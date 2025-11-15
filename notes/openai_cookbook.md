@@ -42,6 +42,7 @@
 
 - [Optimize Prompts](https://github.com/openai/openai-cookbook/blob/main/examples/Optimize_Prompts.ipynb)
   - 2025-07
+
 - [Prompt Migration Guide](https://github.com/openai/openai-cookbook/blob/main/examples/Prompt_migration_guide.ipynb)
   - 2025-07
 
@@ -175,12 +176,16 @@
   - summaries
 
 - [Using file search tool in the Responses API](https://github.com/openai/openai-cookbook/blob/main/examples/File_Search_Responses.ipynb)
+
 - [Multi-Tool Orchestration with RAG approach using OpenAI's Responses API](https://github.com/openai/openai-cookbook/blob/main/examples/responses_api/responses_api_tool_orchestration.ipynb)
 
 ## api tricks
 - [multicore parallel processing](https://github.com/openai/openai-cookbook/blob/main/examples/api_request_parallel_processor.py)
+
 - [batch processing](https://github.com/openai/openai-cookbook/blob/main/examples/batch_processing.ipynb)
+
 - [token usage statistics](https://github.com/openai/openai-cookbook/blob/main/examples/completions_usage_api.ipynb)
+
 - [How to handle rate limits](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_handle_rate_limits.ipynb)
 
 ## Reasoning
@@ -223,6 +228,7 @@
 ## agent sdk
 - [object oriented agentic approach](https://github.com/openai/openai-cookbook/blob/main/examples/object_oriented_agentic_approach/Secure_code_interpreter_tool_for_LLM_agents.ipynb)
   - time: 2025-02
+
 - [+] [agentkit](https://github.com/openai/openai-cookbook/blob/main/examples/agentkit/agentkit_walkthrough.ipynb)
   - time: 2025-10
   - Agent Builder: visually build and iterate on agent workflows
@@ -253,7 +259,9 @@
 
 ## Context Engineering
 - [How to use functions with a knowledge base](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_call_functions_for_knowledge_retrieval.ipynb)
+
 - [Summarizing Long Documents](https://github.com/openai/openai-cookbook/blob/main/examples/Summarizing_long_documents.ipynb)
+
 - [+] [Context Engineering - Short-Term Memory Management with Sessions from OpenAI Agents SDK](https://github.com/openai/openai-cookbook/blob/main/examples/agents_sdk/session_memory.ipynb)
   - time: 2025-09
   - basic memory support: response api
@@ -274,6 +282,7 @@
 ## Agent - coding
 - [gpt5 - agent-coding-app](https://github.com/openai/openai-cookbook/blob/main/examples/gpt-5/gpt-5_frontend.ipynb)
   - building apps
+
 - [gpt-5.1 coding agent](https://github.com/openai/openai-cookbook/blob/main/examples/Build_a_coding_agent_with_GPT-5.1.ipynb)
 
 ## Agent - Research
