@@ -5,9 +5,9 @@
 
 ## 2025-09 Agent - Web Playwright actions
 
-## 2025-10 OpenAI audio and realtime api
+## 2025-10 OpenAI audio; realtime api
 
-## 2025-11-07 Download arxiv papers + math agent
+## 2025-11-07 arxiv papers: Download; math agent
 - [Background Research](/media/lingzhi/Mass3/Code/AI/Background_Code)
   - [Papers](/media/lingzhi/Mass3/Code/AI/Background_Papers)
   - [Tutorials](/media/lingzhi/Mass3/Code/AI/Background_Tutorials)
@@ -57,7 +57,7 @@
     - source location. remember, the description should be correct. and the source location is not the location of the pdf/jpeg. but the source code/project page that might be mentioned in the file content. if the api gpt-5 cannot find it, export null. The source location should fill with all the url,source code, website mentioned in the pdf that is helpful/constructive in understanding the paper.
 
 
-## 2025-11-11 Download conference papers， Tidyup catalog project github
+## 2025-11-11 conference papers: Download; project: get info
 - 把 所有收藏的本地化
   - 把 twitter的所有论文、diagram本地化
   - 把 浏览器的所有论文本地化
@@ -112,15 +112,12 @@
   - 最后把所有的论文下面的source location当中的github项目收集到一个文件github_projects.md当中，存储地址在程序本地
 
 
-## 2025-11-12 Tidyup catalog projects
+## 2025-11-12 projects & papers catalog: categorize 
 - 学agent基础知识
   - plan-verify求解器
   - 幂等重试
-- github & website project
-  - 整理 github project
-  - 整理 website project
-- categorize arxiv papers
-- categorize conference papers
+- categorize github & website project
+- categorize arxiv & conference papers
 
 
 - task7 get project info
@@ -171,7 +168,7 @@
   - 我已经做了一些了。
   - 请你帮助我分类所有未分类的文章 
 
-## 2025-11-13 Tidyup conference papers
+## 2025-11-13 conference papers: categorize, get info
 
 - 用claude code详细分类papers
 
@@ -247,7 +244,7 @@
 - task get conference paper citations
   - 用tools/semantic 处理Papers/conferences当中的所有论文
 
-## 2025-11-14 openai cookbook: code, agent, evals
+## 2025-11-14 openai cookbook: categorize, take notes; marktechpost: categorize
 
 - task openai cookbook： 筛选、分类、学习、测试
   - 笔记：/Users/lingzhi/Code/AI/plan+notes/notes/tutorial_openai_cookbook.md
@@ -267,14 +264,16 @@
 
 ## 2025-11-15 code base
 
-- task tooluniverse
+- task 通过论文获取更加全面的github codebase catalog
+
+- task 筛选出有用的模块
+  - tooluniverse
 
 - task Test Programs
   - Tools
   - Agent memory
   - Agent synthesizer and optimizer
   - RL settings
-
 
 ## paper database
 
