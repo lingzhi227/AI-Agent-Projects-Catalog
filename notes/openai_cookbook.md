@@ -1,6 +1,9 @@
 # OpenAI Cookbook Notes
 
 ## Prompt Engineering
+- [Meta Prompting: A Guide to Automated Prompt Optimization](https://github.com/openai/openai-cookbook/blob/main/examples/Enhance_your_prompts_with_meta_prompting.ipynb)
+  - 2025-01
+
 - [+] [GPT-4.1 - prompt guide](https://cookbook.openai.com/examples/gpt4-1_prompting_guide)
   - time: 2025-04
   - model: gpt-4.1
@@ -36,6 +39,11 @@
       - XML is convenient to precisely wrap a section including start and end, 
       - add metadata to the tags for additional context, 
       - and enable nesting.
+
+- [Optimize Prompts](https://github.com/openai/openai-cookbook/blob/main/examples/Optimize_Prompts.ipynb)
+  - 2025-07
+- [Prompt Migration Guide](https://github.com/openai/openai-cookbook/blob/main/examples/Prompt_migration_guide.ipynb)
+  - 2025-07
 
 - [+] [GPT-5 - prompt guide](https://cookbook.openai.com/examples/gpt-5/gpt-5_prompting_guide)
   - time: 2025-08
@@ -98,7 +106,7 @@
       </tool_preambles>
       ```
 
-- [+] [GPT-5 - prompt optimization guide](https://github.com/openai/openai-cookbook/blob/main/examples/gpt-5/prompt-optimization-cookbook.ipynb)
+- [+] [GPT-5 - prompt optimizer guide](https://github.com/openai/openai-cookbook/blob/main/examples/gpt-5/prompt-optimization-cookbook.ipynb)
   - time: 2025-08
   - model: gpt-5
   - common failure modes
@@ -109,6 +117,7 @@
   - LLM as a judge to provide qualitative scoring for results
 
 - [+] [GPT-5 New Params and Tools](https://github.com/openai/openai-cookbook/blob/main/examples/gpt-5/gpt-5_new_params_and_tools.ipynb)
+  - time: 2025-09
   - new parameters
   - Verbosity Parameter
   - Minimal Reasoning
@@ -119,6 +128,7 @@
   - Context‑Free Grammar (CFG)
 
 - [+] [GPT-5 Troubleshooting Guide](https://github.com/openai/openai-cookbook/blob/main/examples/gpt-5/gpt-5_troubleshooting_guide.ipynb)
+  - time: 2025-09
   - Overthinking
   - Laziness / underthinking
   - Overly deferential
@@ -129,6 +139,7 @@
   - General troubleshooting
 
 - [] [GPT-5 - codex prompt guide](https://github.com/openai/openai-cookbook/blob/main/examples/gpt-5-codex_prompting_guide.ipynb)
+  - time: 2025-09
   - adaptive reasoning
   - Planning
 
@@ -152,6 +163,9 @@
       - shell
   - metaprompt GPT-5.1 to debug prompt
 
+
+
+
 ## response api
 
 - [response api intro](https://github.com/openai/openai-cookbook/blob/main/examples/responses_api/responses_example.ipynb)
@@ -160,7 +174,14 @@
   - Caching
   - summaries
 
+- [Using file search tool in the Responses API](https://github.com/openai/openai-cookbook/blob/main/examples/File_Search_Responses.ipynb)
 - [Multi-Tool Orchestration with RAG approach using OpenAI's Responses API](https://github.com/openai/openai-cookbook/blob/main/examples/responses_api/responses_api_tool_orchestration.ipynb)
+
+## api tricks
+- [multicore parallel processing](https://github.com/openai/openai-cookbook/blob/main/examples/api_request_parallel_processor.py)
+- [batch processing](https://github.com/openai/openai-cookbook/blob/main/examples/batch_processing.ipynb)
+- [token usage statistics](https://github.com/openai/openai-cookbook/blob/main/examples/completions_usage_api.ipynb)
+- [How to handle rate limits](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_handle_rate_limits.ipynb)
 
 ## Reasoning
 
@@ -174,12 +195,26 @@
   - model: o1
   - Generate data, then use o1's reasoning capability for data validation
 
+## embeddings
+
+- [User Product Embeddings](https://github.com/openai/openai-cookbook/blob/main/examples/User_and_product_embeddings.ipynb)
+
 ## structural output
 
 - [+] [o1 - Structured Output](https://github.com/openai/openai-cookbook/blob/main/examples/o1/Using_chained_calls_for_o1_structured_outputs.ipynb)
   - time: 2024
   - model: o1
   - structural output using prompt
+
+## RAG
+- [Retrieval Augmented Generation with a Graph Database](https://github.com/openai/openai-cookbook/blob/main/examples/RAG_with_graph_db.ipynb)
+
+## function call
+
+- [Managing Function Calls With Reasoning Models](https://github.com/openai/openai-cookbook/blob/main/examples/reasoning_function_calls.ipynb)
+  - time: 2025-05
+  - o3, o4-mini
+  - conversation orchestration
 
 ## Eval
 - [Evaluation Intro](https://github.com/openai/openai-cookbook/tree/main/examples/evaluation)
@@ -198,6 +233,8 @@
     - Entire workflow optimization
 
 ## multi-agent
+- [Structured Outputs for Multi-Agent Systems](https://github.com/openai/openai-cookbook/blob/main/examples/Structured_outputs_multi_agent.ipynb)
+  - time: 2024-11
 
 - [Multi-Agent Orchestration with OpenAI Agents SDK: Financial Portfolio Analysis Example](https://github.com/openai/openai-cookbook/blob/main/examples/agents_sdk/multi-agent-portfolio-collaboration/multi_agent_portfolio_collaboration.ipynb)
   - time: 2025-05
@@ -215,7 +252,8 @@
 
 
 ## Context Engineering
-
+- [How to use functions with a knowledge base](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_call_functions_for_knowledge_retrieval.ipynb)
+- [Summarizing Long Documents](https://github.com/openai/openai-cookbook/blob/main/examples/Summarizing_long_documents.ipynb)
 - [+] [Context Engineering - Short-Term Memory Management with Sessions from OpenAI Agents SDK](https://github.com/openai/openai-cookbook/blob/main/examples/agents_sdk/session_memory.ipynb)
   - time: 2025-09
   - basic memory support: response api
@@ -229,7 +267,7 @@
   - Breaking down the policy in specific actions and sub-actions
   - Outlining specific conditions for moving between steps
   - Determing where external knowledge/actions may be required, and defining functions that we could use to get that information
-- [Orchestrating Agents: Routines and Handoffs](https://cookbook.openai.com/examples/orchestrating_agents)
+- Orchestrating Agents - Routines and Handoffs: [website](https://cookbook.openai.com/examples/orchestrating_agents) - [Github](https://github.com/openai/openai-cookbook/blob/main/examples/Orchestrating_agents.ipynb)
 
 ## Agent - coding
 - [gpt5 - agent-coding-app](https://github.com/openai/openai-cookbook/blob/main/examples/gpt-5/gpt-5_frontend.ipynb)
@@ -243,3 +281,7 @@
 ## Agent - customer support related
 
 - [Build with Realtime Mini](https://github.com/openai/openai-cookbook/blob/main/examples/building_w_rt_mini/building_w_rt_mini.ipynb)
+
+## multi-hour exec
+
+- [Using PLANS.md for multi-hour problem solving](https://github.com/openai/openai-cookbook/blob/main/articles/codex_exec_plans.md)
