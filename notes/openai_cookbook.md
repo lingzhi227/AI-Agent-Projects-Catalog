@@ -223,6 +223,7 @@
 
 ## Eval
 - [Evaluation Intro](https://github.com/openai/openai-cookbook/tree/main/examples/evaluation)
+
 - [Eval Driven System Design - From Prototype to Production](https://cookbook.openai.com/examples/partners/eval_driven_system_design/receipt_inspection)
 
 ## agent sdk
@@ -276,6 +277,7 @@
   - Breaking down the policy in specific actions and sub-actions
   - Outlining specific conditions for moving between steps
   - Determing where external knowledge/actions may be required, and defining functions that we could use to get that information
+
 - Orchestrating Agents - Routines and Handoffs: [website](https://cookbook.openai.com/examples/orchestrating_agents) - [Github](https://github.com/openai/openai-cookbook/blob/main/examples/Orchestrating_agents.ipynb)
   - 2024-10
 
