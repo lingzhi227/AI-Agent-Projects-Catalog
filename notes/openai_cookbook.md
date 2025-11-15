@@ -262,12 +262,14 @@
   - Context Summarization
 
 ## Routine
-- [Using reasoning for routine generation](https://github.com/openai/openai-cookbook/blob/main/examples/o1/Using_reasoning_for_routine_generation.ipynb)
+- Using reasoning for routine generation. [Website](https://cookbook.openai.com/examples/o1/using_reasoning_for_routine_generation) - [GitHub](https://github.com/openai/openai-cookbook/blob/main/examples/o1/Using_reasoning_for_routine_generation.ipynb)
+  - 2024-09
   - Converting the policy from an external facing document to an internal SOP routine
   - Breaking down the policy in specific actions and sub-actions
   - Outlining specific conditions for moving between steps
   - Determing where external knowledge/actions may be required, and defining functions that we could use to get that information
 - Orchestrating Agents - Routines and Handoffs: [website](https://cookbook.openai.com/examples/orchestrating_agents) - [Github](https://github.com/openai/openai-cookbook/blob/main/examples/Orchestrating_agents.ipynb)
+  - 2024-10
 
 ## Agent - coding
 - [gpt5 - agent-coding-app](https://github.com/openai/openai-cookbook/blob/main/examples/gpt-5/gpt-5_frontend.ipynb)
