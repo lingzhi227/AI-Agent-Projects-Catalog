@@ -287,3 +287,4 @@
 ## multi-hour exec
 
 - [Using PLANS.md for multi-hour problem solving](https://github.com/openai/openai-cookbook/blob/main/articles/codex_exec_plans.md)
+  - 2025-10
