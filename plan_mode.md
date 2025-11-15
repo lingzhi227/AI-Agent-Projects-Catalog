@@ -257,14 +257,15 @@
     - context engineering
     - agent sdk
 
-## 2025-11-15 paper database
-
 - task marktechpost：筛选、分类、学习、测试
-  - agentic
-  - multiagent
-  - tool
-  - agent sdk
-  - rl
+  - 重要概念
+    - agentic
+    - multiagent
+    - tool
+    - agent sdk
+    - rl
+
+## 2025-11-15 code base
 
 - task tooluniverse
 
@@ -273,6 +274,9 @@
   - Agent memory
   - Agent synthesizer and optimizer
   - RL settings
+
+
+## paper database
 
 - task 本地paper数据库
   - paper_id
@@ -305,9 +309,8 @@
     - google
     - math agent
     - others
-# TO DO
 
-- task 整理 catalog tutorials
+# TO DO
 
 - 写agentic截止11月综述
 
