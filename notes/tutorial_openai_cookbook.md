@@ -106,6 +106,13 @@
       - Finish by summarizing completed work distinctly from your upfront plan.
       </tool_preambles>
       ```
+    - Coding任务避免的错误
+      - 修改要minimal
+      - 要修根原因、而不是表面拼接
+      - 必须跑pre-commit
+      - 在完成任务前不能停 - 不算搜索、修改、尝试
+      - 先分析、再搜索、再改代码
+      - 禁止提问 - 尽量自己推断
 
 - [+] [GPT-5 - prompt optimizer guide](https://github.com/openai/openai-cookbook/blob/main/examples/gpt-5/prompt-optimization-cookbook.ipynb)
   - time: 2025-08
@@ -163,9 +170,6 @@
       - apply_patch
       - shell
   - metaprompt GPT-5.1 to debug prompt
-
-
-
 
 ## response api
 

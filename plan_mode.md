@@ -7,7 +7,7 @@
 
 ## 2025-10 OpenAI audio and realtime api
 
-## 2025-11-07 下载 arxiv papers + math agent
+## 2025-11-07 Download arxiv papers + math agent
 - [Background Research](/media/lingzhi/Mass3/Code/AI/Background_Code)
   - [Papers](/media/lingzhi/Mass3/Code/AI/Background_Papers)
   - [Tutorials](/media/lingzhi/Mass3/Code/AI/Background_Tutorials)
@@ -57,7 +57,7 @@
     - source location. remember, the description should be correct. and the source location is not the location of the pdf/jpeg. but the source code/project page that might be mentioned in the file content. if the api gpt-5 cannot find it, export null. The source location should fill with all the url,source code, website mentioned in the pdf that is helpful/constructive in understanding the paper.
 
 
-## 2025-11-11 下载 conference papers， 整理catalog project github
+## 2025-11-11 Download conference papers， Tidyup catalog project github
 - 把 所有收藏的本地化
   - 把 twitter的所有论文、diagram本地化
   - 把 浏览器的所有论文本地化
@@ -112,7 +112,7 @@
   - 最后把所有的论文下面的source location当中的github项目收集到一个文件github_projects.md当中，存储地址在程序本地
 
 
-## 2025-11-12 整理 catalog projects
+## 2025-11-12 Tidyup catalog projects
 - 学agent基础知识
   - plan-verify求解器
   - 幂等重试
@@ -171,7 +171,7 @@
   - 我已经做了一些了。
   - 请你帮助我分类所有未分类的文章 
 
-## 2025-11-13 整理 conference papers
+## 2025-11-13 Tidyup conference papers
 
 - 用claude code详细分类papers
 
@@ -250,12 +250,14 @@
 ## 2025-11-14 openai cookbook: code, agent, evals
 
 - task openai cookbook： 筛选、分类、学习、测试
-  - 笔记：/Users/lingzhi/Code/AI/plan+notes/notes/openai_cookbook.md
+  - 笔记：/Users/lingzhi/Code/AI/plan+notes/notes/tutorial_openai_cookbook.md
   - 重要概念
     - prompt engineering
     - response api
     - context engineering
     - agent sdk
+
+## 2025-11-15 paper database
 
 - task marktechpost：筛选、分类、学习、测试
   - agentic
@@ -271,8 +273,6 @@
   - Agent memory
   - Agent synthesizer and optimizer
   - RL settings
-
-## 2025-11-15 paper database
 
 - task 本地paper数据库
   - paper_id
