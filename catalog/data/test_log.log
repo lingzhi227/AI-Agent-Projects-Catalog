@@ -1,0 +1,193 @@
+lingzhi@macbook:~/Downloads/Code/AI/plan+notes/tools/semantic$ python3 get_citation_semantic.py --root /Users/lingzhi/Downloads/Code/AI/Ref_Papers/conferences/3agent-framework --limit 60 --batch-size 30
+Discovered 45 paper(s) under /Users/lingzhi/Downloads/Code/AI/Ref_Papers/conferences/3agent-framework. Resolving Semantic Scholar IDs...
+[1/45] Matching: ACL 2025 Findings 0 An_Empirical_Study_of_Group_Conformity_in_Multi-Agent_Systems.pdf
+    ✓ Matched as 'An Empirical Study of Group Conformity in Multi-Agent Systems' (paperId=023775b7419f412bec845f25c9acf69a0de9f3a5)
+[2/45] Matching: ACL 2025 Findings 0 NetSafe_Exploring_the_Topological_Safety_of_Multi-agent_System.pdf
+    ✓ Matched as 'NetSafe: Exploring the Topological Safety of Multi-agent System' (paperId=6a3e290561cd1a342e2031d31e85814292aadd17)
+[3/45] Matching: ACL 2025 Findings 0 Optima_Optimizing_Effectiveness_and_Efficiency_for_LLM-Based_Multi-Agent_System.pdf
+    ⚠ Match error 'Optima Optimizing Effectiveness and Efficiency for LLM-Based Multi-Agent System' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Optima+Optimizing+Effectiveness+and+Efficiency+for+LLM-Based+Multi-Agent+System&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 1.0s
+    ⚠ Match error 'Optima Optimizing Effectiveness and Efficiency for LLM-Based Multi-Agent System' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Optima+Optimizing+Effectiveness+and+Efficiency+for+LLM-Based+Multi-Agent+System&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 2.0s
+    ⚠ Match error 'Optima Optimizing Effectiveness and Efficiency for LLM-Based Multi-Agent System' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Optima+Optimizing+Effectiveness+and+Efficiency+for+LLM-Based+Multi-Agent+System&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 4.0s
+    ✗ Failed to match 'Optima Optimizing Effectiveness and Efficiency for LLM-Based Multi-Agent System': 404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Optima+Optimizing+Effectiveness+and+Efficiency+for+LLM-Based+Multi-Agent+System&fields=paperId%2Ctitle%2Cyear&year=2025
+    ↺ Retrying match without year constraint...
+    ✓ Matched as 'Optima: Optimizing Effectiveness and Efficiency for LLM-Based Multi-Agent System' (paperId=2fc8a207405ac233cde98424c36dd19c8731ce5e)
+[4/45] Matching: ACL 2025 Findings 1 Red-Teaming LLM Multi-Agent Systems via Communication Attacks.pdf
+    ✓ Matched as 'Red-Teaming LLM Multi-Agent Systems via Communication Attacks' (paperId=4669474df8ee4985a95c43c0ee54d621c0a639e1)
+[5/45] Matching: ACL 2025 Findings 10 MegaAgent_A_Large-Scale_Autonomous_LLM-based_Multi-Agent_System_Without_Predefined_SOPs.pdf
+    ⚠ Match error 'MegaAgent A Large-Scale Autonomous LLM-based Multi-Agent System Without Predefined SOPs' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=MegaAgent+A+Large-Scale+Autonomous+LLM-based+Multi-Agent+System+Without+Predefined+SOPs&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 1.0s
+    ⚠ Match error 'MegaAgent A Large-Scale Autonomous LLM-based Multi-Agent System Without Predefined SOPs' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=MegaAgent+A+Large-Scale+Autonomous+LLM-based+Multi-Agent+System+Without+Predefined+SOPs&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 2.0s
+    ⚠ Match error 'MegaAgent A Large-Scale Autonomous LLM-based Multi-Agent System Without Predefined SOPs' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=MegaAgent+A+Large-Scale+Autonomous+LLM-based+Multi-Agent+System+Without+Predefined+SOPs&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 4.0s
+    ✗ Failed to match 'MegaAgent A Large-Scale Autonomous LLM-based Multi-Agent System Without Predefined SOPs': 404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=MegaAgent+A+Large-Scale+Autonomous+LLM-based+Multi-Agent+System+Without+Predefined+SOPs&fields=paperId%2Ctitle%2Cyear&year=2025
+    ↺ Retrying match without year constraint...
+    ✓ Matched as 'MegaAgent: A Large-Scale Autonomous LLM-based Multi-Agent System Without Predefined SOPs' (paperId=d5b847411bf80ccaf1314476f2dbb8e2623fe0c9)
+[6/45] Matching: ACL 2025 Findings 4 LLM-Based_Multi-Agent_Systems_are_Scalable_Graph_Generative_Models.pdf
+    ✓ Matched as 'LLM-Based Multi-Agent Systems are Scalable Graph Generative Models' (paperId=d6ce71c5c8b25de92e2f3c5fa369ff12030cd2b4)
+[7/45] Matching: ACL 2025 Long 0 Agents_Under_Siege_Breaking_Pragmatic_Multi-Agent_LLM_Systems_with_Optimized_Prompt_Attacks.pdf
+    ✓ Matched as 'Agents Under Siege: Breaking Pragmatic Multi-Agent LLM Systems with Optimized Prompt Attacks' (paperId=8be6b0b0c7af16da10938c252db05cd8dd2f74d0)
+[8/45] Matching: ACL 2025 Long 0 Completing_A_Systematic_Review_in_Hours_instead_of_Months_with_Interactive_AI_Agents.pdf
+    ✓ Matched as 'Completing A Systematic Review in Hours instead of Months with Interactive AI Agents' (paperId=3a7d07c638a10781c6c0e3170115ce82dfb111c5)
+[9/45] Matching: ACL 2025 Long 0 Gödel_Agent__A_Self-Referential_Agent_Framework_for_Recursively_Self-Improvement.pdf
+    ✓ Matched as 'Gödel Agent: A Self-Referential Agent Framework for Recursively Self-Improvement' (paperId=f5d950c5359e45ead81dae05e6798ab1ebadb174)
+[10/45] Matching: ACL 2025 Long 0 SurveyPilot_an_Agentic_Framework_for_Automated_Human_Opinion_Collection_from_Social_Media.pdf
+    ✓ Matched as 'SurveyPilot: an Agentic Framework for Automated Human Opinion Collection from Social Media' (paperId=b1e79802a72689b61f186306551db6ad33885306)
+[11/45] Matching: ACL 2025 Long 1 A Dual-Mind Framework for Strategic and Expressive Negotiation Agent.pdf
+    ✓ Matched as 'A Dual-Mind Framework for Strategic and Expressive Negotiation Agent' (paperId=85a5365dc6964e68362a942d8f9fe3b2bcb4cccd)
+[12/45] Matching: ACL 2025 Long 1 KG-Agent_An_Efficient_Autonomous_Agent_Framework_for_Complex_Reasoning_over_Knowledge_Graph.pdf
+    ✓ Matched as 'KG-Agent: An Efficient Autonomous Agent Framework for Complex Reasoning over Knowledge Graph' (paperId=a8f3ffeddef17b4e46d981ca50ad319a76ac0b36)
+[13/45] Matching: ACL 2025 Long 1 Leveraging_Dual_Process_Theory_in_Language_Agent_Framework_for_Real-time_Simultaneous_Human-AI_Collaboration.pdf
+    ✓ Matched as 'Leveraging Dual Process Theory in Language Agent Framework for Real-time Simultaneous Human-AI Collaboration' (paperId=65e3d5e1ba3f5e1d2e3730538dc8cee6e0ee2382)
+[14/45] Matching: ACL 2025 Long 1 METAL_A_Multi-Agent_Framework_for_Chart_Generation_with_Test-Time_Scaling.pdf
+    ✓ Matched as 'METAL: A Multi-Agent Framework for Chart Generation with Test-Time Scaling' (paperId=580c5dea65666784d1767969b1ee094ad9af4ddf)
+[15/45] Matching: ACL 2025 Long 2 MasRouter__Learning_to_Route_LLMs_for_Multi-Agent_Systems.pdf
+    ✓ Matched as 'MasRouter: Learning to Route LLMs for Multi-Agent Systems' (paperId=086830da14fbf4fccfb3197d97b7b01adf7014a6)
+[16/45] Matching: COLM 2025 2504.06821_14_Inducing Programmatic Skills for Agentic Tasks.pdf
+    ✓ Matched as 'Inducing Programmatic Skills for Agentic Tasks' (paperId=eda5889e6ebcdd761512d1b544c4adeccb9a1981)
+[17/45] Matching: EMNLP 2024 Main 0 Triad_A_Framework_Leveraging_a_Multi-Role_LLM-based_Agent_to_Solve_Knowledge_Base_Question_Answering.pdf
+    ✓ Matched as 'Triad: A Framework Leveraging a Multi-Role LLM-based Agent to Solve Knowledge Base Question Answering' (paperId=04847af01a0ba0beadb98d36a3059b7cac701f1a)
+[18/45] Matching: ICLR 2025 Poster 0 AgentSquare_Automatic_LLM_Agent_Search_in_Modular_Design_Space.pdf
+    ⚠ Match error 'AgentSquare Automatic LLM Agent Search in Modular Design Space' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=AgentSquare+Automatic+LLM+Agent+Search+in+Modular+Design+Space&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 1.0s
+    ⚠ Match error 'AgentSquare Automatic LLM Agent Search in Modular Design Space' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=AgentSquare+Automatic+LLM+Agent+Search+in+Modular+Design+Space&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 2.0s
+    ⚠ Match error 'AgentSquare Automatic LLM Agent Search in Modular Design Space' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=AgentSquare+Automatic+LLM+Agent+Search+in+Modular+Design+Space&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 4.0s
+    ✗ Failed to match 'AgentSquare Automatic LLM Agent Search in Modular Design Space': 404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=AgentSquare+Automatic+LLM+Agent+Search+in+Modular+Design+Space&fields=paperId%2Ctitle%2Cyear&year=2025
+    ↺ Retrying match without year constraint...
+    ✓ Matched as 'AgentSquare: Automatic LLM Agent Search in Modular Design Space' (paperId=f9da7cfe8d403f66ab844b08577deeff6d1b1170)
+[19/45] Matching: ICLR 2025 Poster 0 Cut_the_Crap_An_Economical_Communication_Pipeline_for_LLM-based_Multi-Agent_Systems.pdf
+    ⚠ Match error 'Cut the Crap An Economical Communication Pipeline for LLM-based Multi-Agent Systems' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Cut+the+Crap+An+Economical+Communication+Pipeline+for+LLM-based+Multi-Agent+Systems&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 1.0s
+    ⚠ Match error 'Cut the Crap An Economical Communication Pipeline for LLM-based Multi-Agent Systems' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Cut+the+Crap+An+Economical+Communication+Pipeline+for+LLM-based+Multi-Agent+Systems&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 2.0s
+    ⚠ Match error 'Cut the Crap An Economical Communication Pipeline for LLM-based Multi-Agent Systems' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Cut+the+Crap+An+Economical+Communication+Pipeline+for+LLM-based+Multi-Agent+Systems&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 4.0s
+    ✗ Failed to match 'Cut the Crap An Economical Communication Pipeline for LLM-based Multi-Agent Systems': 404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Cut+the+Crap+An+Economical+Communication+Pipeline+for+LLM-based+Multi-Agent+Systems&fields=paperId%2Ctitle%2Cyear&year=2025
+    ↺ Retrying match without year constraint...
+    ✓ Matched as 'Cut the Crap: An Economical Communication Pipeline for LLM-based Multi-Agent Systems' (paperId=aebfeb42bbd155c1541a67fddf0a6e2bc5d6ae34)
+[20/45] Matching: ICLR 2025 Poster 0 EMOS_Embodiment-aware_Heterogeneous_Multi-robot_Operating_System_with_LLM_Agents.pdf
+    ⚠ Match error 'EMOS Embodiment-aware Heterogeneous Multi-robot Operating System with LLM Agents' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=EMOS+Embodiment-aware+Heterogeneous+Multi-robot+Operating+System+with+LLM+Agents&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 1.0s
+    ⚠ Match error 'EMOS Embodiment-aware Heterogeneous Multi-robot Operating System with LLM Agents' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=EMOS+Embodiment-aware+Heterogeneous+Multi-robot+Operating+System+with+LLM+Agents&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 2.0s
+    ⚠ Match error 'EMOS Embodiment-aware Heterogeneous Multi-robot Operating System with LLM Agents' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=EMOS+Embodiment-aware+Heterogeneous+Multi-robot+Operating+System+with+LLM+Agents&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 4.0s
+    ✗ Failed to match 'EMOS Embodiment-aware Heterogeneous Multi-robot Operating System with LLM Agents': 404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=EMOS+Embodiment-aware+Heterogeneous+Multi-robot+Operating+System+with+LLM+Agents&fields=paperId%2Ctitle%2Cyear&year=2025
+    ↺ Retrying match without year constraint...
+    ✓ Matched as 'EMOS: Embodiment-aware Heterogeneous Multi-robot Operating System with LLM Agents' (paperId=faffd56c4024f552335a76639526d5d60e7a278b)
+[21/45] Matching: ICLR 2025 Poster 0 NeSyC_A_Neuro-symbolic_Continual_Learner_For_Complex_Embodied_Tasks_In_Open_Domains.pdf
+    ✓ Matched as 'NeSyC: A Neuro-symbolic Continual Learner For Complex Embodied Tasks In Open Domains' (paperId=81a24412a768b5571e4c49d821db7d24d0341ebb)
+[22/45] Matching: ICLR 2025 Poster 1 Inverse_Attention_Agents_for_Multi-Agent_Systems.pdf
+    ⚠ Match error 'Inverse Attention Agents for Multi-Agent Systems' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Inverse+Attention+Agents+for+Multi-Agent+Systems&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 1.0s
+    ⚠ Match error 'Inverse Attention Agents for Multi-Agent Systems' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Inverse+Attention+Agents+for+Multi-Agent+Systems&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 2.0s
+    ⚠ Match error 'Inverse Attention Agents for Multi-Agent Systems' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Inverse+Attention+Agents+for+Multi-Agent+Systems&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 4.0s
+    ✗ Failed to match 'Inverse Attention Agents for Multi-Agent Systems': 404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Inverse+Attention+Agents+for+Multi-Agent+Systems&fields=paperId%2Ctitle%2Cyear&year=2025
+    ↺ Retrying match without year constraint...
+    ✓ Matched as 'Inverse Attention Agents for Multi-Agent Systems' (paperId=a4afcf94fd770ef5c1273cd316f7dda869d35b9f)
+[23/45] Matching: ICLR 2025 Poster 2 Learn-by-interact__A_Data-Centric_Framework_For_Self-Adaptive_Agents_in_Realistic_Environments.pdf
+    ✓ Matched as 'Learn-by-interact: A Data-Centric Framework for Self-Adaptive Agents in Realistic Environments' (paperId=2e20395786ebaf45b3cee398b3db3531bc4851d6)
+[24/45] Matching: ICLR 2025 Poster 25 Motion-Agent_A_Conversational_Framework_for_Human_Motion_Generation_with_LLMs.pdf
+    ⚠ Match error 'Motion-Agent A Conversational Framework for Human Motion Generation with LLMs' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Motion-Agent+A+Conversational+Framework+for+Human+Motion+Generation+with+LLMs&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 1.0s
+    ⚠ Match error 'Motion-Agent A Conversational Framework for Human Motion Generation with LLMs' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Motion-Agent+A+Conversational+Framework+for+Human+Motion+Generation+with+LLMs&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 2.0s
+    ⚠ Match error 'Motion-Agent A Conversational Framework for Human Motion Generation with LLMs' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Motion-Agent+A+Conversational+Framework+for+Human+Motion+Generation+with+LLMs&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 4.0s
+    ✗ Failed to match 'Motion-Agent A Conversational Framework for Human Motion Generation with LLMs': 404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Motion-Agent+A+Conversational+Framework+for+Human+Motion+Generation+with+LLMs&fields=paperId%2Ctitle%2Cyear&year=2025
+    ↺ Retrying match without year constraint...
+    ✓ Matched as 'Motion-Agent: A Conversational Framework for Human Motion Generation with LLMs' (paperId=660af93b31f0774b8e00267cb15731224ead9c46)
+[25/45] Matching: ICLR 2025 Poster Automated Design of Agentic Systems.pdf
+    ⚠ Match error 'Automated Design of Agentic Systems' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Automated+Design+of+Agentic+Systems&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 1.0s
+    ⚠ Match error 'Automated Design of Agentic Systems' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Automated+Design+of+Agentic+Systems&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 2.0s
+    ⚠ Match error 'Automated Design of Agentic Systems' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Automated+Design+of+Agentic+Systems&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 4.0s
+    ✗ Failed to match 'Automated Design of Agentic Systems': 404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Automated+Design+of+Agentic+Systems&fields=paperId%2Ctitle%2Cyear&year=2025
+    ↺ Retrying match without year constraint...
+    ✓ Matched as 'Automated Design of Agentic Systems' (paperId=c9537f656e7d9713fd4108ce7bf512290f48e562)
+[26/45] Matching: ICML 2025 Oral 51 Multi-agent_Architecture_Search_via_Agentic_Supernet.pdf
+    ✓ Matched as 'Multi-agent Architecture Search via Agentic Supernet' (paperId=01f257a840d271d766d741f911bb1078240fbbdf)
+[27/45] Matching: ICML 2025 Poster 0 AutoML-Agent_A_Multi-Agent_LLM_Framework_for_Full-Pipeline_AutoML.pdf
+    ⚠ Match error 'AutoML-Agent A Multi-Agent LLM Framework for Full-Pipeline AutoML' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=AutoML-Agent+A+Multi-Agent+LLM+Framework+for+Full-Pipeline+AutoML&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 1.0s
+    ⚠ Match error 'AutoML-Agent A Multi-Agent LLM Framework for Full-Pipeline AutoML' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=AutoML-Agent+A+Multi-Agent+LLM+Framework+for+Full-Pipeline+AutoML&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 2.0s
+    ⚠ Match error 'AutoML-Agent A Multi-Agent LLM Framework for Full-Pipeline AutoML' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=AutoML-Agent+A+Multi-Agent+LLM+Framework+for+Full-Pipeline+AutoML&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 4.0s
+    ✗ Failed to match 'AutoML-Agent A Multi-Agent LLM Framework for Full-Pipeline AutoML': 404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=AutoML-Agent+A+Multi-Agent+LLM+Framework+for+Full-Pipeline+AutoML&fields=paperId%2Ctitle%2Cyear&year=2025
+    ↺ Retrying match without year constraint...
+    ✓ Matched as 'AutoML-Agent: A Multi-Agent LLM Framework for Full-Pipeline AutoML' (paperId=efde8940a0b924e93d35184c4a1e8f9670b94fe7)
+[28/45] Matching: ICML 2025 Poster 0 MAS-GPT_Training_LLMs_to_Build_LLM-based_Multi-Agent_Systems.pdf
+    ✓ Matched as 'MAS-GPT: Training LLMs to Build LLM-based Multi-Agent Systems' (paperId=ad07189387af46e5d5636c0e8d3a7bf81124cc7e)
+[29/45] Matching: ICML 2025 Poster 5 UDora__A_Unified_Red_Teaming_Framework_against_LLM_Agents_by_Dynamically_Hijacking_Their_Own_Reasoning.pdf
+    ✓ Matched as 'UDora: A Unified Red Teaming Framework against LLM Agents by Dynamically Hijacking Their Own Reasoning' (paperId=d7615286b342dd800881a3a6c9ce70397a0012bd)
+[30/45] Matching: ICML 2025 Poster 8 KABB__Knowledge-Aware_Bayesian_Bandits_for_Dynamic_Expert_Coordination_in_Multi-Agent_Systems.pdf
+    ✓ Matched as 'KABB: Knowledge-Aware Bayesian Bandits for Dynamic Expert Coordination in Multi-Agent Systems' (paperId=6f560c72a36ecd6a4faeb345efdff1fc856e60a9)
+[31/45] Matching: ICML 2025 Poster Cowpox_ Towards the Immunity of VLM-based Multi-Agent Systems.pdf
+    ✓ Matched as 'Cowpox: Towards the Immunity of VLM-based Multi-Agent Systems' (paperId=026901c8c3099df6ddb86074019a3ec1db728cc0)
+[32/45] Matching: ICML 2025 Poster Improving Parallel Program Performance with LLM Optimizers via Agent-System Interfaces.pdf
+    ⚠ Match error 'Improving Parallel Program Performance with LLM Optimizers via Agent-System Interfaces' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Improving+Parallel+Program+Performance+with+LLM+Optimizers+via+Agent-System+Interfaces&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 1.0s
+    ⚠ Match error 'Improving Parallel Program Performance with LLM Optimizers via Agent-System Interfaces' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Improving+Parallel+Program+Performance+with+LLM+Optimizers+via+Agent-System+Interfaces&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 2.0s
+    ⚠ Match error 'Improving Parallel Program Performance with LLM Optimizers via Agent-System Interfaces' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Improving+Parallel+Program+Performance+with+LLM+Optimizers+via+Agent-System+Interfaces&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 4.0s
+    ✗ Failed to match 'Improving Parallel Program Performance with LLM Optimizers via Agent-System Interfaces': 404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=Improving+Parallel+Program+Performance+with+LLM+Optimizers+via+Agent-System+Interfaces&fields=paperId%2Ctitle%2Cyear&year=2025
+    ↺ Retrying match without year constraint...
+    ✓ Matched as 'Improving Parallel Program Performance with LLM Optimizers via Agent-System Interfaces' (paperId=4e71d7bee58aedf1cb095b371f9be6a2cfbd26e7)
+[33/45] Matching: ICML 2025 Poster MetaAgent_ Automatically Constructing Multi-Agent Systems Based on Finite State Machines.pdf
+    ✓ Matched as 'MetaAgent: Automatically Constructing Multi-Agent Systems Based on Finite State Machines' (paperId=8c3cb97f07b538aefdea8b95756eea3cfa27008a)
+[34/45] Matching: ICML 2025 Spotlightposter 30 Which_Agent_Causes_Task_Failures_and_When__On_Automated_Failure_Attribution_of_LLM_Multi-Agent_Systems.pdf
+    ✓ Matched as 'Which Agent Causes Task Failures and When? On Automated Failure Attribution of LLM Multi-Agent Systems' (paperId=a0d37ec77dc2acddb223d9a7ac4f23ca10e2908f)
+[35/45] Matching: NAACL 2025 Long 1 MASTER_A_Multi-Agent_System_with_LLM_Specialized_MCTS.pdf
+    ✓ Matched as 'MASTER: A Multi-Agent System with LLM Specialized MCTS' (paperId=4a005446503199434b76cc2824187a163f0b86b0)
+[36/45] Matching: NAACL 2025 Long 5 AgentMove_A_Large_Language_Model_based_Agentic_Framework_for_Zero-shot_Next_Location_Prediction.pdf
+    ✓ Matched as 'AgentMove: A Large Language Model based Agentic Framework for Zero-shot Next Location Prediction' (paperId=d0a50797ac591f7216be91b42bd535f78a18236b)
+[37/45] Matching: NeurIPS 2025 Poster 0 DyFlow_Dynamic_Workflow_Framework_for_Agentic_Reasoning.pdf
+    ✓ Matched as 'DyFlow: Dynamic Workflow Framework for Agentic Reasoning' (paperId=adcf542438d49fc056e2c78eec19ef99ca8adc45)
+[38/45] Matching: NeurIPS 2025 Poster 0 KVCOMM_Online_Cross-context_KV-cache_Communication_for_Efficient_LLM-based_Multi-agent_Systems.pdf
+    ✓ Matched as 'KVCOMM: Online Cross-context KV-cache Communication for Efficient LLM-based Multi-agent Systems' (paperId=471de4fab0885f45dffb717512741128775bcbaa)
+[39/45] Matching: NeurIPS 2025 Poster 0 MLZero_A_Multi-Agent_System_for_End-to-end_Machine_Learning_Automation.pdf
+    ✓ Matched as 'MLZero: A Multi-Agent System for End-to-end Machine Learning Automation' (paperId=4a7bee9c6b631091a827ca3c1760311e36598d26)
+[40/45] Matching: NeurIPS 2025 Poster 14 AgentNet_Decentralized_Evolutionary_Coordination_for_LLM-based_Multi-Agent_Systems.pdf
+    ✓ Matched as 'AgentNet: Decentralized Evolutionary Coordination for LLM-based Multi-Agent Systems' (paperId=8de70eaa909fef2adb6d8e15bd7178b7d0fd9749)
+[41/45] Matching: NeurIPS 2025 Poster 15 SiriuS_Self-improving_Multi-agent_Systems_via_Bootstrapped_Reasoning.pdf
+    ✓ Matched as 'SiriuS: Self-improving Multi-agent Systems via Bootstrapped Reasoning' (paperId=76f93c2b16af5e838e1631cd9e00bb253b2fd1ea)
+[42/45] Matching: NeurIPS 2025 Poster 3 CAML_Collaborative_Auxiliary_Modality_Learning_for_Multi-Agent_Systems.pdf
+    ✓ Matched as 'CAML: Collaborative Auxiliary Modality Learning for Multi-Agent Systems' (paperId=d61ef56f15ff85df5b031f10ced055aeae0be3d0)
+[43/45] Matching: NeurIPS 2025 Poster TrajAgent_ An LLM-Agent Framework for Trajectory Modeling via Large-and-Small Model Collaboration.pdf
+    ⚠ Match error 'TrajAgent An LLM-Agent Framework for Trajectory Modeling via Large-and-Small Model Collaboration' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=TrajAgent+An+LLM-Agent+Framework+for+Trajectory+Modeling+via+Large-and-Small+Model+Collaboration&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 1.0s
+    ⚠ Match error 'TrajAgent An LLM-Agent Framework for Trajectory Modeling via Large-and-Small Model Collaboration' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=TrajAgent+An+LLM-Agent+Framework+for+Trajectory+Modeling+via+Large-and-Small+Model+Collaboration&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 2.0s
+    ⚠ Match error 'TrajAgent An LLM-Agent Framework for Trajectory Modeling via Large-and-Small Model Collaboration' (404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=TrajAgent+An+LLM-Agent+Framework+for+Trajectory+Modeling+via+Large-and-Small+Model+Collaboration&fields=paperId%2Ctitle%2Cyear&year=2025); retrying in 4.0s
+    ✗ Failed to match 'TrajAgent An LLM-Agent Framework for Trajectory Modeling via Large-and-Small Model Collaboration': 404 Client Error: Not Found for url: https://api.semanticscholar.org/graph/v1/paper/search/match?query=TrajAgent+An+LLM-Agent+Framework+for+Trajectory+Modeling+via+Large-and-Small+Model+Collaboration&fields=paperId%2Ctitle%2Cyear&year=2025
+    ↺ Retrying match without year constraint...
+    ✓ Matched as 'TrajAgent: An LLM-Agent Framework for Trajectory Modeling via Large-and-Small Model Collaboration' (paperId=bab60348d6147c3fb62abb4e160ef7f3f9710195)
+[44/45] Matching: NeurIPS 2025 Spotlight 0 G-Memory_Tracing_Hierarchical_Memory_for_Multi-Agent_Systems.pdf
+    ✓ Matched as 'G-Memory: Tracing Hierarchical Memory for Multi-Agent Systems' (paperId=daa9bcf3ffefdfa8c0f25654aa0512a19ff08157)
+[45/45] Matching: NeurIPS 2025 Spotlight 5 MetaMind__Modeling_Human_Social_Thoughts_with_Metacognitive_Multi-Agent_Systems.pdf
+    ✓ Matched as 'MetaMind: Modeling Human Social Thoughts with Metacognitive Multi-Agent Systems' (paperId=6c82c6570a6daa357d4d41e3e924320884dd7f73)
+Fetching citation counts in batches of 30...
+Renamed: 'ACL 2025 Findings 0 An_Empirical_Study_of_Group_Conformity_in_Multi-Agent_Systems.pdf' → 'ACL 2025 Findings 2 An_Empirical_Study_of_Group_Conformity_in_Multi-Agent_Systems.pdf' (citations=2)
+Renamed: 'ACL 2025 Findings 0 NetSafe_Exploring_the_Topological_Safety_of_Multi-agent_System.pdf' → 'ACL 2025 Findings 1 NetSafe_Exploring_the_Topological_Safety_of_Multi-agent_System.pdf' (citations=1)
+Renamed: 'ACL 2025 Findings 0 Optima_Optimizing_Effectiveness_and_Efficiency_for_LLM-Based_Multi-Agent_System.pdf' → 'ACL 2025 Findings 13 Optima_Optimizing_Effectiveness_and_Efficiency_for_LLM-Based_Multi-Agent_System.pdf' (citations=13)
+Renamed: 'ACL 2025 Findings 1 Red-Teaming LLM Multi-Agent Systems via Communication Attacks.pdf' → 'ACL 2025 Findings 41 Red-Teaming LLM Multi-Agent Systems via Communication Attacks.pdf' (citations=41)
+✓ ACL 2025 Findings 10 MegaAgent_A_Large-Scale_Autonomous_LLM-based_Multi-Agent_System_Without_Predefined_SOPs.pdf already up to date (10).
+✓ ACL 2025 Findings 4 LLM-Based_Multi-Agent_Systems_are_Scalable_Graph_Generative_Models.pdf already up to date (4).
+Renamed: 'ACL 2025 Long 0 Agents_Under_Siege_Breaking_Pragmatic_Multi-Agent_LLM_Systems_with_Optimized_Prompt_Attacks.pdf' → 'ACL 2025 Long 9 Agents_Under_Siege_Breaking_Pragmatic_Multi-Agent_LLM_Systems_with_Optimized_Prompt_Attacks.pdf' (citations=9)
+Renamed: 'ACL 2025 Long 0 Completing_A_Systematic_Review_in_Hours_instead_of_Months_with_Interactive_AI_Agents.pdf' → 'ACL 2025 Long 2 Completing_A_Systematic_Review_in_Hours_instead_of_Months_with_Interactive_AI_Agents.pdf' (citations=2)
+✓ ACL 2025 Long 0 Gödel_Agent__A_Self-Referential_Agent_Framework_for_Recursively_Self-Improvement.pdf already up to date (0).
+✓ ACL 2025 Long 0 SurveyPilot_an_Agentic_Framework_for_Automated_Human_Opinion_Collection_from_Social_Media.pdf already up to date (0).
+✓ ACL 2025 Long 1 A Dual-Mind Framework for Strategic and Expressive Negotiation Agent.pdf already up to date (1).
+Renamed: 'ACL 2025 Long 1 KG-Agent_An_Efficient_Autonomous_Agent_Framework_for_Complex_Reasoning_over_Knowledge_Graph.pdf' → 'ACL 2025 Long 23 KG-Agent_An_Efficient_Autonomous_Agent_Framework_for_Complex_Reasoning_over_Knowledge_Graph.pdf' (citations=23)
+Renamed: 'ACL 2025 Long 1 Leveraging_Dual_Process_Theory_in_Language_Agent_Framework_for_Real-time_Simultaneous_Human-AI_Collaboration.pdf' → 'ACL 2025 Long 6 Leveraging_Dual_Process_Theory_in_Language_Agent_Framework_for_Real-time_Simultaneous_Human-AI_Collaboration.pdf' (citations=6)
+Renamed: 'ACL 2025 Long 1 METAL_A_Multi-Agent_Framework_for_Chart_Generation_with_Test-Time_Scaling.pdf' → 'ACL 2025 Long 10 METAL_A_Multi-Agent_Framework_for_Chart_Generation_with_Test-Time_Scaling.pdf' (citations=10)
+Renamed: 'ACL 2025 Long 2 MasRouter__Learning_to_Route_LLMs_for_Multi-Agent_Systems.pdf' → 'ACL 2025 Long 15 MasRouter__Learning_to_Route_LLMs_for_Multi-Agent_Systems.pdf' (citations=15)
+Renamed: 'COLM 2025 2504.06821_14_Inducing Programmatic Skills for Agentic Tasks.pdf' → 'COLM 2025 14 Inducing Programmatic Skills for Agentic Tasks.pdf' (citations=14)
+Renamed: 'EMNLP 2024 Main 0 Triad_A_Framework_Leveraging_a_Multi-Role_LLM-based_Agent_to_Solve_Knowledge_Base_Question_Answering.pdf' → 'EMNLP 2024 Main 24 Triad_A_Framework_Leveraging_a_Multi-Role_LLM-based_Agent_to_Solve_Knowledge_Base_Question_Answering.pdf' (citations=24)
+Renamed: 'ICLR 2025 Poster 0 AgentSquare_Automatic_LLM_Agent_Search_in_Modular_Design_Space.pdf' → 'ICLR 2025 Poster 44 AgentSquare_Automatic_LLM_Agent_Search_in_Modular_Design_Space.pdf' (citations=44)
+Renamed: 'ICLR 2025 Poster 0 Cut_the_Crap_An_Economical_Communication_Pipeline_for_LLM-based_Multi-Agent_Systems.pdf' → 'ICLR 2025 Poster 46 Cut_the_Crap_An_Economical_Communication_Pipeline_for_LLM-based_Multi-Agent_Systems.pdf' (citations=46)
+Renamed: 'ICLR 2025 Poster 0 EMOS_Embodiment-aware_Heterogeneous_Multi-robot_Operating_System_with_LLM_Agents.pdf' → 'ICLR 2025 Poster 11 EMOS_Embodiment-aware_Heterogeneous_Multi-robot_Operating_System_with_LLM_Agents.pdf' (citations=11)
+Renamed: 'ICLR 2025 Poster 0 NeSyC_A_Neuro-symbolic_Continual_Learner_For_Complex_Embodied_Tasks_In_Open_Domains.pdf' → 'ICLR 2025 Poster 6 NeSyC_A_Neuro-symbolic_Continual_Learner_For_Complex_Embodied_Tasks_In_Open_Domains.pdf' (citations=6)
+✓ ICLR 2025 Poster 1 Inverse_Attention_Agents_for_Multi-Agent_Systems.pdf already up to date (1).
+Renamed: 'ICLR 2025 Poster 2 Learn-by-interact__A_Data-Centric_Framework_For_Self-Adaptive_Agents_in_Realistic_Environments.pdf' → 'ICLR 2025 Poster 58 Learn-by-interact__A_Data-Centric_Framework_For_Self-Adaptive_Agents_in_Realistic_Environments.pdf' (citations=58)
+✓ ICLR 2025 Poster 25 Motion-Agent_A_Conversational_Framework_for_Human_Motion_Generation_with_LLMs.pdf already up to date (25).
+Renamed: 'ICLR 2025 Poster Automated Design of Agentic Systems.pdf' → 'ICLR 2025 Poster 105 Automated Design of Agentic Systems.pdf' (citations=105)
+✓ ICML 2025 Oral 51 Multi-agent_Architecture_Search_via_Agentic_Supernet.pdf already up to date (51).
+Renamed: 'ICML 2025 Poster 0 AutoML-Agent_A_Multi-Agent_LLM_Framework_for_Full-Pipeline_AutoML.pdf' → 'ICML 2025 Poster 44 AutoML-Agent_A_Multi-Agent_LLM_Framework_for_Full-Pipeline_AutoML.pdf' (citations=44)
+Renamed: 'ICML 2025 Poster 0 MAS-GPT_Training_LLMs_to_Build_LLM-based_Multi-Agent_Systems.pdf' → 'ICML 2025 Poster 16 MAS-GPT_Training_LLMs_to_Build_LLM-based_Multi-Agent_Systems.pdf' (citations=16)
+✓ ICML 2025 Poster 5 UDora__A_Unified_Red_Teaming_Framework_against_LLM_Agents_by_Dynamically_Hijacking_Their_Own_Reasoning.pdf already up to date (5).
+✓ ICML 2025 Poster 8 KABB__Knowledge-Aware_Bayesian_Bandits_for_Dynamic_Expert_Coordination_in_Multi-Agent_Systems.pdf already up to date (8).
+Renamed: 'ICML 2025 Poster Cowpox_ Towards the Immunity of VLM-based Multi-Agent Systems.pdf' → 'ICML 2025 Poster 0 Cowpox_ Towards the Immunity of VLM-based Multi-Agent Systems.pdf' (citations=0)
+Renamed: 'ICML 2025 Poster Improving Parallel Program Performance with LLM Optimizers via Agent-System Interfaces.pdf' → 'ICML 2025 Poster 7 Improving Parallel Program Performance with LLM Optimizers via Agent-System Interfaces.pdf' (citations=7)
+Renamed: 'ICML 2025 Poster MetaAgent_ Automatically Constructing Multi-Agent Systems Based on Finite State Machines.pdf' → 'ICML 2025 Poster 1 MetaAgent_ Automatically Constructing Multi-Agent Systems Based on Finite State Machines.pdf' (citations=1)
+✓ ICML 2025 Spotlightposter 30 Which_Agent_Causes_Task_Failures_and_When__On_Automated_Failure_Attribution_of_LLM_Multi-Agent_Systems.pdf already up to date (30).
+Renamed: 'NAACL 2025 Long 1 MASTER_A_Multi-Agent_System_with_LLM_Specialized_MCTS.pdf' → 'NAACL 2025 Long 7 MASTER_A_Multi-Agent_System_with_LLM_Specialized_MCTS.pdf' (citations=7)
+Renamed: 'NAACL 2025 Long 5 AgentMove_A_Large_Language_Model_based_Agentic_Framework_for_Zero-shot_Next_Location_Prediction.pdf' → 'NAACL 2025 Long 8 AgentMove_A_Large_Language_Model_based_Agentic_Framework_for_Zero-shot_Next_Location_Prediction.pdf' (citations=8)
+✓ NeurIPS 2025 Poster 0 DyFlow_Dynamic_Workflow_Framework_for_Agentic_Reasoning.pdf already up to date (0).
+✓ NeurIPS 2025 Poster 0 KVCOMM_Online_Cross-context_KV-cache_Communication_for_Efficient_LLM-based_Multi-agent_Systems.pdf already up to date (0).
+Renamed: 'NeurIPS 2025 Poster 0 MLZero_A_Multi-Agent_System_for_End-to-end_Machine_Learning_Automation.pdf' → 'NeurIPS 2025 Poster 6 MLZero_A_Multi-Agent_System_for_End-to-end_Machine_Learning_Automation.pdf' (citations=6)
+✓ NeurIPS 2025 Poster 14 AgentNet_Decentralized_Evolutionary_Coordination_for_LLM-based_Multi-Agent_Systems.pdf already up to date (14).
+✓ NeurIPS 2025 Poster 15 SiriuS_Self-improving_Multi-agent_Systems_via_Bootstrapped_Reasoning.pdf already up to date (15).
+✓ NeurIPS 2025 Poster 3 CAML_Collaborative_Auxiliary_Modality_Learning_for_Multi-Agent_Systems.pdf already up to date (3).
+Renamed: 'NeurIPS 2025 Poster TrajAgent_ An LLM-Agent Framework for Trajectory Modeling via Large-and-Small Model Collaboration.pdf' → 'NeurIPS 2025 Poster 2 TrajAgent_ An LLM-Agent Framework for Trajectory Modeling via Large-and-Small Model Collaboration.pdf' (citations=2)
+Renamed: 'NeurIPS 2025 Spotlight 0 G-Memory_Tracing_Hierarchical_Memory_for_Multi-Agent_Systems.pdf' → 'NeurIPS 2025 Spotlight 14 G-Memory_Tracing_Hierarchical_Memory_for_Multi-Agent_Systems.pdf' (citations=14)
+✓ NeurIPS 2025 Spotlight 5 MetaMind__Modeling_Human_Social_Thoughts_with_Metacognitive_Multi-Agent_Systems.pdf already up to date (5).
