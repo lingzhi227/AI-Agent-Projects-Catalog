@@ -1,0 +1,20 @@
+- Design
+  - dataset
+    - 
+  - context engineering
+    - ![overview](picture/context_engineering.png)
+    - [review](https://openreview.net/pdf/116ed45ae3d0873b16f5fdcab7f1fa4f12253e6d.pdf)
+  - Tools
+  - Agent memory: automatic compact([openai-codex](https://x.com/OpenAIDevs/status/1991217500269289732))
+  - Agent synthesizer and optimizer
+  - eval
+  - reinforcement learning settings
+
+- Useful Reference projects
+  - Tools
+    - ToolUniverse: [Github](https://github.com/mims-harvard/ToolUniverse)
+    - Claude-Scientific-skills: [GitHub](https://github.com/K-Dense-AI/claude-scientific-skills)
+  - Agent-coder
+    - codex
+    - gemini cli
+  - Agent-datascience Karpathy [Github](https://github.com/K-Dense-AI/karpathy)

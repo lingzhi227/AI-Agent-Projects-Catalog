@@ -1,0 +1,362 @@
+# Trending Arxiv Papers
+
+## ml
+
+- title: Deep sequence models tend to memorize geometrically; it is unclear why.pdf
+  Arxiv: 2510.26745V1
+  Citation_count: 0
+  Org: Google
+  Tags:
+    - memory-representation
+
+## model-mechanism
+
+- title: Beyond Context Limits Subconscious Threads for Long-Horizon Reasoning.pdf
+  Arxiv: 2507.16784V1
+  Citation_count: 0
+  Org: MIT
+  Tags:
+    - long-context
+    - KV-cache
+
+- title: Kimi K2 Open Agentic Intelligence.pdf
+  Arxiv: 2507.20534V1
+  Citation_count: 35
+  Org: Kimi
+  Tags:
+    - MoE
+    - optimizer
+    - training
+    - RL
+    - agentic
+
+
+## agent-framework
+
+- title: Planning with Multi-Constraints via Collaborative Language Agents.pdf
+  Arxiv: 2405.16510V4
+  Citation_count: 0
+  Org: Huawei
+  Tags:
+    - planning
+    - task-decomposition
+
+- title: VeriPlan Integrating Formal Verification and LLMs into End-User Planning.pdf
+  Arxiv: 2502.17898V1
+  Citation_count: 0
+  Org: UW-Madison
+  Tags:
+    - planning
+    - verification
+
+- title: Dynamic Cheatsheet Test-Time Learning with Adaptive Memory.pdf
+  Arxiv: 2504.07952V1
+  Citation_count: 0
+  Org: Stanford
+  Tags:
+    - Context-Engineering
+
+- title: Routine A Structural Planning Framework for LLM Agent System in Enterprise.pdf
+  Arxiv: 2507.14447V2
+  Citation_count: 0
+  Org: Digital China
+  Tags:
+    - planning
+    - routine
+
+- title: Agentic Context Engineering Evolving Contexts for Self-Improving Language Models.pdf
+  Arxiv: 2510.04618V1
+  Citation_count: 0
+  Org: Stanford
+  Tags:
+    - domain-specific
+    - context-engineering
+
+- title: How Do AI Agents Do HumanWork Comparing AI and HumanWorkflows Across Diverse Occupations.pdf
+  Arxiv: 2510.22780V2
+  Citation_count: 0
+  Org: CMU, Stanford
+  Tags:
+    - agent-workflow
+    - agent-sdk
+
+- title: Context Engineering 2.0.pdf
+  Arxiv: 2510.26493V1
+  Citation_count: 0
+  Org: SJTU
+  Tags:
+    - review
+    - context-engineering
+
+- title: The Era of Agentic Organization Learning to Organize with Language Models.pdf
+  Arxiv: 2510.26658V1
+  Citation_count: 0
+  Org: Microsoft
+  Tags:
+    - CoT
+    - planning
+    - multi-agent
+    - agent-sdk
+
+- title: Accumulating Context Changes the Beliefs of Language Models.pdf
+  Arxiv: 2511.01805V2
+  Citation_count: 0
+  Org: CMU
+  Tags:
+    - long-context
+    - belief-shift
+    - context-engineering
+
+- title: Unlocking the Power of Multi-Agent LLM for Reasoning From Lazy Agents to Deliberation.pdf
+  Arxiv: 2511.02303V1
+  Citation_count: 0
+  Org: PSU, Harvard
+  Tags:
+    - multi-agent
+    - lazy-agent-problem
+    - context-engineering
+
+- title: The Collaboration Gap.pdf
+  Arxiv: 2511.02687V1
+  Citation_count: 0
+  Org: Microsoft-Research-intern
+  Tags:
+    - multi-agent
+    - collaboration-gap-problem
+
+## RL
+- title: Enigmata Scaling Logical Reasoning in Large Language Models with Synthetic Verifiable Puzzles.pdf
+  Time: 2025-05
+  Arxiv: 2505.19914
+  Citation_count: 15
+  Org: ByteDance
+  Tags:
+    - synthetic data
+    - RL
+
+- title: S-GRPO Early Exit via Reinforcement Learning in Reasoning Models.pdf
+  Arxiv: 2505.07686V2
+  Citation_count: 36
+  Org: Huawei
+  Tags:
+    - CoT
+    - S-GRPO
+
+- title: Scaling Agent Learning via Experience Synthesis.pdf
+  Arxiv: 2511.03773V1
+  Citation_count: 0
+  Org: Meta Superintelligence lab
+  Tags:
+    - LLM-agent-RL
+    - world-model
+    - synthetic-data
+
+- title: Seer Online Context Learning for Fast Synchronous LLM Reinforcement Learning
+  Time: 2025-11-18
+  Arxiv: 2511.14617
+  Citation_count: 0
+  Org: moonshot ai
+
+## Applications
+
+- title: Adaptable and Precise Enterprise-Scenario LLM Function-Calling Capability Training Pipeline.pdf
+  Arxiv: 2412.15660V1
+  Citation_count: 0
+  Org: Digital China
+  Tags:
+    - function-call
+    - tool-api
+    - application
+
+- title: A Solver-Aided Hierarchical Language for LLM-Driven CAD Design.pdf
+  Arxiv: 2502.09819V1
+  Citation_count: 0
+  Org: UW
+  Tags:
+    - application
+    - domain-specific
+    - formal-verification
+    - CAD
+
+- title: DS-STAR Data Science Agent via Iterative Planning and Verification.pdf
+  Arxiv: 2509.21825V3
+  Citation_count: 0
+  Org: Google
+  Tags:
+    - application
+    - data-science-agent
+
+- title: A Survey of Vibe Coding with Large Language Models.pdf
+  Arxiv: 2510.12399V1
+  Citation_count: 0
+  Org: Chinese Academy of Sciences
+  Tags:
+    - review
+    - context-engineering
+    - application
+    - coding-agent
+
+- title: The Denario Project Deep Knowledge AI Agents for Scientific Discovery.pdf
+  Arxiv: 2510.26887V1
+  Citation_count: 0
+  Org: Princeton Sciences
+  Tags:
+    - multi-agent
+    - application
+    - literature-agent
+    - deep-research-agent
+
+- title: Towards Robust Mathematical Reasoning.pdf
+  Arxiv: 2511.01846V1
+  Citation_count: 0
+  Org: Google
+  Tags:
+    - reasoning-bench
+    - application
+    - domain-specific
+    - math-agent
+  Website: https://imobench.github.io/
+  Reference: Gemini Deep Think
+
+- title: Training Proactive and Personalized LLM Agents.pdf
+  Arxiv: 2511.02208V1
+  Citation_count: 0
+  Org: CMU
+  Tags:
+    - application
+    - LLM-assistant
+
+- title: Kosmos AI Scientist.pdf
+  Arxiv: 2511.02824V2
+  Citation_count: 0
+  Org: Edison Scientific Inc.
+  Tags:
+    - application
+    - multi-agent
+    - medical-deep-agent
+    - data-agent
+    - literature-agent
+    - coding-agent
+
+- title: LLM-as-a-Judge Toward World Models for Slate Recommendation Systems.pdf
+  Arxiv: 2511.04541V1
+  Citation_count: 0
+  Org: Universit ́e Lava
+  Tags:
+    - world-model
+    - application
+    - recommendation
+
+- title: JrScientist.pdf
+  Arxiv: 2511.04583V1
+  Citation_count: 0
+  Org: University of Tokyo
+  Tags:
+    - application
+    - deep-research-agent
+    - literature-agent
+    - coding-agent
+
+
+# Conference Papers
+
+## agent framework
+
+- title: Describe, Explain, Plan and Select Interactive Planning with Large Language Models Enables Open-World Multi-Task Agents.pdf
+  Citation_count: 409
+  Conference: NIPS 2023
+  Org: Peking University
+  Tags:
+    - planning
+    - multi-agent
+
+- title: DSPy Compiling Declarative Language Model Calls into Self-Improving Pipelines.pdf
+  Citation_count: 431
+  Conference: ICLR 2024
+  Org: Stanford, CMU
+  Tags:
+    - agent-sdk
+    - prompt-optimization
+
+- title: Towards Hierarchical Multi-Agent Workflows for Zero-Shot Prompt Optimization.pdf
+  Citation_count: 14
+  Conference: ICLR 2025 Workshop
+  Org: Cisco
+  Tags:
+    - multi-agent
+    - prompt-optimization
+
+## Applications
+
+- title: A_Real_World_WebAgent_wit.pdf
+  Conference: ICLR 2024
+  Citation_count: 39
+  Org: Google
+  Tags:
+    - application
+    - web-agent
+    - planning
+    - long-context
+    - program-synthesis
+
+# Conference Papers Citated
+
+## Academic Papers & Preprints
+- ACL Anthology NAACL 2025 Paper: https://aclanthology.org/2025.naacl-long.427/
+- ACL Anthology NAACL 2025 Paper (194): https://aclanthology.org/2025.naacl-long.194/
+- ACL Anthology NAACL 2025 Paper (199): https://aclanthology.org/2025.naacl-long.199/
+- ACL Anthology EMNLP 2023 Paper: https://aclanthology.org/2023.emnlp-main.189/
+- ACL Anthology EMNLP 2020 Demo Paper: https://aclanthology.org/2020.emnlp-demos.6
+- ACL Anthology EMNLP 2019 Paper: https://aclanthology.org/D19-1261
+- ACL Anthology ACL 2019 Paper: https://aclanthology.org/P19-1472/
+- ACL Anthology NAACL 2019 Paper: https://aclanthology.org/N19-1300/
+- ACL Anthology EMNLP 2019 Paper: https://aclanthology.org/D19-1454/
+- ACL Anthology ACL 2017 Paper: https://aclanthology.org/P17-1171
+- ACL Anthology ACL 2016 Paper: https://aclanthology.org/P16-1144/
+- NeurIPS 2022 Paper (Abstract): https://papers.nips.cc/paper_files/paper/2022/hash/3cf775c7e0b4387efa076ef47f7b3b09-Abstract-Conference.html
+- NeurIPS 2022 Paper (PDF): https://proceedings.neurips.cc/paper_files/paper/2022/file/82ad13ec01f9fe44c01cb91814fd7b8c-Paper-Conference.pdf
+- NeurIPS 2021 Paper (Abstract): https://proceedings.neurips.cc/paper/2021/hash/2e92962c0b6996add9517e4242ea9bdc-Abstract.html
+- NeurIPS 2020 Paper: https://proceedings.neurips.cc/paper_files/paper/2020/file/6b493230205f780e1bc26945df7481e5-Paper.pdf
+- NeurIPS 2019 Paper: https://proceedings.neurips.cc/paper_files/paper/2019/file/bdbca288fee7f92f2bfa9f7012727740-Paper.pdf
+- NeurIPS 2018 Paper (Abstract): https://papers.nips.cc/paper/2018/hash/6788076842014c83cedadbe6b0ba0314-Abstract.html
+- NeurIPS 2017 Paper: https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf
+- PMLR ICML 2022 Paper: https://proceedings.mlr.press/v162/xu22k.html
+- PMLR ICML 2020 Paper: https://proceedings.mlr.press/v119/nash20a.html
+- ACM SIGGRAPH 2022 Paper: https://dl.acm.org/doi/10.1145/3528223.3530078
+- ACM SIGGRAPH 2022 Paper: https://dl.acm.org/doi/10.1145/3528223.3530133
+- ACM SIGGRAPH 2021 Paper: https://dl.acm.org/doi/10.1145/3478513.3480562
+- ACM SIGGRAPH 2021 Paper: https://dl.acm.org/doi/10.1145/3450626.3459818
+- ACM Digital Library Paper: http://doi.acm.org/10.1145/3272127.3275006
+- ACM Digital Library Paper: https://dl.acm.org/doi/10.1145/3663529.3663797
+- ACM Digital Library Paper: https://doi.org/10.1145/3706598.3714113
+- ACM Digital Library Paper: https://doi.org/10.1145/3641289
+- IJCAI 2024 Paper: https://www.ijcai.org/proceedings/2024/890
+- IJCAI 2019 Paper PDF: https://www.ijcai.org/proceedings/2019/0609.pdf
+- IEEE Paper (9523001): https://ieeexplore.ieee.org/document/9523001/
+- IEEE Paper (9879522): https://ieeexplore.ieee.org/document/9879522/
+- IEEE Paper (9710909): https://ieeexplore.ieee.org/document/9710909/
+- IEEE Paper (8954378): https://ieeexplore.ieee.org/document/8954378/
+- OpenReview Forum Paper: https://openreview.net/forum?id=VTF8yNQM66
+- OpenReview Paper PDF: https://openreview.net/pdf?id=l9rATNBB8Y
+- arXiv Paper (2402.07927): https://doi.org/10.48550/arXiv.2402.07927
+- CVM Journal Paper: https://doi.org/10.26599/cvm.2025.9450460
+- bioRxiv Preprint (2025.02.27.640551v1): https://www.biorxiv.org/content/10.1101/2025.02.27.640551v1
+- bioRxiv Preprint (2025.10.24.684192v1): https://www.biorxiv.org/content/10.1101/2025.10.24.684192v1
+- OSF Preprint: https://osf.io/va6d5/?view_only=8d74c81f765746908420e63479f6f36d
+- OSF SocArXiv Preprint: https://osf.io/preprints/socarxiv/xvcf2_v1
+
+## Semantic Scholar Papers
+- Semantic Scholar Paper (272648256): https://api.semanticscholar.org/CorpusID:272648256
+- Semantic Scholar Paper (278905542): https://api.semanticscholar.org/CorpusID:278905542
+- Semantic Scholar Paper (260925901): https://api.semanticscholar.org/CorpusID:260925901
+- Semantic Scholar Paper (260351380): https://api.semanticscholar.org/CorpusID:260351380
+- Semantic Scholar Paper (268042527): https://api.semanticscholar.org/CorpusID:268042527
+- Semantic Scholar Paper (258841118): https://api.semanticscholar.org/CorpusID:258841118
+- Semantic Scholar Paper (267094917): https://api.semanticscholar.org/CorpusID:267094917
+- Semantic Scholar Paper (274515739): https://api.semanticscholar.org/CorpusID:274515739
+- Semantic Scholar Paper (273507543): https://api.semanticscholar.org/CorpusID:273507543
+- Semantic Scholar Paper (268531873): https://api.semanticscholar.org/CorpusID:268531873
+- Semantic Scholar Paper (277092007): https://api.semanticscholar.org/CorpusID:277092007
+- Semantic Scholar Paper (273098750): https://api.semanticscholar.org/CorpusID:273098750
+- SketchGen Semantic Scholar Paper: https://www.semanticscholar.org/paper/SketchGen%3A-Generating-Constrained-CAD-Sketches-Para-Bhat/adfce546ad940c724b25e6c0023c5d5bc7362272
+- Semantic Scholar Paper: https://www.semanticscholar.org/paper/f81a1b4510631d14b5b565c4701ee056f8d5c72f

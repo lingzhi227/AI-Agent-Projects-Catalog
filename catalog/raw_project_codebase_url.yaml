@@ -1,0 +1,1983 @@
+- name: UTCP
+  github: https://github.com/universal-tool-calling-protocol
+- name: 2WikiMultiHopQA
+  github: https://github.com/Alab-NII/2WikiMultiHopQA
+- name: 2WikiMultihopQA
+  github: https://github.com/Alab-NII/2wikimultihop
+- name: Abstraction and Reasoning Corpus (ARC)
+  github: https://github.com/fchollet/ARC
+- name: ActivityWatch
+  github: https://github.com/ActivityWatch/activitywatch
+- name: ADAPT (As-needed Decomposition and Planning)
+  github: https://github.com/allenai/adapt
+- name: ADB Keyboard
+  github: https://github.com/senzhk/ADBKeyBoard
+- name: ADMET-AI
+  github: https://github.com/swansonk14/admet_ai
+- name: 'AdvBench: Harmful Behaviors'
+  github: https://github.com/llm-attacks/llm-attacks/tree/main/data/advbench
+- name: AG2 (AgentGym/AG2)
+  github: https://github.com/ag2ai/ag2
+- name: Agent S
+  github: https://github.com/simular-ai/Agent-S
+- name: Agent Skill Induction (ASI)
+  github: https://github.com/zorazrw/agent-skill-induction
+- name: Agent Workflow Memory (AWM)
+  github: https://github.com/zorazrw/agent-workflow-memory
+- name: agent-attack (VWA-Adv, attacks, defenses)
+  github: https://github.com/ChenWu98/agent-attack
+- name: Agent-Oriented-Planning (AOP)
+  github: https://github.com/lalaliat/Agent-Oriented-Planning
+- name: AgentBench
+  github: https://github.com/THUDM/AgentBench
+- name: AgentBoard (PDDL tasks)
+  github: https://github.com/hkust-nlp/AgentBoard
+- name: AgentDropout
+  github: https://github.com/wangzx1219/AgentDropout
+- name: AgentEval
+  github: https://github.com/Narabzad/AgentEval/
+- name: AgentGPT
+  github: https://github.com/reworkd/AgentGPT
+- name: AgentLego
+  github: https://github.com/InternLM/agentlego
+- name: AgentLite
+  github: https://github.com/salesforce/AgentLite
+- name: AgentOhana
+  github: https://github.com/SalesforceAIResearch/agentohana
+- name: AgentOhana / xLAM
+  github: https://github.com/Agent-Ohana/xLAM
+- name: AgentPrune
+  github: https://github.com/yanweiyue/AgentPrune
+- name: AgentReview
+  github: https://github.com/Ahren09/AgentReview
+- name: AgentScope
+  github: https://github.com/modelscope/agentscope
+- name: AgentsCourt / SimuCourt
+  github: https://github.com/Zhitao-He/SimuCourt
+- name: AgentSense
+  github: https://github.com/ljcleo/agent_sense
+- name: AgentSquare
+  github: https://github.com/tsinghua-fib-lab/agentsquare
+- name: AgentTuning / AgentLM
+  github: https://github.com/THUDM/AgentTuning
+- name: AgentVerse
+  github: https://github.com/OpenBMB/AgentVerse
+- name: AgentVerse
+  github: https://github.com/THUDM/AgentVerse
+- name: Aguvis
+  github: https://github.com/salesforce/AGuVis
+- name: AHK (Python AutoHotkey wrapper)
+  github: https://github.com/spyoungtech/ahk
+- name: AI Scientist
+  github: https://github.com/SakanaAI/AI-Scientist
+- name: AI-Researcher
+  github: https://github.com/NoviScl/AI-Researcher
+- name: AI2-THOR
+  github: https://github.com/allenai/ai2thor
+- name: Aider
+  github: https://github.com/Aider-AI/aider
+  codewiki: https://codewiki.google/github.com/Aider-AI/aider
+- name: AiTM (Agent-in-the-Middle)
+  github: https://github.com/PengfeiHePower/AiTM
+- name: ALFRED
+  github: https://github.com/askforalfred/alfred
+- name: ALFWorld
+  github: https://github.com/alfworld/alfworld
+- name: ALFWorld
+  github: https://github.com/princeton-vl/ALFWorld
+- name: Alibaba DAMO-ConvAI (FlowBench mirror/hub)
+  github: https://github.com/AlibabaResearch/DAMO-ConvAI
+- name: AlpacaEval
+  github: https://github.com/tatsu-lab/alpaca_eval
+- name: AlphaFlow / ESMFlow
+  github: https://github.com/bjing2016/alphaflow
+- name: AlphaFold
+  github: https://github.com/deepmind/alphafold
+- name: AlphaFold2
+  github: https://github.com/google-deepmind/alphafold
+  codewiki: https://codewiki.google/github.com/google-deepmind/alphafold
+- name: AmbigQA
+  github: https://github.com/shmsw25/ambigqa
+- name: Android in the Wild (AITW)
+  github: https://github.com/google-research/google-research/tree/master/android_in_the_wild
+- name: android_world
+  github: https://github.com/google-research/android_world
+- name: AndroidControl
+  github: https://github.com/microsoft/AndroidControl
+- name: AndroidEnv
+  github: https://github.com/google-deepmind/android_env
+- name: AndroidEnv
+  github: https://github.com/google-research/android_env
+- name: AndroidEnv
+  github: https://github.com/deepmind/android_env
+- name: AndroidLab
+  github: https://github.com/THUDM/Android-Lab
+- name: AndroidLab
+  github: https://github.com/THUDM/AndroidLab
+- name: AndroidWorld
+  github: https://github.com/google-deepmind/android-world
+- name: AndroidWorld
+  github: https://github.com/google-deepmind/android_world
+- name: AndroidWorld
+  github: https://github.com/microsoft/AndroidWorld
+- name: ANLI (Adversarial NLI)
+  github: https://github.com/facebookresearch/anli
+- name: AntiBERTy
+  github: https://github.com/Graylab/AntiBERTy
+- name: antibioticsai
+  github: https://github.com/felixjwong/antibioticsai
+- name: API-Bank
+  github: https://github.com/AlibabaResearch/DAMO-ConvAI/tree/main/api-bank
+- name: APIBench (from Gorilla)
+  github: https://github.com/gorilla-llm/gorilla
+- name: APIGen
+  github: https://github.com/SalesforceAIResearch/APIGen
+- name: AppAgent
+  github: https://github.com/RUC-GSAI/AppAgent
+- name: appium
+  github: https://github.com/appium/appium
+  codewiki: https://codewiki.google/github.com/appium/appium
+- name: APPS
+  github: https://github.com/hendrycks/apps
+- name: AQuA-RAT
+  github: https://github.com/deepmind/AQuA
+- name: ARC (AI2 Reasoning Challenge)
+  github: https://github.com/allenai/ai2-arc
+- name: Aria-UI
+  github: https://github.com/aria-ui/Aria-UI
+- name: Arquero
+  github: https://github.com/uwdata/arquero
+- name: arxiv Python package
+  github: https://github.com/lukasschwab/arxiv.py
+- name: ASDiv
+  github: https://github.com/chaochun/nlu-asdiv-dataset
+- name: Ask-before-Plan
+  github: https://github.com/magicgh/Ask-before-Plan
+- name: ATOM3D
+  github: https://github.com/drorlab/atom3d
+- name: AucArena
+  github: https://github.com/jiangjiechen/auc-arena
+- name: Auto-GPT
+  github: https://github.com/Significant-Gravitas/Auto-GPT
+- name: Auto-UI (You Only Look at Screens)
+  github: https://github.com/amazon-science/auto-ui
+- name: AutoAgents
+  github: https://github.com/Link-AGI/AutoAgents
+- name: AutoDAN
+  github: https://github.com/SheltonLiu-N/AutoDAN
+- name: AutoDock Vina
+  github: https://github.com/ccsb-scripps/AutoDock-Vina
+- name: AutoForm
+  github: https://github.com/thunlp/AutoForm
+- name: AutoGen
+  github: https://github.com/microsoft/autogen
+- name: AutoGluon
+  github: https://github.com/autogluon/autogluon
+- name: AutoGPT
+  github: https://github.com/Significant-Gravitas/AutoGPT
+- name: Automated Design of Agentic Systems (ADAS)
+  github: https://github.com/ShengranHu/ADAS
+- name: Automatic Prompt Engineer (APE)
+  github: https://github.com/keirp/automatic_prompt_engineer
+- name: AutoML-Agent
+  github: https://github.com/deepauto-ai/automl-agent
+- name: AutoWebGLM
+  github: https://github.com/THUDM/AutoWebGLM
+- name: AVDC (Learning to Act from Actionless Videos through Dense Correspondences)
+  github: https://github.com/apple/ml-avdc
+- name: Awesome-Scientific-Language-Models
+  github: https://github.com/yuzhimanhua/Awesome-Scientific-Language-Models
+- name: AxCell
+  github: https://github.com/paperswithcode/axcell
+- name: BabyAGI
+  github: https://github.com/yoheinakajima/babyagi
+- name: BabyAI
+  github: https://github.com/mila-iqia/babyai
+- name: Baize
+  github: https://github.com/project-baize/baize
+- name: Bamboogle
+  github: https://github.com/ofirpress/Bamboogle
+- name: Bamboogle (dataset)
+  github: https://github.com/ofirpress/self-ask/tree/main/bamboogle
+- name: BEHAVIOR / BEHAVIOR-1K
+  github: https://github.com/StanfordVL/Behavior
+- name: BenchForm
+  github: https://github.com/Zhiyuan-Weng/BenchForm
+- name: BERT
+  github: https://github.com/google-research/bert
+  codewiki: https://codewiki.google/github.com/google-research/bert
+- name: BERTopic
+  github: https://github.com/MaartenGr/BERTopic
+- name: BERTScore
+  github: https://github.com/Tiiiger/bert_score
+- name: BGE (FlagEmbedding)
+  github: https://github.com/FlagOpen/FlagEmbedding
+- name: BIG-bench
+  github: https://github.com/google/BIG-bench
+- name: BIG-bench Hard (BBH)
+  github: https://github.com/suzgunmirac/BIG-bench-Hard
+- name: BIG-bench Hard (BBH)
+  github: https://github.com/suzgunmirac/BIG-bench-hard
+- name: BioBERT
+  github: https://github.com/dmis-lab/biobert
+- name: BioDiscoveryAgent
+  github: https://github.com/snap-stanford/BioDiscoveryAgent
+- name: BioGPT
+  github: https://github.com/microsoft/BioGPT
+- name: BiomedCLIP
+  github: https://github.com/microsoft/BiomedCLIP
+- name: BioPsyKit
+  github: https://github.com/mad-lab-fau/BioPsyKit
+- name: Biopython
+  github: https://github.com/biopython/biopython
+- name: Biotite (P-SEA)
+  github: https://github.com/biotite-dev/biotite
+- name: BIRD (Text-to-SQL)
+  github: https://github.com/AlibabaResearch/DAMO-ConvAI/tree/main/bird
+- name: 'BIRD: Big Bench for Large-Scale Database-Grounded Text-to-SQL'
+  github: https://github.com/AlibabaResearch/DAMO-ConvAI/tree/main/BIRD
+- name: bitsandbytes
+  github: https://github.com/TimDettmers/bitsandbytes
+- name: BLADE
+  github: https://github.com/behavioral-data/BLADE
+- name: BLEURT-20
+  github: https://github.com/google-research/bleurt
+- name: BLINK (Scalable Zero-shot Entity Linking)
+  github: https://github.com/facebookresearch/BLINK
+- name: BLIP
+  github: https://github.com/salesforce/BLIP
+- name: BLIP-2 / LAVIS (Q-Former)
+  github: https://github.com/salesforce/LAVIS
+- name: BLOOM
+  github: https://github.com/bigscience-workshop/bloom
+- name: BMTools
+  github: https://github.com/OpenBMB/BMTools
+- name: Bokeh
+  github: https://github.com/bokeh/bokeh
+  codewiki: https://codewiki.google/github.com/bokeh/bokeh
+- name: BrowserGym
+  github: https://github.com/ServiceNow/BrowserGym
+- name: BrowserGym
+  github: https://github.com/ServiceNow/browsergym
+- name: BUTTON (BUTTONInstruct)
+  github: https://github.com/PKU-Baichuan-MLSystemLab/BUTTON
+- name: CAIL2018 (China AI and Law Challenge 2018)
+  github: https://github.com/thunlp/CAIL2018
+- name: CAMDA-DILI
+  github: https://github.com/anikaliu/CAMDA-DILI
+- name: CAMEL (Communicative Agents for “Mind” Exploration)
+  github: https://github.com/camel-ai/camel
+  codewiki: https://codewiki.google/github.com/camel-ai/camel
+- name: CAMEL (Communicative Agents for “Mind” Exploration)
+  github: https://github.com/lightaime/camel
+- name: Carleson
+  github: https://github.com/fpvandoorn/carleson
+- name: CATH 4.2 processed dataset (NeurIPS’19 Graph Protein Design)
+  github: https://github.com/jingraham/neurips19-graph-protein-design
+- name: Chameleon
+  github: https://github.com/lupantech/Chameleon
+- name: ChaosBlade
+  github: https://github.com/chaosblade-io/chaosblade
+- name: Character-LLM
+  github: https://github.com/thu-coai/Character-LLM
+- name: Chart-to-text
+  github: https://github.com/vis-nlp/Chart-to-text
+- name: ChartQA
+  github: https://github.com/vis-nlp/ChartQA
+- name: ChatArena
+  github: https://github.com/chatarena/chatarena
+- name: ChatDev
+  github: https://github.com/OpenBMB/ChatDev
+- name: ChatDev (Puppeteer branch)
+  github: https://github.com/OpenBMB/ChatDev/tree/puppeteer
+- name: ChemBERTa
+  github: https://github.com/seyonechithrananda/chemberta
+- name: ChemGE (Population-based de novo molecule generation)
+  github: https://github.com/tsudalab/ChemGE
+- name: CheXzero
+  github: https://github.com/rajpurkarlab/CheXzero
+- name: Chroma
+  github: https://github.com/chroma-core/chroma
+  codewiki: https://codewiki.google/github.com/chroma-core/chroma
+- name: Chroma
+  github: https://github.com/generative-biology/chroma
+- name: Chronos (KernelSynth)
+  github: https://github.com/amazon-science/chronos-forecasting
+- name: CIAR (Counter-Intuitive Arithmetic Reasoning)
+  github: https://github.com/Skytliang/CIAR
+- name: CLIN
+  github: https://github.com/allenai/clin
+- name: ClinicalBERT
+  github: https://github.com/EmilyAlsentzer/clinicalBERT
+- name: CLIP (Contrastive Language-Image Pre-training)
+  github: https://github.com/openai/CLIP
+  codewiki: https://codewiki.google/github.com/openai/CLIP
+- name: CLIPort
+  github: https://github.com/cliport/cliport
+- name: clipscore
+  github: https://github.com/jmhessel/clipscore
+- name: CMU-MOSEI
+  github: https://github.com/A2Zadeh/CMU-MultimodalSDK
+- name: 'COCOA Datasets: MutualFriends and CraigslistBargain'
+  github: https://github.com/stanfordnlp/cocoa
+- name: Code Llama
+  github: https://github.com/facebookresearch/codellama
+- name: CodeAct
+  github: https://github.com/xingyaoww/CodeAct
+- name: CodeContests
+  github: https://github.com/deepmind/code_contests
+- name: CodeScientist
+  github: https://github.com/allenai/codescientist
+- name: CODESIM
+  github: https://github.com/KagNLP/codesim.github.io
+- name: CogAgent
+  github: https://github.com/THUDM/CogAgent
+- name: CogMir
+  github: https://github.com/XuanL17/CogMir
+- name: cogsci-jnmf
+  github: https://github.com/brand-d/cogsci-jnmf
+- name: CogVLM
+  github: https://github.com/THUDM/CogVLM
+- name: CogVLM2
+  github: https://github.com/THUDM/CogVLM2
+- name: COIG (Chinese Open Instruction Generalist)
+  github: https://github.com/BAAI-Open/COIG
+- name: ColabFold
+  github: https://github.com/sokrypton/ColabFold
+- name: ColBERT / ColBERTv2
+  github: https://github.com/stanford-futuredata/ColBERT
+- name: CommaQA
+  github: https://github.com/allenai/CommaQA
+- name: CommonGen
+  github: https://github.com/INK-USC/CommonGen
+- name: CommonGen-Hard (from Self-Refine)
+  github: https://github.com/allenai/self-refine
+- name: compfiles
+  github: https://github.com/dwrensha/compfiles
+- name: ComplexCoT (Complexity-Based Prompting)
+  github: https://github.com/FranxYao/Complexity-Based-Prompting
+- name: con-nf
+  github: https://github.com/leanprover-community/con-nf
+- name: ConceptNet 5
+  github: https://github.com/commonsense/conceptnet5
+- name: CONCH
+  github: https://github.com/mahmoodlab/CONCH
+- name: Concordia
+  github: https://github.com/google-deepmind/concordia
+- name: context-plus
+  github: https://github.com/Multi-Agent-LLMs/context-plus
+- name: Contriever
+  github: https://github.com/facebookresearch/contriever
+- name: ConvNeXt
+  github: https://github.com/facebookresearch/ConvNeXt
+- name: Coxeter
+  github: https://github.com/NUS-Math-Formalization/coxeter
+- name: CRAB (Cross-environment Agent Benchmark)
+  github: https://github.com/camel-ai/crab
+- name: CRAB Benchmark-v0 (dataset and tasks)
+  github: https://github.com/camel-ai/crab/tree/main/crab-benchmark-v0
+- name: CraigslistBargain (CB)
+  github: https://github.com/stanfordnlp/craigslistbargains
+- name: CREATOR Challenge (CREATION Challenge)
+  github: https://github.com/amazon-science/creator
+- name: Croto (Cross-Team Orchestration)
+  github: https://github.com/OpenBMB/ChatDev/tree/macnet
+- name: CURIE Benchmark
+  github: https://github.com/google/curie
+- name: CVXPY
+  github: https://github.com/cvxpy/cvxpy
+- name: Cytopus
+  github: https://github.com/wallet-maker/cytopus
+- name: DBpedia
+  github: https://github.com/dbpedia
+- name: DDIM (Denoising Diffusion Implicit Models)
+  github: https://github.com/ermongroup/ddim
+- name: Deal or No Deal (Negotiation)
+  github: https://github.com/facebookresearch/end-to-end-negotiator
+- name: Debate
+  github: https://github.com/google-deepmind/debate
+- name: DeBERTa
+  github: https://github.com/microsoft/DeBERTa
+- name: Decision Protocols (Voting or Consensus?)
+  github: https://github.com/lkaesberg/decision-protocols
+- name: Decomposed Prompting (DecomP)
+  github: https://github.com/allenai/DecomP
+- name: DeepFRI
+  github: https://github.com/flatironinstitute/DeepFRI
+- name: DeepMind Mathematics Dataset
+  github: https://github.com/deepmind/mathematics_dataset
+- name: DeepPurpose
+  github: https://github.com/kexinhuang12345/DeepPurpose
+- name: DeepSDF
+  github: https://github.com/facebookresearch/DeepSDF
+- name: DeepSeek-Coder
+  github: https://github.com/deepseek-ai/deepseek-coder
+  codewiki: https://codewiki.google/github.com/deepseek-ai/deepseek-coder
+- name: DeepSeek-Coder-V2
+  github: https://github.com/deepseek-ai/DeepSeek-Coder
+  codewiki: https://codewiki.google/github.com/deepseek-ai/DeepSeek-Coder
+- name: DeepSeek-V2
+  github: https://github.com/deepseek-ai/DeepSeek-V2
+- name: DeepSeek-V3
+  github: https://github.com/deepseek-ai/DeepSeek-V3
+  codewiki: https://codewiki.google/github.com/deepseek-ai/DeepSeek-V3
+- name: DeepSeekMath
+  github: https://github.com/deepseek-ai/DeepSeek-Math
+- name: DeepSeek‑R1
+  github: https://github.com/deepseek-ai/DeepSeek-R1
+  codewiki: https://codewiki.google/github.com/deepseek-ai/DeepSeek-R1
+- name: DeepSpeed
+  github: https://github.com/microsoft/DeepSpeed
+- name: DeepSpeed-Chat
+  github: https://github.com/microsoft/DeepSpeedExamples
+- name: deeptime
+  github: https://github.com/deeptime-ml/deeptime
+- name: Dense Passage Retrieval (DPR)
+  github: https://github.com/facebookresearch/DPR
+- name: DialogStudio
+  github: https://github.com/salesforce/DialogStudio
+- name: DIAMOND
+  github: https://github.com/bbuchfink/diamond
+- name: DiffAb
+  github: https://github.com/luost26/diffab
+- name: DiffDock
+  github: https://github.com/gcorso/DiffDock
+- name: Diffusion Policy (DiT-based policy)
+  github: https://github.com/real-stanford/diffusion_policy
+- name: dill
+  github: https://github.com/uqfoundation/dill
+- name: DINOv2
+  github: https://github.com/facebookresearch/dinov2
+- name: Direct Preference Optimization (DPO)
+  github: https://github.com/eric-mitchell/direct-preference-optimization
+- name: DiscoveryWorld
+  github: https://github.com/allenai/discoveryworld
+- name: DLATK (Differential Language Analysis ToolKit)
+  github: https://github.com/wwbp/dlatk
+- name: DMAD (Diverse Multi‑Agent Debate)
+  github: https://github.com/MraDonkey/DMAD
+- name: dMaSIF
+  github: https://github.com/LPDI-EPFL/dMaSIF
+- name: DNA Chisel
+  github: https://github.com/Edinburgh-Genome-Foundry/DnaChisel
+- name: DNABERT
+  github: https://github.com/jerryji1993/DNABERT
+- name: dockur/windows
+  github: https://github.com/dockur/windows
+  codewiki: https://codewiki.google/github.com/dockur/windows
+- name: DRAFT
+  github: https://github.com/quchangle1/DRAFT
+- name: DroidBot
+  github: https://github.com/honeynet/droidbot
+- name: DROP
+  github: https://github.com/allenai/drop
+- name: DS-Agent
+  github: https://github.com/guosyjlu/DS-Agent
+- name: DSBench
+  github: https://github.com/LiqiangJing/DSBench
+- name: DSFD (Dual Shot Face Detector)
+  github: https://github.com/sfzhang15/DSFD
+- name: dspy
+  github: https://github.com/stanfordnlp/dspy
+  codewiki: https://codewiki.google/github.com/stanfordnlp/dspy
+- name: DSSP
+  github: https://github.com/cmbi/dssp
+- name: DSSP
+  github: https://github.com/PDB-REDO/dssp
+- name: DuckTrack
+  github: https://github.com/TheDuckAI/DuckTrack
+- name: DyLAN
+  github: https://github.com/SALT-NLP/DyLAN
+- name: e3nn (Tensor Field Networks)
+  github: https://github.com/e3nn/e3nn
+- name: E5
+  github: https://github.com/microsoft/unilm/tree/master/e5
+- name: EasyJailbreak
+  github: https://github.com/EasyJailbreak/EasyJailbreak
+- name: EasyOCR
+  github: https://github.com/JaidedAI/EasyOCR
+  codewiki: https://codewiki.google/github.com/JaidedAI/EasyOCR
+- name: EASYTOOL (in JARVIS)
+  github: https://github.com/microsoft/JARVIS/tree/main/easytool
+- name: Ecology Georeferencing (BIOGR subset)
+  github: https://github.com/google-research/ecology-georeferencing
+- name: EEG2EEG
+  github: https://github.com/ZitongLu1996/EEG2EEG
+- name: EGNN
+  github: https://github.com/vgsatorras/egnn
+- name: EigenFold
+  github: https://github.com/bjing2016/eigenfold
+- name: EigenFold
+  github: https://github.com/microsoft/eigenfold
+- name: Elasticsearch
+  github: https://github.com/elastic/elasticsearch
+- name: EleutherAI LM Evaluation Harness
+  github: https://github.com/EleutherAI/lm-evaluation-harness
+- name: EmbodiedBench
+  github: https://github.com/EmbodiedBench
+- name: EnvDistraction
+  github: https://github.com/xbmxb/EnvDistraction
+- name: eofs
+  github: https://github.com/ajdawson/eofs
+- name: Error Correction Zoo (EC Zoo)
+  github: https://github.com/errorcorrectionzoo/eczoo_data
+- name: ESM (ESM3/ESMFold)
+  github: https://github.com/evolutionaryscale/esm
+- name: ESM All-Atom (ESM-AA)
+  github: https://github.com/zhengkangjie/ESM-AA
+- name: ESMDiff (Structure Language Models for Protein Conformation Generation)
+  github: https://github.com/lujiarui/esmdiff
+- name: ESMFold (ESM)
+  github: https://github.com/facebookresearch/esm
+- name: ETDataset (ETT)
+  github: https://github.com/zhouhaoyi/ETDataset
+- name: Eureka
+  github: https://github.com/eureka-research/eureka
+- name: EvalPlus
+  github: https://github.com/evalplus/evalplus
+- name: EvoDiff
+  github: https://github.com/salesforce/evodiff
+- name: EvoDiff
+  github: https://github.com/microsoft/evodiff
+- name: EXAMS-V
+  github: https://github.com/mbzuai-nlp/EXAMS
+- name: FACTSCORE
+  github: https://github.com/google-research/factscore
+- name: FAISS
+  github: https://github.com/facebookresearch/faiss
+  codewiki: https://codewiki.google/github.com/facebookresearch/faiss
+- name: fastText
+  github: https://github.com/facebookresearch/fastText
+  codewiki: https://codewiki.google/github.com/facebookresearch/fastText
+- name: 'FILM: Following Instructions in Language with Modular Methods'
+  github: https://github.com/soyeonm/FILM
+- name: Firecrawl
+  github: https://github.com/mendableai/firecrawl
+- name: Flan‑T5 (Instruction‑tuned T5)
+  github: https://github.com/google-research/FLAN
+- name: FlashAttention
+  github: https://github.com/HazyResearch/flash-attention
+- name: FlashAttention-2
+  github: https://github.com/Dao-AILab/flash-attention
+  codewiki: https://codewiki.google/github.com/Dao-AILab/flash-attention
+- name: Flask
+  github: https://github.com/pallets/flask
+  codewiki: https://codewiki.google/github.com/pallets/flask
+- name: FLASK
+  github: https://github.com/kaistAI/FLASK
+- name: Flickr30k Entities
+  github: https://github.com/BryanPlummer/flickr30k_entities
+- name: Flow (official)
+  github: https://github.com/tmllab/2025_ICLR_FLOW
+- name: FlowBench
+  github: https://github.com/Justherozen/FlowBench
+- name: FlowMap
+  github: https://github.com/dcharatan/flowmap
+- name: FLT (Fermat’s Last Theorem)
+  github: https://github.com/ImperialCollegeLondon/FLT
+- name: FoldComp
+  github: https://github.com/steineggerlab/foldcomp
+- name: FoldFlow
+  github: https://github.com/joeybose/foldflow
+- name: FoldFlow / FOLDFLOW-2
+  github: https://github.com/DreamFold/FoldFlow
+- name: Foldseek
+  github: https://github.com/steineggerlab/foldseek
+- name: FormalBook (“Proofs from THE BOOK”)
+  github: https://github.com/Mo271/FormalBook
+- name: Formalisation of Constructable Numbers
+  github: https://github.com/Louis-Le-Grand/Formalisation-of-constructable-numbers
+- name: Foundation (Formalized Formal Logic)
+  github: https://github.com/FormalizedFormalLogic/Foundation
+- name: Fpocket
+  github: https://github.com/Discngine/fpocket
+- name: FrameDiff (SE(3) diffusion for protein backbones)
+  github: https://github.com/jasonkyuyim/se3_diffusion
+- name: FreeSASA
+  github: https://github.com/mittinatten/freesasa
+- name: FreshQA (FreshLLMs)
+  github: https://github.com/google-research/google-research/tree/master/freshqa
+- name: FrugalGPT
+  github: https://github.com/stanford-futuredata/FrugalGPT
+- name: Functionary (Functionary‑Small‑v3.1)
+  github: https://github.com/MeetKai/functionary
+- name: G-Designer
+  github: https://github.com/yanweiyue/GDesigner
+- name: G-Memory
+  github: https://github.com/bingreeky/GMemory
+- name: GAIA (General AI Assistant Benchmark)
+  github: https://github.com/gaia-benchmark/GAIA
+- name: 'GAIA: A Benchmark for General AI Assistants'
+  github: https://github.com/GAIA-benchmark/GAIA
+- name: GAIR-NLP/Abel
+  github: https://github.com/GAIR-NLP/abel
+- name: Galactica
+  github: https://github.com/paperswithcode/galai
+- name: GAOKAO-MM
+  github: https://github.com/FudanNLP/GAOKAO-MM
+- name: GCG (llm-attacks)
+  github: https://github.com/llm-attacks/llm-attacks
+- name: Gemma 2
+  github: https://github.com/google-deepmind/gemma
+- name: Generative Agents
+  github: https://github.com/joonspk-research/generative_agents
+  codewiki: https://codewiki.google/github.com/joonspk-research/generative_agents
+- name: Genesis (Embodied-AI simulator)
+  github: https://github.com/Genesis-EmbodiedAI/Genesis
+- name: Genie
+  github: https://github.com/aqlaboratory/genie
+- name: Genie2
+  github: https://github.com/aqlaboratory/genie2
+- name: gensim
+  github: https://github.com/RaRe-Technologies/gensim
+- name: GeoPandas
+  github: https://github.com/geopandas/geopandas
+- name: geoplot
+  github: https://github.com/ResidentMario/geoplot
+- name: GeoQA
+  github: https://github.com/chenjiaqi/GeoQA
+- name: GLM-4
+  github: https://github.com/THUDM/GLM-4
+- name: GLoRIA
+  github: https://github.com/marshuang80/gloria
+- name: GluonTS
+  github: https://github.com/awslabs/gluonts
+- name: Google Landmarks Dataset v2 (Web‑Landmark)
+  github: https://github.com/cvdfoundation/google-landmark
+- name: Gorilla (APIBench)
+  github: https://github.com/ShishirPatil/gorilla
+- name: GPQA
+  github: https://github.com/Idavidrein/gpqa
+- name: GPQA
+  github: https://github.com/idavidrein/gpqa
+- name: GPQA
+  github: https://github.com/idavidrein/GPQA
+- name: GPT-Engineer
+  github: https://github.com/AntonOsika/gpt-engineer
+  codewiki: https://codewiki.google/github.com/AntonOsika/gpt-engineer
+- name: GPT-J 6B
+  github: https://github.com/kingoflolz/mesh-transformer-jax
+- name: GPTSwarm
+  github: https://github.com/SchmidhuberAI/GPTSwarm
+- name: GPTSwarm
+  github: https://github.com/microsoft/gptswarm
+- name: GPTSwarm
+  github: https://github.com/metauto-ai/GPTSwarm
+- name: GPTSwarm
+  github: https://github.com/VITA-Group/GPTSwarm
+- name: GPT‑2
+  github: https://github.com/openai/gpt-2
+- name: GPUDrive
+  github: https://github.com/Emerge-Lab/gpudrive
+- name: Gradio
+  github: https://github.com/gradio-app/gradio
+  codewiki: https://codewiki.google/github.com/gradio-app/gradio
+- name: GrailQA
+  github: https://github.com/dki-lab/GrailQA
+- name: Graphein
+  github: https://github.com/a-r-j/graphein
+- name: GraphRAG
+  github: https://github.com/microsoft/graphrag
+  codewiki: https://codewiki.google/github.com/microsoft/graphrag
+- name: GraphRouter
+  github: https://github.com/snap-stanford/GraphRouter
+- name: GROOT
+  github: https://github.com/CraftJarvis/GROOT
+- name: Grounding DINO
+  github: https://github.com/IDEA-Research/GroundingDINO
+- name: GSM-Hard
+  github: https://github.com/FranxYao/GSM8K-Hard
+- name: GSM8K
+  github: https://github.com/openai/grade-school-math
+- name: Guanaco-7B (QLoRA)
+  github: https://github.com/artidoro/qlora
+- name: GUI Odyssey
+  github: https://github.com/OpenGVLab/GUI-Odyssey
+- name: Gymnasium
+  github: https://github.com/Farama-Foundation/Gymnasium
+- name: H2O AutoML
+  github: https://github.com/h2oai/h2o-3
+- name: Habitat 3.0 (AI Habitat)
+  github: https://github.com/facebookresearch/habitat-lab
+- name: Hairy Ball Theorem (Lean)
+  github: https://github.com/corent1234/hairy-ball-theorem-lean
+- name: HaluEval
+  github: https://github.com/RUCAIBox/HaluEval
+- name: Hammer 2.0
+  github: https://github.com/MadeAgents/Hammer
+- name: Hanabi Learning Environment
+  github: https://github.com/deepmind/hanabi-learning-environment
+- name: Hanabi SAD/OBL (facebookresearch)
+  github: https://github.com/facebookresearch/hanabi_SAD
+- name: HarmBench
+  github: https://github.com/centerforaisafety/HarmBench
+- name: HellaSwag
+  github: https://github.com/rowanz/hellaswag
+- name: HH-suite3 (HHblits, hhalign)
+  github: https://github.com/soedinglab/hh-suite
+- name: HiAgent
+  github: https://github.com/HiAgent2024/HiAgent
+- name: HMMER/JackHMMER
+  github: https://github.com/EddyRivasLab/hmmer
+- name: HoloViews
+  github: https://github.com/holoviz/holoviews
+- name: HoneyComb
+  github: https://github.com/BangLab-UdeM-Mila/NLP4MatSci-HoneyComb
+- name: HotpotQA
+  github: https://github.com/hotpotqa/hotpotqa
+- name: HotpotQA (dataset)
+  github: https://github.com/hotpotqa/hotpot
+- name: HotpotQA (via Reflexion data)
+  github: https://github.com/noahshinn/reflexion/tree/main/hotpotqa_runs/data
+- name: html2text
+  github: https://github.com/Alir3z4/html2text
+- name: HuatuoGPT-Vision
+  github: https://github.com/FreedomIntelligence/HuatuoGPT-Vision
+- name: Hugging Face Accelerate
+  github: https://github.com/huggingface/accelerate
+- name: Hugging Face Datasets
+  github: https://github.com/huggingface/datasets
+  codewiki: https://codewiki.google/github.com/huggingface/datasets
+- name: Hugging Face Transformers
+  github: https://github.com/huggingface/transformers
+  codewiki: https://codewiki.google/github.com/huggingface/transformers
+- name: Hugging Face TRL (Transformer Reinforcement Learning)
+  github: https://github.com/huggingface/trl
+  codewiki: https://codewiki.google/github.com/huggingface/trl
+- name: HuggingGPT (JARVIS)
+  github: https://github.com/microsoft/JARVIS
+  codewiki: https://codewiki.google/github.com/microsoft/JARVIS
+- name: HumanAct12
+  github: https://github.com/EricGuo5513/action-to-motion
+- name: HumanEval
+  github: https://github.com/openai/human-eval
+- name: HumanML3D
+  github: https://github.com/EricGuo5513/HumanML3D
+- name: HUSKY (and Husky-QA dataset)
+  github: https://github.com/allenai/husky
+- name: Hydra
+  github: https://github.com/facebookresearch/hydra
+- name: Hydra (3D Scene Graph)
+  github: https://github.com/MIT-SPARK/Hydra
+- name: Hydra-Multi
+  github: https://github.com/MIT-SPARK/Hydra-Multi
+- name: Hypothetical Minds
+  github: https://github.com/locross93/Hypothetical-Minds/
+- name: idpGAN
+  github: https://github.com/feiglab/idpGAN
+- name: IgFold
+  github: https://github.com/Graylab/IgFold
+- name: IIRC
+  github: https://github.com/allenai/iirc
+- name: INFOGENT
+  github: https://github.com/gangiswag/infogent
+- name: INFOSEEK
+  github: https://github.com/google-research-datasets/infoseek
+- name: InstructPix2Pix
+  github: https://github.com/timothybrooks/instruct-pix2pix
+- name: InstructProtein
+  github: https://github.com/HICAI-ZJU/InstructProtein
+- name: InterCode / InterCodeSQL
+  github: https://github.com/princeton-nlp/InterCode
+- name: Internet of Agents (IoA)
+  github: https://github.com/OpenBMB/IoA
+- name: InternLM (InternLM2.5)
+  github: https://github.com/InternLM/InternLM
+- name: InternLM-XComposer 2.5 (InternVL2.5-XComposer)
+  github: https://github.com/InternLM/InternLM-XComposer
+- name: InternVideo2 / InternVideo2.5
+  github: https://github.com/OpenGVLab/InternVideo2
+- name: InternVL
+  github: https://github.com/OpenGVLab/InternVL
+- name: InterProScan
+  github: https://github.com/ebi-pf-team/interproscan
+- name: InterProt
+  github: https://github.com/etowahadams/interprot
+- name: IPR (Iterative step-level Process Refinement)
+  github: https://github.com/WeiminXiong/IPR
+- name: IPython/Jupyter
+  github: https://github.com/ipython/ipython
+  codewiki: https://codewiki.google/github.com/ipython/ipython
+- name: IQA (Interactive Question Answering)
+  github: https://github.com/allenai/ai2thor-iqa
+- name: IRCoT (Interleaving Retrieval with Chain-of-Thought)
+  github: https://github.com/allenai/ir-cot
+- name: Iris (SciTools)
+  github: https://github.com/SciTools/iris
+- name: iTransformer
+  github: https://github.com/thuml/iTransformer
+- name: Jarvis-VLA
+  github: https://github.com/CraftJarvis/JARVIS-VLA
+- name: JAX
+  github: https://github.com/google/jax
+  codewiki: https://codewiki.google/github.com/google/jax
+- name: Jellyfish
+  github: https://github.com/gmarcais/Jellyfish
+- name: Jericho
+  github: https://github.com/microsoft/jericho
+- name: Jina-CLIP-v1
+  github: https://github.com/jina-ai/jina-clip
+- name: KGQAn
+  github: https://github.com/qcri/KGQAn
+- name: KnowAgent
+  github: https://github.com/zjunlp/KnowAgent
+- name: KPConv (Kernel Point Convolution)
+  github: https://github.com/HuguesTHOMAS/KPConv
+- name: Label Studio
+  github: https://github.com/HumanSignal/label-studio
+- name: LangChain
+  github: https://github.com/langchain-ai/langchain
+  codewiki: https://codewiki.google/github.com/langchain-ai/langchain
+- name: Langfun
+  github: https://github.com/google/langfun
+- name: Language Models as Zero-Shot Planners (baseline)
+  github: https://github.com/huangwl18/language-planner
+- name: LatProtRL
+  github: https://github.com/haewonc/LatProtRL
+- name: Lawformer
+  github: https://github.com/thunlp/LAWformer
+- name: LaWGPT
+  github: https://github.com/pengxiao-song/LaWGPT
+- name: LC-QuAD 1.0
+  github: https://github.com/AskNowQA/LC-QuAD
+- name: LDB (Debug Like a Human)
+  github: https://github.com/TIGER-AI-Lab/LDB
+- name: LDST (LLM-driven Dialogue State Tracking)
+  github: https://github.com/WoodScene/LDST
+- name: Lean (Lean 4)
+  github: https://github.com/leanprover/lean4
+- name: Lean Math Workshop
+  github: https://github.com/yuma-mizuno/lean-math-workshop
+- name: Lean Matrix Cookbook
+  github: https://github.com/eric-wieser/lean-matrix-cookbook
+- name: Lean4 PDL
+  github: https://github.com/M4lvin/lean4-pdl
+- name: Lean4Lean
+  github: https://github.com/digama0/lean4lean
+- name: LeanAgent
+  github: https://github.com/lean-dojo/LeanAgent
+- name: LeanAPAP
+  github: https://github.com/YaelDillies/LeanAPAP
+- name: LeanEuclid
+  github: https://github.com/loganrjmurphy/LeanEuclid
+- name: leidenalg (Leiden community detection)
+  github: https://github.com/vtraag/leidenalg
+- name: LexicalRichness
+  github: https://github.com/LSYS/lexicalrichness
+- name: LIBERO
+  github: https://github.com/UT-Austin-RPL/LIBERO
+- name: LightEval
+  github: https://github.com/huggingface/lighteval
+- name: LiteLLM
+  github: https://github.com/BerriAI/litellm
+- name: LiveBench
+  github: https://github.com/LiveBench/LiveBench
+- name: Lizard
+  github: https://github.com/terryyin/lizard
+- name: LLaMA
+  github: https://github.com/facebookresearch/llama
+- name: Llama 2
+  github: https://github.com/meta-llama/llama
+- name: Llama 3
+  github: https://github.com/meta-llama/llama3/blob/main/MODEL_CARD.md
+- name: Llama 3
+  github: https://github.com/meta-llama/llama3
+- name: Llama 3.1
+  github: https://github.com/meta-llama/llama-models
+- name: Llama Guard 3
+  github: https://github.com/meta-llama/llama-guard
+- name: LLaMA-Factory
+  github: https://github.com/hiyouga/LLaMA-Factory
+  codewiki: https://codewiki.google/github.com/hiyouga/LLaMA-Factory
+- name: LlamaGuard (Llama Guard 3)
+  github: https://github.com/meta-llama/PurpleLlama
+- name: LlamaIndex
+  github: https://github.com/run-llama/llama_index
+  codewiki: https://codewiki.google/github.com/run-llama/llama_index
+- name: LlamaIndex
+  github: https://github.com/jerryjliu/llama_index
+- name: LLaVA (LLaVA-1.6 / LLaVA-Next)
+  github: https://github.com/haotian-liu/LLaVA
+  codewiki: https://codewiki.google/github.com/haotian-liu/LLaVA
+- name: LLaVA-Med
+  github: https://github.com/microsoft/LLaVA-Med
+- name: LLaVA-OneVision
+  github: https://github.com/LLaVA-VL/LLaVA-OneVision
+- name: LLaVA-OneVision
+  github: https://github.com/LLaVA-VL/LLaVA-NeXT
+- name: LLaVA‑OneVision
+  github: https://github.com/haotian-liu/LLaVA-OneVision
+- name: Llemma
+  github: https://github.com/EleutherAI/llemma
+- name: LLM Foundry
+  github: https://github.com/mosaicml/llm-foundry
+- name: LLM-Blender
+  github: https://github.com/yuchenlin/LLM-Blender
+- name: LLM-Debate
+  github: https://github.com/ucl-dark/llm_debate
+- name: LLM-Game-Agent
+  github: https://github.com/3DAgentWorld/LLM-Game-Agent
+- name: LLMCompiler
+  github: https://github.com/mit-han-lab/llm-compiler
+- name: LLMLingua
+  github: https://github.com/microsoft/LLMLingua
+- name: LMDeploy
+  github: https://github.com/InternLM/lmdeploy
+- name: LMQL (Language Model Query Language)
+  github: https://github.com/eth-sri/lmql
+- name: LongBench
+  github: https://github.com/THUDM/LongBench
+- name: LongLLaMA
+  github: https://github.com/CStanKonrad/long_llama
+- name: Lookup-Free Quantizer (LFQ, MAGVIT-v2)
+  github: https://github.com/google-research/magvit-v2
+- name: LoRA
+  github: https://github.com/microsoft/LoRA
+  codewiki: https://codewiki.google/github.com/microsoft/LoRA
+- name: MaAS (Multi-agent Architecture Search)
+  github: https://github.com/bingreeky/MaAS
+- name: mABC
+  github: https://github.com/knediny/mABC
+- name: MACE
+  github: https://github.com/ACEsuit/mace
+- name: MAD (Multi-Agent Debate)
+  github: https://github.com/Skytliang/MAD
+- name: Madrona Game Engine
+  github: https://github.com/madrona-engine/madrona
+- name: MAgIC (Multi-Agent in Cognition, Adaptability, Rationality and Collaboration)
+  github: https://github.com/cathyxl/MAgIC
+- name: Magicoder
+  github: https://github.com/ise-uiuc/Magicoder
+- name: MALLM (Multi‑Agent Large Language Models)
+  github: https://github.com/Multi-Agent-LLMs/mallm
+- name: MALR (Multi-Agent framework for improving complex Legal Reasoning)
+  github: https://github.com/yuanwk99/MALR
+- name: MAM (Modular Multi-Agent Framework for Multi-Modal Medical Diagnosis)
+  github: https://github.com/yczhou001/MAM
+- name: MAmmoTH
+  github: https://github.com/TIGER-AI-Lab/MAmmoTH
+- name: MAmmoTH (MAmmoTH-Coder)
+  github: https://github.com/GAIR-NLP/MAmmoTH
+- name: ManiSkill2
+  github: https://github.com/haosulab/ManiSkill2
+- name: MapCoder
+  github: https://github.com/KagNLP/MapCoder
+- name: MAPoRL
+  github: https://github.com/chanwoo-park-official/MAPoRL
+- name: MAPPO (Multi-Agent PPO)
+  github: https://github.com/marlbenchmark/on-policy
+- name: MARBLE (MultiAgentBench)
+  github: https://github.com/ulab-uiuc/MARBLE
+- name: MAS-GPT
+  github: https://github.com/rui-ye/MAS-GPT
+- name: MAS-Resilience (this paper)
+  github: https://github.com/CUHK-ARISE/MAS-Resilience
+- name: MaSIF-Site (PPI site prediction dataset)
+  github: https://github.com/LPDI-EPFL/masif
+- name: MasRouter
+  github: https://github.com/yanweiyue/masrouter
+- name: MAST-ML
+  github: https://github.com/uw-cmg/MAST-ML
+- name: MATH
+  github: https://github.com/hendrycks/math
+- name: MathCoder
+  github: https://github.com/OpenGVLab/MathCoder
+- name: Mathematics in Lean Source
+  github: https://github.com/avigad/mathematics_in_lean_source
+- name: mathlib4
+  github: https://github.com/leanprover-community/mathlib4
+- name: MathVerse
+  github: https://github.com/OpenGVLab/MathVerse
+- name: MathVision
+  github: https://github.com/OpenGVLab/MathVision
+- name: MathVista
+  github: https://github.com/lupantech/MathVista
+- name: Matminer
+  github: https://github.com/hackingmaterials/matminer
+- name: MatPlotAgent / MatPlotBench
+  github: https://github.com/thunlp/MatPlotAgent
+- name: Matplotlib
+  github: https://github.com/matplotlib/matplotlib
+- name: MAWPS (SingleEQ, SingleOP, AddSub, MultiArith)
+  github: https://github.com/MAWPS/MAWPS
+- name: MBPP
+  github: https://github.com/google-research/google-research/tree/master/mbpp
+- name: MC-Planner (DEPS)
+  github: https://github.com/CraftJarvis/MC-Planner
+- name: MCU (Minecraft Universe)
+  github: https://github.com/CraftJarvis/MCU
+- name: MDM (Motion Diffusion Model)
+  github: https://github.com/GuyTevet/motion-diffusion-model
+- name: MDTraj
+  github: https://github.com/mdtraj/mdtraj
+- name: MEAN / dyMEAN
+  github: https://github.com/THUNLP-MT/MEAN
+- name: Med-Flamingo
+  github: https://github.com/snap-stanford/med-flamingo
+- name: MedICaT
+  github: https://github.com/allenai/medicat
+- name: MedMCQA
+  github: https://github.com/medmcqa/medmcqa
+- name: MedNLI
+  github: https://github.com/jgc128/mednli
+- name: MedQA (USMLE)
+  github: https://github.com/jind11/MedQA
+- name: MedSAM
+  github: https://github.com/bowang-lab/MedSAM
+- name: MedSSS
+  github: https://github.com/pixas/MedSSS
+- name: MegaAgent
+  github: https://github.com/Xtra-Computing/MegaAgent
+- name: Megablocks (Mixture-of-Experts)
+  github: https://github.com/stanford-futuredata/megablocks
+- name: Megatron-LM
+  github: https://github.com/NVIDIA/Megatron-LM
+- name: Melting Pot 2.0
+  github: https://github.com/google-deepmind/meltingpot
+- name: Melting Pot Contest 2023 Starter Code
+  github: https://github.com/rstrivedi/Melting-Pot-Contest-2023
+- name: MemGPT
+  github: https://github.com/cpacker/MemGPT
+- name: Mermaid
+  github: https://github.com/mermaid-js/mermaid
+  codewiki: https://codewiki.google/github.com/mermaid-js/mermaid
+- name: Meta-World
+  github: https://github.com/rlworkgroup/metaworld
+- name: MetaEuk
+  github: https://github.com/soedinglab/metaeuk
+- name: MetaGPT
+  github: https://github.com/geekan/MetaGPT
+- name: MetaGPT
+  github: https://github.com/metagpt-dev/MetaGPT
+- name: MetaMath
+  github: https://github.com/hkust-nlp/MetaMath
+- name: MGSM (Multilingual Grade School Math)
+  github: https://github.com/google-research/google-research/tree/master/mgsm
+- name: Microsoft COCO (MS-COCO)
+  github: https://github.com/cocodataset/cocoapi
+- name: Microsoft Malmo Platform
+  github: https://github.com/Microsoft/malmo
+- name: Middleware for LLMs (this paper)
+  github: https://github.com/OSU-NLP/Middleware
+- name: Milvus
+  github: https://github.com/milvus-io/milvus
+  codewiki: https://codewiki.google/github.com/milvus-io/milvus
+- name: Mind2Web
+  github: https://github.com/OSU-NLP/Mind2Web
+- name: Mind2Web
+  github: https://github.com/OSU-NLP-Group/Mind2Web
+- name: MindAgent
+  github: https://github.com/OpenGVLab/MindAgent
+- name: MindSearch
+  github: https://github.com/OpenGVLab/MindSearch
+- name: MindSearch
+  github: https://github.com/InternLM/MindSearch
+- name: MineCLIP
+  github: https://github.com/MineDojo/MineCLIP
+- name: MineCLIP (from MineDojo)
+  github: https://github.com/MineDojo/MineDojo
+- name: Mineflayer
+  github: https://github.com/PrismarineJS/mineflayer
+- name: MineRL
+  github: https://github.com/minerllabs/minerl
+- name: MineStudio
+  github: https://github.com/CraftJarvis/MineStudio
+- name: MiniCPM-V
+  github: https://github.com/OpenBMB/MiniCPM-V
+  codewiki: https://codewiki.google/github.com/OpenBMB/MiniCPM-V
+- name: miniF2F-Lean4
+  github: https://github.com/yangky11/miniF2F-lean4
+- name: MiniGPT-v2
+  github: https://github.com/Vision-CAIR/MiniGPT-4
+  codewiki: https://codewiki.google/github.com/Vision-CAIR/MiniGPT-4
+- name: MiniLM
+  github: https://github.com/microsoft/unilm/tree/master/minilm
+- name: MiniLM (UniLM)
+  github: https://github.com/microsoft/unilm
+  codewiki: https://codewiki.google/github.com/microsoft/unilm
+- name: Minimap2
+  github: https://github.com/lh3/minimap2
+- name: MiniWoB++
+  github: https://github.com/stanfordnlp/miniwob-plusplus
+- name: MiniWoB++
+  github: https://github.com/miniwob/miniwob-plusplus
+- name: MiniWoB++
+  github: https://github.com/google-deepmind/miniwob-plusplus
+- name: MINT
+  github: https://github.com/xingyaoww/MINT-benchmark
+- name: Mistral 7B
+  github: https://github.com/mistralai/mistral-src
+- name: Mixtral‑8x7B‑Instruct
+  github: https://github.com/mistralai
+- name: Mixture-of-Agents (MoA)
+  github: https://github.com/togethercomputer/moa
+- name: MMBench
+  github: https://github.com/open-compass/MMBench
+- name: MMedAgent
+  github: https://github.com/Wangyixinxin/MMedAgent
+- name: MMInA
+  github: https://github.com/shulin16/MMInA
+- name: MMLU (Massive Multitask Language Understanding)
+  github: https://github.com/hendrycks/test
+- name: MMLU‑Pro
+  github: https://github.com/TIGER-Lab/MMLU-Pro
+- name: MMLU‑Pro
+  github: https://github.com/TIGER-AI-Lab/MMLU-Pro
+- name: MMMU
+  github: https://github.com/MMMU-Benchmark/MMMU
+- name: MMOA-RAG
+  github: https://github.com/chenyiqun/MMOA-RAG
+- name: MMRole (MMRole-Agent, MMRole-Data, MMRole-Eval)
+  github: https://github.com/YanqiDai/MMRole
+- name: MMseqs2
+  github: https://github.com/soedinglab/MMseqs2
+- name: MM‑Vet
+  github: https://github.com/yuweihao/MM-Vet
+- name: Moatless Tools
+  github: https://github.com/aorwall/moatless-tools
+- name: MobileReach (dataset)
+  github: https://github.com/XiaoMi/reachagent
+- name: MobileUse Toolkit
+  github: https://github.com/MadeAgents/mobile-use
+- name: ModelScope-Agent
+  github: https://github.com/modelscope/modelscope-agent
+- name: ModernBERT
+  github: https://github.com/AnswerDotAI/ModernBERT
+- name: MODNet
+  github: https://github.com/ppdebreuck/modnet
+- name: Mol-Instructions
+  github: https://github.com/zjunlp/Mol-Instructions
+- name: MoleculeNet
+  github: https://github.com/deepchem/deepchem
+- name: MolPAL
+  github: https://github.com/coleygroup/molpal
+- name: MoMask
+  github: https://github.com/OpenMotionLab/MoMask
+- name: MORE (Quantifying and Mitigating Unimodal Biases)
+  github: https://github.com/OpenCausaLab/MORE
+- name: MosaicML Composer
+  github: https://github.com/mosaicml/composer
+- name: MosaicML Streaming
+  github: https://github.com/mosaicml/streaming
+- name: MotionChain
+  github: https://github.com/OpenMotionLab/MotionChain
+- name: MotionGPT
+  github: https://github.com/OpenMotionLab/MotionGPT
+- name: mPLUG-Owl
+  github: https://github.com/X-PLUG/mPLUG-Owl
+- name: MT-Bench (LMSYS)
+  github: https://github.com/lm-sys/FastChat#mt-bench-and-chatbot-arena
+  codewiki: https://codewiki.google/github.com/lm-sys/FastChat#mt-bench-and-chatbot-arena
+- name: Multi-LLM-Agent (α-UMi)
+  github: https://github.com/X-PLUG/Multi-LLM-Agent
+- name: MultiAgent_ImplicitBias
+  github: https://github.com/MichiganNLP/MultiAgent_ImplicitBias
+- name: MultiWOZ 2.4
+  github: https://github.com/smartyfh/MultiWOZ2.4
+- name: Multi‑Agent Debate (Du et al., 2024)
+  github: https://github.com/composable-models/llm_multiagent_debate
+- name: MuMath (Multi-perspective Data Augmentation)
+  github: https://github.com/youweihao-tal/MuMath
+- name: MuMath-Code
+  github: https://github.com/youweihao-tal/MuMath-Code
+- name: MUMmer (DNADiff)
+  github: https://github.com/mummer4/mummer
+- name: Muon
+  github: https://github.com/scverse/muon
+- name: MuSiQue
+  github: https://github.com/stanfordnlp/musique
+- name: MuSiQue
+  github: https://github.com/StonyBrookNLP/musique
+- name: Musique (dataset)
+  github: https://github.com/stonybrooknlp/musique
+- name: MUSK
+  github: https://github.com/lilab-stanford/MUSK
+- name: MVBench
+  github: https://github.com/OpenGVLab/MVBench
+- name: nanobind
+  github: https://github.com/wjakob/nanobind
+- name: nanoGPT
+  github: https://github.com/karpathy/nanoGPT
+  codewiki: https://codewiki.google/github.com/karpathy/nanoGPT
+- name: NarrativeQA
+  github: https://github.com/deepmind/narrativeqa
+- name: Natural Questions (NQ)
+  github: https://github.com/google-research-datasets/natural-questions
+- name: NCBI BLAST+
+  github: https://github.com/ncbi/blast
+- name: Needle-in-a-Haystack (original)
+  github: https://github.com/gkamradt/LLMTest_NeedleInAHaystack
+- name: Needle-in-a-Haystack PLUS
+  github: https://github.com/zuucan/NeedleInAHaystack-PLUS
+- name: NetworkX
+  github: https://github.com/networkx/networkx
+- name: NeuroKit2
+  github: https://github.com/neuropsychology/NeuroKit
+- name: NexusRaven
+  github: https://github.com/NexusflowAI/NexusRaven
+- name: NLG-Eval
+  github: https://github.com/Maluuba/nlg-eval
+- name: nnU-Net
+  github: https://github.com/MIC-DKFZ/nnUNet
+- name: Nocturne
+  github: https://github.com/facebookresearch/nocturne
+- name: NormBank
+  github: https://github.com/behavioral-data/NormBank
+- name: NumPy
+  github: https://github.com/numpy/numpy
+- name: NVIDIA Warp
+  github: https://github.com/NVIDIA/warp
+- name: OAG-BERT
+  github: https://github.com/THUDM/OAG-BERT
+- name: Objaverse
+  github: https://github.com/allenai/objaverse
+- name: OBS Studio
+  github: https://github.com/obsproject/obs-studio
+- name: Octo
+  github: https://github.com/octo-model/Octo
+- name: OFA
+  github: https://github.com/OFA-Sys/OFA
+- name: OGGM
+  github: https://github.com/OGGM/oggm
+- name: Ollama
+  github: https://github.com/ollama/ollama
+  codewiki: https://codewiki.google/github.com/ollama/ollama
+- name: OmegaFold
+  github: https://github.com/HeliXonProtein/OmegaFold
+- name: OmniAct
+  github: https://github.com/omni-act/omni-act
+- name: OmniGibson
+  github: https://github.com/StanfordVL/OmniGibson
+- name: OmniParser
+  github: https://github.com/microsoft/OmniParser
+- name: Open Motion Planning Library (OMPL)
+  github: https://github.com/ompl/ompl
+- name: Open X-Embodiment (OXE)
+  github: https://github.com/google-deepmind/open_x_embodiment
+- name: Open-SMARTAgent
+  github: https://github.com/qiancheng0/Open-SMARTAgent
+- name: OpenAdapt
+  github: https://github.com/OpenAdaptAI/OpenAdapt
+- name: OPENAGI
+  github: https://github.com/agiresearch/OpenAGI
+- name: OpenAI Python API (Chat Completions)
+  github: https://github.com/openai/openai-python
+  codewiki: https://codewiki.google/github.com/openai/openai-python
+- name: OpenAI Simple Evals
+  github: https://github.com/openai/simple-evals
+- name: OpenCompass
+  github: https://github.com/open-compass/opencompass
+- name: OpenCV
+  github: https://github.com/opencv/opencv
+  codewiki: https://codewiki.google/github.com/opencv/opencv
+- name: OpenDelta
+  github: https://github.com/thunlp/OpenDelta
+- name: OpenEQA
+  github: https://github.com/allenai/OpenEQA
+- name: OpenFold
+  github: https://github.com/aqlaboratory/openfold
+- name: OpenHands
+  github: https://github.com/All-Hands-AI/OpenHands
+- name: OpenInterpreter
+  github: https://github.com/OpenInterpreter/open-interpreter
+- name: OpenInterpreter
+  github: https://github.com/KillianLucas/open-interpreter
+- name: OpenMM
+  github: https://github.com/openmm/openmm
+- name: openreview-py
+  github: https://github.com/openreview/openreview-py
+- name: OpenVLA
+  github: https://github.com/openvla/openvla
+- name: OpenWebVoyager
+  github: https://github.com/MinorJerry/OpenWebVoyager
+- name: OPRO (LLMs as Optimizers)
+  github: https://github.com/google-deepmind/opro
+- name: OPT
+  github: https://github.com/facebookresearch/metaseq
+- name: OPTIMA
+  github: https://github.com/thunlp/Optima
+- name: OS Agents Survey
+  github: https://github.com/os-agent-survey/os-agent-survey.github.io
+- name: OS-Atlas
+  github: https://github.com/OS-Copilot/OS-Atlas
+- name: OS-Kairos
+  github: https://github.com/Wuzheng02/OS-Kairos
+- name: OSWorld / OSWorld-Verified
+  github: https://github.com/xlang-ai/OSWorld
+- name: Oumi
+  github: https://github.com/oumi-ai/oumi
+- name: Overcooked-AI
+  github: https://github.com/HumanCompatibleAI/overcooked_ai
+- name: Overcooked-AI Human Trajectories (BC dataset)
+  github: https://github.com/HumanCompatibleAI/overcooked_ai/tree/master/overcooked_ai/data/human_data
+- name: OWL (Optimized Workforce Learning / WORKFORCE)
+  github: https://github.com/camel-ai/owl
+- name: OWL‑ViT
+  github: https://github.com/google-research/scenic/tree/main/scenic/projects/owl_vit
+- name: PaddleOCR
+  github: https://github.com/PaddlePaddle/PaddleOCR
+  codewiki: https://codewiki.google/github.com/PaddlePaddle/PaddleOCR
+- name: PAL (Program-Aided Language Models)
+  github: https://github.com/reasoning-machines/pal
+- name: Pallatom
+  github: https://github.com/levinthal/Pallatom
+- name: pandas
+  github: https://github.com/pandas-dev/pandas
+  codewiki: https://codewiki.google/github.com/pandas-dev/pandas
+- name: Papyrus Scaffold Visualizer
+  github: https://github.com/martin-sicho/papyrus-scaffold-visualizer
+- name: Papyrus Scripts
+  github: https://github.com/OlivierBeq/Papyrus-scripts
+- name: Parsel
+  github: https://github.com/ezelikman/Parsel
+- name: PartNet-Mobility (SAPIEN)
+  github: https://github.com/haosulab/SAPIEN
+- name: PathFinderCRC
+  github: https://github.com/LiangJunhao-THU/PathFinderCRC
+- name: PathVQA
+  github: https://github.com/UCSD-AI4H/PathVQA
+- name: PEER Benchmark
+  github: https://github.com/DeepGraphLearning/PEER_Benchmark
+- name: PEFT (Parameter-Efficient Fine-Tuning)
+  github: https://github.com/huggingface/peft
+  codewiki: https://codewiki.google/github.com/huggingface/peft
+- name: Perplexica Search Engine
+  github: https://github.com/ItzCrazyKns/Perplexica
+  codewiki: https://codewiki.google/github.com/ItzCrazyKns/Perplexica
+- name: PersuasionForGood (P4G)
+  github: https://github.com/facebookresearch/ParlAI
+- name: PFR (Polynomial Freiman–Ruzsa)
+  github: https://github.com/teorth/pfr
+- name: Phi-3.5 Vision
+  github: https://github.com/microsoft/Phi-3CookBook
+- name: pip-tools
+  github: https://github.com/jazzband/pip-tools
+- name: pipreqs
+  github: https://github.com/bndr/pipreqs
+- name: PlanBench (BlocksWorld)
+  github: https://github.com/karthikvalmeekam/planbench
+- name: Playwright
+  github: https://github.com/microsoft/playwright
+  codewiki: https://codewiki.google/github.com/microsoft/playwright
+- name: pNeRF
+  github: https://github.com/aqlaboratory/pnerf
+- name: Predicting-Activity-by-Machine-Learning
+  github: https://github.com/psa-lab/predicting-activity-by-machine-learning
+- name: PrimeNumberTheoremAnd
+  github: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd
+- name: ProAgent
+  github: https://github.com/THUDM/ProAgent
+- name: Prodigal
+  github: https://github.com/hyattpd/Prodigal
+- name: Prodigal-GV
+  github: https://github.com/apcamargo/prodigal-gv
+- name: ProDy
+  github: https://github.com/prody/ProDy
+- name: ProFSA
+  github: https://github.com/bowen-gao/ProFSA
+- name: ProGen2
+  github: https://github.com/salesforce/progen
+- name: ProGen2 fine-tuning helper
+  github: https://github.com/hugohrban/ProGen2-finetuning
+- name: ProGen3
+  github: https://github.com/Profluent-AI/progen3
+- name: Program-of-Thoughts (PoT) Prompting
+  github: https://github.com/wenhuchen/Program-of-Thoughts
+- name: Project CodeNet
+  github: https://github.com/IBM/Project_CodeNet
+- name: ProLIF
+  github: https://github.com/chemosim-lab/ProLIF
+- name: ProofWriter
+  github: https://github.com/allenai/proofwriter
+- name: ProSST
+  github: https://github.com/ai4protein/ProSST
+- name: Protein Frame Flow (FrameFlow)
+  github: https://github.com/microsoft/protein-frame-flow
+- name: ProteinCLAP (components used in reimplementation) — SciBERT
+  github: https://github.com/allenai/scibert
+- name: ProteinGym
+  github: https://github.com/OATML-Markslab/ProteinGym
+- name: ProteinKG25 (from OntoProtein)
+  github: https://github.com/zjunlp/OntoProtein
+- name: ProteinMPNN
+  github: https://github.com/dauparas/ProteinMPNN
+- name: ProteinNet
+  github: https://github.com/aqlaboratory/proteinnet
+- name: ProteinWorkshop
+  github: https://github.com/a-r-j/ProteinWorkshop
+- name: Proteus
+  github: https://github.com/Wangchentong/Proteus
+- name: Proteína
+  github: https://github.com/NVIDIA-Digital-Bio/proteina
+- name: ProtST
+  github: https://github.com/DeepGraphLearning/ProtST
+- name: ProtT3
+  github: https://github.com/acharkq/ProtT3
+- name: ProtTrans/ProtBERT
+  github: https://github.com/agemagician/ProtTrans
+- name: pubmedqa
+  github: https://github.com/pubmedqa/pubmedqa
+- name: PubMedQA
+  github: https://github.com/qiaojin/PubMedQA
+- name: PufferLib
+  github: https://github.com/PufferAI/pufferlib
+- name: PyAutoGUI
+  github: https://github.com/asweigart/pyautogui
+- name: PyBullet
+  github: https://github.com/bulletphysics/bullet3
+- name: pycma (CMA-ES)
+  github: https://github.com/CMA-ES/pycma
+- name: Pydantic
+  github: https://github.com/pydantic/pydantic
+  codewiki: https://codewiki.google/github.com/pydantic/pydantic
+- name: PyDirectInput
+  github: https://github.com/learncodebygaming/pydirectinput
+- name: PyEMMA
+  github: https://github.com/markovmodel/PyEMMA
+- name: pygetwindow
+  github: https://github.com/asweigart/pygetwindow
+- name: PyKrige
+  github: https://github.com/GeoStat-Framework/PyKrige
+- name: pymatgen
+  github: https://github.com/materialsproject/pymatgen
+- name: pymed (PubMed querying with Python)
+  github: https://github.com/gijswobben/pymed
+- name: PyMuPDF (fitz)
+  github: https://github.com/pymupdf/PyMuPDF
+- name: pynput
+  github: https://github.com/moses-palmer/pynput
+- name: pyperclip
+  github: https://github.com/asweigart/pyperclip
+- name: Pyserini (BM25)
+  github: https://github.com/castorini/pyserini
+- name: pytesseract
+  github: https://github.com/madmaze/pytesseract
+- name: python-docx
+  github: https://github.com/python-openxml/python-docx
+- name: python-mss
+  github: https://github.com/BoboTiG/python-mss
+- name: python-pptx
+  github: https://github.com/scanny/python-pptx
+- name: PyTorch
+  github: https://github.com/pytorch/pytorch
+- name: PyTorch Geometric
+  github: https://github.com/pyg-team/pytorch_geometric
+  codewiki: https://codewiki.google/github.com/pyg-team/pytorch_geometric
+- name: PyTorch Lightning
+  github: https://github.com/Lightning-AI/lightning
+- name: pytorch-fid
+  github: https://github.com/mseitzer/pytorch-fid
+- name: PyTube
+  github: https://github.com/pytube/pytube
+- name: pywinauto
+  github: https://github.com/pywinauto/pywinauto
+- name: Qasper
+  github: https://github.com/allenai/qasper
+- name: QMSum
+  github: https://github.com/Yale-LILY/QMSum
+- name: Qwen (Qwen2/2.5)
+  github: https://github.com/QwenLM/Qwen
+  codewiki: https://codewiki.google/github.com/QwenLM/Qwen
+- name: Qwen-Agent
+  github: https://github.com/QwenLM/Qwen-Agent
+- name: Qwen-Agent Code Interpreter Benchmark
+  github: https://github.com/QwenLM/Qwen-Agent/tree/main/benchmark
+- name: Qwen-Audio
+  github: https://github.com/QwenLM/Qwen-Audio
+- name: Qwen-VL
+  github: https://github.com/QwenLM/Qwen-VL
+- name: Qwen2
+  github: https://github.com/QwenLM/Qwen2
+- name: Qwen2-VL
+  github: https://github.com/QwenLM/Qwen2-VL
+- name: Qwen2.5
+  github: https://github.com/QwenLM/Qwen2.5
+- name: Qwen2.5-Math
+  github: https://github.com/QwenLM/Qwen2.5-Math
+- name: Qwen2.5-VL
+  github: https://github.com/QwenLM/Qwen2.5-VL
+- name: QwQ‑32B‑Preview (Qwen Team)
+  github: https://github.com/QwenLM/QwQ
+- name: RadFM
+  github: https://github.com/chaoyi-wu/RadFM
+- name: RapidFuzz python-Levenshtein
+  github: https://github.com/rapidfuzz/python-Levenshtein
+- name: rasterio
+  github: https://github.com/rasterio/rasterio
+- name: RAVEN
+  github: https://github.com/WellyZhang/RAVEN
+- name: Ray RLlib
+  github: https://github.com/ray-project/ray
+  codewiki: https://codewiki.google/github.com/ray-project/ray
+- name: rbo (Ranked Biased Overlap)
+  github: https://github.com/changyaochen/rbo
+- name: RDKit
+  github: https://github.com/rdkit/rdkit
+- name: RE-Bench Environments (ai-rd-tasks)
+  github: https://github.com/METR/ai-rd-tasks
+- name: ReAct
+  github: https://github.com/ysymyth/ReAct
+- name: ReAct
+  github: https://github.com/ysymyth/react
+- name: Reaction Class Prediction (IEConv Proteins)
+  github: https://github.com/phermosilla/IEConv_proteins
+- name: ReasoningLM
+  github: https://github.com/RUCAIBox/ReasoningLM
+- name: Recast Navigation
+  github: https://github.com/recastnavigation/recastnavigation
+- name: ReConcile
+  github: https://github.com/JustinChihYaoChen/ReConcile
+- name: RedPajama-Data
+  github: https://github.com/togethercomputer/RedPajama-Data
+- name: Reflexion
+  github: https://github.com/noahshinn024/reflexion
+- name: Reflexion
+  github: https://github.com/noahshinn/reflexion
+- name: ReHAC
+  github: https://github.com/XueyangFeng/ReHAC
+- name: rembg
+  github: https://github.com/danielgatis/rembg
+  codewiki: https://codewiki.google/github.com/danielgatis/rembg
+- name: ReProver (LeanDojo)
+  github: https://github.com/lean-dojo/LeanDojo
+- name: ResearchAgent
+  github: https://github.com/JinheonBaek/ResearchAgent
+- name: ResearchAgent
+  github: https://github.com/snap-stanford/ResearchAgent
+- name: RESEARCHTOWN
+  github: https://github.com/ulab-uiuc/research-town
+- name: RestGPT / RestBench
+  github: https://github.com/Yifan-Song793/RestGPT
+- name: RETFound_MAE
+  github: https://github.com/rmaphoh/RETFound_MAE
+- name: RFdiffusion
+  github: https://github.com/RosettaCommons/RFdiffusion
+- name: RLBench
+  github: https://github.com/stepjam/RLBench
+- name: RoBERTa-base
+  github: https://github.com/facebookresearch/fairseq
+  codewiki: https://codewiki.google/github.com/facebookresearch/fairseq
+- name: RoCo / RoCoBench
+  github: https://github.com/roco-llm/roco
+- name: RoomR (Visual Room Rearrangement)
+  github: https://github.com/allenai/roomr
+- name: Rosetta / RosettaAntibodyDesign (RAbD)
+  github: https://github.com/RosettaCommons/rosetta
+- name: RoseTTAFold2
+  github: https://github.com/RosettaCommons/RoseTTAFold2
+- name: rouge
+  github: https://github.com/pltrdy/rouge
+- name: ROUGE (rouge-score)
+  github: https://github.com/google-research/google-research/tree/master/rouge
+- name: RouteLLM
+  github: https://github.com/lm-sys/RouteLLM
+- name: RT-1 / RT-1-X
+  github: https://github.com/google-research/robotics_transformer
+- name: 'S2ORC: Semantic Scholar Open Research Corpus'
+  github: https://github.com/allenai/s2orc
+- name: SABM_ShallWeTeamUp
+  github: https://github.com/wuzengqing001225/SABM_ShallWeTeamUp
+- name: SAMtools/BCFtools
+  github: https://github.com/samtools/samtools
+- name: SaProt
+  github: https://github.com/westlake-repl/SaProt
+- name: SaProt
+  github: https://github.com/DeepGraphLearning/SaProt
+- name: Saturn
+  github: https://github.com/siddhartha-gadgil/Saturn
+- name: Scanpy
+  github: https://github.com/scverse/scanpy
+- name: Schema-Guided Dialogue (SGD)
+  github: https://github.com/google-research-datasets/dstc8-schema-guided-dialogue
+- name: SchNetPack (SchNet)
+  github: https://github.com/atomistic-machine-learning/schnetpack
+- name: SciBench
+  github: https://github.com/SciBench/SciBench
+- name: SciBench
+  github: https://github.com/JetRunner/SciBench
+- name: SciDocs
+  github: https://github.com/allenai/scidocs
+- name: ScienceQA
+  github: https://github.com/lupantech/ScienceQA
+- name: ScienceWorld
+  github: https://github.com/allenai/ScienceWorld
+- name: scikit-image
+  github: https://github.com/scikit-image/scikit-image
+- name: scikit-learn
+  github: https://github.com/scikit-learn/scikit-learn
+  codewiki: https://codewiki.google/github.com/scikit-learn/scikit-learn
+- name: SCILEAD (Scientific Leaderboard dataset) / Leaderboard Generation
+  github: https://github.com/UKPLab/leaderboard-generation
+- name: SciLean
+  github: https://github.com/lecopivo/SciLean
+- name: SciPy
+  github: https://github.com/scipy/scipy
+  codewiki: https://codewiki.google/github.com/scipy/scipy
+- name: SciRepEval
+  github: https://github.com/allenai/SciRepEval
+- name: Scirpy
+  github: https://github.com/scverse/scirpy
+- name: ScreenAgent (dataset)
+  github: https://github.com/niuzaisheng/ScreenAgent/tree/main/data/ScreenAgent/train
+- name: ScreenSpot
+  github: https://github.com/Sea-Snell/ScreenSpot
+- name: ScreenSpot-Pro
+  github: https://github.com/Sea-Snell/ScreenSpot-Pro
+- name: scvi-tools
+  github: https://github.com/scverse/scvi-tools
+- name: seaborn
+  github: https://github.com/mwaskom/seaborn
+  codewiki: https://codewiki.google/github.com/mwaskom/seaborn
+- name: Search-O1
+  github: https://github.com/THUIR/Search-O1
+- name: SeeAct
+  github: https://github.com/OSU-NLP-Group/SeeAct
+- name: SeeAct
+  github: https://github.com/OSU-NLP/SeeAct
+- name: SeeClick
+  github: https://github.com/TencentARC/SeeClick
+- name: SeeClick
+  github: https://github.com/OpenGVLab/SeeClick
+- name: Segment Anything (SAM)
+  github: https://github.com/facebookresearch/segment-anything
+  codewiki: https://codewiki.google/github.com/facebookresearch/segment-anything
+- name: Segment Anything 2 (SAM 2)
+  github: https://github.com/facebookresearch/segment-anything-2
+- name: Selenium
+  github: https://github.com/SeleniumHQ/selenium
+  codewiki: https://codewiki.google/github.com/SeleniumHQ/selenium
+- name: self-ask
+  github: https://github.com/ofirpress/self-ask
+- name: Self-Instruct
+  github: https://github.com/yizhongw/self-instruct
+- name: SELF-RAG
+  github: https://github.com/AkariAsai/self-rag
+- name: Self-Refine
+  github: https://github.com/madaan/self-refine
+- name: SelfCheckGPT
+  github: https://github.com/potsawee/selfcheckgpt
+- name: Self‑Refine
+  github: https://github.com/kaistAI/self-refine
+- name: Semantic Kernel
+  github: https://github.com/microsoft/semantic-kernel
+  codewiki: https://codewiki.google/github.com/microsoft/semantic-kernel
+- name: Semantic Scholar Python package
+  github: https://github.com/danielnsilva/semanticscholar
+- name: Sentence-Transformers
+  github: https://github.com/UKPLab/sentence-transformers
+- name: Set‑of‑Mark (SoM)
+  github: https://github.com/CASIA-IVA-Lab/SoM
+- name: SGLang
+  github: https://github.com/sgl-project/sglang
+  codewiki: https://codewiki.google/github.com/sgl-project/sglang
+- name: ShareGPT4V
+  github: https://github.com/InternLM/ShareGPT4V
+- name: ShowUI
+  github: https://github.com/ShowLab/ShowUI
+- name: ShowUI
+  github: https://github.com/showlab/ShowUI
+- name: SimClass
+  github: https://github.com/THU-MAIC/SimClass
+- name: SimCSE
+  github: https://github.com/princeton-nlp/SimCSE
+- name: SimpleDeepSearcher
+  github: https://github.com/RUCAIBox/SimpleDeepSearcher
+- name: SimplerEnv
+  github: https://github.com/google-research/simpler-env
+- name: Smina
+  github: https://github.com/mwojcikowski/smina
+- name: smolagents (Hugging Face Agents)
+  github: https://github.com/huggingface/smolagents
+  codewiki: https://codewiki.google/github.com/huggingface/smolagents
+- name: SNIPS NLU (repurposed for DST)
+  github: https://github.com/snipsco/nlu-benchmark
+- name: Social-AI Community Resource
+  github: https://github.com/l-mathur/social-ai
+- name: SOCIALIQA
+  github: https://github.com/rowanz/social-iqa
+- name: Soft Actor-Critic (SAC, PyTorch)
+  github: https://github.com/denisyarats/pytorch_sac
+- name: Solo-Performance-Prompting (SPP)
+  github: https://github.com/GAIR-NLP/solo-performance-prompting
+- name: SOTOPIA
+  github: https://github.com/sotopia-lab/sotopia
+- name: SPECTER
+  github: https://github.com/allenai/specter
+- name: Spider (Text-to-SQL)
+  github: https://github.com/taoyds/spider
+- name: SQuAD
+  github: https://github.com/rajpurkar/SQuAD-explorer
+- name: SRBench
+  github: https://github.com/cavalab/srbench
+- name: Stable Baselines
+  github: https://github.com/hill-a/stable-baselines
+- name: Stable-Baselines3
+  github: https://github.com/DLR-RM/stable-baselines3
+- name: stable-diffusion
+  github: https://github.com/CompVis/stable-diffusion
+- name: StableToolBench
+  github: https://github.com/THUDM/StableToolBench
+- name: STAMP
+  github: https://github.com/KatherLab/STAMP
+- name: Stanford Alpaca
+  github: https://github.com/tatsu-lab/stanford_alpaca
+  codewiki: https://codewiki.google/github.com/tatsu-lab/stanford_alpaca
+- name: statsmodels
+  github: https://github.com/statsmodels/statsmodels
+- name: Step‑Back Prompting
+  github: https://github.com/google-research/google-research/tree/master/step-back-prompting
+- name: STORM
+  github: https://github.com/stanford-oval/storm
+  codewiki: https://codewiki.google/github.com/stanford-oval/storm
+- name: Str2Str
+  github: https://github.com/lujiarui/Str2Str
+- name: Str2Str
+  github: https://github.com/DeepGraphLearning/Str2Str
+- name: StrategyQA
+  github: https://github.com/allenai/strategyqa
+- name: StructGPT
+  github: https://github.com/RUCAIBox/StructGPT
+- name: Super-NaturalInstructions (SNI)
+  github: https://github.com/allenai/natural-instructions
+- name: SVAMP
+  github: https://github.com/arkilpatel/SVAMP
+- name: SWE-Agent
+  github: https://github.com/princeton-nlp/SWE-agent
+- name: SWE-bench
+  github: https://github.com/princeton-nlp/SWE-bench
+- name: SWE-Search (moatless-tree-search)
+  github: https://github.com/aorwall/moatless-tree-search
+- name: syllogistic-nvc
+  github: https://github.com/nriesterer/syllogistic-nvc
+- name: SymPy
+  github: https://github.com/sympy/sympy
+- name: T5 (Text-to-Text Transfer Transformer)
+  github: https://github.com/google-research/text-to-text-transfer-transformer
+- name: TabMWP
+  github: https://github.com/lupantech/TabMWP
+- name: TabPFN
+  github: https://github.com/automl/TabPFN
+- name: TabPFN
+  github: https://github.com/PriorLabs/TabPFN
+- name: TAPAS
+  github: https://github.com/google-research/tapas
+- name: TAPE
+  github: https://github.com/songlab-cal/tape
+- name: TapeAgents
+  github: https://github.com/ServiceNow/TapeAgents
+- name: TaskWeaver
+  github: https://github.com/microsoft/TaskWeaver
+- name: TELL ME A STORY (Agents’ Room)
+  github: https://github.com/google-deepmind/tell_me_a_story
+- name: Tesseract OCR
+  github: https://github.com/tesseract-ocr/tesseract
+  codewiki: https://codewiki.google/github.com/tesseract-ocr/tesseract
+- name: Text Generation Inference (TGI)
+  github: https://github.com/huggingface/text-generation-inference
+- name: Text-to-Motion (T2M)
+  github: https://github.com/EricGuo5513/text-to-motion
+- name: textgrad
+  github: https://github.com/stanfordmlgroup/textgrad
+- name: TextWorld
+  github: https://github.com/microsoft/TextWorld
+- name: TextWorldExpress
+  github: https://github.com/allenai/textworld-express
+- name: The Alignment Handbook
+  github: https://github.com/huggingface/alignment-handbook
+- name: TheoremQA
+  github: https://github.com/wenhuchen/TheoremQA
+- name: ThreeDWorld (TDW)
+  github: https://github.com/threedworld-mit/tdw
+- name: tiktoken
+  github: https://github.com/openai/tiktoken
+  codewiki: https://codewiki.google/github.com/openai/tiktoken
+- name: Time-Series-Library (TSLib)
+  github: https://github.com/thuml/Time-Series-Library
+- name: TimeCraft (BRIDGE)
+  github: https://github.com/microsoft/TimeCraft
+- name: TimeGAN
+  github: https://github.com/jsyoon0823/TimeGAN
+- name: Tongyi DeepResearch (WebDancer code and demo)
+  github: https://github.com/Alibaba-NLP/DeepResearch
+  codewiki: https://codewiki.google/github.com/Alibaba-NLP/DeepResearch
+- name: Tool-Planner
+  github: https://github.com/OceannTwT/Tool-Planner
+- name: ToolAlpaca
+  github: https://github.com/thunlp/ToolAlpaca
+- name: ToolAlpaca
+  github: https://github.com/tangqiaoyu/ToolAlpaca
+- name: ToolBench / ToolLLM
+  github: https://github.com/THUDM/ToolBench
+- name: ToolBench / ToolLLM (ToolLLaMA)
+  github: https://github.com/OpenBMB/ToolBench
+- name: Toolformer
+  github: https://github.com/TimoSchick/Toolformer
+- name: ToolGen
+  github: https://github.com/Reason-Wang/ToolGen
+- name: ToolHallucination (Relign + RelyToolBench)
+  github: https://github.com/X-LANCE/ToolHallucination
+- name: TOOLMAKER (includes TM-BENCH)
+  github: https://github.com/KatherLab/ToolMaker
+- name: ToolPlanner / MGToolBench
+  github: https://github.com/XiaoMi/toolplanner
+- name: Tools Fail
+  github: https://github.com/jiminsun/tools-fail
+- name: TOOLSANDBOX
+  github: https://github.com/apple/ToolSandbox
+- name: ToRA
+  github: https://github.com/microsoft/ToRA
+- name: TorchDrug
+  github: https://github.com/DeepGraphLearning/torchdrug
+- name: torchtune
+  github: https://github.com/pytorch/torchtune
+- name: TraceVLA
+  github: https://github.com/microsoft/TraceVLA
+- name: Train-Ticket
+  github: https://github.com/FudanSELab/train-ticket
+- name: TravelPlanner
+  github: https://github.com/TIGER-AI-Lab/TravelPlanner
+- name: TravelPlanner Benchmark
+  github: https://github.com/OSU-NLP-Group/TravelPlanner
+- name: Tree of Thoughts (ToT)
+  github: https://github.com/princeton-nlp/tree-of-thought-llm
+- name: Tree-of-Thoughts (Game of 24)
+  github: https://github.com/ysymyth/tree-of-thought-llm
+- name: Triad
+  github: https://github.com/ZJU-DCDLab/Triad
+- name: TriageAgent
+  github: https://github.com/Lucanyc/TriageAgent
+- name: Triton (GPU programming language)
+  github: https://github.com/triton-lang/triton
+  codewiki: https://codewiki.google/github.com/triton-lang/triton
+- name: TriviaQA
+  github: https://github.com/mandarjoshi90/triviaqa
+- name: TrueSkill
+  github: https://github.com/sublee/trueskill
+- name: TrustAgent
+  github: https://github.com/agiresearch/TrustAgent
+- name: TruthfulQA
+  github: https://github.com/sylinrl/TruthfulQA
+- name: TS50 and TS500 benchmark sets
+  github: https://github.com/drorlab/gvp-pytorch
+- name: Tulu / Open-Instruct
+  github: https://github.com/allenai/open-instruct
+- name: UGround
+  github: https://github.com/OSU-NLP/UGround
+- name: UI-TARS
+  github: https://github.com/bytedance/UI-TARS
+- name: UI-Vision (project site repo)
+  github: https://github.com/uivision/uivision.github.io
+- name: UIAutomator2
+  github: https://github.com/openatx/uiautomator2
+- name: UNI
+  github: https://github.com/mahmoodlab/UNI
+- name: Uni-Mol
+  github: https://github.com/dptech-corp/Uni-Mol
+- name: UniKGQA
+  github: https://github.com/RUCAIBox/UniKGQA
+- name: Unstructured
+  github: https://github.com/Unstructured-IO/unstructured
+  codewiki: https://codewiki.google/github.com/Unstructured-IO/unstructured
+- name: Vector Field Network (VFN)
+  github: https://github.com/aim-uofa/VFN
+- name: Vega-Lite
+  github: https://github.com/vega/vega-lite
+- name: VERL (vLLM Efficient Reinforcement Learning)
+  github: https://github.com/vllm-project/verl
+- name: Vicuna / FastChat
+  github: https://github.com/lm-sys/FastChat
+  codewiki: https://codewiki.google/github.com/lm-sys/FastChat
+- name: VideoGUI
+  github: https://github.com/ShowLab/VideoGUI
+- name: VideoLLaMA2
+  github: https://github.com/DAMO-NLP-SG/VideoLLaMA2
+- name: VideoWebArena
+  github: https://github.com/ljang0/videowebarena
+- name: VILA (Visual Language Model)
+  github: https://github.com/Efficient-Large-Model/VILA
+- name: Virtual Scientists (VIRSCI)
+  github: https://github.com/open-sciencelab/Virtual-Scientists
+- name: Vision Transformer (ViT)
+  github: https://github.com/google-research/vision_transformer
+- name: Visual Sketchpad
+  github: https://github.com/allenai/visual-sketchpad
+- name: Visual Studio Code
+  github: https://github.com/microsoft/vscode
+  codewiki: https://codewiki.google/github.com/microsoft/vscode
+- name: VisualAgentBench (VAB)
+  github: https://github.com/THUDM/VisualAgentBench
+- name: VisualWebArena
+  github: https://github.com/jykoh/visualwebarena
+- name: VisualWebArena (VWA)
+  github: https://github.com/web-arena-x/visualwebarena
+- name: vLLM
+  github: https://github.com/vllm-project/vllm
+  codewiki: https://codewiki.google/github.com/vllm-project/vllm
+- name: VLMbench
+  github: https://github.com/UM-ARM-Lab/VLMbench
+- name: voyageai Python client
+  github: https://github.com/voyage-ai/voyageai-python
+- name: Voyager
+  github: https://github.com/MineDojo/Voyager
+- name: VPT (Video Pre-Training)
+  github: https://github.com/openai/Video-Pre-Training
+- name: Waymax
+  github: https://github.com/waymo-research/waymax
+- name: WebArena
+  github: https://github.com/web-arena-x/webarena
+- name: WebArena
+  github: https://github.com/web-arena-dev/WebArena
+- name: WebArena
+  github: https://github.com/WebArena-Lab/WebArena
+- name: WebRL
+  github: https://github.com/THUDM/WebRL
+- name: WebShop
+  github: https://github.com/princeton-nlp/WebShop
+- name: WebThinker
+  github: https://github.com/RUC-NLPIR/WebThinker
+- name: Whisper (OpenAI)
+  github: https://github.com/openai/whisper
+  codewiki: https://codewiki.google/github.com/openai/whisper
+- name: WikiExtractor
+  github: https://github.com/attardi/wikiextractor
+- name: WikiHow Dataset
+  github: https://github.com/mahnazkoupaee/WikiHow-Dataset
+- name: WikiPlots
+  github: https://github.com/markriedl/WikiPlots
+- name: WikiSQL
+  github: https://github.com/salesforce/WikiSQL
+- name: WikiTableQuestions
+  github: https://github.com/ppasupat/WikiTableQuestions
+- name: WindowsAgentArena
+  github: https://github.com/microsoft/WindowsAgentArena
+- name: WizardCoder / Evol-CodeAlpaca (code data)
+  github: https://github.com/nlpxucan/WizardLM/tree/main/WizardCoder
+- name: WizardLM
+  github: https://github.com/nlpxucan/WizardLM
+- name: WORD (Abdominal Organ Segmentation from CT)
+  github: https://github.com/HiLab-git/WORD
+- name: World Models (VAE + MDN-RNN controller)
+  github: https://github.com/hardmaru/WorldModels
+- name: XAgent
+  github: https://github.com/OpenBMB/XAgent
+- name: xCodeEval
+  github: https://github.com/microsoft/xCodeEval
+- name: XFeat (Accelerated Features)
+  github: https://github.com/verlab/accelerated_features
+- name: XGBoost
+  github: https://github.com/dmlc/xgboost
+  codewiki: https://codewiki.google/github.com/dmlc/xgboost
+- name: xLAM (Large Action Models)
+  github: https://github.com/SalesforceAIResearch/xLAM
+- name: XTuner
+  github: https://github.com/InternLM/xtuner
+- name: Xwin-Math
+  github: https://github.com/Xwin-LM/Xwin-LM
+- name: YAGO 4
+  github: https://github.com/yago-naga/yago-4
+- name: Yi / Yi-VL
+  github: https://github.com/01-ai/Yi
+- name: YOLO (You Only Look Once)
+  github: https://github.com/pjreddie/darknet
+- name: Zeta 3 Irrational
+  github: https://github.com/ahhwuhu/zeta_3_irrational

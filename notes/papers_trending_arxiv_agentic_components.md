@@ -1,0 +1,4964 @@
+# Agentic Components
+
+Each entry below records the GPT-5–derived tree for one source file under Papers/.
+
+The tree highlights the agent node, system components, tooling, and source locations.
+
+## ml
+### 2510.26745v1_Deep sequence models tend to memorize geometrically.pdf
+**Title**: 2510.26745v1_Deep sequence models tend to memorize geometrically.pdf
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM Models
+    - gpt-5 (primary orchestrator; multimodal PDF/image understanding; code/spec generation; experiment planning)
+    - Optional analysis backends: small local LLM for post-processing and log summarization
+  - Responsibilities/Roles
+    - Read PDFs/JPEGs and extract/design an agentic system from each source
+    - Prefer geometric memory over purely associative storage; design training/eval to elicit implicit in-weights reasoning
+    - Generate executable research pipelines (Transformer, Mamba, Node2Vec) and analyses (spectral/Fiedler vectors, UMAP)
+    - Compare associative vs geometric data structures; report headroom and risks
+    - Output a unified agentic_components.md tree with per-file system blueprints and source references
+  - Core System Prompts
+    - “You are an Agentic System Architect. Read the source (PDF/image). Identify the intended end-to-end agentic system implied by the work. Enumerate agents, tools, memories, data flows, supervision regimes, and model choices. Favor geometric memory and spectral analysis. Produce a precise, testable blueprint and URLs.”
+    - “When the paper enhances a capability (e.g., implicit reasoning, geometries), translate it into system modules, toggles, and evaluators. Provide training curricula, ablations, and metrics to validate.”
+    - “List every public URL (paper, repo, demo, dataset) named in the document in a Source References section.”
+
+- 2510.26745v1_Deep sequence models tend to memorize geometrically.pdf
+  - System: Geometric-Memory Agentic Lab
+    - Purpose
+      - Build, train, and analyze sequence models whose parametric memory becomes geometric (encodes global structure), enabling implicit in-weights reasoning on graph tasks
+      - Contrast with associative-memory baselines and surface spectral-bias mechanisms
+    - High-level Data Flow
+      - Graph Generator -> Edge Memorization Trainer -> Path-Finding Finetuner -> Evaluators (hardest-token, full-path) -> Geometry Analyzer (heatmaps/UMAP) -> Spectral Analyzer (Laplacian/Fiedler) -> Report/Export
+    - Agents and Sub-agents
+      - Orchestrator Agent (gpt-5)
+        - Plans experiments, selects model family (Transformer/Mamba/Node2Vec), sets graph topology/size, schedules interleaved training, collects metrics/plots, writes summary
+      - Graph Data Agent
+        - Generates path-star, tree-star, grid, cycle, irregular graphs; randomizes node labels and edge order; produces datasets:
+          - D_edge→, D_edge←, D_edge (both), D_path→ (forward), D_path← (reverse), hardest-token-only
+          - Supports train/test splits: by leaf and by first-token
+      - Training Agent
+        - Runs edge-memorization and path-finding (interleaved) with pause tokens; supports first-token-only runs; supports embedding-freeze ablation
+      - Geometry Analyzer Agent
+        - Computes leaf↔first-hop cosine heatmaps, path-vs-path distance maps, UMAP projections of token embeddings
+      - Spectral Analyzer Agent
+        - Builds normalized random-walk Laplacian; computes Fiedler and Fiedler-like eigenvectors; tracks Node2Vec dynamics C(t), V(t); projects onto eigenspaces; verifies spectral bias emergence
+      - Baseline/Counterfactual Agent
+        - Trains associative-memory form (frozen embeddings + single trainable layer) on tiny graphs; contrasts against learned geometry; verifies failure of composition with frozen embeddings on large tasks
+      - Evaluation Agent
+        - Metrics: full-path accuracy, first-token accuracy, per-token learning curves, chance-level baselines; forward vs reverse generation; forward-only vs backward-only vs mixed edges
+      - Reporting Agent
+        - Compiles results, ablations (reverse edges, pause tokens, interleaving vs two-phase), limitations, and practical headroom into markdown reports
+    - Models
+      - Transformer (decoder-only; “GPT-mid”-like)
+        - N_layer: 12, d_model: 384–784, n_heads: 8, GELU MLPs, sinusoidal positions, tied input/output embeddings
+        - Trained from scratch on synthetic graph corpora
+      - Mamba SSM
+        - Depth comparable to Transformer; d_state: 16–32, d_conv: 4, expand: 2–4
+        - Strong geometric memory even with edge-only supervision
+      - Node2Vec (1-layer, 1-hop, softmax variant)
+        - Embedding V ∈ R^{n×m}; weight-tied unembedding; cross-entropy objective; dynamics V̇(t)=η C(t) V(t)
+    - Tools
+      - Graph libraries: NetworkX (graph generation), SciPy (Laplacian eigensolvers)
+      - DL stack: PyTorch, CUDA, AdamW, cosine LR with warmup
+      - Visualization: UMAP, matplotlib/seaborn for heatmaps/plots
+      - Analysis: NumPy, pandas; spectral projections and eigenspace tracking
+      - IO: PDF reader/OCR for inputs; file writer for markdown/plots
+    - Memories
+      - Parametric Memory
+        - Learned embeddings capturing global geometry; geometric memory prioritized over associative
+        - Weight tying for embedding/unembedding; optional frozen-embedding ablation to enforce associative storage
+      - Experiment Memory
+        - Persistent run registry (configs, seeds, metrics, plots, checkpoints)
+      - Vector Stores (optional)
+        - Archive of learned embeddings for cross-run comparison and UMAP reuse
+    - Key Capabilities and Design Choices
+      - Geometric Memory Elicitation
+        - Interleave D_edge (bi-directional edges) with D_path→ training; include pause tokens for compute slack
+        - Evaluate hardest-token learning in isolation; expect 1-step geometric retrieval instead of ℓ-fold composition
+      - Associative vs Geometric Competition
+        - Ablations: forward-only vs backward-only vs both; frozen embeddings; first-token-only supervision; two-phase vs interleaved training
+      - Spectral Bias Mechanism
+        - Node2Vec dynamics tracking: C(t)= (D^{-1}A − P(t)) + (D^{-1}A − P(t))^T; show convergence of V(t) columns to Fiedler-like subspace; show C(t) null-space alignment
+      - Generalization Topologies
+        - Large: path-star (up to ~5×10^4 nodes, ℓ up to 10), tree-star; Small: grid, cycle, irregular graphs
+      - In-weights vs In-context Contrast
+        - Show in-context failure on forward path-star; show reverse generation triviality; corroborate in-weights success
+    - Training Protocols
+      - Objectives: next-token cross-entropy; token-wise masked for first-token-only studies
+      - Schedules: AdamW (wd=0.01), cosine decay, warmup; batch sizes 64–1024; epochs O(10^3–5×10^4) as needed
+      - Aids: pause tokens (0/2/4/6/10); reverse-edge augmentation to mitigate reversal curse
+    - Evaluation and Visual Outputs
+      - Full-path accuracy (exact match), first-token accuracy, per-token learning order, chance levels
+      - Leaf↔first-hop cosine heatmap; path↔path average cosine distance maps
+      - UMAP of token embeddings; spectral projection trajectories of V(t) and C(t)
+    - Risks and Headroom
+      - Reverse-edge dependence in large tasks; knowledge editing limits in geometric storage
+      - Headroom: push Transformer toward stronger spectral geometry (closer to Node2Vec), reduce associative adulteration
+    - Interfaces and File Contracts
+      - Input: JSON/YAML experiment spec; graph seeds/topology; training knobs
+      - Outputs: metrics.json, plots/*.png, embeddings/*.npy, spectral/*.npy, report.md
+    - Where to Read Code/Project Pages (if any)
+      - Paper: https://arxiv.org/abs/2510.26745
+      - Mamba SSM project: Mamba: https://github.com/state-spaces/mamba, https://arxiv.org/abs/2312.00752
+      - Node2Vec canonical: https://snap.stanford.edu/node2vec/, node2vec: https://github.com/aditya-grover/node2vec
+      - UMAP: https://arxiv.org/abs/1802.03426, https://umap-learn.readthedocs.io
+      - PyTorch: https://pytorch.org
+
+**Source Location**:
+- Deep sequence models tend to memorize geometrically; it is unclear why: https://arxiv.org/abs/2510.26745    0
+- Mamba: https://github.com/state-spaces/mamba
+- Mamba: Linear-Time Sequence Modeling with Selective State Spaces: https://arxiv.org/abs/2312.00752    4431
+- https://snap.stanford.edu/node2vec/
+- node2vec: https://github.com/aditya-grover/node2vec
+- UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction: https://arxiv.org/abs/1802.03426    10740
+- https://umap-learn.readthedocs.io
+- https://pytorch.org
+
+
+
+
+
+
+## model-theory
+### 2507.16784v1 BEYOND CONTEXT LIMITS SUBCONSCIOUS THREADS FOR LONG-HORIZON REASONING.pdf
+**Title**: 2507.16784v1 BEYOND CONTEXT LIMITS SUBCONSCIOUS THREADS FOR LONG-HORIZON REASONING.pdf
+
+**Agentic System Description**:
+
+- Title: 2507.16784v1 BEYOND CONTEXT LIMITS SUBCONSCIOUS THREADS FOR LONG-HORIZON REASONING.pdf
+- Agent Node
+  - LLM Models
+    - TIM-8b (Qwen3-8B post-trained via SFT + GRPO)
+    - TIM-large (constructed from GPT-4.1 to emit Thread-2 JSON; used for comparison/validation)
+  - Responsibilities/Roles
+    - Decompose tasks into recursive Thread-2 subtasks (tree-structured reasoning)
+    - Generate structured JSON (TimResponse) in a single inference
+    - Plan thoughts, invoke tools, aggregate subtask conclusions, and produce final answer
+    - Maintain selective working memory via subtask pruning; ignore irrelevant lower-level details
+    - Perform multi-hop tool use within one model call
+  - Prompts
+    - System prompt (concise): “You are TIM, a Thread-2 reasoning model. Produce a TimResponse JSON with fields: reasoning: [Task], answer: string. Each Task has thought, optional tooluse, optional subtasks, conclusion. Use tools only via tooluse schema. Follow JSON schema strictly. No extra text.”
+    - Tool specs (embedded): name, description, input parameters, and output format for each tool; runtime will supply tool_result content
+    - Decoding constraints: Constrained JSON decoding per pydantic schema; no free-form tokens outside JSON except final answer field
+- Available Tools
+  - SearchTool
+    - Parameters: query: str
+    - Purpose: web/data search (e.g., for Datacommons, general research)
+  - WebReaderTool
+    - Parameters: goal: str, url: str
+    - Purpose: fetch and parse webpage content for research/browsing tasks
+  - External Tool Servers
+    - Invoked by TIMRUN directly (e.g., via MCP-compatible servers)
+    - Tool responses streamed back into the ongoing KV cache as JSON
+- Memory and Reasoning Features
+  - Working Memory
+    - Retains KV states of only relevant higher/same-level tasks (thoughts + conclusions)
+    - Hides details of completed lower-level subtasks
+  - Subtask Pruning
+    - Rule-based pruning via a pruning buffer (stack); threshold typically in {0,1,2}
+    - Prunes KV for completed subtasks; retains redundancy via buffer to avoid info loss
+  - Positional Embedding Reuse
+    - Sequence extend step re-encodes tokens after pruned segments to reassign positions
+    - Enables virtually unlimited output beyond model output-window limits
+  - KV Cache Management
+    - Fine-grained eviction of pruned subtasks’ KV pages
+    - Page size set to 1 for dynamic, per-request pruning in batched inference
+- System-Level Components
+  - TIM (LLM)
+    - Thread-2 JSON generator with fields:
+      - Task: {thought, tooluse?, subtasks?, conclusion}
+      - ToolUse: {tool_name ∈ ["SearchTool","WebReaderTool"], parameters, tool_result}
+      - TimResponse: {reasoning: [Task], answer: str}
+    - Multi-hop tool reasoning in a single call; outputs tool parameters; awaits tool_result insertion by runtime
+  - TIMRUN (Inference Runtime)
+    - Constrained JSON Decoder
+      - Enforces pydantic/JSON schema during generation
+      - Extracts tool parameters when encountering "tool_result" keys
+    - Tool Runtime Integration
+      - Launches tool calls (e.g., MCP servers) directly from runtime; no client round-trips
+      - Appends tool_result JSON back into model’s ongoing output stream
+    - Subtask Pruner and KV Manager
+      - Maintains pruning buffer; prunes completed subtasks’ KV pages
+      - Re-encodes post-pruning segments to reuse positional embeddings and free GPU memory
+    - Paged-Attention + Accelerators
+      - Page size 1 (heterogeneous pruning per request in batch)
+      - Triton kernels for batched pruning; FlashInfer for attention acceleration
+    - Batching/Scheduling
+      - High-throughput decoding while manipulating up to ~90% of KV cache
+      - Stable throughput under many tool calls due to pruning and single-pass design
+    - Logging/Tracing/Metrics
+      - Tracks max KV cache length, output token length, and pruning ratio
+  - Data and Training Pipeline (for TIM-8b)
+    - Synthetic Data Generation
+      - Sources: 20k openr1-math-220k, 20k “researchy questions”, 6k ToolBench prompts
+      - Tool I/O schemas synthesized; tool calls not executed during data gen
+    - Supervised Fine-Tuning
+      - Model: Qwen3-8B; toolkit: LlamaFactory
+      - Objective: emit correct Thread-2 JSON structures natively
+    - Reinforcement Learning
+      - Algorithm: GRPO; target: openr1-math-220k remainder
+      - Reward: answer correctness under constrained JSON sampling
+- Sub-Agents/Services
+  - Tool Servers (e.g., MCP-compatible)
+    - Provide Search and Web Reader capabilities
+    - Responses are JSON-serialized and injected into the ongoing inference stream
+  - External Knowledge Providers
+    - Datacommons API endpoints (for QA)
+    - Public web pages for browse/research tasks
+- Interactions and Flow
+  - 1) User input arrives as a single prompt + tool specs
+  - 2) TIM generates Thread-2 JSON; when emitting tooluse with tool_result placeholder:
+    - TIMRUN extracts parameters; calls the tool; receives response JSON
+    - Runtime appends tool_result into the output stream without new requests
+  - 3) Subtasks complete; TIMRUN aggregates conclusions; prunes completed subtasks from KV
+  - 4) Runtime re-encodes subsequent tokens to recycle positions; output window reused
+  - 5) Final TimResponse.answer returned; a single LLM call completed the entire workflow
+- Agent Configuration Knobs
+  - Pruning buffer size: {0,1,2} (trade-off accuracy vs. speed)
+  - Batch size and page size: page size fixed at 1 for dynamic pruning; batch tuned per GPU
+  - Tools enabled: SearchTool, WebReaderTool (extensible set; add schemas + server endpoints)
+  - Decoding: constrained JSON decoding engine; strict schema validation
+- Where to Read the Code / Project
+  - TIMRUN runtime and examples: TIMRUN: Efficient Engine for Long-horizon Reasoning: https://github.com/subconscious-systems/TIMRUN
+
+**Source Location**:
+- TIMRUN: Efficient Engine for Long-horizon Reasoning: https://github.com/subconscious-systems/TIMRUN
+- https://brand.mit.edu/logos-marks/tim-beaver
+- Qwen-Agent: https://github.com/QwenLM/Qwen-Agent
+- https://openai.com/index/introducing-deep-research/
+- Triton Conference 2025: https://github.com/triton-lang/triton
+- flashinfer: https://github.com/flashinfer-ai/flashinfer
+- sglang: https://github.com/sgl-project/sglang
+- vllm: https://github.com/vllm-project/vllm
+- LlamaFactory: Unified Efficient Fine-Tuning of 100+ Language Models: http://arxiv.org/abs/2403.13372    973
+- Open R1: https://github.com/huggingface/open-r1
+- https://aclanthology.org/2025.naacl-long.427/
+- https://datacommons.org
+- BrowseComp: A Simple Yet Challenging Benchmark for Browsing Agents: https://arxiv.org/abs/2504.12516    145
+- DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning: https://arxiv.org/abs/2501.12948    4626
+- Compressive Transformers for Long-Range Sequence Modelling: https://arxiv.org/abs/1911.05507    740
+- The NANOGrav 12.5-year data set: A computationally efficient eccentric binary search pipeline and constraints on an eccentric supermassive binary candidate in 3C 66B: https://arxiv.org/abs/2309.17438    9
+- Efficient Guided Generation for Large Language Models: https://arxiv.org/abs/2307.09702    67
+- Qwen Technical Report: https://arxiv.org/abs/2309.16609    2725
+- DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models: https://arxiv.org/abs/2402.03300    3054
+- HybridFlow: A Flexible and Efficient RLHF Framework: https://arxiv.org/abs/2409.19256    724
+- Reflexion: Language Agents with Verbal Reinforcement Learning: https://arxiv.org/abs/2303.11366    1966
+- Decomposed Prompting: A Modular Approach for Solving Complex Tasks: https://arxiv.org/abs/2210.02406    556
+- Qwen: https://github.com/QwenLM/Qwen
+- AutoGen: https://github.com/microsoft/autogen
+- CAMEL Framework Design Principles: https://github.com/camel-ai/camel
+- MetaGPT: The Multi-Agent Framework: https://github.com/geekan/MetaGPT
+
+### 2507.20534v1 KIMI K2 OPEN AGENTIC INTELLIGENCE.pdf
+**Title**: 2507.20534v1 KIMI K2 OPEN AGENTIC INTELLIGENCE.pdf
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM Models
+    - Kimi-K2-Instruct (policy/assistant, non-thinking default, 128k context)
+    - Kimi-K2-Base (foundation model used for SFT/RL initialization)
+    - K2 Critic/Judge (self-critique preference model; evaluates pairwise responses against rubrics)
+  - Responsibilities/Roles
+    - Conversational assistant and tool-using agent for multi-step tasks
+    - Planner and executor for software engineering, coding, STEM, and general tasks
+    - Tool caller via function-style schema; error-aware retries and correction
+    - Self-critic for alignment using rubric-based judgments
+  - Prompts
+    - System prompt variants defining agent persona, capabilities, and available toolsets (thousands of diversified agents synthesized)
+    - Rubric-based guidance: core rubrics (clarity/relevance, conversational fluency/engagement, objective/grounded tone), prescriptive rubrics (no initial praise, no explicit self-justification)
+    - Tool declaration block instructing the agent in TypeScript/JSON function schemas
+    - Safety and faithfulness prompts: judge-style instructions to detect unsupported claims and jailbreaks
+
+- Available Tools
+  - Tool Interface and Invocation
+    - Tool declaration message with TypeScript function types or OpenAI-compatible JSON schemas
+    - Parallel tool calls per response turn with call IDs functions.{tool_name}:{counter}
+    - Tool results returned as messages tagged to call IDs
+    - Constrained decoding “enforcer” to ensure tool-call JSON validity and schema conformance
+  - Tool Repository (heterogeneous, large-scale)
+    - 3000+ real MCP tools (fetched from GitHub)
+    - 20,000+ LLM-synthesized tools (hierarchical domain evolution)
+    - Categories include: databases, vector-databases, search, web-scraping, browser-automation, app automation, shell/OS access, developer tools, version control, cloud platforms/storage, RAG systems, knowledge & memory, image/video/speech processing, translation, ecommerce, finance/cryptocurrency/trading, health/wellness, security/IAM, monitoring, IoT/home automation, travel/transportation, entertainment/media/gaming, education/e-learning, legal/compliance, robot control, manufacturing/industrial IoT, real estate, weather, note-taking, social media, research & data
+  - Execution Environments
+    - Tool Simulator (stateful world-model-like executor with stochastic outcomes)
+    - Real execution sandboxes for coding/SE (Kubernetes-backed; 10k+ concurrent sandboxes; test-suite ground truth)
+    - Terminal/bash and code editor tools for SWE-bench-style tasks
+    - Code interpreter and program judges for deterministic evaluation
+
+- Memory Features
+  - Long-context processing up to 128k via YaRN; instruction/state carryover across multi-turn interactions
+  - Environment state persistence in the Tool Simulator across steps (persistent effects, checkpoints)
+  - Partial rollout persistence for long-horizon tasks (pause/resume across RL iterations)
+  - Tool-call structured memory: tool declarations, call IDs, and results embedded in the dialogue transcript
+  - Safety/faithfulness memory via sentence-level grounding checks in context
+
+- Sub-Agents and Services
+  - User Simulator
+    - LLM personas driving realistic, multi-turn dialogues with varied styles/preferences
+  - Judge Agent (LLM-based)
+    - Evaluates trajectories against task-specific rubrics; filters successful trajectories
+  - Faithfulness Judge
+    - Sentence-level detector of unsupported claims for grounding and RAG faithfulness
+  - Checkpoint Engine
+    - Distributed parameter broadcaster/resharder between training and inference engines; parameter-by-parameter pipelined updates
+  - Training Engine (colocated)
+    - Runs SFT/RL optimization with Muon/MuonClip; shares nodes with inference via resource handoff
+  - Inference Engine (colocated)
+    - Generates on-policy rollouts and trajectories; receives updated shards from checkpoint engine
+  - Constrained Decoding Enforcer
+    - Runtime schema validator for tool-call segments to prevent malformed calls
+
+- System-Level Components
+  - Pre-training
+    - 1.04T-param MoE with 32B activated; MLA attention; 384 experts; 8 experts per token; 64 heads
+    - MuonClip optimizer (Muon + QK-Clip) for stable training without loss spikes
+    - Data rephrasing pipelines for Knowledge and Mathematics (chunk-wise autoregressive rewriting; fidelity verification; learning-note style/translated math)
+    - Long-context activation and YaRN-based extension to 128k
+  - Supervised Fine-Tuning (SFT)
+    - Large, diverse instruction dataset; agentic tool-use demonstrations from synthetic and real trajectories
+    - Automated judges/humans for response quality filtering; domain-specialized experts for candidate responses
+  - Agentic Data Synthesis Pipeline (Tool Use)
+    - Tool Spec Generation: aggregate real MCP tools; synthesize tools via hierarchical domain evolution
+    - Agent and Task Generation: diverse system prompts and toolset combinations; rubric-attached tasks from simple to complex
+    - Trajectory Generation: user simulator + tool simulator; multi-turn paths with stateful effects and controlled stochasticity
+    - Quality Filtering: LLM judge ensures rubric-compliant success; combine simulated and real sandboxes (coding/SE)
+  - Reinforcement Learning (RL)
+    - RL with Verifiable Rewards (RLVR): math/STEM/logic, instruction following with hybrid rule/LLM judges, coding/SE with unit tests and sandboxes, safety red-teaming rewards
+    - Self-Critique Rubric Reward: actor generates; critic ranks pairwise using core/prescriptive/human rubrics; closed-loop critic refinement using verifiable signals
+    - RL Algorithm: variance-reduced policy optimization with KL-style regularization; Muon optimizer; multi-sample per prompt
+    - Stabilizers: per-task token budget control, auxiliary PTX loss to prevent forgetting, temperature decay (explore→exploit)
+  - RL Infrastructure and Orchestration
+    - Colocated training/inference on same workers; GPU resource handoff
+    - Distributed checkpoint engine for fast reshard/broadcast (<30s updates at 1T scale)
+    - Efficient startup/recovery: selective disk reads, broadcasted initialization, checkpoint-engine-backed restarts
+    - Agentic rollout scaling: heavy environments as services; many concurrent rollouts; partial rollouts for long-tail tasks
+    - Unified Gym-like interface for adding new interactive environments
+  - Tool-Calling Token Template (Runtime Protocol)
+    - Tool Declaration message (TypeScript or JSON schema)
+    - Assistant tool-call section with parallel calls and JSON arguments
+    - Tool Result message tagged by call_id
+  - Safety and Alignment
+    - Automated red-teaming with Promptfoo across Harmful/Criminal/Misinformation/Privacy/Security plugins and attack strategies (basic, prompt injection, iterative jailbreak, crescendo)
+    - Safety judge rubrics and hack-checks; adversarial prompt evolution (attack model, target model, judge model)
+  - Evaluation and Bench Integration
+    - SWE-bench Verified/Multilingual; Multi-SWE-bench; LiveCodeBench; OJBench; Tau2-Bench; ACEBench; Terminal-Bench; Aider-Polyglot; PaperBench; MRCR, FRAMES, LongBench v2; FACTS Grounding, HHEM, FaithJudge; MMLU/MMLU-Redux/Pro; IFEval; Multi-Challenge; SimpleQA; GPQA-Diamond; SuperGPQA; AIME; MATH/GSM8K; LMSYS Arena tracking
+  - Deployment/Access
+    - Released checkpoints for base and instruct models on Hugging Face
+    - Non-thinking default configuration; 8k+ output token caps with task-specific exceptions
+
+- Where to Read/Use Code or Models
+  - Kimi-K2 checkpoints: https://huggingface.co/moonshotai/Kimi-K2-Instruct
+  - Terminal-Bench agent env: terminal-bench: https://github.com/laude-institute/terminal-bench
+  - Promptfoo red-teaming: Promptfoo: LLM evals & red teaming: https://github.com/promptfoo/promptfoo
+  - Constrained decoding enforcer: lm-format-enforcer: https://github.com/noamgat/lm-format-enforcer
+  - Aider-Polyglot leaderboard: https://aider.chat/docs/leaderboards/
+  - LMSYS Arena text leaderboard: https://lmarena.ai/leaderboard/text
+  - MRCR dataset: https://huggingface.co/datasets/openai/mrcr
+
+- Title: 2507.20534v1 KIMI K2 OPEN AGENTIC INTELLIGENCE.pdf
+
+**Source Location**:
+- https://huggingface.co/moonshotai/Kimi-K2-Instruct
+- Kimi K2: Open Agentic Intelligence: https://arxiv.org/abs/2507.20534    35
+- https://lmarena.ai/leaderboard/text
+- terminal-bench: https://github.com/laude-institute/terminal-bench
+- Promptfoo: LLM evals & red teaming: https://github.com/promptfoo/promptfoo
+- lm-format-enforcer: https://github.com/noamgat/lm-format-enforcer
+- https://huggingface.co/datasets/openai/mrcr
+- https://openreview.net/forum?id=VTF8yNQM66
+- LiveCodeBench: Holistic and Contamination Free Evaluation of Large Language Models for Code: https://arxiv.org/abs/2403.07974    807
+- OJBench: A Competition Level Code Benchmark For Large Language Models: https://arxiv.org/abs/2506.16395    2
+- Multi-SWE-bench: A Multilingual Benchmark for Issue Resolving: https://arxiv.org/abs/2504.02605    28
+- SWE-smith: Scaling Data for Software Engineering Agents: https://arxiv.org/abs/2504.21798    42
+- $τ^2$-Bench: Evaluating Conversational Agents in a Dual-Control Environment: https://arxiv.org/abs/2506.07982    48
+- $τ$-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains: https://arxiv.org/abs/2406.12045    224
+- LongBench v2: Towards Deeper Understanding and Reasoning on Realistic Long-context Multitasks: https://arxiv.org/abs/2412.15204    95
+- The FACTS Grounding Leaderboard: Benchmarking LLMs' Ability to Ground Responses to Long-Form Input: https://arxiv.org/abs/2501.03200    28
+- https://huggingface.co/vectara/hallucination_evaluation_model
+- DeepSeek-V3 Technical Report: https://arxiv.org/abs/2412.19437    0
+- Qwen2.5 Technical Report: https://arxiv.org/abs/2412.15115    2537
+- YaRN: Efficient Context Window Extension of Large Language Models: https://arxiv.org/abs/2309.00071    361
+- https://ai.meta.com/blog/llama-4-multimodal-intelligence/
+- WizardLM: Empowering large pre-trained language models to follow complex instructions: https://arxiv.org/abs/2304.12244    1134
+- ZeroSearch: Incentivize the Search Capability of LLMs without Searching: https://arxiv.org/abs/2505.04588    73
+- OpenCoder: The Open Cookbook for Top-Tier Code Large Language Models: https://arxiv.org/abs/2411.04905    63
+- KodCode: A Diverse, Challenging, and Verifiable Synthetic Dataset for Coding: https://arxiv.org/abs/2503.02951    43
+- https://aider.chat/docs/leaderboards/
+- Benchmarking LLM Faithfulness in RAG with Evolving Leaderboards: https://arxiv.org/abs/2505.04847    3
+
+### Google_Nested_Learning.pdf
+**Title**: Google_Nested_Learning.pdf
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM models
+    - gpt-5 (multimodal, PDF/JPEG understanding)
+  - Responsibilities/Roles
+    - Ingest PDFs/JPEGs, parse text/figures/equations
+    - Identify agentic software components proposed in each document
+    - Model the system as a nested tree with agents, tools, memory, and interactions
+    - Normalize and collect public source URLs (arXiv/OpenReview/ACL/Repos)
+  - Prompts
+    - System prompt: "You are an agentic-architecture extractor. Read one paper/image and output a single Markdown tree. Start with the Agent Node, enumerate tools/memory/sub‑agents, all system‑level components and interactions, and list public source references. Do not include prose."
+    - Extraction constraints: "Describe agent nodes with model names, roles, prompts, available tools, memory features. Include where code or project pages can be found. If none, set null."
+- Available Tools
+  - PDF/Image parsing: PyMuPDF or pdfminer.six; OCR fallback for images (tesseract or gpt-5 vision)
+  - Link normalizer: arXiv/OpenReview/ACL ID to canonical URL resolver
+  - Markdown writer: agentic_components.md
+  - Shell key loader: /Users/lingzhi/Downloads/set_llm_keys.sh
+- Memory Features
+  - Short-term: per-file scratchpad; section embeddings for retrieval over parsed chunks
+  - Long-term: per-run URL cache; deduplicated citation store
+- Sub‑agents/Services
+  - Document Loader
+  - Multimodal Parser (text, tables, figures, equations)
+  - NL/HOPE Analyzer
+  - Optimizer & Memory Extractor
+  - Source Link Extractor
+  - Tree Assembler/Exporter
+
+- File
+  - Title: Google_Nested_Learning.pdf
+  - Agentic System Description
+    - System Overview
+      - Paradigm: Nested Learning (NL) — model as nested/multi‑level optimization problems ordered by update frequency; each component has its own context flow and gradient pathway
+      - Core Architecture: HOPE — self‑referential sequence model + Continuum Memory System (CMS)
+    - Agent Nodes
+      - HOPE Sequence Agent
+        - LLM model names
+          - HOPE-340M, HOPE-760M, HOPE-1.3B (language modeling scales reported)
+        - Responsibilities/Roles
+          - Autoregressive sequence modeling with multi-time-scale updates
+          - Learn to modify its own update algorithm (self-modifying/Titans-inspired)
+          - Perform in-context learning, continual learning, and long-context reasoning
+        - Prompts
+          - Task prompt: standard LM prompts (zero-/few-shot) with permission to update inner memories during generation
+          - Control prompt: "Execute nested learning schedule: update working memory per token; projection/optimizer states per micro-chunk; CMS layers per designated chunk sizes; respect safety constraints on parameter updates."
+        - Available Tools
+          - Working-memory operator: Associative Memory (e.g., Linear Attention; Mt ← Mt + v k^T)
+          - Projection adapters: context-conditioned K/Q/V projections
+          - Optimizers: NL-optimized rules (GD, Momentum, Adam-like, Deep Momentum GD, L2-regression GD, Newton‑Schulz/Muon-style nonlinearity)
+        - Memory Features
+          - Working memory: key/value associative store updated per token
+          - Continuum Memory System (CMS): chain of MLP blocks per frequency f1..fk with chunk sizes C^(ℓ)
+          - Self-referential update buffers: stores surprise signals u_t = ∇_y L and gradient statistics
+      - Optimizer Agent (Meta‑Memory)
+        - LLM model names
+          - DMGD (Deep Momentum Gradient Descent), Adam-like NL variant, Muon-style layer optimizer
+        - Responsibilities/Roles
+          - Treat optimizer states as associative memories that compress gradients and learning signals
+          - Learn mappings between gradients and preconditioned values P_i
+        - Prompts
+          - "Given per-token gradients and statistics, update meta‑memory m and emit parameter deltas respecting stability and capacity constraints."
+        - Available Tools
+          - Momentum memory m (matrix or MLP)
+          - Preconditioning matrix/value P_i (e.g., Hessian-informed features)
+          - Objectives: dot-product Hebbian, L2 regression delta-rule; optional Newton-Schulz output transform
+        - Memory Features
+          - Multi-level states (fast m, slower W); independent gradient flows per level
+      - Context/Memories Agent (CMS Manager)
+        - LLM model names
+          - CMS-F_k stack (MLP(f1) ... MLP(fk))
+        - Responsibilities/Roles
+          - Schedule updates across frequencies; consolidate knowledge online
+          - Manage chunk sizes and gating for each memory level
+        - Prompts
+          - "Every C^(ℓ) steps, apply optimizer f(·) to θ^(fℓ); otherwise freeze."
+        - Available Tools
+          - Chunker, frequency scheduler, parameter freezing/unfreezing
+        - Memory Features
+          - Multi-frequency persistent memories; abstraction increases with lower frequency
+      - Self‑Modification Agent (Titans‑style)
+        - LLM model names
+          - Titans‑LMM-inspired self-referential module
+        - Responsibilities/Roles
+          - Learn its own update algorithm; generate/modify fast weights from current context
+        - Prompts
+          - "Infer update rule parameters from context; write fast weights for next step while preserving stability."
+        - Available Tools
+          - Fast-weight programmer; gating over which submodules to modify
+        - Memory Features
+          - Short‑horizon fast weights; safety constraints; rollback/checkpoint hooks
+      - Data/Context Orchestrator
+        - LLM model names
+          - N/A (system service)
+        - Responsibilities/Roles
+          - Tokenization, batching, chunking; route signals to correct frequency level; compute surprise signals u_t
+        - Tools
+          - Dataset loaders, task adapters (LM evals), metrics
+    - System‑Level Components and Interactions
+      - Nested Levels and Frequencies
+        - Level 1 (fastest): Working memory Mt updates per token; no backprop through projection at this level
+        - Level 2: Optimizer meta‑memory m updates per step; emits ΔW
+        - Level 3: Projection layers (W_k, W_q, W_v) updated by outer optimizer; frequency lower than L1/L2
+        - Level 4..k (slowest): CMS MLP layers θ^(fℓ) updated every C^(ℓ) tokens; outermost pre‑training loop
+      - Gradient Flow Separation
+        - Exclusive gradient pathways per component; inner objectives optimized without backprop through slower levels
+      - Learning Rules
+        - Hebbian/dot‑product or L2 regression objectives for associative memories
+        - Preconditioned momentum; Newton‑Schulz nonlinearity for layerwise normalization-like effects
+      - Continual/Online Learning
+        - Online consolidation via CMS; optional offline replay not covered here
+      - Safety/Stability
+        - Capacity control via delta‑rule; schedule‑based freezing; chunk‑wise updates; rollback checkpoints
+    - Tools Available to the Agentic System
+      - Sequence operator: Linear Attention/RetNet‑style retention or compatible recurrent operator
+      - Optimizer suite: GD, Momentum, Adam‑like NL, DMGD, Muon‑style output transform
+      - Schedulers: frequency scheduler, chunking policy C^(ℓ)
+      - Evaluators: LM perplexity; commonsense benchmarks (PIQA, HellaSwag, WinoGrande, ARC-e/c, SIQA, BoolQ)
+    - Memory Features
+      - Associative memory everywhere: optimizers, attention, and CMS interpreted as memories
+      - Multi‑time‑scale consolidation: from per‑token to long‑horizon persistent parameters
+    - Where to read the code/project page
+      - null
+
+**Source Location**:
+- https://openreview.net/forum?id=YicbFdNTTy
+- https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf
+- https://openreview.net/forum?id=QCZabhKQhB
+- https://openreview.net/forum?id=QZgo9JZpLq
+- GPT-4 Technical Report: https://arxiv.org/abs/2303.08774    19068
+- Scaling Laws for Neural Language Models: https://arxiv.org/abs/2001.08361    6159
+- Titans: Learning to Memorize at Test Time: https://arxiv.org/abs/2501.00663    100
+- I-Con: A Unifying Framework for Representation Learning: https://arxiv.org/abs/2504.16929    10
+- Adam: A Method for Stochastic Optimization: https://arxiv.org/abs/1412.6980    158577
+- https://kellerjordan.github.io/posts/muon
+- https://openreview.net/forum?id=IDxZhXrpNf
+- Training Compute-Optimal Large Language Models: https://arxiv.org/abs/2203.15556    2453
+- https://openreview.net/forum?id=iaYcJKpY2B_
+- Longhorn: State Space Models are Amortized Online Learners: https://arxiv.org/abs/2407.14207    25
+- Retentive Network: A Successor to Transformer for Large Language Models: https://arxiv.org/abs/2307.08621    465
+- https://openreview.net/forum?id=7SaXczaBpG
+- https://openreview.net/forum?id=Ai8Hw3AXqks
+- https://openreview.net/forum?id=g4OTKRKfS7R
+- Learning to (Learn at Test Time): RNNs with Expressive Hidden States: https://arxiv.org/abs/2407.04620    161
+- Gated Delta Networks: Improving Mamba2 with Delta Rule: https://arxiv.org/abs/2412.06464    108
+- On the Resurgence of Recurrent Models for Long Sequences -- Survey and Research Opportunities in the Transformer Era: https://arxiv.org/abs/2402.08132    16
+- MambaMixer: Efficient Selective State Space Models with Dual Token and Channel Selection: https://arxiv.org/abs/2403.19888    39
+- Eagle and Finch: RWKV with Matrix-Valued States and Dynamic Recurrence: https://arxiv.org/abs/2404.05892    120
+- RWKV-7 "Goose" with Expressive Dynamic State Evolution: https://arxiv.org/abs/2503.14456    55
+- DeltaProduct: Improving State-Tracking in Linear RNNs via Householder Products: https://arxiv.org/abs/2502.10297    20
+- Test-time regression: a unifying framework for designing sequence models with associative memory: https://arxiv.org/abs/2501.12352    26
+- https://openreview.net/forum?id=GbFluKMmtE
+- https://aclanthology.org/P16-1144/
+- https://aclanthology.org/P19-1472/
+- Think you have Solved Question Answering? Try ARC, the AI2 Reasoning Challenge: https://arxiv.org/abs/1803.05457    3437
+- https://aclanthology.org/D19-1454/
+- https://aclanthology.org/N19-1300/
+- Mechanistic Design and Scaling of Hybrid Architectures: https://arxiv.org/abs/2403.17844    45
+- Gemini 2.5: Pushing the Frontier with Advanced Reasoning, Multimodality, Long Context, and Next Generation Agentic Capabilities: https://arxiv.org/abs/2507.06261    801
+- DeepSeek-V3 Technical Report: https://arxiv.org/abs/2412.19437    0
+- Cartridges: Lightweight and general-purpose long context representations via self-study: https://arxiv.org/abs/2506.06266    8
+- https://openreview.net/forum?id=7ZwuGZCopw
+
+
+
+
+
+
+## agent-framework
+### 2023 NIPS describe-explain-plan-and-select-interactive-planning-with-llms-enables-open-world-multi-task-agents-Paper-Conference.pdf
+**Title**: 2023 NIPS describe-explain-plan-and-select-interactive-planning-with-llms-enables-open-world-multi-task-agents-Paper-Conference.pdf
+
+**Agentic System Description**:
+
+- Title: 2023 NIPS describe-explain-plan-and-select-interactive-planning-with-llms-enables-open-world-multi-task-agents-Paper-Conference.pdf
+- Agent Node
+  - LLM Models
+    - OpenAI Codex (code-davinci-002) for planning/program-style outputs
+    - OpenAI GPT-3 (text-davinci-003) for text planning/explanations
+    - OpenAI ChatGPT (gpt-3.5-turbo) for dialog-style planning/explanations
+    - OpenAI GPT-4 for stronger planning (optional)
+    - LLaMA2-70B/13B (optional; finetuned variant used in ablations)
+  - Responsibilities/Roles
+    - Planner: decomposes task T into a sequence of sub-goals P0 = {g1..gK} with preconditions/effects; produces Python-like pseudo-code steps
+    - Explainer: analyzes failure using description dt and preconditions to produce explanation et (self-reflection) and bug-fix hints
+    - Re-Planner: updates prompt pt = CONCAT(pt-1, dt, et) and generates revised plan Pt
+  - Prompts
+    - Planner prompt: Python-like “mine/craft/smelt” code with step comments, preconditions, effects, and inventory updates
+    - Explainer prompt: few-shot chain-of-thought to explain failure causes and required fixes (e.g., tool/material missing)
+    - Goal Parser prompt: extract action, object counts, tools, and step ranks from free-form plan lines
+    - Dialogue format: iterative ChatGPT-style conversation maintaining plan, descriptions, explanations across rounds
+- Tools
+  - Descriptor (event-triggered)
+    - Summarizes current state st, inventory, biome/GPS, recent goal outcome into structured text dt
+    - Sources: environment info, inventory, success detector, minimal relevant fields to avoid prompt clutter
+  - Success Detector
+    - Minecraft: inventory delta and rule checks
+    - Other domains: reward-based or LLM-judged success from textual observations
+  - Goal Parser
+    - LLM-based parsing of plan lines to canonical skills
+    - Fallback: Sentence-BERT cosine similarity matching to predefined skill set
+  - Horizon-Predictive Selector (HPS)
+    - Learns µ(g, st) ≈ remaining steps to complete goal g; selects gt = argmin µ
+    - Backbone: goal-sensitive Impala CNN; optionally shares encoder with controller
+    - Alternatives: CLIP/MineCLIP similarity or random/fixed ordering (ablations)
+  - Controllers (Goal-Conditioned Policies)
+    - Visual BC controller for MineDojo; Steve-1 for MineRL; CLIPort for Tabletop; LLM action decider for ALFWorld
+    - Execute primitive actions to achieve sub-goals; accept natural-language goals
+  - Prompt Generator
+    - Formats task T, dt, et, examples, and code-style templates into LLM-ready prompts
+  - Vision-Language Model (optional)
+    - CLIP/MineCLIP for descriptors/selector baselines
+- Memory Features
+  - Conversational context of T, P0..Pt, dt, et across re-planning rounds
+  - Plan graph/state: remaining goals, parallel goal sets, selected gt history
+  - Inventory and environment summaries (event-level logging)
+  - Termination memory: success/failure flags and episode budget counters
+- Sub-Agents and Services
+  - Descriptor Service: event-driven summarizer for dt
+  - Explainer LLM: generates et (root-cause analysis and fix suggestions)
+  - Planner/Re-Planner LLM: produces P0 and iterative Pt
+  - Selector Service (HPS): ranks parallel sub-goals based on predicted horizons
+  - Controller Service: executes goal-conditioned skills; returns observations/actions
+  - Success Detection Service: validates completion per sub-goal
+  - Goal Parsing Service: maps plan text to executable skills
+- System-Level Components
+  - Environment Interfaces
+    - Minecraft (MineDojo 1.11.2, MineRL 1.16.5, MC-TextWorld 1.19.2)
+    - ALFWorld (text-based), Tabletop Manipulation (CLIPort/UR5e sim)
+  - Planning Loop
+    - Initialize plan P0 from LLM Planner
+    - For each gt in Pt: Controller attempts; on failure trigger Descriptor→Explainer→Re-Planner to get Pt+1
+    - When Pt exposes parallel goals, Selector chooses gt using HPS
+    - Terminate when task achieved or episode/token budget exceeded
+  - Training Data/Signals
+    - Selector trained offline on trajectories with ground-truth horizons; entropy/minimum loss on horizons
+    - Controllers trained via behavior cloning or existing checkpoints (e.g., CLIPort; Steve-1)
+  - Execution Policies
+    - Hard constraints checked before actions (tools/materials), enforced via parser and success detector
+    - Episode step budgets per meta-task; LLM token budget bounds re-planning rounds
+  - Observability/Sensors
+    - Inventory parsing, biome/GPS/compass, partial RGB view, yaw/pitch, nearby blocks grid
+  - Error Handling
+    - Re-planning on failure; explicit reasons from Explainer (missing tool/materials, wrong order, unreachable targets)
+    - Selector mitigates inefficiency by choosing nearest/feasible parallel sub-goals
+  - Outputs
+    - Final plan, action logs, success metrics, ablation records for selector and rounds
+- Agentic System Description (Domain-Specific Instantiations)
+  - Minecraft DEPS
+    - LLMs: code-davinci-002 (planner), text-davinci-003 (explainer), GPT-4 optional
+    - Skills library: 262 goal templates (mine/craft/smelt/kill/equip)
+    - Tools: Inventory Reader, Crafting/Furnace rule checks, Parser, Success Detector
+    - Controller: goal-sensitive Impala CNN BC agent
+    - Selector: HPS with shared encoder; alternatives CLIP/MineCLIP baselines
+  - ALFWorld DEPS
+    - LLMs: text-davinci-003 for both planner and controller (action decider)
+    - Descriptor: textual room/object summaries from environment
+    - Success detector: environment-provided goal checks
+    - Selector: not used (N/A)
+  - Tabletop Manipulation DEPS
+    - LLMs: gpt-3.5-turbo for planner; CLIPort as controller
+    - Descriptor: scene goal completion reports from simulator/reward
+    - Selector: not used (N/A)
+- Where to Read Code/Project
+  - Primary repository: Describe, Explain, Plan and Select: Interactive Planning with Large Language Models Enables Open-World Multi-Task Agents: https://github.com/CraftJarvis/MC-Planner
+
+**Source Location**:
+- Describe, Explain, Plan and Select: Interactive Planning with Large Language Models Enables Open-World Multi-Task Agents: https://github.com/CraftJarvis/MC-Planner
+- https://minedojo.org
+- https://minerl.io
+- ALFWorld: https://github.com/alfworld/alfworld
+- https://cliport.github.io
+- cliport: https://github.com/NVlabs/cliport
+- CLIP: https://github.com/openai/CLIP
+- https://www.sbert.net
+- Sentence Transformers: Embeddings, Retrieval, and Reranking: https://github.com/UKPLab/sentence-transformers
+- https://openai.com/api
+- MCU: An Evaluation Framework for Open-Ended Game Agents: https://arxiv.org/abs/2310.08367    16
+- STEVE-1: A Generative Model for Text-to-Behavior in Minecraft: https://arxiv.org/abs/2306.00937    93
+- Malmö #: https://github.com/microsoft/malmo
+- Mastering Diverse Domains through World Models: https://arxiv.org/abs/2301.04104    777
+
+### 2024 ICLR DSPy_Compiling_Declarativ.pdf
+**Title**: 2024 ICLR DSPy_Compiling_Declarativ.pdf
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM Models
+    - GPT-3.5 family (e.g., gpt-3.5-turbo-1106) — used for zero-shot/ICL, teacher programs, and compilation
+    - Llama 2 chat models (e.g., Llama2-13b-chat) — used for compiled student programs and inference
+    - T5 family (e.g., Flan-T5-Large, T5-Large/770M) — used as smaller finetuned student models
+  - Responsibilities/Roles
+    - Orchestrate text transformation graphs (DSPy programs) comprising declarative modules
+    - Learn task behavior via compilation (teleprompters) to optimize prompts or finetunes against metrics
+    - Execute sub-steps such as reasoning chains, retrieval-augmented answering, tool-use actions, multihop planning
+    - Serve as teacher or student within bootstrapping loops to generate/consume demonstrations
+  - Prompts (signature-driven)
+    - question -> answer
+    - context, question -> answer
+    - context, question -> search_query
+    - Auto-augmented CoT: adds OutputField "Reasoning: Let's think step by step."
+    - ReAct-style: Thought, Action[tool], Observation loops for tool use
+- Available Tools
+  - Retrieval
+    - dspy.Retrieve (k=n) with pluggable backends
+      - ColBERTv2 server
+      - Pyserini
+      - Pinecone
+  - Program Execution
+    - dspy.PythonInterpreter (sandboxed Python)
+    - dspy.SQL (SQL execution)
+  - Ensembling/Reduction
+    - Majority voting and custom reducers over multiple compiled candidate programs
+- Memory Features
+  - Parameterized Modules
+    - ParameterLM: binds per-module LM weights or endpoints
+    - ParameterDemonstrations: per-module demonstration stores (few-shot exemplars)
+  - Compiler-Traces
+    - Thread-safe capture of module I/O traces for bootstrapping during compile mode
+  - Finetuned Weights
+    - Module-specific small LM finetunes using bootstrapped demonstrations (e.g., Flan-T5-Large, T5-Large)
+  - Cached Artifacts
+    - Bootstrapped demonstration sets, selected instructions/field-prefixes, and candidate program ensembles
+- Sub-Agents / Services
+  - Predictor Modules (LLM-call wrappers)
+    - Predict — base module that formats prompts from signatures and parses outputs
+    - ChainOfThought — wraps Predict by prepending rationale OutputField and sampling reasoning
+    - ProgramOfThought — implements code-generation style reasoning
+    - MultiChainComparison — compares multiple sampled chains to produce improved answers
+    - ReAct — agent loop module that interleaves Thought/Action/Observation with tools
+  - Teleprompters (Compilers/Optimizers)
+    - LabeledFewShot — selects k labeled examples as demonstrations
+    - BootstrapFewShot — simulates teacher/zero-shot to collect valid multi-stage traces, becomes demos
+    - BootstrapFewShotWithRandomSearch — random search over demo selections/hyperparams with CV
+    - BootstrapFinetune — uses bootstrapped data to finetune smaller target LMs per predictor
+    - Ensemble — higher-order program that runs multiple compiled candidates and reduces outputs
+- System-Level Components
+  - Signatures (Natural-Language Typed Interfaces)
+    - Declarative specs: input/output fields with names, descriptions, and prefixes
+    - Handle structured formatting/parsing; generalize across tasks and LMs
+  - Modules (Templated, Parameterized Operators)
+    - Compose arbitrary pipelines in define-by-run Python control flow (loops, conditionals, exceptions)
+    - Each module tracks: bound LM, demonstrations, decoding/config, and signature expansion
+  - Compiler (Three-Stage Optimization)
+    - Stage 1: Candidate Generation
+      - Simulate teacher/zero-shot on train inputs with temperature
+      - Collect multi-stage traces that satisfy metric; convert to demonstrations per module
+    - Stage 2: Parameter Optimization
+      - Search/select among candidate demonstrations/instructions/prefixes
+      - Alternative path: finetune small LMs per predictor using bootstrapped datasets
+    - Stage 3: Higher-Order Program Optimization
+      - Modify control flow via ensembling, majority voting, and other reducers
+  - Metrics and Evaluation
+    - Exact Match, F1, answer_passage_match, custom composite metrics (e.g., grounding constraints)
+    - Cross-validation/random search for selection; parallel evaluation support
+  - Execution Runtime
+    - Define-by-run graph construction; thread-safe trace capture in compile mode
+    - Tool invocation layer for retrieval, SQL, Python execution
+    - Parallelism: multi-threaded compilation/evaluation and batch inference
+- Example Pipelines (from the paper)
+  - GSM8K
+    - vanilla: Predict("question -> answer")
+    - CoT: ChainOfThought("question -> answer")
+    - ThoughtReflection: ChainOfThought sampler (n=5) + MultiChainComparison reducer
+  - HotPotQA
+    - RAG: Retrieve(k=n) + ChainOfThought("context, question -> answer")
+    - ReAct: ReAct("question -> answer", tools=[Retrieve(k=1)], max_steps=5)
+    - BasicMultiHop
+      - Loop: generate_query("context, question -> search_query") → retrieve → accumulate context
+      - Final: generate_answer("context, question -> answer")
+- Interactions and Dataflow
+  - Authoring: define signatures → declare modules → write forward() with control flow
+  - Compiling: choose teleprompter + metric + (optional) teacher → run compiler → get optimized program
+  - Inference: run compiled program; modules call LMs/tools; reducers aggregate outputs; metrics used only for eval
+  - Knowledge Access: retrieve passages via retrievers; optionally enforce grounding via metrics
+  - Self-Improvement Loop: teacher program supervises student via bootstrapped multi-stage demonstrations
+- Where to Read the Code / Project Page
+  - DSPy framework repository: DSPy: _Programming_—not prompting—Foundation Models: https://github.com/stanfordnlp/dspy
+- Title of the paper or picture: 2024 ICLR DSPy_Compiling_Declarativ.pdf
+  - Agentic System Description
+    - See Agent Node, Tools, Memory, Sub-Agents/Services, System-Level Components, Interactions above for the DSPy architecture
+  - Source Location
+    - DSPy: _Programming_—not prompting—Foundation Models: https://github.com/stanfordnlp/dspy
+
+**Source Location**:
+- DSPy: _Programming_—not prompting—Foundation Models: https://github.com/stanfordnlp/dspy
+- Why use LangChain?: https://github.com/hwchase17/langchain
+- https://learn.microsoft.com/semantic-kernel/
+- 🗂️ LlamaIndex 🦙: https://github.com/jerryjliu/llama_index
+- ColBERT (v2): https://github.com/stanford-futuredata/ColBERT
+- Pyserini <img src="docs/pyserini-logo.png" width="300" />: https://github.com/castorini/pyserini
+- https://www.pinecone.io
+- https://platform.openai.com/docs/models/gpt-3-5
+- https://ai.meta.com/llama/
+- Grade School Math: https://github.com/openai/grade-school-math
+- https://hotpotqa.github.io/
+- https://aclanthology.org/P17-1171
+- https://proceedings.neurips.cc/paper_files/paper/2020/file/6b493230205f780e1bc26945df7481e5-Paper.pdf
+- https://openai.com/blog/language-unsupervised/
+- https://proceedings.neurips.cc/paper_files/paper/2019/file/bdbca288fee7f92f2bfa9f7012727740-Paper.pdf
+- Answering Open-Domain Questions of Varying Reasoning Steps from Text: https://arxiv.org/abs/2010.12527    61
+- https://aclanthology.org/D19-1261
+- https://aclanthology.org/2020.emnlp-demos.6
+- REALM: Retrieval-Augmented Language Model Pre-Training: https://arxiv.org/abs/2002.08909    2444
+- Enabling Intelligent Interactions between an Agent and an LLM: A Reinforcement Learning Approach: https://arxiv.org/abs/2306.03604    31
+- ExpeL: LLM Agents Are Experiential Learners: https://arxiv.org/pdf/2308.10144    311
+- https://optuna.org
+- Hyperopt: Distributed Hyperparameter Optimization: https://github.com/hyperopt/hyperopt
+
+### 2025 ICLR_Workshop_Towards_Hierarchical_Multi_.pdf
+**Title**: 2025 ICLR_Workshop_Towards_Hierarchical_Multi_.pdf
+
+**Agentic System Description**:
+
+- Title: 2025 ICLR_Workshop_Towards_Hierarchical_Multi_.pdf
+- Agent Node
+  - LLM model names
+    - Mixtral-8x7B-v0.1 (default agent for experiments; generates instructions and final answers)
+    - GPT-3.5 (alternative base agent; also used as an external evaluator)
+    - GPT-4o (alternative base agent)
+  - Responsibilities/Roles
+    - CEO Agent
+      - Role: Interpret raw user query; produce high-level, query-specific guidance for Manager; ensure task-agnostic, zero-shot prompt optimization.
+      - Output: MP1 (CEO-to-Manager instruction).
+    - Manager Agent
+      - Role: Convert CEO guidance + user query into detailed, actionable checklist and structure for the Worker; preserve specificity.
+      - Output: MP2 (Manager-to-Worker instruction/prompt).
+    - Worker Agent
+      - Role: Produce the final user-facing response using the optimized prompt MP2 while honoring user query and layer context.
+      - Output: Final response O.
+    - Evaluator Agent (auxiliary, not in end-user generation loop)
+      - Role: Pairwise preference judge for responses; outputs JSON with analysis and choice.
+      - Output: Preference scores for A/B responses.
+  - Prompts (system/context designs)
+    - CEO system prompt (Figure 6)
+      - Key instructions: begins with “Detailed Instructions to MANAGER:”; only output MP1; do not answer the user; repeat user input exactly if needed; structure: CEO receives P, produces MP1 for Manager; company structure CEO→Manager→Worker→User.
+    - Manager system prompt (Figure 7)
+      - Key instructions: begins with “Detailed Instructions to WORKER:”; only output MP2; do not answer the user; include both the original user input P and CEO instruction; structure: produce a detailed, tailored prompt MP2 for Worker.
+    - Worker system prompt (Figure 8)
+      - Key instructions: produce final “Response for the User”; use Manager instructions and original user input; ensure tailored, pleasing, accurate response; do not refuse to answer.
+    - Evaluator prompt (Figure 9)
+      - Key instructions: Given User Prompt and Response A/B, output JSON with keys user-analysis, pros-and-cons, comparison, choice; must choose one.
+- Available Tools
+  - None required; the method is zero-shot, training-free, task-agnostic and does not rely on external tools or plugins.
+- Memory Features
+  - Short-term cross-layer memory via message passing:
+    - Skip connections: user query qi is concatenated into both Manager and Worker prompts to preserve specificity and prevent drift.
+    - Layer outputs propagate downward: CEO→Manager (q_c), Manager→Worker (q_m/MP2).
+  - No persistent long-term memory; no external vector DB; memory is implicit in prompts and intermediate messages.
+- Sub-agents and Services
+  - CEO Agent
+    - Model: Mixtral-8x7B-v0.1 or GPT-3.5/GPT-4o
+    - Tools: none
+    - Prompt elements: role, workflow, “IMPORTANT” rules, output-only MP1, “Detailed Instructions to MANAGER” header
+    - Memory: receives user query; no prior state
+  - Manager Agent
+    - Model: Mixtral-8x7B-v0.1 or GPT-3.5/GPT-4o
+    - Tools: none
+    - Prompt elements: role, workflow, “IMPORTANT” rules, output-only MP2, “Detailed Instructions to WORKER” header; includes both user query and CEO instruction
+    - Memory: skip connection with user query; receives CEO MP1
+  - Worker Agent
+    - Model: Mixtral-8x7B-v0.1 or GPT-3.5/GPT-4o
+    - Tools: none
+    - Prompt elements: role, workflow, final-response directive; includes user query and Manager instruction
+    - Memory: skip connection with user query; receives Manager MP2; outputs final user response
+  - Evaluator Agent (optional/offline)
+    - Model: GPT-3.5
+    - Purpose: automated A/B preference judging with JSON output
+- System-level Components and Interactions
+  - Orchestrator
+    - Sequence: User Query qi → CEO(Mixtral/GPT-x) → MP1 → Manager(Mixtral/GPT-x) → MP2 → Worker(Mixtral/GPT-x) → Final Response O.
+    - Policy: one pass per query (single-shot per layer); no human-in-the-loop; no training.
+  - Prompters (concatenation operators)
+    - f_c: builds CEO prompt p_c = concat(C_c, qi)
+    - f_m: builds Manager prompt p_m = concat(C_m, qi, q_c)
+    - f_w: builds Worker prompt p* = concat(C_w, qi, q_m)
+  - Context constants
+    - C_c, C_m, C_w: role descriptions, company structure/workflow, constraints (“do not answer,” “output only MP1/MP2,” required headers).
+  - Skip Connections
+    - From qi to Manager and Worker prompts to preserve specificity and mitigate error propagation; empirically ablated and shown critical.
+  - Workflow Variants
+    - Depth options: 1 layer (no prompting), 2 layers (CEO→Worker), 3 layers (default CEO→Manager→Worker), 4–6 layers with additional titles (e.g., Senior Manager, VP); best results at 3 layers.
+    - Context variants: Company (default), Government (President→Minister→Officer), University (Dean→Department Head→Lecturer), Temple (Abbot→Prior→Monk); company generally strongest.
+    - Disordered hierarchy degrades performance (e.g., Worker→Manager→CEO).
+  - Evaluation Subsystem (offline)
+    - Datasets: ATLAS, FED, GSM8K, CodeNet, Education
+    - Judge: GPT-3.5 Evaluator agent with JSON rubric; order-robustness via response order permutations.
+    - Metrics: Preference (%) for subjective tasks; accuracy for GSM8K.
+  - Model Configurations
+    - Base agents: Mixtral-8x7B-v0.1 (local), GPT-3.5/GPT-4o (API)
+    - Single-call per layer; zero-shot; task-agnostic
+  - Performance Notes
+    - Added latency from two extra layer calls (CEO, Manager) vs. no prompting; ablations show skip connections and both layers materially improve quality.
+- Where to find it
+  - Project page: https://liuyvchi.github.io/HMAW_project/
+  - Paper references include multiple OpenReview/arXiv links; datasets and model pages linked below in Source References.
+
+**Source Location**:
+- https://liuyvchi.github.io/HMAW_project/
+- https://platform.openai.com/docs/models/gpt-3-5
+- https://openai.com/index/gpt-4o/
+- Mixtral of Experts: https://arxiv.org/abs/2401.04088    1447
+- Principled Instructions Are All You Need for Questioning LLaMA-1/2, GPT-3.5/4: https://arxiv.org/abs/2312.16171    94
+- Unsupervised Evaluation of Interactive Dialog with DialoGPT: https://arxiv.org/abs/2006.12719    197
+- Training Verifiers to Solve Math Word Problems: https://arxiv.org/abs/2110.14168    6221
+- CodeNet: A Large-Scale AI for Code Dataset for Learning a Diversity of Coding Tasks: https://arxiv.org/abs/2105.12655    305
+- https://openreview.net/forum?id=Sx038qxjek
+- https://openreview.net/forum?id=mqVgBbNCm9
+- https://openreview.net/forum?id=22pyNMuIoa
+- https://openreview.net/forum?id=5Xc1ecxO1h
+- https://openreview.net/forum?id=Bb4VGOWELI
+- https://openreview.net/forum?id=92gvk82DE-
+- https://openreview.net/forum?id=shr9PXz7T0
+
+### 2502.17898v1 VeriPlan Integrating Formal Verification and LLMs into End-User Planning.PDF
+**Title**: 2502.17898v1 VeriPlan Integrating Formal Verification and LLMs into End-User Planning.PDF
+
+**Agentic System Description**:
+
+- 2502.17898v1 VeriPlan Integrating Formal Verification and LLMs into End-User Planning.PDF
+  - Agent Node
+    - LLM models: GPT-4 (all LLM-powered sub-agents)
+    - Responsibilities/Roles:
+      - LLM Planner: generate initial end-user plan from natural-language prompt; justify steps; format plans for verification; refine plans using verifier feedback
+      - Mapping Agent (Rule Extractor): extract constraints from user prompt; map to temporal constraint categories (fixed time blocks, sequential order, concurrent events, conditional constraints, exclusive constraints, global constraints)
+      - LTL Translator: convert mapped constraints to LTL using predefined templates with operators G, F, U
+      - PRISM Translator (Constraints): translate LTL properties to PRISM-compatible properties/labels for model checking
+      - PRISM Translator (Plan): convert the LLM-generated plan to PRISM model code (modules, states, transitions)
+      - Feedback Explainer: summarize model-checker outcomes and violated rules in natural language for the user and for the planner
+    - Prompts (representative):
+      - Planner: "Given the user's natural-language planning request and constraints, produce a step-by-step plan. Ensure each step is explicit and checkable. When given verifier feedback about violated rules, regenerate a corrected plan that satisfies the hard constraints and improves adherence to soft constraints."
+      - Mapping Agent: "From the user's prompt, extract all constraints and map each to one of {fixed time blocks, sequential order, concurrent events, conditional constraints, exclusive constraints, global constraints}. Output a structured list with category and natural-language statement."
+      - LTL Translator: "Translate each mapped constraint into an LTL formula using the provided category-specific templates (G, F, U). Keep atomic propositions consistent with the scenario state variables."
+      - PRISM Translator (Constraints): "Convert the LTL formulas into PRISM properties and labels suitable for verification and violation reporting."
+      - PRISM Translator (Plan): "Given the plan steps and state variables, emit PRISM model code defining modules, states, actions, and time/resource updates corresponding to the plan."
+      - Feedback Explainer: "Explain which rules were violated and why; instruct the planner on how to modify the plan to satisfy the constraints."
+  - Available Tools
+    - PRISM Model Checker
+      - Function: verifies PRISM-encoded plans against PRISM properties derived from LTL constraints; outputs validity and rule violations
+    - Storm/Stormpy
+      - Function: Python API/runtime to load PRISM models/properties, execute model checking, and retrieve verification results
+    - Temporal Logic Templates (LTL)
+      - Categories: fixed time blocks; sequential order; concurrent events; conditional; exclusive; global
+      - Operators: G (globally), F (eventually), U (until)
+    - Flexibility Sliders
+      - Function: user sets rule strictness; classify constraints as hard (must hold) vs soft (prefer); weight-based sampling of constraints for checking; violations of soft constraints are surfaced as warnings
+    - Front-end Mind-Map UI
+      - Elements: input panel; rule translator view with checkboxes; slider controls; LLM planning attempts; model-checker feedback/violations; multi-iteration view
+  - Memory and State
+    - Session memory: current prompt; extracted constraints; user-confirmed rules; slider strictness values; latest plan; model-checker outcomes; iteration counter (default max = 3)
+    - No cross-session persistence; paper notes desire for future contextual memory to support iterative rule refinement across interactions
+  - Sub-agents and Services
+    - Rule Translator Service (LLM-orchestrated)
+      - Mapping Agent
+      - LTL Translator
+      - PRISM Translator (constraints)
+      - Natural-language rephraser for user verification and confirmation
+    - LLM Planner Service
+      - Initial Planner
+      - Refined Planner (uses verifier feedback about broken rules; iterates up to system limit)
+    - Plan-to-PRISM Translation Service (LLM-based)
+    - Flexibility Manager Service
+      - Maintains slider states; determines hard/soft classification; samples weighted constraints for checking
+    - Model Checking Service
+      - Executes PRISM via Storm/Stormpy; evaluates plan against constraints; reports validity and violated rules; returns labels and explanations
+    - Feedback Propagator
+      - Sends violations to UI; forwards structured feedback to Refined Planner; archives per-iteration results within session
+  - System-level Components and Interactions
+    - A. User prompt entry: user submits planning request plus constraints via UI
+    - B. Initial planning: LLM Planner generates a candidate plan and justification
+    - C. Rule specification: Rule Translator extracts constraints → LTL → PRISM; results are rephrased to natural language for user verification; user confirms constraints via checkboxes; Flexibility Sliders set rule strictness (hard vs soft, weights)
+    - D. Model checking: Plan and constraints are translated to PRISM; Storm/PRISM verifies plan; outputs validity and list of violated rules/labels
+    - E. Feedback loop: results displayed to user; violations and validity passed to Refined Planner; user may adjust sliders or regenerate/modify rules; iterate up to 3 times or until plan is valid; soft-constraint violations may be accepted with warnings
+    - F. Termination: deliver verified plan or prompt user to adjust constraints/strictness for further attempts
+  - Where the system/code can be found
+    - Supplementary materials (prompts and source code): https://osf.io/va6d5/?view_only=8d74c81f765746908420e63479f6f36d
+    - PRISM Model Checker: https://www.prismmodelchecker.org/
+    - Storm/Stormpy: https://www.stormchecker.org/, Get started: https://github.com/moves-rwth/stormpy
+    - Paper record: https://doi.org/10.1145/3706598.3714113, https://arxiv.org/abs/2502.17898
+
+**Source Location**:
+- https://osf.io/va6d5/?view_only=8d74c81f765746908420e63479f6f36d
+- https://www.prismmodelchecker.org/
+- https://www.stormchecker.org/
+- Get started: https://github.com/moves-rwth/stormpy
+- https://doi.org/10.1145/3706598.3714113
+- VeriPlan: Integrating Formal Verification and LLMs into End-User Planning: https://arxiv.org/abs/2502.17898    17
+- https://openai.com/research/gpt-4
+- The AIPlan4EU Unified Planning Library: https://github.com/aiplan4eu/unified-planning
+
+### 2507.14447v2 Routine A Structural Planning Framework for LLM Agent System in Enterprise.pdf
+**Title**: 2507.14447v2 Routine A Structural Planning Framework for LLM Agent System in Enterprise.pdf
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM models
+    - Planning model: GPT-4o (also validated with GPT-4-Turbo, Claude-3.7-Sonnet)
+    - Execution model: Small instruction-following LLMs (Qwen2.5-7B/14B, Qwen3-8B/14B; LoRA‑fine‑tuned; scenario‑specific distilled variants)
+    - Summarizer: Dedicated summarization tool (template-driven; separate from executor)
+  - Responsibilities/roles
+    - Planner: transform expert routine drafts and tool list into a structured Routine (well‑formatted, branchable workflow)
+    - Executor: strictly follow Routine; emit one function call at a time; choose branches; handle variable memory keys; never generate free‑text answers
+    - Summarizer: produce final user-facing answer from observations at the last step
+  - Prompts
+    - Structured Routine Generation Prompt (JSON list of steps; fields: step, name, description, input, output, tool, type=node/branchnode/branch/finish; one tool per step; branch indices x-n_i)
+    - Execution System Prompt Template (XML sections <routines>, <variables>, <tools>; output only <tool_call>{"name":..., "arguments":{...}}</tool_call>; follow Routine strictly; branch by conditions; use temporary variable memory_xxx placeholders)
+    - System parameters in prompt (e.g., USER_ID); tool list with JSON schemas; guidance to avoid natural‑language outputs
+
+- System Components
+  - Planning Module
+    - Inputs: expert planning prompt/draft, available tool list/descriptions, scenario docs
+    - Processing: AI‑optimized decomposition into detailed steps; explicit tool mapping; emits Routine in NL and JSON; supports branch and finish nodes
+    - Output: Routine script stored in Procedure Memory and supplied to Executor
+    - LLM: high‑capacity model (GPT‑4o) for reliability
+  - Execution Module
+    - Inputs: retrieved Routine(s), system parameters, tool list, variable memory
+    - Behavior: stepwise tool calling; one call per step; branch decision per Routine; no free‑text; writes/reads temporary variables; calls summarization tool at final step
+    - Models: small LLMs (Qwen2.5/Qwen3) with LoRA; common Routine‑following and scenario‑specific distilled variants
+  - Tool Module (MCP Server)
+    - Function: registry and executor of external tools via MCP protocol; tools have uniform JSON schemas (name, parameters, constraints)
+    - Services: data queries, permission verification, model generation, user response synthesis (summarizer)
+    - Parameter handling: expands variable memory keys to full values before execution
+  - Memory Module
+    - Procedure Memory Base: library of Routines per sub‑scenario; retrieval via similarity against user/task; returns one best Routine when possible
+    - Variable Memory Base: ephemeral key‑value store for long intermediate inputs/outputs; reduces context length; auto‑substitution using placeholders (e.g., temporary variable memory_xxx)
+  - Summarization Tool
+    - Input: accumulated observations
+    - Template: scenario‑specific; decoupled from executor prompts
+    - Output: final answer returned to user
+  - Evaluation & Monitoring
+    - Framework: BFCL with AST parsing; hierarchical checks for Structural, Tool Selection, and Parameter errors; overall accuracy computed only when all pass
+  - Training & Data Pipeline
+    - Common Routine‑following dataset: derive Routines from BUTTON multi‑tool traces via GPT‑4o; filter (format checks, remove NL summaries, limit step length); 4,209 instances
+    - Scenario‑specific distillation: use GPT‑4o + Routines to generate labeled multi‑step tool calls for HR agent; 537 training queries (3,108 tool calls) + 200 eval queries
+    - Fine‑tuning: LoRA on Qwen2.5/Qwen3; tools: LLaMA‑Factory, DeepSpeed ZeRO‑3, FlashAttention‑2; special tokens for <routines>, </routines>, <variables>, </variables>
+
+- Tools
+  - MCP tool registry (protocol-defined tools; exactly one tool per Routine step)
+  - Example tool types: permission_check, data_fetch/query, model_generation, summarization
+  - Tool signatures provided to executor in <tools> block; order randomized at eval time to avoid positional bias
+
+- Memory Features
+  - Procedure memory retrieval: select best Routine per task; supports multiple candidate Routines but aims to serve one to reduce interference
+  - Variable memory
+    - Stores long parameters/observations with keys
+    - Non‑persistent; scoped to current task
+    - Auto‑inflate keys to values before tool execution
+
+- Workflow and Interactions
+  - Expert provides planning draft and tool list -> Planner LLM generates structured Routine -> Routine stored in Procedure Memory
+  - At runtime: user input + system params -> retrieve Routine -> Executor selects next step -> emits one tool_call JSON -> MCP executes -> observation returned
+  - Variable Memory stores long results as keys -> Executor references keys in subsequent calls
+  - Branching: Executor evaluates branch conditions per Routine; follows corresponding sub‑steps
+  - Finalization: Executor calls summarization tool per Routine; tool returns final answer to user
+
+- Deployment/Runtime Settings
+  - One function call per step; no natural‑language outputs from executor
+  - Branch notation: x-n_i for branch n, step i of main step x; steps may have type=finish to terminate workflow
+  - Tool list includes JSON schemas; prompts include USER_ID and other system parameters
+  - Logging: persist system prompt state per step for evaluation; randomize tool order in lists to test robustness
+
+- Title
+  - 2507.14447v2 Routine A Structural Planning Framework for LLM Agent System in Enterprise.pdf
+
+- Where the system or code can be found
+  - Project/repo for this specific Routine system: null
+  - Document: https://arxiv.org/abs/2507.14447v2
+
+**Source Location**:
+- Routine: A Structural Planning Framework for LLM Agent System in Enterprise: https://arxiv.org/abs/2507.14447v2    1
+- https://www.anthropic.com/news/model-context-protocol
+- BUTTON: Facilitating Multi-turn Function Calling for LLMs via Compositional Instruction Tuning: https://github.com/PKU-Baichuan-MLSystemLab/BUTTON
+- Context Engineering: https://github.com/davidkimai/Context-Engineering
+- https://cookbook.openai.com/examples/o1/using_reasoning_for_routine_generation
+- Used by [Amazon](https://aws.amazon.com/cn/blogs/machine-learning/how-apoidea-group-enhances-visual-information-extraction-from-banking-documents-with-multimodal-models-using-llama-factory-on-amazon-sagemaker-hyperpod/), [NVIDIA](https://developer.nvidia.com/rtx/ai-toolkit), [Aliyun](https://help.aliyun.com/zh/pai/use-cases/fine-tune-a-llama-3-model-with-llama-factory), etc.: https://github.com/hiyouga/LLaMA-Factory
+- DeepSpeed: https://github.com/microsoft/DeepSpeed
+- FlashAttention: https://github.com/Dao-AILab/flash-attention
+- berkeley-function-call-leaderboard: https://github.com/gorilla-llm/berkeley-function-call-leaderboard
+
+### 2510.04618v1_Agentic Context Engineering.pdf
+**Title**: 2510.04618v1_Agentic Context Engineering.pdf
+
+**Agentic System Description**:
+
+- Title: 2510.04618v1_Agentic Context Engineering.pdf
+- Agent Node
+  - LLM Models
+    - DeepSeek‑V3.1 (non‑thinking mode) as default for all roles (Generator, Reflector, Curator)
+    - Pluggable alternatives supported (e.g., GPT‑4.1) without architectural changes
+  - Responsibilities/Roles
+    - Generator: executes tasks, produces reasoning trajectories, cites used playbook bullet_ids, returns final answers or code
+    - Reflector: diagnoses trajectories with environment/label feedback, tags bullets as helpful/harmful/neutral, extracts actionable insights
+    - Curator: proposes delta additions to the playbook (no monolithic rewrite), organizes insights into sections, avoids redundancy
+  - Prompts
+    - Generator (Agents/AppWorld): ReAct-style coding agent with Python REPL; must read “ACE Playbook” between PLAYBOOK_BEGIN/END; follow API‑usage rules (page-wise iteration, verify before irreversible ops, complete_task on finish); reports bullet_ids used
+    - Generator (Domain/FiNER, Formula): analysis-first prompt using Playbook and Reflection; outputs reasoning, bullet_ids, final_answer
+    - Reflector (Agents): compares generated code vs ground truth/tests; outputs reasoning, error_identification, root_cause_analysis, correct_approach, key_insight; tags each referenced bullet as helpful/harmful/neutral; curates API schema clarifications
+    - Reflector (Domain): similar to above with focus on calculation/label errors; returns bullet_tags and key corrective principles
+    - Curator (Agents & Domain): returns JSON “operations” list of ADD actions with section and content; never rewrites full playbook; includes API schema clarifications when discovered
+- Tools
+  - Python REPL execution sandbox for agent coding
+  - AppWorld application APIs and docs accessors
+    - apis.api_docs.show_app_descriptions
+    - apis.api_docs.show_api_descriptions(app_name=…)
+    - apis.api_docs.show_api_doc(app_name=…, api_name=…)
+    - Supervisor/Phone/FileSystem/Spotify/Venmo task APIs
+    - apis.supervisor.complete_task(answer=…) for task completion
+  - Environment feedback channels
+    - Code execution outputs and exceptions
+    - Unit test reports per task
+    - Task/Scenario Goal Completion signals (TGC/SGC) in AppWorld
+    - Optional ground-truth labels/answers for offline training
+  - Memory retrieval and curation services
+    - Semantic embedding service for de‑duplication of bullets
+    - Deterministic merge engine for delta updates
+    - Vector/structured store for bullet indexing and retrieval
+- Memory Features
+  - Context Playbook as evolving, itemized bullets (not a single prompt)
+    - Bullet metadata: unique bullet_id, helpful_count, harmful_count, timestamps/tags
+    - Bullet content types: strategies, hard rules, API schemas, code templates/snippets, troubleshooting/pitfalls, verification checklists, formulas/calculations, domain playbooks
+  - Incremental Delta Updates
+    - Curator adds only new bullets as deltas; no monolithic rewrites
+    - Deterministic merging; parallelizable across samples/batches
+  - Grow‑and‑Refine
+    - Append new bullets; in‑place counter updates for existing bullets
+    - Semantic de‑duplication/pruning; proactive or lazy when window pressure occurs
+  - Retrieval and Credit Assignment
+    - Generator cites bullet_ids it used
+    - Reflector tags bullet_ids as helpful/harmful/neutral for counter updates and curation focus
+  - Multi‑epoch and Warm‑start
+    - Optional multi‑epoch offline refinement over training set
+    - Optional offline warmup before online adaptation
+- Sub‑Agents and Services
+  - Generator LLM service
+  - Reflector LLM service
+  - Curator LLM service
+  - Orchestrator
+    - Controls offline vs online adaptation modes
+    - Schedules generation, reflection, curation; batches deltas; triggers refine
+  - Memory Store
+    - Structured repository for bullets, sections, counters, embeddings
+  - Embedding/Dedup Service
+    - Computes embeddings and prunes near-duplicates
+  - Evaluation Harness
+    - Executes unit tests, collects environment signals, computes metrics (TGC/SGC, accuracy)
+- System‑Level Components and Interactions
+  - Offline Adaptation Loop
+    - For each training sample: run Generator with current playbook → collect execution/label feedback → Reflector produces insights and bullet tagging → Curator proposes delta bullets (ADD ops) → Deterministic Merge → Optional refine → Multi‑epoch repetition up to configured rounds
+  - Online Adaptation Loop
+    - For each test‑time sample: predict with current playbook → ingest natural feedback (execution success/failure, unit tests) and optional labels → Reflector → Curator delta ops → Merge → Optional lazy refine
+  - Delta Merge Pipeline
+    - Validates Curator JSON ops → assigns bullet_ids → updates counters for tagged bullets → persists to Memory Store
+  - Retrieval Path at Inference
+    - Selects relevant bullets (top‑K by similarity and/or section filters) → injects into Generator as “ACE Playbook” → Generator cites bullet_ids used
+  - Anti‑Collapse Safeguards
+    - Strict delta‑only updates (no full rewrites)
+    - Sectioned playbook structure and ID‑stable bullets
+    - Counter‑guided pruning and de‑dup checks
+  - Cost/Latency Optimizations
+    - Batchable deltas; non‑LLM merging/dedup
+    - Compatible with KV‑cache reuse/compression/offload in serving stacks
+- System Sections (Playbook Schema)
+  - strategies_and_hard_rules: canonical task rules, identity/source‑of‑truth policies
+  - apis_to_use_for_specific_information: API-by-task mappings and pagination patterns
+  - api_schemas_and_formats: curated output schemas, pitfalls, parameter notes
+  - code_snippets_and_templates: reusable code fragments
+  - troubleshooting_and_pitfalls: frequent failure modes and fixes
+  - verification_checklist: pre‑commit checks and post‑execution validations
+  - formulas_and_calculations: domain math and XBRL financial formulas
+  - domain_guides: domain‑specific tactics (e.g., AppWorld tasks, FiNER/Formula)
+- Where to Read Code/Project Pages
+  - ACE code: null (paper releases prompts; no official ACE repo cited)
+  - Related/Referenced implementations
+    - Dynamic Cheatsheet (baseline/memory framework): Dynamic Cheatsheet: Test-Time Learning with Adaptive Memory: https://github.com/suzgunmirac/dynamic-cheatsheet
+    - GEPA in DSPy: https://dspy.ai/api/optimizers/GEPA/overview/
+    - MIPROv2 in DSPy: https://dspy.ai/api/optimizers/MIPROv2/
+    - AppWorld leaderboard/demo site: https://appworld.dev/leaderboard
+    - AppWorld project site: https://appworld.dev
+
+**Source Location**:
+- Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models: https://arxiv.org/abs/2510.04618    4
+- Dynamic Cheatsheet: Test-Time Learning with Adaptive Memory: https://github.com/suzgunmirac/dynamic-cheatsheet
+- https://dspy.ai/api/optimizers/GEPA/overview/
+- https://dspy.ai/api/optimizers/MIPROv2/
+- https://appworld.dev
+- https://appworld.dev/leaderboard
+- https://bair.berkeley.edu/blog/2024/02/18/compound-ai-systems/
+- https://www.deepseek.com
+
+### 2510.26493v1_Context Engineering 2.0.pdf
+**Title**: 2510.26493v1_Context Engineering 2.0.pdf
+
+**Agentic System Description**:
+
+- 2510.26493v1_Context Engineering 2.0.pdf
+  - Agent Node
+    - LLM model names
+      - Claude 4 (multimodal reasoning, subagent orchestration)
+      - GPT-4 class models (long-form planning, tool use)
+      - Qwen2-VL (vision-language grounding for multimodal context)
+      - Optional modality specialists: Kosmos-2.5 (literacy across modalities)
+    - Responsibilities/Roles
+      - LeadResearcher/Orchestrator: decomposes goals, plans tasks, delegates to sub‑agents, enforces context policies
+      - Context Manager: collects, filters, compresses, and routes context across layers and agents
+      - Tool Coordinator: selects and parameterizes tools; enforces decoding constraints and action guards
+      - Preference Miner: infers latent user goals and preferences from long‑horizon traces
+      - Cross‑System Bridge: shares/ingests context via shared schemas, summaries, vectors, or adapters/MCP
+      - Safety/Reviewer: validates outputs, detects contradictions, resolves conflicts in retrieved evidence
+    - Prompts
+      - System prompt: “You are the LeadResearcher orchestrating a context‑cooperative agent system. Always plan → execute → reflect. Maintain layered memory (short‑term, long‑term). Use subagents for isolation. Prefer minimal sufficient context.”
+      - Planning prompt: “Decompose into subtasks; define goals, inputs, tools, expected artifacts, stop criteria; update todo.md and recite key goals into recent context.”
+      - Selection prompt: “Before answering, select context by semantic relevance, logical dependency, recency/frequency; deduplicate overlaps; cite sources.”
+      - Summarization prompt: “Periodically snapshot history into NL summaries + schema facts; retain evidence chains; note gaps and next steps.”
+      - Tool prompt: “Choose a single best tool per step; avoid overlapping tools; adhere to tool JSON schema; keep tool list stable; respect permissions.”
+      - Multimodal prompt: “Project modalities to a shared space; align with self‑/cross‑attention; reference image/time spans explicitly.”
+      - Proactive help prompt: “Detect hesitation/loops; propose options, visualizations, or checklists; ask clarifying questions.”
+  - Available Tools
+    - Information access
+      - Web search/browse/scrape
+      - RAG pipeline (embed, retrieve, rerank)
+      - Knowledge graph/AST/dep graph retrieval
+    - Storage and indexes
+      - Vector DB (e.g., FAISS)
+      - Local DBs: SQLite, LevelDB, RocksDB
+      - KV cache controller (prefix stability, checkpoints, prefetch)
+    - Multimodal I/O
+      - Image/audio/video ingestion and caption/ASR
+      - Screen/FS context readers; project GEMINI.md‑like specs
+      - Optional BCI/physiological/IoT adapters (future‑ready)
+    - Execution and analysis
+      - Code runner/sandbox; filesystem; git
+      - Schema extractors (ChatSchema‑style)
+      - Summarizer and reranker models
+    - Interop
+      - Model Context Protocol (MCP) client
+      - Adapter toolkit (format converters)
+      - Shared blackboard/sharedrop‑style exchange
+  - Memory Features
+    - Layered architecture
+      - Short‑term (RAM‑like) working set with temporal weights
+      - Long‑term (stable) knowledge with importance weights
+      - Memory transfer/consolidation based on repetition, utility, links
+    - Self‑baking/abstraction
+      - NL summaries with multi‑level roll‑ups
+      - Fixed‑schema extraction: entities, events, tasks, decisions
+      - Progressive semantic vectors with hierarchical pooling/fusion
+      - Task graphs and semantic graphs for reasoning traceability
+    - Context isolation
+      - Subagents with dedicated prompts, tools, and windows
+      - Lightweight references to external blobs; sandboxed artifacts
+    - Selection and maintenance
+      - Relevance, dependency, recency/frequency, redundancy control
+      - Active merge/update/forget policies; user‑feedback weighting
+  - Sub‑Agents and Services
+    - Planner/LeadResearcher: builds plan; spawns and schedules agents; maintains todo.md
+    - Retriever/Searcher: web/API/FS retrieval; builds evidence sets
+    - Summarizer/Compressor: creates snapshots; QA pairs; hierarchical notes
+    - Context Selector/Reranker: filters candidates; resolves overlaps; reranks
+    - Executor/Toolcaller: performs tool actions; enforces schemas; logs traces
+    - Memory Manager: embedding, vector DB ops, consolidation, conflict checks
+    - Preference Miner: builds/updates user profile; proactive suggestions
+    - Multimodal Perception: encoders; cross‑attention fusion; grounding
+    - Cross‑System Adapter Gate: JSON/API/summary/vector exchange; MCP
+    - Safety/Validation Reviewer: contradiction detection; evidence audit; rollback
+  - System‑Level Components
+    - Context Collection Layer
+      - Sources: text/dialog, files, code, web, images/audio/video, sensors/IoT, OS/IDE state, optional BCI/physio
+      - Principles: Minimal Sufficiency; Semantic Continuity
+    - Storage Layer
+      - Caches (KV, edge); local embedded DBs; secure storage/HSM; cloud DB/object store; vector indexes
+      - Checkpointing and resume for long‑horizon tasks
+    - Context Management Layer
+      - Textual processing: timestamps, tagging, summaries, schema, vectors
+      - Multimodal processing: shared embedding space; unified self‑attention; cross‑attention bridges
+      - Organization: layered memory; isolation via subagents/sandboxes; schema‑based state
+    - Usage Layer
+      - Intra‑system sharing: prompt embedding of outputs; structured messages; shared memory/blackboard/graphs
+      - Cross‑system sharing: adapters; shared JSON/API; natural‑language summaries; semantic vectors; MCP
+      - Selection for understanding: retrieval + rerank with dependency tracking; dedup; preference‑aware weighting
+      - Proactive inference: goal prediction; struggle detection; assistive interventions
+      - Lifelong memory: scalable storage; drift/consistency checks; evaluation hooks
+    - Efficiency and Reliability
+      - KV‑cache hygiene (stable prefixes; deterministic appends; checkpoints; prefetch)
+      - Tool scale control and decoding masks; error retention for learning
+      - Extended thinking mode with explicit reasoning logs
+  - Interactions
+    - Flow: Collect → Normalize/Encode → Organize (isolate/layer) → Select/Retrieve → Plan → Act (tool) → Reflect/Summarize → Consolidate → Share/Publish
+    - Subagent coordination via structured messages or shared blackboard; lead agent orchestrates and merges results
+  - Where to read system/code
+    - Claude Code and Subagents docs and repo
+    - Google Gemini CLI repo and docs/tutorials illustrating GEMINI.md project context
+    - Letta (MemGPT), AutoGPT, Langroid for structured messaging and memory OS patterns
+    - OpenSII/SII‑CLI for CLI‑centric agent ecosystem and hierarchical notes
+    - Tongyi DeepResearch for long‑horizon research and context snapshots
+    - Sharedrop for shared representation across systems
+    - Vector/DB infrastructure (FAISS, SQLite, LevelDB, RocksDB)
+
+**Source Location**:
+- Gemini CLI: https://github.com/google-gemini/gemini-cli
+- https://www.anthropic.com/news/claude-4
+- Claude Code: https://github.com/anthropics/claude-code
+- https://docs.anthropic.com/claude/docs/claude-code-subagents
+- https://www.sqlite.org
+- leveldb: https://github.com/google/leveldb
+- https://rocksdb.org
+- Faiss: https://github.com/facebookresearch/faiss
+- https://docs.llamaindex.ai/en/stable/module_guides/querying/
+- Qwen3-VL: https://github.com/QwenLM/Qwen2-VL
+- Quick glimpse of coding with Langroid: https://github.com/langroid/langroid
+- AutoGPT: Build, Deploy, and Run AI Agents: https://github.com/Significant-Gravitas/AutoGPT
+- Letta (formerly MemGPT): https://github.com/letta-ai/letta
+- SII CLI: Building Next-Generation Cognitive Agentic Intelligence Ecosystem: https://github.com/GAIR-NLP/SII-CLI
+- https://www.opensii.ai
+- https://www.opensii.ai/cli/docs
+- DeepResearch: https://github.com/Alibaba-NLP/DeepResearch
+- ShareDrop is now LimeWire: https://github.com/ShareDropio/sharedrop
+- https://modelcontextprotocol.io
+- https://www.descope.com/blog/post/what-is-model-context-protocol
+
+### 2510.26658v1_The Era of Agentic Organization.pdf
+**Title**: 2510.26658v1_The Era of Agentic Organization.pdf
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM models
+    - AsyncThink Backbone: Qwen3-4B (post-trained)
+    - Data Synthesizer: GPT-4o (for synthetic organizer/worker traces)
+  - Responsibilities/Roles
+    - Organizer: coordinates reasoning, emits Fork/Join/Answer actions, integrates worker returns, produces final answer
+    - Workers (c−1 concurrent): solve assigned sub-queries, return concise intermediate results
+  - Prompts
+    - Organizer system prompt (template)
+      - "This is main process. {Task-specific instruction here} Use <FORKi>subtask description</FORKi> to delegate work and <JOINi> to wait for results. Integrate these results and provide final answer with <ANSWER>your final answer</ANSWER>. Notice that you can have at most {Capacity−1} subtasks running concurrently; any additional ones must wait until earlier ones finish. {Query}"
+    - Worker system prompt (template)
+      - "This is a subprocess. {Task-specific instruction here} Subtask: {Sub-query assigned by the organizer} Complete the subtask and provide results in: <RETURN>(Your short summary and valid expressions found)</RETURN>"
+- Available Tools and Actions
+  - Text actions (no external tools required at inference)
+    - Think: continue decoding within current thread
+    - Fork: "<FORK-i> sub-query </FORK-i>" to delegate to worker i
+    - Join: "<JOIN-i>" to wait/merge results from worker i; appends "<JOIN-i> returned text </JOIN-i>" into organizer context
+    - Answer: terminate with final solution
+    - Worker Return: workers format results with "<RETURN> ... </RETURN>"
+  - Orchestration utilities
+    - Agent Pool Manager: enforces capacity c with c−1 workers available
+    - Action Parser/Validator: checks tag syntax, unique sub-query ids, pool overflow, invalid joins, missing final answer
+    - Join Waiter: pauses organizer until corresponding worker completes; merges return payload into context
+- Memory Features
+  - Short-term
+    - Organizer decoding context accumulates full transcript, including merged worker returns
+    - Sub-query registry: maps sub-query ids to assigned worker/status
+    - Per-worker token-budget window; budget resets after each organizer Join
+  - Long-term
+    - None by default (no external vector store); trace logs can be stored for training/analysis
+- Sub-agents and Services
+  - Organizer (LLM instance)
+  - Worker Pool (c−1 LLM instances sharing backbone weights)
+  - Policy Optimization Service (GRPO-based RL over organizer+workers’ joint trajectories)
+  - Reward Shaper
+    - Accuracy Reward (task-dependent, e.g., exact/partial correctness)
+    - Format Reward (penalize malformed actions/overflows/invalid joins/no final answer)
+    - Thinking Concurrency Reward (encourages effective parallelism with cap τ)
+  - Latency Estimator
+    - Critical-Path Latency via dynamic programming over Fork/Join DAG
+- System-level Components
+  - Organizer-Worker Thinking Protocol
+    - Defines roles, action surface (Think/Fork/Join/Answer/Return), and asynchronous execution semantics
+  - Agent Pool
+    - Capacity c; concurrent execution bounded by available workers; fair-comparison control for experiments
+  - Inference Runtime
+    - Asynchronous decoding for organizer and workers
+    - Join synchronization and return merging
+    - Token-budget management (e.g., workers 512–2k tokens per sub-query; organizer budget reset on Join)
+  - Data Synthesis Pipeline (Cold-Start SFT)
+    - Query analysis and role-trace generation using GPT-4o few-shot prompts
+    - Randomized organizer action topologies injected to diversify structures
+    - Rule-based verification/filtering for format compliance
+  - Supervised Format Fine-Tuning
+    - Teaches backbone to emit valid action syntax for both organizer and worker roles
+  - Reinforcement Learning Pipeline
+    - GRPO over non-sequential multi-trace episodes (organizer+all workers form one episode)
+    - Shared group-relative advantage assigned to tokens from both roles (mask worker-return text in organizer loss)
+    - Rewards: Accuracy + λ·Concurrency, or format-error penalty
+  - Evaluation and Analytics
+    - Final-Answer Accuracy (task metric)
+    - Critical-Path Latency (theoretical lower-bound on wall-clock)
+    - Thinking Concurrency Ratio η
+    - Trace logging, ablation toggles (−Rη, −Format SFT, −RL), frontier plots
+  - Safety/Compliance Layer
+    - Action-format guardrails; stop conditions; capacity enforcement; duplicate sub-query id prevention
+- Training/Deployment Configuration
+  - Backbone: Qwen3-4B
+  - SFT
+    - Steps: ~400–1000; LR 1e−6 to 2e−6; batch 128; synthetic traces with capacity c∈{2,4}
+  - RL
+    - GRPO; LR ~1e−6; batch 64–128; sample 8–32 trajectories/query; worker max tokens typically 512 (math) or 2k (countdown)
+    - Rewards as defined; τ to cap concurrency reward
+  - Tasks
+    - Multi-Solution Countdown (train/eval)
+    - Math reasoning: AMC-23, AIME-24
+    - Generalization: 4×4 Sudoku (Enigmata), CS/biology cases (appendix)
+- Interactions and Control Flow
+  - User query → Organizer Think → optional Forks to available workers → organizer continues thinking while workers run → on Join, organizer pauses until worker i returns → merge "<JOIN-i>... </JOIN-i>" → continue; repeat → Answer
+  - RL instrumentation wraps full episode (organizer+workers) → compute accuracy/format/η rewards → GRPO update
+- Where to read the code or project resources
+  - Public project/overview: https://aka.ms/GeneralAI
+  - Paper: https://arxiv.org/abs/2510.26658
+  - No explicit code repository released in the paper; use links below for related models/datasets and cited systems
+- File Result
+  - Title: 2510.26658v1_The Era of Agentic Organization.pdf
+  - Agentic system description: AsyncThink organizer-worker protocol with RL-optimized Fork/Join reasoning; details above
+  - Source location: see Source References below
+
+**Source Location**:
+- The Era of Agentic Organization: Learning to Organize with Language Models: https://arxiv.org/abs/2510.26658    0
+- https://aka.ms/GeneralAI
+- Qwen3 Technical Report: https://arxiv.org/abs/2505.09388    1468
+- https://qwenlm.github.io
+- https://openai.com/index/gpt-4o
+- https://maa.org/math-competitions/american-invitational-mathematics-examination-aime
+- Enigmata: Scaling Logical Reasoning in Large Language Models with Synthetic Verifiable Puzzles: https://arxiv.org/abs/2505.19914    15
+- https://api.semanticscholar.org/CorpusID:272648256
+- DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning: https://arxiv.org/abs/2501.12948    4626
+- https://api.semanticscholar.org/CorpusID:278905542
+- https://api.semanticscholar.org/CorpusID:260925901
+- AutoGen: https://github.com/microsoft/autogen
+- MetaGPT: The Multi-Agent Framework: https://github.com/geekan/MetaGPT
+- CAMEL Framework Design Principles: https://github.com/camel-ai/camel
+- https://openreview.net/forum?id=_VjQlMeSB_J
+- https://api.semanticscholar.org/CorpusID:260351380
+- https://api.semanticscholar.org/CorpusID:268042527
+- https://api.semanticscholar.org/CorpusID:258841118
+- https://api.semanticscholar.org/CorpusID:267094917
+- https://api.semanticscholar.org/CorpusID:274515739
+- https://api.semanticscholar.org/CorpusID:273507543
+- https://api.semanticscholar.org/CorpusID:268531873
+- https://api.semanticscholar.org/CorpusID:277092007
+- https://api.semanticscholar.org/CorpusID:273098750
+- Parallel-R1: Towards Parallel Thinking via Reinforcement Learning: https://arxiv.org/abs/2509.07980    14
+- Learning Adaptive Parallel Reasoning with Language Models: https://arxiv.org/abs/2504.15466    37
+- DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models: https://arxiv.org/abs/2402.03300    3054
+- CompassVerifier: A Unified and Robust Verifier for LLMs Evaluation and Outcome Reward: https://arxiv.org/abs/2508.03686    7
+- Hogwild! Inference: Parallel LLM Generation via Concurrent Attention: https://arxiv.org/abs/2504.06261    16
+- Multiverse: Your Language Models Secretly Decide How to Parallelize and Merge Generation: https://arxiv.org/abs/2506.09991    12
+
+### 2511.01805v2_ACCUMULATING_CONTEXT_CHANGES_THE_BELIEFS_OF_LANGUAGE_MODELS.pdf
+**Title**: 2511.01805v2_ACCUMULATING_CONTEXT_CHANGES_THE_BELIEFS_OF_LANGUAGE_MODELS.pdf
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM Models
+    - GPT-5 (assistant under test; persuader/target; reader; researcher; actor in tool-use tasks)
+    - Claude-4-Sonnet (assistant under test; persuader/target; reader; researcher; actor)
+    - GPT-OSS-120B (assistant under test; persuader/target; actor)
+    - DeepSeek-V3.1 (assistant under test; persuader/target; actor)
+    - Gemini-2.5-Pro (assistant under test in non-intentional tasks; reader; researcher)
+    - Grok-4 (assistant under test in non-intentional tasks; reader; researcher)
+    - GPT-5-mini (judge model for behavior stance classification)
+    - text-embedding-3-large (embedding model for topic–sentence similarity analysis)
+  - Responsibilities/Roles
+    - Record initial stated beliefs and behaviors (Stage 1)
+    - Accumulate context via multi-turn debate or one-sided persuasion (intentional), or in‑depth reading and web research (non‑intentional) (Stage 2)
+    - Record post‑task beliefs and behaviors (Stage 3)
+    - Execute tool-based actions that implicitly reveal stance in decision tasks
+    - Judge model labels behavioral stance from agent actions
+  - Prompts
+    - Debate prompt: task each agent to discuss an opposing view, make persuasive arguments, multi‑turn
+    - Persuasion general prompt: change the other agent’s opinion over 10 rounds using a specified technique
+    - Persuasion technique prompts (5):
+      - Information: center arguments on facts/data/research
+      - Values: moral reframing aligned to interlocutor’s values
+      - Norms: descriptive or prescriptive normative appeals
+      - Empathy: perspective sharing/deep canvassing-style narratives
+      - Elite cues: cite respected leaders endorsing the stance
+    - In‑Depth Reading prompt: read delimited document text and summarize parts that capture the spirit of the document to learn the topic
+    - Research prompt: perform web research on a named book/document, extract entire content from sources, then summarize
+    - Stated belief (A/B) label evaluation prompt: choose between support vs oppose with brief reasoning; output “The answer is: X”
+    - Likert agreement prompt: output 0–100 agreement with brief reasoning; output “The answer is: X”
+    - Behavior 2nd‑person decision prompt: choose a course of action given a scenario
+    - Behavior judge prompt (for GPT-5-mini): map the agent’s response or tool log to A/B stance with brief rationale
+- Document
+  - Title: 2511.01805v2_ACCUMULATING_CONTEXT_CHANGES_THE_BELIEFS_OF_LANGUAGE_MODELS.pdf
+  - High‑level Goal: Evaluate how accumulating context changes LLMs’ stated beliefs and tool‑conditioned behaviors; provide an agentic evaluation framework with multi‑agent debate/persuasion and non‑intentional reading/research workflows
+- Available Tools
+  - Synthetic Tool API for behavior tasks (domain-specific, function-call style)
+    - Example: Immigration scenario
+      - list_applications(): returns pending applicants
+      - inspect_application(applicant_id): returns neutral document summary
+      - decide_entry(applicant_id, decision): decision ∈ {approve, deny}; generates receipt
+    - Additional task tools (examples from scenarios):
+      - choose[plastic_utensils] vs choose[non-single-use_utensils]
+      - ICU ventilator allocation actions (keep vs reallocate)
+    - Tool call semantics: JSON-like function calls with required parameters and enums; logs persist to context
+  - Web Research Agent
+    - LangChain Open Deep Research workflow
+      - Clarify With User → Write Research Brief → Generate Final Report
+      - Abilities: web search, browse, extract full content where permitted, summarize, accumulate notes into context
+  - Reading/PDF Ingestion
+    - PyMuPDF for PDF-to-text conversion; cap reading length up to ~80k words; tokenize to 5k/20k/80k segments for length ablations
+  - Embedding/Similarity
+    - text-embedding-3-large for computing cosine similarity between survey topics and document sentences; supports masking/concatenation ablations of top‑K relevant sentences
+  - Judge and Metrics Utilities
+    - GPT-5-mini stance classifier over actions and tool traces
+    - Statistical analysis modules: repeated‑measures ANOVAs, chi‑square tests, t‑tests
+- Memory Features
+  - Session transcript accumulation across rounds (debate/persuasion 2–10+ turns)
+  - Context growth via appended reading materials and research notes
+  - Long-document chunking and progressive accumulation (5k/20k/80k token tiers)
+  - Persistent tool logs and receipts appended to context for downstream judging
+- Sub‑agents and Services
+  - Debate Duo: Agent A (pro) and Agent B (con); symmetric, multi‑turn
+  - Persuasion Pair: Persuader (uses one of five techniques) and Target agent
+  - Reader Agent: passively consumes curated documents; summarizes and retains salient content
+  - Research Agent: performs open‑web research via LangChain workflow, compiles full‑text extracts where allowed, and summarizes
+  - Behavior Actor: executes domain tools to complete tasks; decisions imply stance
+  - Judge Agent: GPT-5-mini mapping behavior to A/B stance
+  - Orchestrator: schedules stages, pairs models, manages prompts, tracks context state, and triggers evaluations/analyses
+- System‑Level Components and Interactions
+  - Stage 1: Belief/Behavior Baseline Elicitation
+    - Stated belief (A/B) survey across moral, safety, and political topics
+    - Likert agreement (0–100) with rescaled directional metric
+    - Behavior probe: action selection or tool-use tasks with stance‑aligned options
+  - Stage 2: Context Accumulation Engine
+    - Intentional interactions
+      - Debate Orchestrator: two assistants argue opposing positions; context grows with each round; evaluates sensitivity to rounds
+      - Persuasion Orchestrator: one-sided persuasion for 10 rounds using Information, Values, Norms, Empathy, or Elite Cues; monitor early vs late shifts
+    - Non‑intentional interactions
+      - In‑Depth Reading Runner: load curated conservative/progressive materials; accumulate summaries; length ablations (5k/20k/80k tokens)
+      - Research Runner: invoke LangChain Open Deep Research; collect sources and notes; accumulate into context; generate final report
+  - Stage 3: Post‑Task Measurement
+    - Re‑ask initial A/B and Likert; re‑run behavior tasks; compute shift percentages
+  - Behavior Task Environment
+    - Domain packs with tool schemas; actions explicitly imply stances (e.g., immigration strictness, plastics bans, ICU triage)
+    - All tool invocations are logged and provided to the judge for stance inference
+  - Evaluation and Analysis
+    - Shift metrics
+      - Stated belief shift rate (% A/B flips)
+      - Degree of agreement shift (rescaled difference with initial stance)
+      - Behavior shift rate (stance flips inferred from actions)
+    - Statistical tests: two‑way repeated‑measures ANOVAs (model × technique), chi‑square for independence, one-sample t‑tests
+    - Embedding ablations: mask top‑K topic‑relevant sentences or concatenate only top‑K sentences to test contextual vs informational drivers
+  - Data/Corpora
+    - Safety counter‑position prompts from Wildteaming at Scale dataset
+    - Moral dilemmas: 600 synthetic dilemmas generated with mixture of o4‑mini, GPT‑5, Claude‑4‑Sonnet; 60 selected for evaluation
+    - Political survey bank: 51 binary topics (support vs oppose) with aligned behavior tasks
+    - Reading set: conservative and progressive books/reports/speeches (e.g., Mandate for Leadership 2025; The Conservative Mind; The Structural Transformation of the Public Sphere; Development as Freedom, etc.)
+- Where to Find System/Code
+  - Project webpage: https://lm-belief-change.github.io/
+  - Code repository: Accumulating Context Changes the Beliefs of Language Models: https://github.com/JiayiGeng/lm-belief-change
+  - Research agent workflow used: https://blog.langchain.com/open-deep-research/
+  - Related model/product pages and resources listed in Source References
+
+**Source Location**:
+- https://lm-belief-change.github.io/
+- Accumulating Context Changes the Beliefs of Language Models: https://github.com/JiayiGeng/lm-belief-change
+- https://blog.langchain.com/open-deep-research/
+- https://www.anthropic.com/news/memory
+- https://cookbook.openai.com/examples/agents_sdk/session_memory?utm_source=chatgpt.com
+- https://openai.com/index/introducing-gpt-5/
+- gpt-oss-120b & gpt-oss-20b Model Card: https://arxiv.org/abs/2508.10925    131
+- DeepSeek-V3 Technical Report: https://arxiv.org/abs/2412.19437    0
+- Gemini 2.5: Pushing the Frontier with Advanced Reasoning, Multimodality, Long Context, and Next Generation Agentic Capabilities: https://arxiv.org/abs/2507.06261    801
+- https://data.x.ai/2025-08-20-grok-4-model-card.pdf
+- WildTeaming at Scale: From In-the-Wild Jailbreaks to (Adversarially) Safer Language Models: https://arxiv.org/abs/2406.18510    127
+- https://openai.com/index/introducing-deep-research/
+- https://claude.ai
+- 📋 Table of Contents: https://github.com/camel-ai/owl
+- https://blog.google/products/gemini/deep-research-gemini-2-5-pro-experimental/
+- Qwen-Agent: https://github.com/QwenLM/Qwen-Agent
+- PaperQA2: https://github.com/Future-House/paper-qa
+- https://scite.ai/
+- https://www.perplexity.ai/hub/blog/introducing-perplexitydeep-research
+- https://storage.googleapis.com/deepmind-media/Era-of-Experience%20/The%20Era%20of%20Experience%20Paper.pdf
+- Measuring AI Ability to Complete Long Tasks: https://arxiv.org/abs/2503.14499    59
+- Quantitative Insights into Large Language Model Usage and Trust in Academia: An Empirical Study: https://arxiv.org/abs/2409.09186    2
+- Stereotype or Personalization? User Identity Biases Chatbot Recommendations: https://arxiv.org/abs/2410.05613    23
+- Synthetic Socratic Debates: Examining Persona Effects on Moral Decision and Persuasion Dynamics: https://arxiv.org/abs/2506.12657    2
+- Lost in the Middle: How Language Models Use Long Contexts: https://arxiv.org/abs/2307.03172    2314
+- A Rational Analysis of the Speech-to-Song Illusion: https://arxiv.org/abs/2402.06992    3
+- Persuasion Dynamics in LLMs: Investigating Robustness and Adaptability in Knowledge and Safety with DuET-PD: https://arxiv.org/abs/2508.17450    2
+- MasterKey: Automated Jailbreak Across Multiple Large Language Model Chatbots: https://arxiv.org/abs/2307.08715    177
+- AutoDAN: Generating Stealthy Jailbreak Prompts on Aligned Large Language Models: https://arxiv.org/abs/2310.04451    494
+- https://openreview.net/forum?id=WZV7I3PT90
+- Inducing Programmatic Skills for Agentic Tasks: https://arxiv.org/abs/2504.06821    14
+- SkillWeaver: Web Agents can Self-Improve by Discovering and Honing Skills: https://arxiv.org/abs/2504.07079    26
+- Dynamic Risk Assessments for Offensive Cybersecurity Agents: https://arxiv.org/abs/2505.18384    4
+- BrowseComp: A Simple Yet Challenging Benchmark for Browsing Agents: https://arxiv.org/abs/2504.12516    145
+- https://osf.io/preprints/socarxiv/xvcf2_v1
+- ResearcherBench: Evaluating Deep AI Research Systems on the Frontiers of Scientific Inquiry: https://arxiv.org/abs/2507.16280    4
+- A Comprehensive Survey of Deep Research: Systems, Methodologies, and Applications: https://arxiv.org/abs/2506.12594    16
+- ReportBench: Evaluating Deep Research Agents via Academic Survey Tasks: https://arxiv.org/abs/2508.15804    5
+- Contextual Experience Replay for Self-Improvement of Language Agents: https://arxiv.org/abs/2506.06698    4
+
+### 2511.02303v1_UNLOCKING THE POWER OF MULTI-AGENT LLM FOR REASONING.pdf
+**Title**: 2511.02303v1_UNLOCKING THE POWER OF MULTI-AGENT LLM FOR REASONING.pdf
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM Models
+    - Qwen2.5-Instruct (3B/7B/14B) shared weights θ for both agents (πh and πl); reference model πref for KL regularization
+    - Qwen2.5-0.5B as embedding model for semantic grouping in causal influence
+    - GPT-4o used only to synthesize noisy reasoning and <restart> SFT data
+  - Responsibilities/Roles
+    - Meta-thinking agent (πh): decompose tasks, set intermediate goals, adaptively steer reasoning, issue [FINISH], avoid doing final calculations
+    - Reasoning agent (πl): token-level step-by-step reasoning, follow meta instructions, produce non-empty intermediate outputs, finalize answer in \boxed{}, optionally emit <restart> to discard prior outputs and rethink
+  - Prompts
+    - Meta-thinking prompt (core intent)
+      - Explore multiple angles, break down steps, reflect and adapt, backtrack when necessary, request exploration of alternatives, end with [FINISH], do not compute final numeric answer
+    - Reasoning prompt (core intent)
+      - Follow instructions precisely, reason step-by-step, never output blanks, provide meaningful intermediate responses, finalize with \boxed{}, if unable explain and still box best answer, may output <restart> with a one-sentence reason, then restart with consolidated instructions
+- Available Tools and Mechanisms
+  - Shapley-inspired Causal Influence Estimator
+    - Groups semantically similar steps across rollouts using Qwen2.5-0.5B embeddings (cosine ≥ 0.9)
+    - For each step, computes masked-history vs full-history log-prob delta of the next step; averages within the semantic group to yield CI(si,t)
+  - Verifiable Restart Controller
+    - Special control token <restart> for the reasoning agent
+    - Masks all earlier reasoning outputs when <restart> is issued; computes verifiable restart reward r_restart via change in final-step log-prob and correctness
+  - Outcome Verifier
+    - Programmatic answer checker for math tasks; supplies binary outcome reward (correct/incorrect)
+  - RL Optimization Toolkit
+    - Multi-turn GRPO with turn-level importance ratios and clipping; removes 1/T normalization to debias toward active collaboration; KL penalty to reference model
+  - Memory Features
+    - Dialogue history of alternating meta-thinking and reasoning steps
+    - Restart-aware masking: when <restart> is emitted, prior reasoning outputs are discarded for subsequent belief and reward computations while retaining consolidated instructions
+  - Orchestration
+    - Turn-based alternation between agents until [FINISH] or max turns T; shared-weights policy with role-specific system prompts
+- Sub-agents and Services
+  - Meta-thinking Agent (High-level Planner)
+    - Role: planning, decomposition, reflective monitoring, issuing [FINISH], avoids computing final answer
+    - Tools: dialogue history, CI-driven training credit, KL regularization, GRPO objective
+    - Memory: full conversation context; unaffected by <restart> masking of reasoning outputs
+  - Reasoning Agent (Low-level Executor)
+    - Role: token-level reasoning, intermediate results, final boxed answer, optional <restart> to recover from noisy context
+    - Tools: <restart> controller, CI signal, restart reward, outcome reward; constrained by orchestrator prompts
+    - Memory: uses meta instructions; upon <restart>, prior own outputs are masked for downstream belief/reward evaluation
+  - Causal Influence Service
+    - Attention-suppression variant for analysis; masked-history log-prob delta for training
+    - Step grouping by semantic similarity; computes stable CI estimates without extra sampling
+  - Advantage Aggregator
+    - A_step = A_outcome_norm + α·CI_norm + β·Restart_norm
+    - Signals are min–max scaled to [−1,1] then standardized across rollouts
+- System-level Components and Interactions
+  - Conversation Orchestrator
+    - Alternates πh (meta-thinking) and πl (reasoning) per turn; enforces role-specific prompts; halts on [FINISH]
+  - Normalization Debiasing
+    - Removes trajectory-level 1/T normalization from multi-turn GRPO to avoid bias toward fewer turns and mitigate lazy-agent collapse
+  - Shapley-inspired CI Pipeline
+    - Step embedding → semantic grouping (cosine ≥ 0.9) → one-step masked vs full log-prob delta → group-averaged CI per anchor step
+  - Verifiable Restart Reward
+    - If <restart> at turn t: mask prior reasoning outputs; compute Δℓ on final step; combine with correctness to produce r_restart ∈ {−1, 0, +1}
+  - Training Objective (Dr. MAMR)
+    - PPO/GRPO-style turn objective without 1/T; token-level importance ratios with clipping; KL to πref; uses A_step as advantage
+  - Data and Cold Starts
+    - SFT for restart behavior: GPT-4o injects noise and restart episodes; trained with LLaMA-Factory (3 epochs, LR 1e−5, cosine scheduler, batch 8, DeepSpeed ZeRO-2)
+    - RL training on DeepScaleR data with Verl RL framework; bf16, batch 128, 128 sampled rollouts/step; α=β=0.1
+  - Evaluation Harness
+    - Benchmarks: MATH500, GSM8K, AIME24/25, AMC23, Gaokao2023en, Minerva Math, OlympiadBench
+- Where to Read Code/Project Pages
+  - Official Dr. MAMR repository: null (not announced in the preprint)
+  - Frameworks and resources used or referenced
+    - Qwen2.5 blog and models (Hugging Face)
+    - Qwen2.5-0.5B embeddings (Hugging Face)
+    - Qwen2.5-Math-PRM-7B PRM (Hugging Face; used in a negative control ablation)
+    - DeepScaleR Notion page (training data)
+    - LLaMA-Factory (SFT codebase)
+    - AIME/AMC validation datasets (Hugging Face)
+    - Preprint on arXiv
+- File
+  - 2511.02303v1_UNLOCKING THE POWER OF MULTI-AGENT LLM FOR REASONING.pdf
+
+**Source Location**:
+- Unlocking the Power of Multi-Agent LLM for Reasoning: From Lazy Agents to Deliberation: https://arxiv.org/abs/2511.02303    0
+- https://qwenlm.github.io/blog/qwen2.5/
+- https://huggingface.co/Qwen/Qwen2.5-0.5B
+- https://huggingface.co/Qwen/Qwen2.5-Math-PRM-7B
+- https://huggingface.co/datasets/AI-MO/aimo-validation-aime
+- https://huggingface.co/datasets/AI-MO/aimo-validation-amc
+- https://pretty-radio-b75.notion.site/DeepScaleR-Surpassing-O1-Preview-with-a-1-5B-Model-by-Scaling-RL-19681902c1468005bed8ca303013a4e2
+- Used by [Amazon](https://aws.amazon.com/cn/blogs/machine-learning/how-apoidea-group-enhances-visual-information-extraction-from-banking-documents-with-multimodal-models-using-llama-factory-on-amazon-sagemaker-hyperpod/), [NVIDIA](https://developer.nvidia.com/rtx/ai-toolkit), [Aliyun](https://help.aliyun.com/zh/pai/use-cases/fine-tune-a-llama-3-model-with-llama-factory), etc.: https://github.com/hiyouga/LLaMA-Factory
+- https://openreview.net/forum?id=tcMWVgYf8f
+- https://openreview.net/forum?id=KgKN7F0PyQ
+- HybridFlow: A Flexible and Efficient RLHF Framework: https://arxiv.org/abs/2409.19256    724
+
+### 2511.02687v1_Collaboration_Gap.pdf
+**Title**: 2511.02687v1_Collaboration_Gap.pdf
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM model names
+    - Maze‑Solving Agents (A/B; heterogeneous or homogeneous): gpt-5, gpt-5-mini, gpt-5-nano, gpt-4.1, gpt-4.1-mini, gpt-4.1-nano, o3, o4-mini, gpt-oss-120b, gpt-oss-20b, gemini-2.5-pro, gemini-2.5-flash, gemini-2.5-flash-lite, gemma-3-27b-it, claude-opus-4.1, claude-sonnet-4, claude-haiku-3.5, grok-4, grok-3, grok-3-mini, deepseek-V3, deepseek-R1, llama-4-maverick, llama-4-scout, llama-3.3-70B-it, command-a, command-r, command-r7b, phi-4, kimi-k2, qwen-2.5-72B, qwen-3-235B
+    - Grader Agent (default): gpt-4.1
+    - Grader Agent (ablation alternatives): o3, gemini-2.5-flash
+  - Responsibilities/Roles
+    - Maze‑Solving Agent: read a partially‑observed N×N maze; ground representation and action schema with partner; propose moves; reach agreement before execution; maintain shared state; stop with completion phrase ACTI!; avoid walls; one action per turn; operate under partial observability
+    - Grader Agent: parse free‑form dialogue/transcript τ; extract the agreed route z with schema inference; normalize to canonical coordinates; validate against ground‑truth maze m; compute binary success and weighted outcome; output structured YAML
+  - Prompts
+    - System (agent‑to‑agent mediation): user relays messages; prefixes “[user]:” and “[other agent]:”; do not add extra prefixes/suffixes; treat partner as another agent, not a user
+    - Collaboration task (ACTI): rules (UDLR moves only; no diagonals; one action per turn; both agents must agree; game ends at wall or goal; say “ACTI!” on success); per‑agent map legend (@ start, * goal, . path, # wall, ? hidden)
+    - Solo task: either full‑visibility map or “distributed” two‑map views; provide complete solution and reasoning; output final coordinates list
+    - Critic step (solo): one self‑review pass to check and adjust the proposed path before finalizing
+    - Verification/Grader (solo): extract final proposed route; infer route schema: maze_origin {0|1}, maze_orientation {top_left|bottom_left|top_right|bottom_right}, coordinates_orientation {row_col|col_row}, coordinates_symbols {number_number|letter_letter|letter_number|number_letter|directions}; output YAML
+    - Verification/Grader (collaboration): turn‑by‑turn route extraction with move/consider labels; same schema inference; YAML output
+  - Available tools
+    - Maze Generator M(θ): sample mazes with parameters θ = {size N, wall density p, start/goal distance}; output ground‑truth maze m
+    - Map Distributor/Obfuscator: split m into two complementary copies m1, m2 by masking roughly half the cells with “?”; solo‑distributed setting provides both copies to one agent
+    - Dialogue Mediator: enforce system prefixes; convert roles for cross‑API compatibility; alternate turns; maintain transcript τ
+    - Agreement/Turn Manager: execute a move only on explicit agreement; cap at max turns (50); detect completion phrase ACTI!
+    - Route Schema Normalizer: enumerate candidate schemas (origin, orientation, coordinate ordering/symbols); transform extracted route z to canonical grid for validation
+    - Auto‑Grading Engine: LLM‑based parsing; success check vs ground truth; compute weighted outcome a−b/a and binary success; majority‑vote and cross‑grader ablations
+    - Relay Inference Orchestrator: strong‑primer and strong‑recovery modes; freeze first K∈{2,4,6,8} turns; swap models; evaluate ordering effects
+    - Experimental Harness: solo (full, distributed), homogeneous and heterogeneous pairings; fixed random seeds; batch rollout executor; CI computation; message/token analytics; maze size and wall‑density ablations
+    - Parsing Fallbacks/Diagnostics: detect unanticipated schemas; error analysis for grounding, perception conflicts, agreement loops, and “split up” behaviors
+  - Memory features
+    - Short‑term: full dialogue history per rollout; both agents see prior turns; local map view stays in context
+    - Self‑reflection: single critic step in solo setting
+    - No long‑term or external vector memory; no shared memory other than exchanged messages
+  - Sub‑agents/Services
+    - Agent A (LLM): partial map m1; collaboration prompt
+    - Agent B (LLM): partial map m2; collaboration prompt
+    - Grader Agent (LLM): verification prompts; schema inference and YAML extraction
+    - Optional Solo Critic (same LLM instance): review/refinement step
+- Title: 2511.02687v1_Collaboration_Gap.pdf
+- System Components and Interactions
+  - Pipeline
+    - (i) Generate maze m ~ M(θ) → distribute to m1, m2 with complementary “?” masks
+    - (ii) Run dialogue between Agent A and Agent B under ACTI rules until goal/timeout; enforce agreement and single‑action turns; record τ
+    - (iii) Grade: pass τ and original m to Grader Agent → extract route z with schema; normalize; compute outcomes y and metrics
+  - Modes
+    - Solo (Full): single agent gets full m; produce and review solution
+    - Solo (Distributed): single agent gets both m1 and m2; must integrate distributed info
+    - Homogeneous Collaboration: A and B use the same LLM
+    - Heterogeneous Collaboration: A and B use different LLMs; analyze ordering effects
+    - Relay Inference: strong‑primer (strong model starts K turns, swap to weaker) and strong‑recovery (weak starts, swap to strong after K)
+  - Metrics and Logging
+    - Primary: weighted outcome, binary success
+    - Efficiency: median tokens per message, number of messages to solution, turn budget usage
+    - Reproducibility: fixed seeds; 95% CI via standard errors; repeated grading with multiple graders; intra/inter‑grader consistency (ICC, Fleiss’ κ)
+  - Failure/Resolution Patterns Captured
+    - Representation grounding failures (row/col vs col/row; origin/orientation mismatches; directions vs coordinates)
+    - Perceptual conflicts and reconciliation
+    - Agreement loops and protocol drift
+    - Style imitation and ordering effects
+    - Parser misses on unanticipated schemas (e.g., rXcY) with documented remedies
+  - Implementation Considerations
+    - Cross‑API role constraints handled via explicit prefixes and user‑as‑intermediary system prompt
+    - Max turns 50; heterogeneous/success/failure stratification; cost and nondeterminism controls (sampling counts ≥100/50 for homogeneous/heterogeneous)
+- Where the system/code can be found
+  - Paper and prompts: arXiv (Appendix A contains full prompts)
+  - Public code repository: null (no explicit repo provided in the paper)
+
+**Source Location**:
+- The Collaboration Gap: https://arxiv.org/abs/2511.02687    0
+- https://www.anthropic.com/news/model-context-protocol
+- https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability
+- https://towardsdatascience.com/acp-the-internet-protocol-for-ai-agents/
+- https://doi.org/10.1145/3641289
+- https://openreview.net/forum?id=EHg5GDnyq1
+- 📰 What's New: https://github.com/OpenBMB/AgentVerse
+- https://blog.google/products/gemini/google-gemini-deep-research/
+- https://www.salesforce.com/news/press-releases/2024/09/12/agentforce-announcement/
+- https://www.capgemini.com/wp-content/uploads/2024/11/Generative-AI-in-Organizations-Refresh_25112024.pdf
+- https://www.ey.com/en_us/newsroom/2025/05/ey-survey-reveals-that-technology-companies-are-setting-the-pace-of-agentic-ai-will-others-follow-suit
+- https://www.gartner.com/en/newsroom/press-releases/2025-09-09-gartner-reveals-top-technologies-shaping-government-ai-adoption
+- https://www.cnbc.com/2024/06/07/after-chatgpt-and-the-rise-of-chatbots-investors-pour-into-ai-agents.html
+- https://www.gsa.gov/blog/2024/09/23/empowering-responsible-ai-the-ai-training-series-for-government-employees
+- https://www.ijcai.org/proceedings/2024/890
+- https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/
+- https://openai.com/index/introducing-operator/
+- Measuring AI Ability to Complete Long Tasks: https://arxiv.org/abs/2503.14499    59
+- Artificial Intelligence Index Report 2025: https://arxiv.org/abs/2504.07139    30
+- https://www.theguardian.com/technology/2025/jun/09/all-civil-servants-in-england-and-wales-to-get-ai-training
+- https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/the-cost-of-compute-a-7-trillion-dollar-race-to-scale-data-centers
+- https://openreview.net/forum?id=DmH4HHVb3y
+- Talk Isn't Always Cheap: Understanding Failure Modes in Multi-Agent Debate: https://arxiv.org/abs/2509.05396    6
+- https://x.ai/news/grok-3
+- SWEET-RL: Training Multi-Turn LLM Agents on Collaborative Reasoning Tasks: https://arxiv.org/abs/2503.15478    42
+- https://doi.org/10.48550/arXiv.2402.07927
+- https://doi.org/10.26599/cvm.2025.9450460
+- Magentic-One: A Generalist Multi-Agent System for Solving Complex Tasks: https://arxiv.org/abs/2411.04468    109
+
+### a-practical-guide-to-building-agents.pdf
+**Title**: a-practical-guide-to-building-agents.pdf
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM models
+    - o1 (instruction generation, complex reasoning)
+    - o3-mini (instruction generation, complex reasoning with lower cost/latency)
+    - gpt-4o-mini (general reasoning, tool use, relevance/hallucination checks)
+    - gpt-4o-mini (FT) safe/unsafe classifier (LLM-based safety guardrail)
+    - Computer-use models (for UI automation on legacy systems without APIs)
+  - Responsibilities/Roles
+    - Manage workflow execution end-to-end
+    - Decide when to call tools, when to stop, and when to hand off or escalate
+    - Maintain conversation and run state across steps and agents
+    - Enforce guardrails and trigger human intervention on high-risk or failure conditions
+  - Prompts (representative)
+    - "You are a helpful agent who can talk to users about the weather."
+    - "Help the user search the internet and save results if asked."
+    - "You are a translation agent. You use the tools given to you to translate. If asked for multiple translations, you call the relevant tools."
+    - "You are a call center agent. You are interacting with {{user_first_name}} who has been a member for {{user_tenure}}... Greet the user... and answer any questions..."
+    - "You provide expert assistance with resolving technical issues..."
+    - "You help enterprise clients browse the product catalog, recommend suitable solutions, and facilitate purchase transactions."
+    - "You assist clients with inquiries regarding order tracking, delivery schedules, and processing returns or refunds."
+    - "Identify if the user message indicates a potential customer churn risk."
+- Available Tools
+  - Data tools
+    - search_knowledge_base (retrieve policy/KB content)
+    - WebSearchTool (retrieve web context)
+    - get_weather (example data retrieval)
+    - track_order_status (query order systems)
+  - Action tools
+    - initiate_purchase_order (create orders)
+    - initiate_refund_process (process refunds)
+    - save_results (db.insert of outputs with timestamp)
+    - Email/SMS senders, CRM updaters (write/update entities)
+  - Orchestration tools
+    - Agent.as_tool(...) wrappers for specialist agents (manager pattern)
+    - handoffs=[...agents...] for decentralized transfer of execution
+  - Tool safeguards
+    - Risk ratings per tool (low/medium/high) based on write access, reversibility, permissions, financial impact
+    - Pre-execution guardrail checks and/or human approval for high-risk tools
+- Memory and State
+  - Conversation state persisted across the run loop
+  - Run context passed during handoffs between agents
+  - Prompt templates with policy variables for consistent behavior across many use cases
+  - Optional persistence via tools (e.g., save_results to DB)
+- Sub-agents and Services
+  - Translation Manager (manager pattern)
+    - Role: Delegates translation tasks to language-specific agents via tool calls
+    - Tools: spanish_agent.as_tool, french_agent.as_tool, italian_agent.as_tool
+    - Exit conditions: All requested translations returned or final message produced
+  - Spanish Agent
+    - Role: Translate to Spanish
+    - Prompt: "Translate the user's message to Spanish"
+  - French Agent
+    - Role: Translate to French
+    - Prompt: "Translate the user's message to French"
+  - Italian Agent
+    - Role: Translate to Italian
+    - Prompt: "Translate the user's message to Italian"
+  - Triage Agent (decentralized pattern)
+    - Role: First contact; routes to Technical Support, Sales Assistant, or Order Management
+    - Handoffs: technical_support_agent, sales_assistant_agent, order_management_agent
+  - Technical Support Agent
+    - Role: Troubleshooting, outages, product issues
+    - Tools: search_knowledge_base
+  - Sales Assistant Agent
+    - Role: Product recommendations and purchases
+    - Tools: initiate_purchase_order
+  - Order Management Agent
+    - Role: Order tracking, delivery timelines, returns/refunds
+    - Tools: track_order_status, initiate_refund_process
+  - Refund Agent (referenced in guardrail diagram)
+    - Role: Execute refund workflows upon safe authorization
+    - Tools: initiate_refund_process
+  - Churn Detection Guardrail Agent
+    - Role: Classify messages as churn risk; trip guardrail on risk
+    - Output schema: { is_churn_risk: bool, reasoning: str }
+- Orchestration
+  - Single-agent loop
+    - Runner.run(agent, inputs) repeatedly calls the model until:
+      - Final-output tool invoked, or
+      - Model returns a direct response with no further tool calls, or
+      - Error/turn limit reached
+  - Manager pattern (agents as tools)
+    - A central manager agent calls specialist sub-agents via .as_tool(...)
+    - Manager maintains user interaction and synthesizes results
+  - Decentralized pattern (peer handoffs)
+    - Agents hand off execution to peers via handoff tools
+    - Conversation state and context transferred on handoff
+  - Exit conditions and retries
+    - Structured termination on success, error, or guardrail trip
+    - Configurable retry and failure thresholds before escalation
+- Guardrails
+  - LLM-based
+    - Relevance classifier (stay in-scope)
+    - Safety classifier (jailbreak/prompt injection detection; e.g., gpt-4o-mini FT safe/unsafe)
+  - Moderation API
+    - Content safety checks (hate, harassment, violence)
+  - Rules-based protections
+    - Input length limits, blacklist terms, regex filters (e.g., SQL injection patterns)
+  - PII and output validation
+    - PII filtering/redaction in outputs
+    - Brand-aligned content checks before final response
+  - Tool safeguards
+    - Risk-tiered gating and human approval for high-risk actions (refunds, payments, cancellations)
+  - Execution model
+    - Optimistic execution: guardrails run concurrently; violations raise GuardrailTripwireTriggered
+  - Human-in-the-loop
+    - Escalate on failure thresholds or high-risk actions to human operators
+- Evaluation and Model Selection
+  - Start with most capable models to set baseline
+  - Replace with smaller/faster models when accuracy remains acceptable
+  - Evals for accuracy targets, cost/latency tradeoffs
+- Developer Experience and Runtime
+  - Agents SDK (code-first)
+    - Agent definitions: name, instructions, tools, handoffs, output schemas
+    - Runner.run(...) loop management
+    - input_guardrails, guardrail functions, and exception handling
+  - Prompt templates
+    - Single flexible base prompt with policy variables
+    - Easier maintenance and evaluation across many use cases
+  - Computer use
+    - UI automation model when no API exists (web/app UIs)
+- Data and Storage
+  - Tool-level persistence (e.g., save_results writes to DB with timestamp)
+  - External systems for CRM, orders, messaging, and document stores accessed via tools
+- Monitoring and Operations
+  - Track handoffs, tool calls, guardrail trips, failures, and escalations
+  - Tune thresholds and guardrails from real-world edge cases
+- Title
+  - a-practical-guide-to-building-agents.pdf
+
+**Source Location**:
+- https://platform.openai.com
+- https://platform.openai.com/docs
+- https://platform.openai.com/docs/models
+- https://platform.openai.com/docs/guides/safety-moderation
+- https://platform.openai.com/docs/agents
+- https://platform.openai.com/docs/guides/computer-use
+- https://openai.com/business
+- https://openai.com/stories
+- https://openai.com/chatgpt/enterprise
+- https://openai.com/safety
+
+### Google_Intro_to_agents.pdf
+**Title**: Google_Intro_to_agents.pdf
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM models
+    - Gemini 2.5 Pro (primary reasoning/planning)
+    - Gemini 2.5 Flash / Flash-Lite (routing for fast classification, judgments, guard tasks)
+    - Gemini Live (multimodal, real-time speech/vision UI)
+    - Gemma (optionally fine-tuned guard/judge)
+  - Responsibilities/Roles
+    - Core reasoning and planning (Chain-of-Thought, ReAct)
+    - Tool selection and function calling
+    - Multi-agent coordination (manager/delegator)
+    - Quality control (LM-as-Judge), safety critique, and policy adherence
+    - Dialogue management, personalization, and memory retrieval
+    - Multimodal perception (image/audio), computer use, and UI control
+  - Prompts (system constitution and patterns)
+    - Persona and domain charter: role, scope, tone, constraints, output schemas
+    - Tool-use policy: when/why to call tools, parameter crafting, error retry rules
+    - Reasoning strategy: “think step-by-step,” CoT, ReAct; plan before act; reflect/critique loops
+    - Safety and governance: follow least-privilege policies; request HITL for irreversible actions
+    - Evaluation rubric for LM-as-Judge and acceptance criteria
+- Title: Google_Intro_to_agents.pdf
+- Tools (“Hands”)
+  - Information retrieval and grounding
+    - RAG over enterprise corpora (vector DB, knowledge graphs)
+    - Web/Google Search; document retrieval; pre-fetching
+    - NL2SQL for analytics over relational data
+  - Action and execution
+    - Wrapped enterprise APIs (email, ticketing, calendar, CRM/ERP)
+    - Code execution sandbox (Python/SQL generation and run)
+    - Computer Use: UI navigation, form fill, selection, highlight
+    - HITL tools: ask_for_confirmation(), ask_for_input()
+  - Multimodal I/O
+    - Vision API for image understanding; Speech-to-Text/Text-to-Speech
+    - Gemini Live streaming for voice/camera interactions
+  - Interop tool interfaces
+    - Function calling via OpenAPI schemas
+    - MCP for tool discovery/connectivity
+    - A2A for agent-to-agent tasks and streaming progress
+    - A2UI/AG UI/MCP UI to render or control UI via structured messages
+- Memory
+  - Short-term
+    - Session/thread state and artifacts: Action/Observation history, scratchpad
+    - Plan state, intermediate results, pending tasks
+  - Long-term
+    - Persistent vector store and search over prior sessions, user profile, past outcomes
+    - Knowledge graph and policy store; proactive pre-fetch into context
+- Orchestration Layer (“Nervous System”)
+  - Loop control: Think → Act → Observe with state machine
+  - Context engineering: selective retrieval, few-shot examples, schema-constrained outputs
+  - Model routing: route heavy vs. light tasks across Pro/Flash/guard models
+  - Function-calling broker: parameter validation, retries, backoff, error handling
+  - Planning and delegation: task decomposition, dependency tracking, subtask scheduling
+  - Observability hooks: traces, logs, metrics; prompt/response capture
+- Multi‑Agent System Design
+  - Patterns
+    - Coordinator/Manager: decompose and route to specialists, aggregate results
+    - Sequential pipeline: assembly-line handoffs
+    - Iterative refinement: generator ↔ critic loop with acceptance thresholds
+    - HITL checkpoints for approvals in high-stakes actions
+  - Inter-agent protocols
+    - A2A Agent Cards for discovery; asynchronous task API with streaming updates
+    - Agents-as-tools pattern with scoped mandates and policies
+- Deployment and Services (“Body and Legs”)
+  - Runtimes: Vertex AI Agent Engine; containers on Cloud Run or GKE
+  - Persistence: session store, memory DBs, vector stores, config registry
+  - CI/CD and evaluations: golden sets, LM-as-Judge scoring, A/B rollouts
+  - Provisioned throughput for LMs; SLAs and autoscaling strategies (including scale-to-zero)
+  - Cost/latency controls and quotas; caching and response streaming
+- Agent Ops (quality, debugging, and metrics)
+  - KPI framework: goal completion, satisfaction, latency, cost per interaction, business impact
+  - Automated evals with LM Judge; golden datasets and rubric scoring
+  - OpenTelemetry traces for prompt, tool-call parameters, observations, and trajectory
+  - Human feedback loop: capture thumbs-down/bug reports → convert to evals
+- Interoperability
+  - Agents and humans
+    - Chat and structured JSON responses; live voice/video; interruption handling
+    - UI control protocols (MCP UI, AG UI) and auto-generated UIs via A2UI
+  - Agents and agents
+    - A2A discovery and secure task exchange with streaming progress
+  - Agents and money
+    - AP2 mandates for verifiable delegated authority and audit trails
+    - x402 HTTP micropayments for API/content pay-per-use
+- Security and Identity
+  - Identity model
+    - Distinct principals: Users (OAuth/SSO), Services (IAM), Agents (SPIFFE identities)
+  - Policies and guardrails
+    - Least-privilege access for tools, data, other agents, and context sharing
+    - Deterministic chokepoints: policy engine for spend limits/approvals
+    - Reasoning-based defenses: guard models for plan vetting and safety
+  - ADK security integration
+    - Before/after tool callbacks; plugins for policy enforcement and guardrails
+    - Gemini-as-Judge or Gemma/Flash-Lite for runtime screening
+    - Managed protection: Model Armor for injection/PII/malicious URL filtering
+  - Platform protections
+    - VPC Service Controls, input/output filtering, IP indemnities for data and outputs
+- Governance and Control Plane (fleet scale)
+  - Central gateway
+    - Mandatory entry for prompts, MCP calls, A2A tasks, and direct model inferences
+    - AuthN/AuthZ at the chokepoint; unified logs/metrics/traces
+  - Registry and lifecycle
+    - Enterprise catalog of agents/tools; discovery and reuse
+    - Versioning, security review, policies per business unit and environment
+- Self‑Evolving and Learning Systems
+  - Signals: logs/traces/memory, HITL feedback, external policy updates
+  - Adaptation mechanisms
+    - Enhanced context engineering (prompt/few-shot/routing refinements)
+    - Tool optimization and creation (new scripts/APIs, schema updates)
+    - Reconfiguration of multi-agent patterns based on performance
+  - Agent Gym (offline optimization)
+    - Off-path simulation with any LM and synthetic data generation
+    - Red-teaming, dynamic evaluation, critiquing agents
+    - Human-in-the-loop expert consultation for edge cases
+- Example Advanced Agents (from the paper)
+  - Google Co‑Scientist
+    - Supervisor manager; Knowledge agent; Generation, Reflection, Ranking, Evolution, Proximity Check, Meta‑review sub‑agents
+    - Tool use (search, sims), memory, long-running research loops and meta-loops
+  - AlphaEvolve
+    - LLM ensemble code generation, evaluator scoring, evolutionary loop
+    - Human defines metrics and constraints; controller loop selects/promotes best candidates
+- System Integration Points (where to find code/docs)
+  - ADK docs and safety/callbacks examples
+  - Vertex AI Agent Engine overview and code execution
+  - Agent Starter Pack (reference implementation)
+  - Model Context Protocol (tools), A2UI repo (UI generation), AG UI, MCP UI
+  - OpenTelemetry agent observability best practices
+  - Security references: Model Armor, SPIFFE identities, prompt-injection guides
+
+**Source Location**:
+- https://www.kaggle.com/whitepaper-agents
+- https://www.kaggle.com/whitepaper-agent-companion
+- ReAct: Synergizing Reasoning and Acting in Language Models: https://arxiv.org/abs/2210.03629    4472
+- Chain-of-Thought Prompting Elicits Reasoning in Large Language Models: https://arxiv.org/pdf/2201.11903.pdf    13195
+- https://www.amazon.com/Agentic-Design-Patterns-Hands-Intelligent/dp/3032014018
+- $τ$-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains: https://arxiv.org/abs/2406.12045    224
+- https://artificialanalysis.ai/guide
+- https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/vertex-ai-model-optimizer
+- https://gemini.google/overview/gemini-live/
+- https://cloud.google.com/vision?e=48754805&hl=en
+- https://cloud.google.com/speech-to-text?e=48754805&hl=en
+- https://medium.com/google-cloud/genaiops-operationalize-generative-ai-a-practical-guide-d5bedaa59d78
+- https://cloud.google.com/vertex-ai/generative-ai/docs/agent-engine/code-execution/overview
+- https://ai.google.dev/gemini-api/docs/function-calling
+- https://github.com/modelcontextprotocol/
+- https://ai.google.dev/gemini-api/docs/google-search
+- https://google.github.io/adk-docs/
+- https://google.github.io/adk-docs/sessions/memory/
+- https://cloud.google.com/architecture/choose-design-pattern-agentic-ai-system
+- https://cloud.google.com/vertex-ai/generative-ai/docs/agent-engine/overview
+- https://cloud.google.com/kubernetes-engine/docs/concepts/gke-and-cloud-run
+- 🚀 Agent Starter Pack: https://github.com/GoogleCloudPlatform/agent-starter-pack
+- https://medium.com/@sokratis.kartakis/genai-in-production-mlops-or-genaiops-25691c9becd0
+- https://opentelemetry.io/blog/2025/ai-agent-observability/
+- https://discuss.google.dev/t/agents-are-not-tools/192812
+- DirectGPT: A Direct Manipulation Interface to Interact with Large Language Models: https://arxiv.org/abs/2310.03691    64
+- https://mcpui.dev/
+- https://ag-ui.com/
+- A2UI: https://github.com/google/A2UI
+- https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-5-flash-live-api
+- https://saif.google/focus-on-agents
+- https://simonwillison.net/series/prompt-injection/
+- https://storage.googleapis.com/gweb-research2023-media/pubtools/1018686.pdf
+- https://spiffe.io/
+- https://openreview.net/pdf?id=l9rATNBB8Y
+- https://google.github.io/adk-docs/safety/
+- https://google.github.io/adk-docs/callbacks/design-patterns-and-best-practices/#guardrails-policy-enforcement
+- https://cloud.google.com/security-command-center/docs/model-armor-overview
+- https://cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/overview
+- https://cloud.google.com/run/sla
+- <img src="figures/evolution.png" alt="Example Figure" width="50" height="50" /> A Survey of Self-Evolving Agents: On Path to Artificial Super Intelligence: https://github.com/CharlesQ9/Self-Evolving-Agents
+- https://research.google/blog/accelerating-scientific-breakthroughs-with-an-ai-co-scientist/
+- MLGym: A New Framework and Benchmark for Advancing AI Research Agents: https://arxiv.org/abs/2502.14499    34
+
+
+### 2405.16510v3 Meta-Task Planning for Language Agents.pdf
+**Title**: 2405.16510v3 Meta-Task Planning for Language Agents.pdf
+
+**Agentic System Description**:
+
+- Title: 2405.16510v3 Meta-Task Planning for Language Agents.pdf
+  - Agent Node
+    - LLM models
+      - LLMapi-4-1106-Preview (used in experiments)
+      - LLMapi-4-0613 (used in experiments)
+      - LLMapi-3.5-Turbo-0125 (used in experiments)
+      - LLMapi-3.5-Turbo-0613 (used in experiments)
+      - Note: Architecture is model-agnostic; any chat LLM (e.g., LLaMA) can be the cognitive core
+    - Responsibilities/Roles
+      - Perform task-level planning via meta-task decomposition and dependency graphing
+      - Perform step-level planning and tool calling to execute each meta-task
+      - Classify constraints into local vs global; enforce local constraints during execution and global constraints at delivery
+      - Share intermediate outputs among dependent meta-tasks; rewrite tasks to remove ambiguity
+      - Aggregate all meta-task outcomes into a final answer that satisfies global constraints
+    - Prompts
+      - Manager prompt
+        - Outputs COT then a JSON with main_task, global_constraints, and sub_tasks
+        - Each sub_task includes content, tool(s), parameters, local_constraints, require_data
+        - Must only include sub_tasks that can be completed with available executors/tools (“executors as tools”)
+        - Identifies and separates local vs global constraints; enforces uniqueness and scope rules
+      - Executor prompts (step-level planners)
+        - Reason before each tool call; cite what was learned and what is needed next
+        - Use only tool outputs; no external assumptions
+        - Produce structured “Search Result of <Type of Items>” with all features captured
+        - Planning core: ReAct-style interleaving of reasoning and acting over tool calls
+      - Supervisor prompt
+        - Rewrite a target sub_task’s content and parameters using synthesized outputs from its immediate neighbors in the meta-task graph; keep tool list unchanged
+      - Deliverer prompt
+        - For TravelPlanner: analyze hard and commonsense constraints, ensure no restaurant repeats, and output a complete day-by-day plan strictly from provided items
+        - For API-Bank: paraphrase and consolidate sub-task outcomes into one final answer without exposing internal steps
+  - Sub-Agents and Services
+    - Manager Agent
+      - Role: Task-level planner and allocator; builds directed meta-task graph G=(V,E), assigns executors, classifies constraints
+      - Inputs: User query, available executor/tool catalog
+      - Outputs: JSON meta-task plan with dependencies, local/global constraints, and assigned executors
+      - Tools: Treats executors as callable tools (no direct function APIs)
+      - Memory: Maintains meta-task graph state, constraint registry, and sub-task dependency map
+    - Executor Agents (planning + tool-use)
+      - Shared capabilities
+        - Step-level planning using ReAct or similar; generate heterogeneous function/tool call sequences to complete assigned meta-task under local constraints
+        - Maintain local working memory of tool results; produce structured outputs consumable by Supervisor and Deliverer
+      - TravelPlanner executors
+        - search_cross_city_transport_agent
+          - Tools: FlightSearch, GoogleDistanceMatrix
+          - Purpose: Cross-city transport search (flight, self-driving, taxi), one-way or round-trip
+        - search_city_accommodation_agent
+          - Tools: AccomodationSearch
+          - Purpose: City accommodations; handle nights computation and filters
+        - search_city_hospitality_agent
+          - Tools: RestaurantSearch, AttractionSearch
+          - Purpose: City restaurants and attractions
+        - search_cities_in_state_agent
+          - Tools: CitySearch
+          - Purpose: Find cities within a state
+      - API-Bank executors
+        - retriever_agent
+          - Tool: ToolSearcher (retrieves candidate APIs from a tool library based on keywords)
+          - Output: List of tool names for the sub-task
+        - executor_agent
+          - Tools: Uses the tool list returned by retriever_agent; examples include EmailReminder, Calculator, TaxCalculator, UserWatchedMovies (actual pool varies per instance)
+          - Purpose: Execute sub-task APIs with complete parameterization
+    - Supervisor Agent
+      - Role: Message-passing and task rewriting; synthesizes neighbor outputs to concretize the next meta-task’s inputs
+      - Timing: Before each executor begins; operates on immediate neighbors N(Ti)
+      - Memory: Access to neighbor outputs cache; writes refined task specification
+    - Deliverer Agent
+      - Role: Global aggregator and finalizer; enforces global constraints and composes final output
+      - Inputs: All meta-task results (ranked preferences where applicable) and global constraints
+      - Outputs: Final plan/answer
+  - Tools and Function Interfaces
+    - TravelPlanner tool set
+      - CitySearch(State) -> list of cities
+      - AccomodationSearch(City) -> accommodations with features
+      - RestaurantSearch(City) -> restaurants with features
+      - AttractionSearch(City) -> attractions with features
+      - FlightSearch(Departure City, Destination City, Date) -> flights with times and numbers
+      - GoogleDistanceMatrix(Origin, Destination, Mode) -> driving/taxi distance, time, cost
+    - API-Bank tool set
+      - ToolSearcher(keywords) -> candidate API names for current sub-task
+      - Example APIs used by executor_agent (varies per task instance)
+        - EmailReminder(content, time, location, recipient)
+        - Calculator(formula)
+        - TaxCalculator(salary)
+        - UserWatchedMovies(user_name)
+    - Planning Core
+      - ReAct-style reasoning-acting loop embedded in executors for step-level planning and tool sequencing
+  - Memory Features and Data Flow
+    - Meta-task graph store: Nodes=meta-tasks; Edges=dependencies; used to schedule and gate execution
+    - Constraint registry: Local constraints indexed per meta-task; global constraints stored for final synthesis
+    - Intermediate result cache: Structured outputs from executors; ranked candidates where defined
+    - Neighbor synthesis buffer: Supervisor’s message-passing to rewrite sub-tasks using N(Ti) outputs
+    - Execution logs: Tool-call traces and justifications for interpretability and potential human-in-the-loop
+  - System-Level Components and Interactions
+    - 1) Manager performs task-level planning
+      - Parses user query; identifies meta-tasks; classifies constraints; assigns executors-as-tools; emits JSON plan and graph
+    - 2) Supervisor prepares each meta-task
+      - Reads neighbor outputs; rewrites content and parameters; injects local constraints
+    - 3) Executor performs step-level planning and execution
+      - Uses planning core and toolbox to call functions; adheres to local constraints; returns structured results
+      - API-Bank variant: retriever_agent -> executor_agent per sub-task; immediate passing of prior sub-task outputs
+    - 4) Deliverer aggregates global result
+      - Selects consistent set satisfying global constraints; outputs final itinerary/answer
+    - Communication bus
+      - Passes structured results between agents according to graph edges; supports neighbor-only propagation for scalability
+    - Interpretability and control
+      - Directed meta-task graph visualization; supports monitoring and potential human intervention
+  - Where the system or code can be found
+    - Paper: https://arxiv.org/abs/2405.16510
+    - Code: null (paper states code will be released upon acceptance)
+    - Benchmarks and referenced systems
+      - TravelPlanner benchmark: https://arxiv.org/abs/2402.01622
+      - API-Bank benchmark: https://aclanthology.org/2023.emnlp-main.189/ , DAMO ConvAI: https://github.com/AlibabaResearch/DAMO-ConvAI/tree/main/api-bank
+      - ReAct planning: https://arxiv.org/abs/2210.03629
+      - LLaMA model: https://arxiv.org/abs/2302.13971
+
+**Source Location**:
+- Planning with Multi-Constraints via Collaborative Language Agents: https://arxiv.org/abs/2405.16510    9
+- TravelPlanner: A Benchmark for Real-World Planning with Language Agents: https://arxiv.org/abs/2402.01622    262
+- https://aclanthology.org/2023.emnlp-main.189/
+- DAMO ConvAI: https://github.com/AlibabaResearch/DAMO-ConvAI/tree/main/api-bank
+- ReAct: Synergizing Reasoning and Acting in Language Models: https://arxiv.org/abs/2210.03629    4472
+- LLaMA: Open and Efficient Foundation Language Models: https://arxiv.org/abs/2302.13971    16507
+- Language Agents as Optimizable Graphs: https://arxiv.org/abs/2402.16823    27
+- https://openreview.net/forum?id=Kp1Uj5xayb
+- MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework: https://arxiv.org/abs/2308.00352    0
+- MetaGPT: The Multi-Agent Framework: https://github.com/geekan/MetaGPT
+- https://papers.nips.cc/paper_files/paper/2022/hash/3cf775c7e0b4387efa076ef47f7b3b09-Abstract-Conference.html
+- Mind2Web: Towards a Generalist Agent for the Web: https://arxiv.org/abs/2306.06070    698
+- Toolformer: Language Models Can Teach Themselves to Use Tools: https://arxiv.org/abs/2302.04761    2360
+
+### 2510.22780v2_How Do AI Agents Do HumanWorkComparing AI and HumanWorkflows Across Diverse Occupations.pdf
+**Title**: 2510.22780v2_How Do AI Agents Do HumanWorkComparing AI and HumanWorkflows Across Diverse Occupations.pdf
+
+**Agentic System Description**:
+
+- Title: 2510.22780v2_How Do AI Agents Do HumanWorkComparing AI and HumanWorkflows Across Diverse Occupations.pdf
+- Agent Node
+  - LLM models
+    - claude-sonnet-3.7 (workflow induction, step labeling, segment merging, quality evaluation, workflow alignment)
+    - gpt-4o (OpenHands sub-agent backbone)
+    - claude-sonnet-4 (OpenHands sub-agent backbone)
+    - GPT (ChatGPT Agent backbone; closed-source)
+    - Claude (Manus Agent backbone; closed-source)
+  - Responsibilities/Roles
+    - Induce hierarchical workflows from raw computer-use activities (mouse/keyboard actions and screenshots)
+    - Merge visual segments and produce NL sub-goals for each step
+    - Evaluate workflow step action-goal consistency and modularity
+    - Align human and agent workflows and compute match% and order-preservation%
+    - Comparative analytics on tool usage, programmability, efficiency, and success rates
+  - Prompts
+    - Segment merging: “Identify the front software on two screens (e.g., Chrome, VSCode, Finder). If same, output YES; else NO.”
+    - Goal-action consistency: “Determine if the action sequence attempts to progress toward the NL sub-goal. Output YES/NO.”
+    - Modularity: “Evaluate whether the current step is a single, causally consistent procedure rather than multiple distinct topics. Output YES/NO.”
+- Available Tools
+  - Vision and segmentation
+    - Pixel-level mean squared error between consecutive screenshots for boundary detection
+    - LLM-based semantic merging of adjacent segments
+  - Workflow construction
+    - Hierarchical workflow specification; bottom-up goal summarization to compose higher-level steps
+  - Quality and alignment
+    - LLM-based action-goal consistency checker (YES/NO)
+    - LLM-based modularity checker (YES/NO)
+    - LLM-based pairwise workflow step matching and order-preservation metrics
+  - Recording and preprocessing
+    - Human activity recorder: captures mouse/keyboard events and screenshots
+    - Post-processing: merge consecutive keypress/scrolls; detect double_click if two clicks within 0.1s
+  - Evaluation environments and verifiers
+    - TheAgentCompany (TAC) sandbox with program evaluators and multi-checkpoint rubrics
+    - Engineering tools and sites in sandbox: bash, python, file sharing, communication, project management
+  - Agent action space (wrappers around UI and program tools)
+    - browse_interactive, click, right_click, double_click, noop, scroll, zoom, keypress
+    - run_ipython, search, read, create, edit, run (bash)
+    - think, message, task_tracking
+    - open_image, search_image, generate_image
+    - reset_environment
+- Memory Features
+  - Workflow hierarchy as structured “workflow memory” of goals, sub-goals, and associated actions
+  - Step-level summaries propagated bottom-up to maintain context across levels
+  - Optional agent-side task_tracking tool (todo list) observed in closed-source agents
+- Sub-agents and Services
+  - Human Activity Recorder
+    - Captures raw mouse/keyboard traces and screenshots from workers
+  - Workflow Induction Service
+    - Visual boundary detector (MSE)
+    - Segment merger and NL goal annotator (claude-sonnet-3.7)
+    - Hierarchical composer (bottom-up goal summarization)
+  - Workflow Quality Verifier
+    - Action-goal consistency checker (claude-sonnet-3.7)
+    - Modularity checker (claude-sonnet-3.7)
+  - Workflow Alignment Service
+    - Pairwise step matcher and order-preservation scorer (claude-sonnet-3.7)
+  - Agent Runners
+    - OpenHands-GPT (backbone: gpt-4o) — coding-oriented; uses programmatic tools and UI wrappers
+    - OpenHands-Claude (backbone: claude-sonnet-4) — coding-oriented; uses programmatic tools and UI wrappers
+    - ChatGPT Agent (backbone: GPT; closed-source) — UI actions plus high-level tools; frequent web search
+    - Manus Agent (backbone: Claude; closed-source) — UI actions plus high-level tools; frequent user confirmation
+- System-Level Components and Interactions
+  - Data ingestion
+    - Collect human trajectories and screenshots
+    - Collect agent trajectories from multiple frameworks in sandboxed environments
+  - Processing pipeline per trajectory
+    - Preprocess actions (merge keypress/scroll/double_click)
+    - Visual boundary detection (MSE) → LLM semantic merging
+    - Hierarchical step labeling (NL sub-goals, bottom-up summaries)
+  - Verification and alignment
+    - Step-level action-goal consistency and modularity evaluation
+    - Pairwise human–agent workflow alignment (match% and order-preservation%)
+  - Analytics and reporting
+    - Tool usage profiling (UI vs programmatic; per step and per task)
+    - Program-use rate across domains; efficiency (time and action count); success via program verifiers
+    - Error taxonomy (fabrication, computation errors, format transforms, limited vision)
+    - Teaming recommendations by step programmability (readily/half/less programmable)
+- Agent Nodes (Observed Worker Agents)
+  - OpenHands-GPT
+    - Model: gpt-4o
+    - Role: generalist software/automation agent in sandbox; prefers programmatic tools (Python, bash, HTML)
+    - Prompts: not disclosed; runs via OpenHands framework
+    - Tools: full action space; file system; python, bash; image open; limited UI clicks
+    - Memory: file context and workflow outputs; no persistent long-term memory specified
+  - OpenHands-Claude
+    - Model: claude-sonnet-4
+    - Role: same as above with Claude backbone
+    - Tools/Memory: same as OpenHands-GPT
+  - ChatGPT Agent
+    - Model: GPT family (closed-source)
+    - Role: general-use computer agent; often uses search web; can operate UI and high-level tools
+    - Tools: action space mapped from UI; internal image-generation tool; web search
+    - Memory: task_tracking; internal scratchpad/thoughts (not fully exposed)
+  - Manus Agent
+    - Model: Claude family (closed-source)
+    - Role: general-use computer agent; confirms with users more frequently
+    - Tools: action space mapped from UI; custom ReAct-style program tools
+    - Memory: conversational context; task confirmations
+- System Outputs
+  - Hierarchical workflow trees for each human/agent trajectory
+  - Step alignment maps between paired workflows
+  - Quantitative metrics: match%, order-preservation%, success, progress, time, actions, cost
+  - Aggregated analyses across domains: data analysis, engineering, computation/admin, writing, design
+- Source Location
+  - Code and toolkit: Workflow Induction Toolkit: https://github.com/zorazrw/workflow-induction-toolkit
+  - TheAgentCompany: Benchmarking LLM Agents on Consequential Real World Tasks: https://arxiv.org/abs/2412.14161), WebArena (https://openreview.net/forum?id=oKn9c6ytLx), OSWorld (https://openreview.net/forum?id=tN61DTr4Ed), Mind2Web (https://openreview.net/forum?id=kiYqbO3wqw), WebShop (https://proceedings.neurips.cc/paper_files/paper/2022/file/82ad13ec01f9fe44c01cb91814fd7b8c-Paper-Conference.pdf), O*NET (https://www.onetcenter.org/)    82
+  - Training Software Engineering Agents and Verifiers with SWE-Gym: https://arxiv.org/abs/2412.21139), SWE-bench (https://openreview.net/forum?id=VTF8yNQM66), GUI grounding (https://arxiv.org/abs/2410.05243), API-based web agents (https://arxiv.org/abs/2410.16464), OpenCUA (https://arxiv.org/abs/2508.09123), Agent Workflow Memory (https://openreview.net/forum?id=NTAhi2JEEE), TroVE (https://openreview.net/forum?id=DCNCwaMJjI), What are Tools Anyway? (https://openreview.net/forum?id=Xh1B90iBSR), Re-Bench (https://arxiv.org/abs/2411.15114), AI Scientist (https://arxiv.org/abs/2408.06292), CRMArena (https://aclanthology.org/2025.naacl-long.194/), Design2Code (https://aclanthology.org/2025.naacl-long.199/), Loop11 study (https://www.loop11.com/ai-vs-human-usability-testing-a-comparative-analysis-using-loop11/)    97
+
+**Source Location**:
+- Workflow Induction Toolkit: https://github.com/zorazrw/workflow-induction-toolkit
+- https://openreview.net/forum?id=OJd3ayDDoF
+- TheAgentCompany: Benchmarking LLM Agents on Consequential Real World Tasks: https://arxiv.org/abs/2412.14161    82
+- https://openreview.net/forum?id=oKn9c6ytLx
+- https://openreview.net/forum?id=tN61DTr4Ed
+- https://openreview.net/forum?id=kiYqbO3wqw
+- https://proceedings.neurips.cc/paper_files/paper/2022/file/82ad13ec01f9fe44c01cb91814fd7b8c-Paper-Conference.pdf
+- https://www.onetcenter.org/
+- https://cdn.openai.com/pdf/d5eb7428-c4e9-4a33-bd86-86dd4bcf12ce/GDPval.pdf
+- https://openreview.net/forum?id=7evvwwdo3z
+- Training Software Engineering Agents and Verifiers with SWE-Gym: https://arxiv.org/abs/2412.21139    97
+- https://openreview.net/forum?id=VTF8yNQM66
+- Navigating the Digital World as Humans Do: Universal Visual Grounding for GUI Agents: https://arxiv.org/abs/2410.05243    204
+- Beyond Browsing: API-Based Web Agents: https://arxiv.org/abs/2410.16464    39
+- OpenCUA: Open Foundations for Computer-Use Agents: https://arxiv.org/abs/2508.09123    18
+- https://openreview.net/forum?id=NTAhi2JEEE
+- https://openreview.net/forum?id=DCNCwaMJjI
+- https://openreview.net/forum?id=Xh1B90iBSR
+- RE-Bench: Evaluating frontier AI R&D capabilities of language model agents against human experts: https://arxiv.org/abs/2411.15114    52
+- The AI Scientist: Towards Fully Automated Open-Ended Scientific Discovery: https://arxiv.org/abs/2408.06292    415
+- https://aclanthology.org/2025.naacl-long.194/
+- https://aclanthology.org/2025.naacl-long.199/
+- https://www.loop11.com/ai-vs-human-usability-testing-a-comparative-analysis-using-loop11/
+
+
+
+
+
+## RL
+### 2505.07686v2 S-GRPO Early Exit via RL in Reasoning Models.pdf
+**Title**: 2505.07686v2 S-GRPO Early Exit via RL in Reasoning Models.pdf
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM Models
+    - DeepSeek-R1-Distill-Qwen-7B
+    - DeepSeek-R1-Distill-Qwen-14B
+    - Qwen3-8B
+    - Qwen3-14B
+  - Responsibilities/Roles
+    - Generate full chain-of-thought (CoT) for a query
+    - Produce intermediate early-exit answers along a single CoT
+    - Provide final answers after </think>
+    - Learn to terminate thinking early when sufficient via S-GRPO training
+  - Prompts
+    - CoT style: step-by-step reasoning with </think> delimiter before final answer
+    - Complete answer inducer (inserted at early-exit points): "Time is limited, stop thinking and start answering.\n</think>\n\n"
+    - Task-style example prompt (math): "Please reason step by step, and put your final answer within \boxed{}."
+  - Available Tools
+    - Early-Exit Injector: inserts the answer-inducer token sequence at selected truncation positions
+    - Random Truncation Sampler: uniformly samples m positions along the thought tokens
+    - Rule-based Correctness Checker: evaluates answers as correct/incorrect per task rules
+    - Decaying Reward Calculator: assigns r_i = 1/2^(N_right-1) for correct, 0 otherwise in serial order
+    - Group Advantage Computer: computes A_i = r_i − mean(r) and broadcasts to tokens
+    - PPO-style Policy Optimizer: clipped objective with epsilon and Adam optimizer
+    - Dataset/Benchmark Loaders: DeepMath-103K (train), GSM8K, AIME 2024, AMC 2023, MATH-500, GPQA Diamond (eval)
+    - Oversampling Filter: samples extra queries to retain batches with at least some correct early exits
+    - Evaluation Harness: pass@1 accuracy and token count tracking under length budgets
+  - Memory Features
+    - On-policy training state with token-level advantage broadcast (no replay buffer)
+    - Parameter memory updated via policy gradients (Adam)
+    - Run-time implicit early-exit behavior emerges from trained weights (no external memory or verifier)
+- Sub-agents and Services
+  - Reward Service
+    - Input: ordered outputs O1..Om and O0 (full path)
+    - Logic: sequentially count correct answers; assign exponentially decaying rewards to correct; zero otherwise
+    - Output: reward vector r for the serial group
+  - Early-Exit Rollout Service
+    - Extracts truncated CoT segments CoT_i from the full thought path
+    - Appends answer inducer and generates intermediate answers C_i
+  - Full Thought Rollout Service
+    - Generates O0 = T1..Tn, </think>, C0 for each query
+  - Group Computation and Advantage Service
+    - Aggregates serial group responses; computes A_i and token-wise broadcasting
+  - Policy Update Service
+    - Optimizes JS-GRPO with PPO-style clipping; learning rate 1e-6; Adam optimizer
+  - Data Pipeline Service
+    - Loads and cleans training/evaluation data
+    - Performs oversampling and filtering akin to DAPO-style data filtering
+  - Evaluation Service
+    - Executes multi-trial evaluation across benchmarks
+    - Measures accuracy and token counts under varying max-length budgets
+- System-Level Components and Interactions
+  - Serial-Group Generation
+    - Stage 1: Full Thought Rollout
+      - Produce a complete CoT O0 = {T1..Tn, </think>, C0}
+      - Randomly sample m truncation positions P_i ~ Uniform(1, n)
+    - Stage 2: Early-Exit Thought Rollout
+      - For each P_i, form CoT_i = O0[:P_i] + "Time is limited, stop thinking and start answering.\n</think>\n\n"
+      - Generate intermediate answer C_i; collect O_i = (CoT_i, C_i)
+      - Construct serial group G = {O1..Om, O0}
+  - Decaying Reward Strategy
+    - Traverse serial group in order of exit; maintain N_right
+    - Assign r_i = 1/2^(N_right-1) if correct; else 0
+    - Encourages accurate early exits while preserving correctness-first behavior
+  - Advantage Computation and Policy Update
+    - Compute A_i = r_i − mean(r); broadcast to all tokens of O_i
+    - Optimize with clipped PPO-like objective; epsilon clipping; on-policy updates
+  - Training Configuration
+    - On-policy; m = 8 truncation points per query
+    - Batch: generation and training batch 128 × 8
+    - Optimizer: Adam; LR = 1e-6
+    - Oversampling to ensure presence of correct early-exit samples
+  - Inference Behavior
+    - No extra runtime tools required; model tends to exit earlier implicitly
+    - Supports token budget control; achieves shorter sequences with equal or higher accuracy
+- Where to Find the System or Code
+  - Paper (documentation): https://arxiv.org/abs/2505.07686
+  - Code repository: null (paper mentions an open-sourced training framework but provides no explicit URL)
+  - Related model/documentation links:
+    - DeepSeek-R1: https://github.com/deepseek-ai/DeepSeek-R1
+    - Qwen (project site): https://qwenlm.github.io
+- File
+  - Title: 2505.07686v2 S-GRPO Early Exit via RL in Reasoning Models.pdf
+
+**Source Location**:
+- S-GRPO: Early Exit via Reinforcement Learning in Reasoning Models: https://arxiv.org/abs/2505.07686    36
+- https://openai.com/research/learning-to-reason-with-llms
+- https://artofproblemsolving.com/wiki/index.php/AIME_Problems_and_Solutions
+- RouteLLM: Learning to Route LLMs with Preference Data: https://arxiv.org/abs/2406.18665    186
+- DeepSeek-R1: https://github.com/deepseek-ai/DeepSeek-R1
+- https://qwenlm.github.io
+- Grade School Math: https://github.com/openai/grade-school-math
+- Measuring Mathematical Problem Solving With the MATH Dataset: https://github.com/hendrycks/math
+- GPQA: A Graduate-Level Google-Proof Q&A Benchmark: https://github.com/idavidrein/gpqa
+
+### 2511.03773v1_Scaling_agent_learning.pdf
+**Title**: 2511.03773v1_Scaling_agent_learning.pdf
+
+**Agentic System Description**:
+
+- Title: 2511.03773v1_Scaling_agent_learning.pdf
+- Agentic System Description
+  - Agent Node
+    - LLM models
+      - Policy agent backbones: Llama-3.2-3B-Instruct, Llama-3.1-8B-Instruct, Qwen-2.5-7B-Instruct
+      - Experience model / task generator backbone: Llama-3.1-8B-Instruct (default), alternatives: Llama-3.2-3B-Instruct; optional world-model baseline: WebDreamer
+    - Responsibilities / roles
+      - Policy agent: perceive abstract textual state, plan with step-by-step reasoning, choose one admissible action per turn, interact over multi-step episodes, learn via PPO or GRPO
+      - Experience model (Mexp): simulate meta-dynamics in an abstract textual state space; given task, history, and retrieved demonstrations, generate next state and reward via explicit CoT; ground consequences of the agent’s action; stabilize reward signals
+      - Curriculum task generator (Mtask): share parameters with Mexp; propose feasible but challenging task variations using reward-entropy selection; expand task set online with bounded synthetic ratio λ
+      - Replay memory: store/offload offline and on-policy trajectories; retrieve top‑k similar experiences for Mexp conditioning
+      - RL trainer: compute advantages (PPO GAE or GRPO group-normalized), update policy within trust region; optionally learn value head for PPO
+      - Sim‑to‑real adapter: map real environment observations into the same abstract state space; support warm‑start and transfer
+    - Prompts (representative)
+      - Policy agent prompts
+        - WebShop Agent Prompt Template: uses <think> for step-by-step reasoning and <action> for a single admissible action; includes recent history, current observation, admissible actions
+        - ALFWorld Agent Prompt Template: uses <think>/<action>; conditioned on observation, history, and admissible textual actions
+        - WebArena Agent Prompt Template: uses <think>/<action>; lists 13 web actions (e.g., click, fill, scroll, select_option, hover, press, drag_and_drop, upload_file, noop, send_msg_to_user, etc.); warns to emit exactly one action
+      - Experience model prompts
+        - Reasoning step annotation (WebShop example): produce Task Tutorial and per‑step State Transition Plans; analyze action success/failure; concise CoT explaining causal transition and reward
+        - AX‑tree state mapping prompt (WebArena): produce high‑level reasoning plus refined observation (actionable subset of AXTree with element IDs); strict extraction format
+      - Task generation prompts
+        - WebShop / ALFWorld / WebArena variation prompts: generate or select challenging‑but‑feasible task variants; preserve action type, increase constraints; selection via brief justification
+  - Available Tools
+    - Action execution schema
+      - WebArena action space (13 actions): click, dblclick, fill, select_option, scroll, hover, press, focus, clear, drag_and_drop, upload_file, noop, send_msg_to_user
+      - ALFWorld high‑level text actions: goto, open, take, clean/heat/cool, put
+      - WebShop e‑commerce actions (search, filter, navigate, purchase) expressed as discrete textual operations
+    - Retrieval and embeddings
+      - Semantic encoder ϕ for top‑k nearest trajectory retrieval from replay buffer (cosine similarity)
+    - RL optimization
+      - PPO: GAE advantage; policy and value heads; KL‑regularized trust region
+      - GRPO: group‑relative reward normalization; value head removed
+    - Data interfaces
+      - Offline trajectory loaders (WebShop demos, ALFWorld demos, WebArena leaderboard agent runs + random/oracle rollouts)
+      - Experience replay buffer API: insert/update, top‑k retrieve by (state, action) query
+    - Serving and orchestration
+      - Scalable LLM serving for large‑batch rollout synthesis; parallel sampler coordinating the agent–experience‑model alternation
+    - Evaluation utilities
+      - GPT‑4o judge prompt for consistency/diversity/informativeness/hallucination (scores {0,1,2})
+  - Memory Features
+    - Interaction history window {(s_i, a_i)} for temporal consistency in Mexp and in the policy prompt
+    - Experience replay buffer
+      - Seeded with offline real‑environment trajectories
+      - Continually enriched online with synthetic rollouts
+      - Top‑k demonstration retrieval to ground predictions and reduce hallucinations
+    - Task queue with reward‑entropy scores; curriculum controls synthetic sampling ratio λ per iteration
+  - Sub‑Agents / Services
+    - Experience model (Mexp): reasoning‑driven simulator that outputs (st+1, rt+1, reasoning trace Rt)
+    - Curriculum task generator (Mtask): variation generator conditioned on high‑entropy tasks; shares weights with Mexp
+    - RL trainer: PPO/GRPO learner; computes advantages, applies trust‑region updates
+    - State‑space mapper: rule‑based or light fine‑tuned model to align real and synthetic observation spaces; WebArena AXTree → refined elements; WebShop/ALFWorld textual abstractions
+    - Evaluation judge (optional for analysis): GPT‑4o rubric scorer for ablations
+  - System‑Level Components and Interactions
+    - Abstract state space S
+      - Structured, token‑efficient textual representation (e.g., element lists, tables, IDs) instead of raw HTML/pixels
+      - Domain‑consistent transitions prioritized over pixel fidelity
+    - Experience rollout loop (per task)
+      - Policy agent selects action a_t given state s_t
+      - Experience model Mexp conditions on {history, task τ, top‑k demos} and generates Rt (CoT), next state s_{t+1}, reward r_{t+1}
+      - Trajectory appended to replay buffer; repeat until terminal
+    - Rewarding
+      - Outcome‑based reward: r=1 on successful terminal state; r=0 otherwise; failure states explicitly surfaced by Mexp
+    - Curriculum expansion
+      - Compute group reward entropy V_τ from n rollouts; select feasible, mid‑difficulty tasks (non‑zero variance) for highest learning signal
+      - Mtask produces challenging variations; enforce ratio λ of synthetic tasks per iteration
+    - Policy optimization
+      - PPO: Â via GAE; value head; per‑state KL penalty
+      - GRPO: group‑relative reward normalization; no value head; per‑state KL penalty
+    - Sim‑to‑real transfer (DreamGym‑S2R)
+      - Pretrain policy entirely on synthetic experiences
+      - Align observation mappings; warm‑start limited real‑env RL to reach higher final performance with fewer real rollouts
+    - Training data curation
+      - Offline seeds: WebShop human/oracle/random, ALFWorld expert/random, WebArena leaderboard agents + random
+      - Each transition auto‑annotated with explicit reasoning traces R*_t by a strong LLM for SFT of Mexp
+    - Experience model training objective (SFT)
+      - Joint loss over reasoning trace generation and next‑state prediction conditioned on history and retrieved demos
+    - Theoretical guarantees
+      - Policy improvement lower bound in real M via synthetic Mc under bounded reward/transition errors (ε_R, ε_P) and trust‑region KL radius δ
+  - Where to read the code/project (if any)
+    - null
+
+**Source Location**:
+- Scaling Agent Learning via Experience Synthesis: https://arxiv.org/abs/2511.03773    0
+- https://webarena.dev
+- 🛒 WebShop: https://github.com/princeton-nlp/WebShop
+- ALFWorld: https://github.com/alfworld/alfworld
+- https://ai2thor.allenai.org
+- The Llama 3 Herd of Models: https://arxiv.org/abs/2407.21783    10084
+- https://qwenlm.github.io/blog/qwen2.5/
+- Is Your LLM Secretly a World Model of the Internet? Model-Based Planning for Web Agents: https://arxiv.org/abs/2411.06559    60
+- Proximal Policy Optimization Algorithms: https://arxiv.org/abs/1707.06347    22705
+- https://webarena.dev/leaderboard
+- BrowserGym: https://github.com/webarena-dev/BrowserGym
+- ScribeAgent: Towards Specialized Web Agents Using Production-Scale Workflow Data: https://arxiv.org/abs/2411.15004    23
+- AgentOccam: A Simple Yet Strong Baseline for LLM-Based Web Agents: https://arxiv.org/abs/2410.13825    54
+- Learn-by-interact: A Data-Centric Framework for Self-Adaptive Agents in Realistic Environments: https://arxiv.org/abs/2501.10893    58
+- https://os-world.github.io
+- https://bfcl.cs.berkeley.edu
+
+
+### agent_scaling_agent_learning_via_experience_synthesis.jpg
+**Title**: agent_scaling_agent_learning_via_experience_synthesis.jpg
+
+**Agentic System Description**:
+
+- agent_scaling_agent_learning_via_experience_synthesis.jpg
+  - Agent Node
+    - LLM model names: unspecified (paper states LLM-based policy agent; served via scalable LLM infrastructure)
+    - Responsibilities/Roles:
+      - Execute actions to solve given tasks
+      - Interact with the Reasoning Experience Model to obtain next abstract state, reward, and termination signals
+      - Learn a policy via RL from synthesized experiences and replayed transitions
+    - Prompts:
+      - Task instruction prompt (example shown: “Find out how much I spent on food shopping from mid Jan to the end Jan 2023.”)
+      - Policy/action selection prompt conditioned on current abstract state and task
+      - Uses CoT-style reasoning traces returned by the Experience Model as feedback and guidance
+    - Available Tools:
+      - Experience Model API (query to get next abstract state, informative states, reward signal, and done flag)
+      - Experience Replay Buffer Retriever (retrieve similar transitions and real-world seeds)
+      - Task Value Estimator (score task difficulty/progress)
+    - Memory Features:
+      - Short-term: working memory of current task, abstract state, recent actions/rewards
+      - Long-term: Experience Replay Buffer storing synthesized and real-world transitions; continually updated during training
+  - Sub‑agents and Services
+    - Reasoning Experience Model (REM)
+      - LLM model names: unspecified; reasoning-centric LLM service
+      - Role: Distill environment dynamics into step-by-step reasoning to produce consistent state transitions and reward signals
+      - Inputs: current abstract state, action, task context; optionally retrieved examples from replay buffer
+      - Outputs: next abstract state, reward, done, informative states; CoT traces
+      - Tools: retrieval from replay buffer; CoT reasoning; vectorized rollout interface for scalable simulation
+      - Memory: reads/writes exemplar transitions to replay buffer
+    - Curriculum Task Generator
+      - LLM model names: unspecified
+      - Role: Generate policy-aligned, challenging task variations that adapt to the agent’s current capability
+      - Inputs: task instructions, agent progress metrics, task value estimates
+      - Outputs: new curriculum tasks; termination signal when loop converges
+      - Tools: Task Value Estimator; access to agent performance stats
+      - Memory: maintains curriculum queue and difficulty progression
+    - Task Value Estimator
+      - Role: Estimate reward entropy/value to guide curriculum and training prioritization
+      - Inputs: rewards, success/failure flags, REM feedback
+      - Outputs: task value scores, sampling priorities
+    - RL Trainer
+      - Algorithms: PPO, GRPO (mentioned as baselines/targets)
+      - Role: Optimize the policy agent on rollouts from REM and replay buffer; support sim-to-real transfer
+      - Inputs: batches from replay buffer and on-policy trajectories
+      - Outputs: updated policy parameters
+  - System‑level Components and Interactions
+    - Scalable LLM Serving Infrastructure
+      - Hosts REM and other LLM services with vectorized rollout support
+      - Provides high-throughput API for experience synthesis and CoT generation
+    - Experience Replay Buffer
+      - Initialized with real-world data; continually enriched with fresh interactions
+      - Supports retrieval for REM and sampling for RL training
+      - Stores: abstract states, actions, rewards, done, CoT traces, task metadata
+    - Abstract State Representation
+      - REM converts raw environment observations into unified, vectorized abstract states to stabilize training
+    - Online Training Loop
+      - Steps:
+        - Curriculum Task Generator produces/updates tasks
+        - Agent queries REM to simulate environment steps and receive rewards
+        - Transitions appended to replay buffer
+        - RL Trainer optimizes policy (e.g., PPO/GRPO) on synthesized + replayed experiences
+        - Task Value Estimator scores tasks; curriculum adapts based on scores and success/failure
+    - Sim-to-Real and Real-to-Sim Bridge
+      - Seed replay buffer with real-world trajectories
+      - Transfer policies trained on synthetic experiences back to real environments for additional gains
+    - Evaluation and Success Metrics
+      - Success/Done flags from REM; reward entropy; success rates across WebShop/WebArena-style tasks and RL benchmarks
+  - Where to read the code/resources
+    - DreamGym project/code: not specified in the image (null)
+    - Baselines/environments referenced: WebShop, WebArena; algorithms PPO, GRPO (canonical links listed below)
+
+**Source Location**:
+- https://webarena.dev
+- https://webshop-pnlp.github.io
+- Proximal Policy Optimization Algorithms: https://arxiv.org/abs/1707.06347    22705
+- DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models: https://arxiv.org/abs/2402.03300    3054
+
+
+
+
+
+## Applications
+### 2024 ICLR A_Real_World_WebAgent_wit.pdf
+**Title**: 2024 ICLR A_Real_World_WebAgent_wit.pdf
+
+**Agentic System Description**:
+
+- Agent Node
+  - Title: A_Real_World_WebAgent_wit.pdf
+  - LLM Models
+    - HTML-T5 (Base/Large/XL)
+      - Role: Planner and HTML summarizer specialized for long, messy, real‑world HTML
+      - Architecture: Encoder‑decoder; local and global attention in encoder; dense attention in decoder; context up to ~16K tokens at inference; pre‑trained with mixture of long‑span denoising on CommonCrawl HTML; tokenizer: SentencePiece 32K
+      - Prompts
+        - Planning: "Given instruction I, prior sub‑instruction history H, and current page HTML D, output the next sub‑instruction. Emit a special end‑of‑episode sub‑instruction when task is complete."
+        - Summarization/Retrieval: "From HTML D, return data‑ref ids (and/or CSS/XPath anchors) that are relevant to the sub‑instruction."
+        - Inputs: user instruction, sub‑instruction history, current raw HTML
+        - Outputs: next sub‑instruction, list of snippet reference ids (data‑ref) for extractive snippets
+      - Training signals: self‑experience supervision from scripted planning + regex retrieval + executed programs; fine‑tuned for closed‑loop planning and snippet extraction
+    - Flan‑U‑PaLM (540B)
+      - Role: Grounded program synthesis for open‑ended web actions
+      - Prompts
+        - Few‑shot Python/Selenium examples (click, type, select, scroll, submit, navigation)
+        - Instruction: "Using the provided sub‑instruction and HTML snippets, generate a Python program. Include the sub‑instruction as a comment. Use CSS selectors and provided data‑ref ids. Output code only."
+        - Inputs: next sub‑instruction, task‑relevant HTML snippets, few‑shot code exemplars
+        - Outputs: Executable Python code for Selenium WebDriver
+      - Notes: Treated as frozen decoder‑only generalist programmer; alternatives evaluated: Flan‑PaLM‑62B, Flan‑PaLM‑8B, gpt‑3.5‑turbo
+  - Responsibilities/Roles
+    - Understand user’s natural‑language task goal
+    - Decompose into sub‑instructions over multiple steps
+    - Condense long HTML into task‑relevant snippets
+    - Generate grounded Python actions over an open‑ended action space
+    - Execute actions in a real browser, observe new state, iterate until completion or max steps
+- Available Tools
+  - Browser automation: Selenium WebDriver (Python)
+  - Python runtime and interpreter for executing synthesized programs
+  - HTML retriever/snippetter: extract elements via data‑ref attributes; CSS selector/XPath generators; regex‑based retrieval for bootstrapping
+  - Long‑sequence modeling infra: LongT5 local/global attention code
+  - Training pipelines: SeqIO and T5X for pretraining/finetuning
+  - Utility JS helpers inside code generation (e.g., getScrollParent + scrollBy)
+- Memory Features
+  - Planning memory: sub‑instruction history across steps
+  - HTML memory: cache of last raw HTML and extracted snippets keyed by data‑ref
+  - Execution memory: program traces, runtime exceptions, URL history, environment feedback flags
+  - Result memory: attribute coverage score tracking per task; success/failure labels
+  - Experience buffer: self‑gathered demonstrations of (instruction, plans, snippets, programs, outcomes) for HTML‑T5 fine‑tuning
+- Sub‑Agents and Services
+  - Planner‑Summarizer (HTML‑T5 service): predicts next sub‑instruction and snippet ids
+  - Programmer (Flan‑U‑PaLM service): synthesizes Python/Selenium given plan + snippets
+  - Scripted Planner (rule‑based bootstrapper): decomposes templated instructions; produces initial plan sequences
+  - Regex Retriever (bootstrap summarizer): extracts candidate reference ids from HTML
+  - Execution Engine: runs synthesized Python in Selenium; captures HTML and feedback
+  - Experience Filter: drops traces with execution errors/retriever errors/invalid URLs
+  - Evaluator: computes task success and attribute coverage scores
+- System‑Level Components and Interactions
+  - Pretraining (HTML‑T5)
+    - Corpus: CommonCrawl HTML (3.41M examples) with subtree extraction around <label for=...>
+    - Objective: mixture of long‑span denoising with span means μ ∈ {8, 64}; 15% masking; input 4096 tokens, output 910 tokens
+    - Encoder attention: local window radius r=127 + transient global attention with block size k=16
+  - Self‑Experience Supervision Pipeline
+    - Instruction Template Sampler: fills placeholders (entities, constraints) for maps, real‑estate, social media
+    - Scripted Planning + Regex Retrieval: generates sub‑instructions and candidate snippet ids
+    - Program Synthesis: Flan‑U‑PaLM generates Python for each step (few‑shot)
+    - Execution + Feedback: run code in Selenium; collect HTML; detect failures
+    - Filtering: prune critical failures (execution errors, bad retrieval, malformed URLs)
+    - Fine‑tuning HTML‑T5: supervise on (instruction, history, HTML) → (next sub‑instruction, snippet ids)
+  - Runtime Control Loop
+    - Step 1: Observe current raw HTML; maintain sub‑instruction history
+    - Step 2: HTML‑T5 → next sub‑instruction + snippet references
+    - Step 3: Build programmer prompt with few‑shot code + sub‑instruction + snippets
+    - Step 4: Flan‑U‑PaLM → Python/Selenium program
+    - Step 5: Execute; fetch updated page HTML; append to history; repeat
+    - Termination: HTML‑T5 emits end‑of‑episode sub‑instruction or hit max iterations
+  - Error Handling and Recovery
+    - Program errors: catch exceptions; mark failure; optionally retry or terminate
+    - Planning conflicts: detect contradictions with user instruction; stop and log
+    - Summarization misses: fall back to broader snippet extraction or re‑plan
+  - Evaluation and Benchmarks
+    - Real‑world websites: real‑estate (long‑horizon form filling), social‑media (hyperlink navigation), map (route planning)
+    - Metrics: success rate; attribute coverage score; error breakdown across programming/planning/summarization
+    - Offline: Mind2Web action prediction; MiniWoB++ success rate; WebSRC QA; Description Generation
+- Agent Prompts (indicative)
+  - Planner/Summarizer (HTML‑T5)
+    - System: "You plan and summarize long HTML for web tasks. Given instruction, history, and HTML, output the next sub‑instruction and data‑ref ids to retrieve relevant HTML."
+    - Few‑shot: tuples of (instruction, history, HTML excerpt) → (sub‑instruction, [data‑ref ids])
+    - Stop conditions: emit special token to indicate completion
+  - Programmer (Flan‑U‑PaLM)
+    - System: "You are a Python Selenium programmer. Use provided HTML snippets and sub‑instruction to write executable code. Use CSS selectors with given data‑ref values. Output only code."
+    - Few‑shot: canonical tasks (type, click, select option, scroll, submit, navigation)
+    - Conventions: include sub‑instruction as a comment atop each block
+- Tools and APIs (explicit)
+  - Selenium WebDriver: driver.get, find_element(By.CSS_SELECTOR,...), send_keys, click, submit, execute_script
+  - CSS Selectors keyed by data‑ref (e.g., [data-ref="175"])
+  - XPath fallbacks; regex for bootstrapping retrieval
+  - JS scrolling helper for scrollable ancestors
+- Data and Artifacts
+  - Pretraining data: CommonCrawl HTML (April 2019 WARC subset; Unicode filtered; label‑anchored subtrees)
+  - Self‑experience traces: 260 (real‑estate), 230 (social‑media), 410 (map)
+  - Benchmarks: MiniWoB++, Mind2Web, WebSRC, Description Generation
+- Where to Read Code/Project Pages
+  - WebAgent/HTML‑T5 code: null (not released in the paper)
+  - Supporting repos/tools: LongT5 implementation; T5X/SeqIO training libs; Selenium WebDriver
+
+**Source Location**:
+- LongT5: Efficient Text-To-Text Transformer for Long Sequences: https://github.com/google-research/longt5
+- https://commoncrawl.org/
+- https://www.selenium.dev/
+- SeqIO: https://github.com/google/seqio
+- T5X: https://github.com/google-research/t5x
+- T5X: https://github.com/google-research/t5x/blob/main/docs/models.md#flan-t5-checkpoints
+- Installation: https://github.com/stanfordnlp/miniwob-plusplus
+- https://osu-nlp.github.io/Mind2Web/
+- WebSRC: https://github.com/Alibaba-NLP/WebSRC
+
+### 2412.15660v1 Adaptable and Precise Enterprise-Scenario LLM Function-Calling Capability Training Pipeline.pdf
+**Title**: 2412.15660v1 Adaptable and Precise Enterprise-Scenario LLM Function-Calling Capability Training Pipeline.pdf
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM Models
+    - Primary: Qwen2.5-Coder-7B-Instruct (LoRA fine-tuned for scenario-specific function calling)
+    - Alternative bases explored: Qwen2.5-7B-Instruct, Qwen2-7B-Instruct, Qwen1.5-7B-Chat, Qwen2.5-7B (pretrained)
+    - Reference/baseline generators: GPT-4, GPT-4o (used for data synthesis and benchmarking; not deployed on-prem)
+  - Responsibilities/Roles
+    - Interpret single-turn user queries in enterprise scenarios
+    - Select the correct tool/workflow from a provided tool list
+    - Extract and normalize parameters; fill required/optional fields with types/defaults/examples
+    - Output structured function-calling instructions (JSON) with structural completeness
+    - Maintain stability and accuracy under domain-specific constraints and limited compute
+  - Prompts
+    - Inference system prompt
+      - Role: “Enterprise Function-Calling Agent”
+      - Instructions: choose exactly one tool from the tool list; validate required params; format output JSON per schema; avoid hallucinated functions/fields; keep IDs/names as given; language: Chinese for HR scenario
+      - Output schema: {"tool_name": "...", "arguments": {param: value, ...}}
+    - Tool list prompt segment
+      - For each tool: name, description, parameters[{name, description, type, required, default, examples}]
+      - Order randomized per sample to reduce position bias
+    - Training-time prompts (data synthesis and augmentation)
+      - Seed question generation (role setting, generation rules, output format)
+      - Augmentation strategies: replacement, rewriting, simplification, error-introduction
+      - Parameter extraction prompt to build gold function-call labels
+  - Available Tools (example: Digital HR workflows; each with name, description, parameters with type/required/default/examples)
+    - Employee_Behavior_Analysis
+    - Staff_Training_Inquiry
+    - Personnel_Appointment_Transfer_Inquiry
+    - Staff_Capability_Analysis
+    - Employee_Performance_Inquiry
+    - Employee_Work_Experience
+    - Employee_Benefits_Inquiry
+    - Marketing_Employee_Data_Inquiry
+    - Recruitment_Requirements_Inquiry
+    - Staff_Basic_Information_Inquiry
+    - Employee_Promotion_Inquiry
+    - Marketing_Staff_Achievement_Inquiry
+    - Employee_Project_Participation_Analysis
+    - Person_Job_Matching_Analysis
+  - Memory Features
+    - Short-term: tool list and current query in context; no multi-turn state (single-turn focus)
+    - Model-adapter memory: bank of LoRA adapters per data cycle/task; supports selective loading/merging (linear, SVD, cat, TIES) for lifecycle control
+    - Optional domain defaults/examples embedded in tool parameter specs to stabilize filling
+    - Logs/traces for evaluation; potential future data-feedback loop for continual updates
+  - Tools/Services accessible at runtime
+    - Workflow Engine APIs (enterprise internal services that execute the selected workflow against databases)
+    - Tool Registry (validated tool specs provided to the agent per session)
+  - Safety/Constraints
+    - On-prem deployment to prevent data leakage
+    - Context length must exceed example length to avoid truncation of structured JSON
+
+- Sub-Agents and Services
+  - Data Synthesis Agent
+    - LLM: GPT-4/GPT-4o
+    - Inputs: tool specs; optional human-annotated seed QA
+    - Outputs: diverse seed questions per tool; parameter-aligned function-call labels; multi-template augmentation
+    - Prompts: role-setting, generation rules, output-only lines; augmentation templates (replacement/rewriting/simplification/error)
+  - Parameter Extraction Agent
+    - LLM: GPT-4 class
+    - Task: extract parameters from questions; build gold JSON call consistent with tool schema
+  - Data Validator and Assembler
+    - Tasks: structural checks; param-type/required checks; deduplication; train/val/test split; ShareGPT/OpenAI JSON format conversion; tool list randomization
+  - Fine-Tuning Trainer
+    - Frameworks: LLaMA-Factory + PEFT + DeepSpeed ZeRO-3
+    - Method: LoRA (r=8, alpha=16, dropout=0), bf16, cosine LR, warmup 0.1, grad-accum 16, batch 1, epochs ~10
+    - Hardware: 4× NVIDIA A10 24GB; ~5 hours
+  - LoRA Adapter Merger
+    - Methods: linear combination, SVD, parameter concatenation (cat), TIES, DARE
+    - Purpose: multi-task/data-cycle composition without retraining; selective influence control
+  - Evaluation Suite
+    - AST-based evaluator (BFCL-derived): checks structural completeness, tool selection accuracy, parameter filling accuracy
+    - Confusion Matrix Analyzer: per-tool precision/recall/F1; identifies interfering or ambiguous tools; informs tool spec refinement
+    - Optional Exec evaluator for executable scenarios
+  - Runtime Orchestrator
+    - Serves fine-tuned model on-prem; injects current tool list; validates and dispatches calls to Workflow Engine; collects logs
+  - Workflow Engine
+    - Encapsulates enterprise APIs/ETL/SQL pipelines per tool; returns results for user delivery
+  - Monitoring and Analytics
+    - Tracks structural errors, tool errors, parameter errors; drift detection; supports dataset updates and adapter selection
+
+- System-Level Components and Interactions
+  - Inputs
+    - Human QA seeds (optional, expert-labeled)
+    - Scenario API Tool Specs: name, description, params{name, description, type, required, defaults, examples}
+  - Data Synthesis Module
+    - Seed Question Generation (per tool; role diversity; style rules; output-only format)
+    - Data Augmentation (replacement, rewriting, simplification, error-introduction)
+    - Function-Call Label Generation (parameter extraction; assemble JSON instruction)
+    - Validation and Assembly (format checks; dataset splits; ShareGPT for SFT; BFCL_V3 for eval; tool list order randomization)
+  - Model Fine-Tuning Module
+    - LoRA SFT with LLaMA-Factory + PEFT + DeepSpeed ZeRO-3
+    - Checkpoint selection (best between iters 7–10)
+    - Adapter Merging (optional) for multi-cycle data integration
+  - Model Evaluation Module
+    - AST Evaluation: structural completeness, tool selection accuracy, parameter filling accuracy
+    - Confusion Matrix: per-tool TP/TN/FP/FN; precision/recall/F1; tool ambiguity analysis
+    - Reporting: compares against GPT-4/4o baselines and base Qwen
+  - Deployment and Serving
+    - On-prem model hosting; JSON function-call interface
+    - Tool Registry injection per request; enforce context length > sample length
+    - Result delivery via Workflow Engine to user
+  - Continual Improvement Loop
+    - Analyze confusion/errors; refine tool descriptions (shortened versions recommended)
+    - Synthesize new data; merge adapters; retrain or adapter-swap without full retraining
+    - Future: data-feedback auto-labeling from real interactions for continual SFT
+
+- Data and Formats
+  - Training data: 1,260 AI-augmented + 1,035 human-augmented instances (avg >3,000 tokens)
+  - Evaluation sets: DHR_test_A (207 seeds), DHR_test_B (135 new questions)
+  - Formats: ShareGPT/OpenAI JSON for SFT; BFCL_V3 eval format for AST parsing
+  - Tool description length variants: Long/Short/None; short descriptions yield best generalization
+
+- Example HR Tool Spec Pattern
+  - name: Marketing_Employee_Data_Inquiry
+  - description: concise task scope; avoid overlaps with similar tools
+  - parameters
+    - employee_name: string, required
+    - year: integer, optional, default: current year
+    - marketing_type: enum{composite, channel, customer}, optional
+    - organization: string, optional
+    - examples: provided for high-precision fields
+
+- Where to Read Code/Artifacts
+  - No dedicated project repository released for this paper’s pipeline
+  - Implementation references: LLaMA-Factory, PEFT, DeepSpeed, BFCL benchmark/codebase; Qwen models on Hugging Face
+
+- Document
+  - Title: Adaptable and Precise Enterprise-Scenario LLM Function-Calling Capability Training Pipeline.pdf
+  - Authors: Guancheng Zeng et al., Digital China AI Research
+  - Venue: arXiv:2412.15660v1 (2024-12-20)
+
+**Source Location**:
+- Adaptable and Precise: Enterprise-Scenario LLM Function-Calling Capability Training Pipeline: https://arxiv.org/abs/2412.15660    2
+- https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct
+- Qwen Technical Report: https://arxiv.org/abs/2309.16609    2725
+- Qwen: https://github.com/QwenLM/Qwen
+- Used by [Amazon](https://aws.amazon.com/cn/blogs/machine-learning/how-apoidea-group-enhances-visual-information-extraction-from-banking-documents-with-multimodal-models-using-llama-factory-on-amazon-sagemaker-hyperpod/), [NVIDIA](https://developer.nvidia.com/rtx/ai-toolkit), [Aliyun](https://help.aliyun.com/zh/pai/use-cases/fine-tune-a-llama-3-model-with-llama-factory), etc.: https://github.com/hiyouga/LLaMA-Factory
+- LlamaFactory: Unified Efficient Fine-Tuning of 100+ Language Models: https://arxiv.org/abs/2403.13372    973
+- Quickstart: https://github.com/huggingface/peft
+- ZeRO: Memory Optimizations Toward Training Trillion Parameter Models: https://arxiv.org/abs/1910.02054    1267
+- DeepSpeed: https://github.com/microsoft/DeepSpeed
+- https://gorilla.cs.berkeley.edu/blogs/8_berkeley_function_calling_leaderboard.html
+- 🧭	Welcome: https://github.com/open-compass/opencompass
+- Measuring Massive Multitask Language Understanding: https://github.com/hendrycks/test
+- CMMLU: Measuring massive multitask language understanding in Chinese: https://arxiv.org/abs/2306.09212    370
+- https://cevalbenchmark.com
+- CEval: https://github.com/SJTU-LIT/CEval
+- Grade School Math: https://github.com/openai/grade-school-math
+- ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs: https://arxiv.org/abs/2307.16789    983
+- https://toolllm.github.io
+- ToolBench: https://github.com/THUDM/ToolBench
+- ToolACE: Winning the Points of LLM Function Calling: https://arxiv.org/abs/2409.00920    87
+- ToolAlpaca: Generalized Tool Learning for Language Models with 3000 Simulated Cases: https://arxiv.org/abs/2306.05301    255
+- APIGen: Automated Pipeline for Generating Verifiable and Diverse Function-Calling Datasets: https://arxiv.org/abs/2406.18518    98
+- https://chatgpt.com
+- LoRA: Low-Rank Adaptation of Large Language Models: https://arxiv.org/abs/2106.09685    13939
+- ReAct: Synergizing Reasoning and Acting in Language Models: https://arxiv.org/abs/2210.03629    4472
+- The Rise and Potential of Large Language Model Based Agents: A Survey: https://arxiv.org/abs/2309.07864    1244
+- Model merging with SVD to tie the Knots: https://arxiv.org/abs/2410.19735    35
+
+### 2502.09819v1 A SOLVER-AIDED HIERARCHICAL LANGUAGE FOR LLM-DRIVEN CAD DESIGN.pdf
+**Title**: 2502.09819v1 A SOLVER-AIDED HIERARCHICAL LANGUAGE FOR LLM-DRIVEN CAD DESIGN.pdf
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM models: OpenAI gpt-4o (untuned, general-purpose VLM)
+  - Responsibilities/Roles:
+    - Generate full AIDL programs from text prompts
+    - Plan hierarchical CAD designs (structures) and specify geometric/structural constraints
+    - Self-repair via validate-until-correct loop using execution tracebacks
+    - Produce multiple seeds/runs and select valid programs
+  - Prompts:
+    - System/context: Complete AIDL language description (syntax, primitives, structures, constraints, operators, synonyms)
+    - Few-shot: Six curated example programs (bottle opener, ruler, hanger, key, toy sword, wrench)
+    - Task: “Generate a complete AIDL program for the desired model”
+    - Feedback: Execution/validation errors and Python tracebacks injected; request to fix and retry
+    - Sampling: 10 runs per prompt with different seeds; up to N=5 retries per run
+
+- Tools
+  - AIDL DSL and Runtime
+    - Geometry primitives: Point, Line, Arc, Circle, Rectangle, Triangle, etc.
+    - Structures: Assembly, Solid, Hole, Drawing
+    - Constraints:
+      - Unary: horizontal, diameter, fixed, etc.
+      - Binary: coincident, tangent, equal, symmetric, angle, perpendicular/orthogonal (synonyms)
+      - Logical/equality/inequality expressions with parameters and arithmetic ops (sin, cos, min, max, etc.)
+    - References: first-class pointers to geometry, parameters, and structures; synonym-friendly names compiled to unique IDs
+    - Boolean ops: implied by structure types (Solid, Hole); applied post-solve
+  - Validator/Compiler
+    - Validity checks: geometry references only within same Structure; constraints only within subtree
+    - Parameter/geometry graph construction; slack-variable non-inversion constraints on bounding boxes
+    - Deferred expressions: bounding boxes and ambiguous angle conventions resolved at solve-time
+  - Hierarchical Constraint Solver
+    - Strategy: post-order recursive solve with iterative deepening
+      - Stage 1: translation deepening (add child structure translations as free variables)
+      - Stage 2: geometric deepening (add full parameters progressively)
+    - Numerical method: iterated Newton solver (SolveSpace-style Jacobians)
+    - Branch pruning: re-write min/max branches based on initialization; iterate until valid for original constraints
+    - Stability preference: translate substructures before modifying internal geometry
+  - Boolean Modeling Kernel and Export
+    - OpenCascade (OCCT) for union/subtract; curve aggregation to faces
+    - STEP format export
+  - Executor/Renderer
+    - Python execution of generated AIDL; returns tracebacks
+    - 2D rendering of solved and booleaned geometry
+  - Evaluation (external to generation loop)
+    - CLIP scoring on renderings
+    - Perceptual study ranking
+    - Baselines: OpenSCAD, AIDL-no-constraints, AIDL-no-hierarchy
+
+- Memory Features
+  - Conversational memory across retries (errors, partial code, corrections)
+  - Program-state memory: structure tree with named entities and parameters as first-class mutable values
+  - Synonym canonicalization memory: map user/LLM terms to canonical internal identifiers
+  - Partial executability traces for iterative repair
+  - Hierarchical locality: constraints scoped to subtrees to preserve local edits
+
+- Sub-agents and Services
+  - Front-End Orchestrator
+    - Orchestrates LLM prompting, program execution, error capture, and retry policy
+    - Manages seeds and run budgets; collects valid outputs
+  - Compiler/Validator
+    - Enforces subtree-scoped references/constraints; injects slack constraints; defers expressions
+  - Constraint Solver Service
+    - Performs recursive post-order solve; manages deepening frontier and constraint re-introduction
+  - Boolean Post-Processor
+    - Applies structure-type-driven booleans; aggregates faces; exports STEP
+  - Renderer
+    - Generates 2D visualizations from final geometry
+  - Baseline Generators (for comparison only)
+    - OpenSCAD program generator using LLM prior knowledge
+    - AIDL-no-constraints and AIDL-no-hierarchy generators via modified prompts
+
+- System-Level Components and Interactions
+  - Input: natural-language prompt
+  - Planning/Synthesis: LLM produces hierarchical AIDL with semantically named structures and constraints
+  - Execution/Validation:
+    - Run AIDL; if failure → traceback → LLM repair; retry up to N times
+    - On success → build structure tree and constraint system
+  - Solving:
+    - Recursive local solves; iterative deepening (translation → geometric); iterated Newton; branch pruning
+  - Post-Processing:
+    - Boolean composition (Solid/Hole) via OCCT; face discovery; STEP export
+  - Output:
+    - Final CAD geometry (2D), STEP files, and renders
+  - Optional Evaluation:
+    - CLIP score computation; perceptual study ranking
+  - Editability Loop (post-hoc):
+    - Local edits to substructures and constraints ripple predictably due to hierarchical scoping
+
+- File
+  - Title: 2502.09819v1 A SOLVER-AIDED HIERARCHICAL LANGUAGE FOR LLM-DRIVEN CAD DESIGN.pdf
+  - Agentic system description: AIDL front-end LLM planner + hierarchical solver-aided CAD pipeline with recursive constraint solving and boolean post-processing; validate-until-correct repair loop
+  - Source location (project/code): null
+
+**Source Location**:
+- CadQuery: https://github.com/CadQuery/cadquery
+- https://cad.onshape.com/FsDoc/
+- http://doi.acm.org/10.1145/3272127.3275006
+- Learning to Infer Graphics Programs from Hand-Drawn Images: http://arxiv.org/abs/1707.09627    237
+- https://papers.nips.cc/paper/2018/hash/6788076842014c83cedadbe6b0ba0314-Abstract.html
+- https://proceedings.neurips.cc/paper/2021/hash/2e92962c0b6996add9517e4242ea9bdc-Abstract.html
+- https://dl.acm.org/doi/10.1145/3528223.3530078
+- https://openreview.net/forum?id=ZR2CDgADRo&referrer=%5BTMLR%5D(%2Fgroup%3Fid%3DTMLR
+- https://dl.acm.org/doi/10.1145/3478513.3480562
+- https://dl.acm.org/doi/10.1145/3528223.3530133
+- SECAD-Net: Self-Supervised CAD Reconstruction by Learning Sketch-Extrude Operations: https://arxiv.org/abs/2303.10613    46
+- StarCoder: may the source be with you!: http://arxiv.org/abs/2305.06161    973
+- StarCoder 2 and The Stack v2: The Next Generation: http://arxiv.org/abs/2402.19173    488
+- WizardCoder: Empowering Code Large Language Models with Evol-Instruct: http://arxiv.org/abs/2306.08568    811
+- https://occt3d.com/
+- https://www.semanticscholar.org/paper/SketchGen%3A-Generating-Constrained-CAD-Sketches-Para-Bhat/adfce546ad940c724b25e6c0023c5d5bc7362272
+- ExtrudeNet: Unsupervised Inverse Sketch-and-Extrude for Shape Parsing: http://arxiv.org/abs/2209.15632    44
+- https://solvespace.com/
+- https://ieeexplore.ieee.org/document/9523001/
+- https://dl.acm.org/doi/10.1145/3450626.3459818
+- https://ieeexplore.ieee.org/document/9879522/
+- https://ieeexplore.ieee.org/document/9710909/
+- https://proceedings.mlr.press/v119/nash20a.html
+- https://proceedings.mlr.press/v162/xu22k.html
+- https://ieeexplore.ieee.org/document/8954378/
+- https://www.semanticscholar.org/paper/f81a1b4510631d14b5b565c4701ee056f8d5c72f
+- A Solver-Aided Hierarchical Language for LLM-Driven CAD Design: https://arxiv.org/abs/2502.09819    3
+
+### 2510.12399v1_A Survey of Vibe Coding with Large Language Models.pdf
+**Title**: 2510.12399v1_A Survey of Vibe Coding with Large Language Models.pdf
+
+**Agentic System Description**:
+
+- Title: 2510.12399v1_A Survey of Vibe Coding with Large Language Models.pdf
+- Agent Node
+  - LLM Models (primary options)
+    - GPT‑5 Pro (reasoning/coding)
+    - Claude Sonnet 4.5 (reasoning/coding, long-context)
+    - DeepSeek‑Coder‑V2 (open-source coding + math)
+    - Qwen3‑Coder / Qwen2.5‑Coder (MoE coding models)
+    - Code Llama, StarCoder2, Codestral 25.01, CodeGemma, SantaCoder (open‑source coding LLMs)
+  - Responsibilities/Roles
+    - Planner/Decomposer: turn intents into goals, tasks, milestones (CoT, ToT, plan‑and‑solve)
+    - Context Engineer/Retriever: fetch and rank codebase/docs/tests (RAG)
+    - Implementer/Coder: write/edit code; generate scripts; call tools/APIs
+    - Executor/Operator: run shell, unit tests, integration tests; capture logs
+    - Critic/Verifier: analyze compiler/runtime/static-analysis feedback; propose fixes
+    - Debugger/Refactorer: localize faults; patch; improve performance/readability
+    - Security Auditor: static + dynamic security checks; enforce policies
+    - Memory Manager: consolidate/index/update/forget/retrieve/compress artifacts
+    - Tool Router/Orchestrator: MCP/LSP/DAP tool selection; parameterization; recovery
+    - CI/CD Integrator: open PRs; run pipelines; gate merges; release
+    - Human‑in‑the‑Loop Coordinator: clarify requirements; summarize diffs; accept/reject
+    - Multi‑Agent Coordinator: assign roles; manage debates/reviews; merge outputs
+  - Core Prompts (system and task-level)
+    - Triadic contract: “Human defines WHAT/WHY, Project constrains WHERE, Agent explores HOW”
+    - Planning prompt: derive hierarchical plan (single‑path/tree/hierarchical)
+    - Test‑Driven prompt: generate/expand tests; make code pass tests (red‑green‑refactor)
+    - Context‑Enhanced prompt: bind repo snippets, APIs, schemas, issues, SOPs
+    - Safety prompt: secure coding checklist; license/PII policy; dependency sanity
+    - Reflection prompt: critique → revise → verify loop; keep memory summaries
+    - Collaboration prompt: role charters (architect/dev/tester/reviewer/pm), consensus rules
+- Tools (invocation via MCP/function-calling/executable‑code actions)
+  - Code/Build/Run: compiler/interpreter (gcc/clang/javac/python/node/go/rust/cargo), package managers (pip/npm/maven/gradle/cargo)
+  - Shell and File I/O: read/write/edit/move/patch; grep/ripgrep; sed/awk
+  - Test Runners: pytest/unittest/JUnit/maven‑surefire/go test/cargo test; benchmark harness
+  - Static Analysis & Linters: pylint/flake8/black/ruff; OClint; Frama‑C; Slither (smart contracts); type checkers (mypy/tsc); code complexity analyzers
+  - Debuggers/Tracing: pdb/gdb/lldb; LDB (LLM debugger) / print‑debugging utilities; coverage tools
+  - Security/Policy: SAST/DAST scanners; SBOM checks; dependency audit; sandbox policies
+  - RAG/Index: vector DB (FAISS/pgvector), code graph/symbol index, docs/knowledge loaders
+  - Version Control: git (branch/commit/rebase/PR/tag/merge); GitHub/GitLab APIs
+  - Search/Browse: web search; documentation crawlers; API schema loaders
+  - IDE/Protocol Bridges: MCP servers/clients; LSP/DAP; build task providers
+  - Orchestration: AutoGen/CrewAI/MetaGPT/LangGraph pipelines; job schedulers; workflow runners
+- Memory Features
+  - Short‑term: conversation and working set (planning steps, deltas, tool outcomes)
+  - Long‑term: vectorized repository snapshots, decisions, tests, patches, incidents
+  - MemoryBank‑style temporal decay with timestamps and priorities; FIFO for long‑context agents
+  - Operations: consolidate/index/update/forget/retrieve/compress; belief updating; meta‑insight extraction
+  - Virtual context paging (MemGPT‑like) to extend effective context window
+  - Caches: thought/results caches (think‑in‑memory) to avoid redundant reasoning
+- Sub‑agents and Internal Services (optional, plug‑replaceable)
+  - Architect/Planner; Implementer; Tester; Critic/Reviewer; Debugger; Security Auditor; Doc Writer; Performance Tuner; Release Manager
+  - Collaboration patterns: pipeline, group discussion/debate, shared message pool (MetaGPT‑style), hybrid
+  - Example frameworks: AutoGen, CrewAI, MetaGPT, ChatDev, OpenHands, CodeAgent, AgentCoder, MapCoder
+- Development Models (supported workflows)
+  - UAM: Unconstrained Automation (fast, risky; prototype)
+  - ICCM: Iterative Conversational Collaboration (pair‑programming with AI)
+  - PDM: Planning‑Driven (architecture‑first; SOPs; design docs)
+  - TDM: Test‑Driven (tests/specs gate code; quality‑first)
+  - CEM: Context‑Enhanced (RAG over code/doc/rules; orthogonal enhancer to any model)
+- Feedback Loops (closed-loop learning and control)
+  - Compiler Feedback
+    - Syntax/type errors; optimization reports; instruction counts; cross‑language compilers
+    - Static analysis feedback prioritization; multi-tool verification (Black, OClint, Frama‑C, Slither)
+  - Execution Feedback
+    - Unit tests, property‑based tests, fuzzing; integration/system tests; runtime traces/exceptions
+    - Performance/meta metrics; test‑time scaling (multi‑candidates; rerank by verifiers)
+  - Human Feedback
+    - Ambiguity detection; clarification Q&A; structured code review; preferences (RLHF/DPO/PRO/NLHF/RLAIF)
+  - Self‑Refinement
+    - Reflexion/Self‑Refine/CRITIC; multi‑critic ensembles; memory‑based reflection; debate‑then‑fix
+- System‑Level Components and Interactions
+  - Isolated Execution Runtime Environment
+    - Containers: Docker/Podman; OCI images; language sandboxes; JUDGE0; WebAssembly
+    - Orchestration: Kubernetes pods/quotas/timeouts; multi‑tenant isolation; gVisor; Firecracker
+    - Security: least‑privilege; network/file caps; policy enforcement; logging/audit; SandboxEval
+    - Cloud Backends: AWS/Azure/GCP; autoscaling; cold‑start pools; reproducible runners
+  - Interactive Development Interface Environment
+    - AI‑native IDEs/CLIs: Cursor, Claude Code, Gemini CLI, Qwen Code CLI, Aider, Cline
+    - Remote Dev: GitHub Codespaces/DevContainers; SSH; browser terminals
+    - Protocol Standards: MCP for tool/context; LSP for code intelligence; DAP for debugging; telemetry hooks
+  - Distributed Orchestration Platform Environment
+    - CI/CD: GitHub Actions/Jenkins/KubeSphere; pipeline‑as‑code; gates for tests/linters/security
+    - Cloud Compute Orchestration: TOSCA/TosKer/TORCH; Fog/Edge readiness; GitOps; LLMOps
+    - Multi‑Agent Coordination: AutoGen/CrewAI/MetaGPT/LangGraph graphs; retries; fault containment
+- Data, Benchmarks, and Training/Alignment Inputs (curated connectors)
+  - Coding datasets/benchmarks: SWE‑Bench (and variants: Verified/Live/Multimodal/Multilingual), SWE‑Gym, SWE‑smith, R2E‑Gym, DeepSWE, SWE‑rebench, Multi‑turn SWE‑RL Env., SWE‑RL, LiveCodeBench, BigCodeBench, APPS, HumanEval, MBPP, EvoCodeBench, MLE‑bench, MLE‑Dojo, PaperBench, Terminal‑Bench, DS‑1000, DA‑Code, BioCoder, Codeforces‑CoTs, KodCode, Code‑R1, Z1‑Code, rStar‑Coder, OpenCodeReasoning, DeepCoder, LeetCodeDataset, COFFEE‑GYM, AgentPack
+  - Alignment & post‑training: SFT/Instruction tuning; RLHF/RLAIF/DPO/GRPO/RLVR; verifier‑guided reranking; preference datasets (CodeUltraFeedback, OpenCodeInstruct, OctoPack)
+  - Continual pre‑training and data selection: The Stack v1/v2; RefineCode/SwallowCode pipelines; CPT replay/mixtures
+- Governance, Safety, and Oversight
+  - Threat modeling and policy packs (SAST/DAST; dep/provenance audits; SBOM)
+  - Sandboxed execution; MCP tool permissioning; audit trails; rollback/checkpoints
+  - Scalable oversight: weak‑to‑strong supervision; multi‑agent debate; watchdog policies; anomaly detectors
+- Outputs/Artifacts
+  - Code changes (diffs/PRs), tests, docs, design specs, changelogs, performance reports, SBOMs, trace bundles, memory summaries
+- Source Location
+  - Paper and meta resources
+    - A Survey of Vibe Coding with Large Language Models: https://arxiv.org/abs/2510.12399    0
+    - Survey repo: Awesome Vibe Coding: https://github.com/YuyaoGe/Awesome-Vibe-Coding
+  - Reference implementations/frameworks (code or home pages)
+    - OpenHands: ☁️ OpenHands Cloud: https://github.com/All-Hands-AI/OpenHands
+    - SWE‑bench: 📰 News: https://github.com/princeton-nlp/SWE-bench
+    - AutoGen: https://github.com/microsoft/autogen
+    - CrewAI: Fast and Flexible Multi-Agent Automation Framework: https://github.com/joaomdmoura/crewai
+    - MetaGPT: MetaGPT: The Multi-Agent Framework: https://github.com/geekan/MetaGPT
+    - ChatDev: Communicative Agents for Software Development: https://github.com/OpenBMB/ChatDev
+    - CodeAgent: https://github.com/OpenBMB/CodeAgent
+    - AgentCoder: https://github.com/DeepSoftwareAnalytics/AgentCoder
+    - MapCoder: https://github.com/tsinghua-fib-lab/MapCoder
+    - SWE‑agent: 📣 News: https://github.com/princeton-nlp/SWE-agent
+    - AutoCodeRover: https://github.com/nus-apr/AutoCodeRover
+    - RepoForge: repoforge: https://github.com/sourcegraph/repoforge
+    - AdaCoder: self-improving-coder: https://github.com/maximerobeyns/self-improving-coder
+    - Meta’s TestGen‑LLM (paper): https://dl.acm.org/doi/10.1145/3663529.3663797
+  - IDEs/CLIs and protocol tooling
+    - Cursor: https://cursor.com
+    - Claude Code: https://www.anthropic.com/claude-code
+    - Gemini CLI: https://github.com/google-gemini/gemini-cli
+    - Qwen Code: Qwen-Coder: https://github.com/QwenLM/Qwen-Coder
+    - Aider: https://aider.chat
+    - Cline: https://cline.bot
+    - MCP spec roundup: https://modelcontextprotocol.io (via ecosystem)
+  - Datasets/benchmarks (sample canonical links)
+    - MLE‑bench: https://mle-bench.github.io
+    - PaperBench: https://github.com/AI-Research-Collab/PaperBench
+    - Terminal‑Bench: terminal-bench: https://github.com/laude-institute/terminal-bench
+    - Multi‑SWE‑Bench: DAMO ConvAI: https://github.com/AlibabaResearch/DAMO-ConvAI/tree/main/Multi-SWE-bench
+    - DS‑1000: <img src="pics/ds1000.png" width="5%" alt="" align=center />DS-1000 Data Science Code Generation: https://github.com/HKUNLP/DS-1000
+    - BioCoder: BioCoder: A Benchmark for Bioinformatics Code Generation with Large Language Models: https://github.com/gersteinlab/BioCoder
+    - BigCodeBench: https://github.com/bigcode-project/bigcodebench
+    - LiveCodeBench: livecodebench: https://github.com/itsnamgyu/livecodebench
+    - COFFEE‑GYM: coffee-gym: https://github.com/kaistAI/coffee-gym
+- How Components Interact (high-level flow)
+  - Human intent → Planner (plan decomposition) → Retriever (RAG) → Implementer (code + tools) → Executor (tests/run) → Critic (analysis) → Debugger (patch) → Security Auditor (policy) → CI/CD (gate + PR) → Memory (summarize/store) → Human arbitration; repeat until acceptance
+  - Multi‑agent variants: role agents negotiate via shared message pool; debates/verifiers adjudicate; orchestrator coordinates retries and merges; oversight agents enforce constraints
+
+**Source Location**:
+- A Survey of Vibe Coding with Large Language Models: https://arxiv.org/abs/2510.12399    0
+- Awesome Vibe Coding: https://github.com/YuyaoGe/Awesome-Vibe-Coding
+- ☁️ OpenHands Cloud: https://github.com/All-Hands-AI/OpenHands
+- 📰 News: https://github.com/princeton-nlp/SWE-bench
+- AutoGen: https://github.com/microsoft/autogen
+- Fast and Flexible Multi-Agent Automation Framework: https://github.com/joaomdmoura/crewai
+- MetaGPT: The Multi-Agent Framework: https://github.com/geekan/MetaGPT
+- Communicative Agents for Software Development: https://github.com/OpenBMB/ChatDev
+- CodeAgent: https://github.com/OpenBMB/CodeAgent
+- AgentCoder: https://github.com/DeepSoftwareAnalytics/AgentCoder
+- MapCoder: https://github.com/tsinghua-fib-lab/MapCoder
+- AutoCodeRover: https://github.com/nus-apr/AutoCodeRover
+- repoforge: https://github.com/sourcegraph/repoforge
+- https://cursor.com
+- https://www.anthropic.com/claude-code
+- Gemini CLI: https://github.com/google-gemini/gemini-cli
+- Qwen-Coder: https://github.com/QwenLM/Qwen-Coder
+- https://aider.chat
+- https://cline.bot
+- https://mle-bench.github.io
+- PaperBench: https://github.com/AI-Research-Collab/PaperBench
+- terminal-bench: https://github.com/laude-institute/terminal-bench
+- DAMO ConvAI: https://github.com/AlibabaResearch/DAMO-ConvAI/tree/main/Multi-SWE-bench
+- <img src="pics/ds1000.png" width="5%" alt="" align=center />DS-1000 Data Science Code Generation: https://github.com/HKUNLP/DS-1000
+- BioCoder: A Benchmark for Bioinformatics Code Generation with Large Language Models: https://github.com/gersteinlab/BioCoder
+- BigCodeBench: https://github.com/bigcode-project/bigcodebench
+- livecodebench: https://github.com/itsnamgyu/livecodebench
+- coffee-gym: https://github.com/kaistAI/coffee-gym
+- SWE-Gym Environment: https://github.com/swe-gym/swe-gym
+- r2e-gym: https://github.com/skyzh/r2e-gym
+- DeepSWE: https://github.com/DeepSWE-AI/DeepSWE
+- swe-rebench: https://github.com/JetBrains-Research/swe-rebench
+- mle-dojo: https://github.com/huggingface/mle-dojo
+- agentpack: https://github.com/agentpack-data/agentpack
+- Code-R1: Reproducing R1 for Code with Reliable Rewards: https://github.com/ganler/code-r1
+- https://huggingface.co/datasets/open-r1/codeforces-cots
+- kodcode: https://github.com/zhangchenxu/kodcode
+- rstar-coder: https://github.com/microsoft/rstar-coder
+- NVIDIA NeMo-Aligner: https://github.com/NVIDIA/NeMo-Aligner
+- https://huggingface.co/datasets/bigcode/the-stack-v2
+- https://modelcontextprotocol.io
+- SWE-bench Multimodal: Do AI Systems Generalize to Visual Software Domains?: https://arxiv.org/abs/2410.03859    74
+- SWE-Bench+: Enhanced Coding Benchmark for LLMs: https://arxiv.org/abs/2410.06992    40
+- SWE-bench Goes Live!: https://arxiv.org/abs/2505.23419    15
+- 📣 News: https://github.com/princeton-nlp/SWE-agent
+- self-improving-coder: https://github.com/maximerobeyns/self-improving-coder
+- https://dl.acm.org/doi/10.1145/3663529.3663797
+
+### 2511.01846v1_Towards_Robust_Mathematical_Reasoning.pdf
+**Title**: 2511.01846v1_Towards_Robust_Mathematical_Reasoning.pdf
+
+**Agentic System Description**:
+
+- Title: 2511.01846v1_Towards_Robust_Mathematical_Reasoning.pdf
+  - Agent Node
+    - LLM model names
+      - Gemini 2.5 Pro (primary judge/verifier; also used in the Huang & Yang 2025 agentic pipeline)
+      - Gemini 2.5 Deep Think (solver/evaluator used in experiments)
+      - Gemini Deep Think (IMO Gold) (frontier solver used in experiments)
+    - Responsibilities/Roles
+      - Problem solving via iterative self-verification and bug-fixing (Huang & Yang, 2025 framework)
+      - Short-answer extraction and semantic-equivalence grading (AnswerAutoGrader)
+      - Proof grading against rubric and reference solutions (ProofAutoGrader)
+      - Per-instance grading without references (IMO-GradingBench graders)
+      - Label extraction/parsing of grader outputs
+    - Prompts (explicit)
+      - AnswerAutoGrader system prompt
+        - System role: “Deterministic Mathematical Autograder”
+        - Enforces a two-part output: <thinking>…</thinking> then \boxed{Correct}/\boxed{Incorrect}
+        - Key rules: algebraic/numerical/set equivalence; no partial credit; grade only final result; if no unambiguous final answer, mark Incorrect
+        - Inputs per call: Problem, Model Solution, Golden Answer
+      - ProofAutoGrader system prompt
+        - Role: “Expert grader for the International Mathematics Olympiad (IMO)”
+        - Uses 0/1/6/7 scheme wrapped as <points>7 out of 7</points> (must output exactly one points tag)
+        - Inputs per call: Problem Statement, Ground-Truth Solution, Specific Grading Guidelines, Proposed Solution
+        - Process: analyze references; step-by-step verification; assess progress; assign score
+      - IMO-GradingBench per-instance grader prompt (minimal context)
+        - Analyze problem and proposed solution; output one of: incorrect, partial, almost, correct
+      - Label extraction prompt
+        - Task: read evaluator response and emit “Final answer: {correct|almost|partial|incorrect|not_found}”
+  - Available Tools
+    - AnswerAutoGrader
+      - One-shot Gemini 2.5 Pro call to extract final answer and check semantic equivalence vs golden answer
+      - Robust to varied formats; outputs deterministic grade token (\boxed{…})
+    - ProofAutoGrader
+      - Gemini 2.5 Pro judge with access to problem, reference solution, and detailed grading rubric
+      - Outputs a single <points>k out of 7</points> tag; used for correlation and proxy grading
+    - Huang & Yang (2025) Solver Pipeline Orchestrator
+      - Iterative self-verification and bug-fixing loop (≤30 iterations per pipeline)
+      - Early-stop when solution passes self-verification 5 consecutive times
+      - Abort a pipeline after 10 consecutive verification failures
+      - Parallel execution of 100 pipelines; return first passing solution from any run
+      - Thinking budget: 32K tokens per model call
+    - GradingBench Minimal-Context Grader
+      - Gemini-based per-instance grader with only problem + proposed solution (no refs/guidelines)
+    - Label Extractor
+      - Deterministic post-processor to parse grader outputs to categorical labels (correct/almost/partial/incorrect)
+    - Metrics/Analysis
+      - Pearson correlation analyzer (automatic vs human grades), confusion matrix generator, accuracy and MAE calculators
+  - Memory Features
+    - Iterative solver scratchpad
+      - Maintains current draft solution, detected “bugs,” and verification outcomes across iterations within a pipeline
+      - Resets per pipeline; parallel pipelines are independent
+    - Constrained chain-of-thought
+      - AnswerAutoGrader requires <thinking> section but exposes only the final \boxed{} grade externally
+      - ProofAutoGrader provides detailed rationale but final score is machine-parseable via a single tag
+    - No long-term retrieval memory; robustness enforced by benchmark robustification to mitigate contamination/memorization
+  - Sub-agents and Services
+    - Solver Agent (Gemini 2.5 Pro with Huang & Yang, 2025)
+      - Role: produce candidate full solutions; self-verify; bug-fix; return passing solution
+      - Tools: self-verifier; bug-fixer; iteration and parallel orchestrators
+    - Short-Answer Grader Agent (AnswerAutoGrader)
+      - Role: extract and check semantic equivalence of final answers for IMO-AnswerBench
+    - Proof Grader Agent (ProofAutoGrader)
+      - Role: grade long-form proofs for IMO-ProofBench using rubric and reference solutions
+    - Minimal-Context Grader (IMO-GradingBench)
+      - Role: per-instance categorical grading without references/guidelines
+    - Human Expert Graders
+      - Role: gold-standard scoring of proof solutions (0–7); define grading guidelines; arbitrate edge cases
+    - Reference Solution and Rubric Provider
+      - Delivers canonical solutions and detailed grading schemes to ProofAutoGrader and human graders
+    - Dataset Manager
+      - Manages IMO-AnswerBench (400 short-answer), IMO-ProofBench (60 proof problems; basic/advanced), IMO-GradingBench (1000 graded solutions)
+  - System-level Components and Interactions
+    - Problem Selection and Robustification
+      - Source curation across Algebra, Combinatorics, Geometry, Number Theory with balanced difficulties
+      - Robustification methods: paraphrasing; renaming entities; reformulation; numeric perturbations; distractors; answer canonicalization
+    - IMO-AnswerBench Flow
+      - Input: robustified short-answer problems with ground truths
+      - Solver produces solution text (various models evaluated)
+      - AnswerAutoGrader extracts final answer and judges equivalence to ground truth
+      - Aggregation computes accuracy per category and overall; human spot-checks calibrate the autograder
+    - IMO-ProofBench Flow
+      - Input: basic and advanced proof problems; reference solutions; grading guidelines
+      - Solvers produce proofs; human graders assign 0–7; ProofAutoGrader used as proxy for scalability and correlation studies
+      - Reporting: point-percentage scores by subset/source; correlation/diagnostics for automatic vs human grading
+    - IMO-GradingBench Flow
+      - Input: problem + candidate solution only; balanced labels across Correct/Almost/Partial/Incorrect from human grades
+      - Minimal-context grader predicts category; metrics: accuracy and MAE (mapped to 7,6,1,0)
+    - Evaluation Orchestration
+      - Multi-run sampling for certain models (e.g., mean over 8 runs)
+      - Failure handling for unstable APIs; missing responses scored as 0 after retries
+      - Correlation and confusion-matrix analysis across models and internal systems
+    - Reporting and Reproducibility
+      - Public benchmarks and prompts
+      - Explicit autograder output protocols for deterministic parsing
+  - Where the system or code can be found
+    - IMO-Bench site: https://imobench.github.io
+    - Huang & Yang (2025) open-source agentic framework: IMO 2025 Problem Solver: https://github.com/lyang36/IMO25
+    - Gemini Deep Think announcement: https://goo.gle/imo-gold
+    - Gemini 2.5 Pro product page: https://deepmind.google/models/gemini/pro/
+
+**Source Location**:
+- https://imobench.github.io
+- IMO 2025 Problem Solver: https://github.com/lyang36/IMO25
+- https://goo.gle/imo-gold
+- https://deepmind.google/models/gemini/pro/
+- https://blog.google/products/gemini/gemini-2-5-deep-think/
+- https://www.anthropic.com/news/claude-4
+- https://api-docs.deepseek.com/news/news250528
+- https://api-docs.deepseek.com/news/news250325
+- https://moonshotai.github.io/Kimi-K2/
+- https://qwenlm.github.io/blog/qwen3/
+- https://openai.com/index/introducing-o3-and-o4-mini/
+- https://openai.com/index/introducing-gpt-5/
+- https://x.ai/news/grok-4
+- Gold-medalist Performance in Solving Olympiad Geometry with AlphaGeometry2: https://arxiv.org/abs/2502.03544    38
+- Winning Gold at IMO 2025 with a Model-Agnostic Verification-and-Refinement Pipeline: https://arxiv.org/abs/2507.15855    12
+- FrontierMath: A Benchmark for Evaluating Advanced Mathematical Reasoning in AI: https://arxiv.org/abs/2411.04872    111
+- Creativity or Brute Force? Using Brainteasers as a Window into the Problem-Solving Abilities of Large Language Models: https://arxiv.org/abs/2505.10844    1
+- Omni-MATH: A Universal Olympiad Level Mathematic Benchmark For Large Language Models: https://arxiv.org/abs/2410.07985    119
+- HARDMath: A Benchmark Dataset for Challenging Problems in Applied Mathematics: https://arxiv.org/abs/2410.09988    21
+- RewardBench: Evaluating Reward Models for Language Modeling: https://arxiv.org/abs/2403.13787    320
+- Functional Benchmarks for Robust Evaluation of Reasoning Performance, and the Reasoning Gap: https://arxiv.org/abs/2402.19450    72
+- MATH-Perturb: Benchmarking LLMs' Math Reasoning Abilities against Hard Perturbations: https://arxiv.org/abs/2502.06453    45
+- Humanity's Last Exam: https://arxiv.org/abs/2501.14249    204
+- MiniF2F: a cross-system benchmark for formal Olympiad-level mathematics: https://arxiv.org/abs/2109.00110    260
+- https://openreview.net/forum?id=v8L0pN6EOi
+- https://web.evanchen.cc/static/usemo/captain-guidance-usemo.pdf
+
+### 2511.02208v1_Training Proactive and Personalized LLM Agents.pdf
+**Title**: 2511.02208v1_Training Proactive and Personalized LLM Agents.pdf
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM models
+    - Seed-OSS-36B-Instruct (base policy; fine-tuned with PPP multi-objective RL)
+    - GPT-5/GPT-5-Mini/GPT-5-Nano (baselines; also used as user simulators during training/eval)
+    - GPT-4.1, GPT-4o (alternative user simulators for robustness checks)
+    - Qwen3-Embed-8B (retriever encoder for Deep-Research)
+  - Responsibilities/Roles
+    - Productive: solve SWE and Deep-Research tasks end-to-end
+    - Proactive: detect underspecification; ask strategic clarifying questions via ask_user
+    - Personalized: adapt question style/format/timing to stated user preferences
+    - ReAct-style planning: interleave reasoning and tool invocation across multiple turns
+  - Core prompts
+    - System: “You are a PPP agent. Be productive, proactive, and personalized. If the user prompt is vague, identify blockers and ask minimal, high-value questions. Obey declared user preferences exactly. Use tools when needed. Prefer low-effort questions; avoid unnecessary or high-effort questions.”
+    - Action format: Thought -> Action(tool=...) -> Observation -> ... -> Final Answer
+    - Preference-grounding snippets (examples)
+      - do_selection: “Ask as multiple-choice options (A/B/C/...).”
+      - one_question / ask_many / only_begin / no_ask
+      - language constraints (Italian-only, ALL CAPS English, JSON-wrapped, no commas)
+      - humor requirement, code/doc snippet with references
+- Title
+  - 2511.02208v1_Training Proactive and Personalized LLM Agents.pdf
+- Tools
+  - ask_user
+    - Purpose: query user simulator; must adhere to user preferences
+    - Returns: short answer, “IDK” for unanswerable, or high-effort hints
+  - SWE tools (OpenHands-based scaffold)
+    - Code navigation: view file, search, list, grep
+    - Editing: create/modify files; commit patch (SWE-Full)
+    - Execution: run tests in official SWE-Bench Docker; read logs
+    - Read-only variant for SWE-Func-Loc (localization only)
+  - Deep-Research tools
+    - search: web search over public web
+    - open_page: fetch and parse result pages
+    - retrieval: Qwen3-Embed-8B-powered retriever for context
+  - Environment utilities
+    - prompt_vaguenizer: LLM rewrite precise task to vague user prompt
+    - evaluators: user-effort classifier; preference compliance checker (rule-based + LLM-as-judge)
+- Memory and State
+  - Conversation memory: full multi-turn agent-user-tool transcript preserved in context
+  - Preference memory: active user preference profile cached per session for constraint checking
+  - Tool-state memory: file edits, repo state, browser history, search cache
+  - Statistics buffer: counts of questions, timing, effort levels (low/medium/high), rule hits/violations
+  - Context limits: up to 32K tokens (SWE-Func-Loc), 65K (SWE-Full), 41K (Deep-Research)
+- Sub-agents and Services
+  - UserVille (interactive environment)
+    - Prompt Vaguenization
+      - LLM rewriting precise prompts to vague while preserving intent and removing specifics
+    - Preference-Aware User Simulator
+      - 20-config preference pool; 12 seen for training, 8 held-out for generalization
+      - Examples: concise_question, detail_question, answer_more, only_begin, no_ask, do_selection, professional, amateur, ask_many, one_question, first_try; unseen: lang_ita, lang_multi, capital, commas, json, joke, snippet, length
+      - Uses precise prompt as privileged info to answer low-effort clarifications
+    - User-Centric Evaluation
+      - Proactivity: user-effort estimation per question (low/medium/high) and session-level aggregation
+      - Personalization: rule checks and LLM-as-judge scoring against the active preference
+  - PPP RL Trainer
+    - Objective: R = RProd + RProact + RPers
+      - RProd (Productivity): verifiable task success (F1 for SWE-Func-Loc; unit tests for SWE-Full; EM for Deep-Research)
+      - RProact (Proactivity): +0.05 bonus if all queries low-effort; −0.1 per medium-effort; −0.5 per high-effort
+      - RPers (Personalization): +0.05 if fully compliant; non-positive penalties per preference-specific rule
+    - Algorithm: GRPO with Clip-Higher and token-level policy gradient loss (DAPO)
+    - Data sampling: per input, draw G trajectories from πold; compute group-relative advantage; optimize only LLM-generated tokens
+    - Framework: Verl
+    - Training config: LR 1e-6; batch 64; group size 8; 200 steps; user simulator default GPT-5-Nano
+  - Scaffolds and Bench environments
+    - SWE: SWE-Gym for training; SWE-Bench Verified for localization; SWE-Bench Full (official Docker) for full-program edits
+    - Deep-Research: BrowseComp-Plus and BrowseComp scaffolds with search/open_page tools
+- System-Level Components and Interactions
+  - Episode flow
+    - Input: task instance -> precise prompt rewritten to vague prompt -> user preference sampled
+    - Agent loop: reason -> choose tool (ask_user, code tools, search/open_page) -> observe -> update plan -> repeat -> final answer/patch
+    - User simulator: answers ask_user respecting effort and preference rules; may return IDK or high-effort hint
+    - Evaluation: compute productivity, proactivity (effort), personalization (rule/judge); aggregate to R
+    - RL update: GRPO with group-relative advantages; policy improvement on token-level actions
+  - Interaction policies
+    - Ask selectively: high ask ratio when vague; low when precise
+    - Effort-aware questioning: increase low-effort questions; suppress medium/high-effort over training
+    - Preference adherence: enforce formatting/timing/language/quantity constraints in questions
+  - Logging and analytics
+    - Track ask ratio, interaction counts by effort class, compliance rate by preference type, and task outcomes across datasets
+- Datasets, Models, and Runtime
+  - SWE-Bench Verified (Func-Loc): 488 test instances (Python-filtered); metric F1 over localized function list
+  - SWE-Bench Full: success by official unit tests in Docker
+  - SWE-Gym: training data generator for SWE agents
+  - BrowseComp-Plus: 450 train / 100 test; EM scoring with official judge
+  - BrowseComp: baseline browsing benchmark
+  - Base and simulator LLMs: Seed-OSS-36B-Instruct; GPT-5 series; GPT-4.1/4o; Qwen3-Embed-8B retriever
+- Deployment Notes
+  - SWE-Full requires Dockerized environment compatible with SWE-Bench
+  - OpenHands-based tooling provides file I/O, code edits, and test execution
+  - UserVille runs entirely with LLM simulators; real-user studies are out of scope but suggested future work
+- Where to find system/code
+  - PPP-Agent and UserVille: paper describes framework; no explicit project repo provided
+  - SWE scaffolding: OpenHands
+  - Benchmarks and references: SWE-Bench (site and repo), SWE-Gym (arXiv), BrowseComp/Plus (arXiv)
+  - RL system and methods: Verl (library), GRPO (DeepSeek-R1), DAPO (arXiv)
+
+**Source Location**:
+- Training Proactive and Personalized LLM Agents: https://arxiv.org/abs/2511.02208    0
+- ☁️ OpenHands Cloud: https://github.com/All-Hands-AI/OpenHands
+- https://www.swebench.com
+- 📰 News: https://github.com/princeton-nlp/SWE-bench
+- SWE-bench: Can Language Models Resolve Real-World GitHub Issues?: https://arxiv.org/abs/2310.06770    1100
+- Training Software Engineering Agents and Verifiers with SWE-Gym: https://arxiv.org/abs/2412.21139    97
+- BrowseComp: A Simple Yet Challenging Benchmark for Browsing Agents: https://arxiv.org/abs/2504.12516    145
+- BrowseComp-Plus: A More Fair and Transparent Evaluation Benchmark of Deep-Research Agent: https://arxiv.org/abs/2508.06600    21
+- Qwen: https://github.com/QwenLM/Qwen
+- verl: https://github.com/volcengine/verl
+- DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning: https://arxiv.org/abs/2501.12948    4626
+- DAPO: An Open-Source LLM Reinforcement Learning System at Scale: https://arxiv.org/abs/2503.14476    787
+- ReAct: Synergizing Reasoning and Acting in Language Models: https://arxiv.org/abs/2210.03629    4472
+- $τ$-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains: https://arxiv.org/abs/2406.12045    224
+- CollabLLM: From Passive Responders to Active Collaborators: https://arxiv.org/abs/2502.00640    25
+- SWEET-RL: Training Multi-Turn LLM Agents on Collaborative Reasoning Tasks: https://arxiv.org/abs/2503.15478    42
+- UserBench: An Interactive Gym Environment for User-Centric Agents: https://arxiv.org/abs/2507.22034    10
+
+### 2511.02824v2_Kosmos_AI_Scientist.pdf
+**Title**: 2511.02824v2_Kosmos_AI_Scientist.pdf
+
+**Agentic System Description**:
+
+- Title: 2511.02824v2_Kosmos_AI_Scientist.pdf
+- Agent Node
+  - LLM models
+    - Primary: not specified (general‑purpose LLM(s); versions with different training cutoffs can be swapped for controls)
+    - Runtime modality: multimodal text+code; PDF reading via the literature agent; code generation and execution via the data analysis agent
+  - Responsibilities/Roles
+    - Orchestrate multi‑cycle autonomous discovery runs (up to ~12 hours; >200 rollouts)
+    - Maintain and query a structured world model to share context across agents
+    - Plan and assign up to ~10 parallel tasks per cycle across literature and data‑analysis tracks
+    - Enforce traceability: require every report claim to cite code or primary literature
+    - Decide stopping/termination and synthesize 3–4 scientific reports per run
+  - Prompts
+    - System prompts (high level): “Given a research objective and dataset, plan iterative cycles of parallel data analysis and literature review. Update a structured world model with task outputs, propose next tasks, and produce fully cited discoveries. All claims must cite either a Jupyter notebook cell output or a primary source.”
+    - Task prompts (examples; see Supplementary Information 1): open‑ended research objectives plus precise dataset descriptions for each study; constraints to use specific statistical packages/methods when provided
+- Available Tools
+  - World‑model read/write API (graph store of objectives, hypotheses, tasks, findings, evidence, citations, code artifacts)
+  - Task scheduler/queue for parallel rollouts (literature and analysis tasks)
+  - Code execution sandbox
+    - Jupyter notebooks (Python and R)
+    - Package ecosystem typically used: numpy, pandas, scipy, scikit‑learn, statsmodels, matplotlib, seaborn, shap, powerlaw, gaussian‑process utilities, segmented regression, bootstrapping
+    - Domain libraries (used as needed by tasks): gseapy/Enrichr, TwoSampleMR, MendelianRandomization, coloc, susieR, LDlinkR, palantir, motifbreakR, ReMap lookup, TWAS utilities, GWAS/QTL handling
+  - Literature tools
+    - Web/PDF retrieval (academic search, arXiv/PubMed/CrossRef style APIs)
+    - PDF parsing and citation extraction
+    - Evidence grounding and claim linking to sources
+  - Artifacts and provenance
+    - Notebook, figure, and result artifact store with immutable links into the world model
+    - Trajectory logs for every agent rollout
+- Memory Features
+  - Structured world model (graph)
+    - Nodes: objectives, datasets, tasks, hypotheses, analyses, figures, code artifacts, literature items, claims, evaluations, uncertainties
+    - Edges: supports, refutes, derives‑from, cites, duplicates, relates‑to
+  - Cross‑cycle synthesis: summaries distilled after each cycle to seed next‑cycle task generation
+  - Artifact provenance: each claim links to the exact notebook cell or literature section used
+  - Library memory: set of read/parsed papers with embeddings/metadata for rapid re‑use
+- Sub‑Agents
+  - Data Analysis Agent
+    - LLM model: not specified (code‑capable)
+    - Role: exploratory data analysis, statistical modeling, method implementation, figure creation, notebook authoring, reproducibility checks
+    - Prompts: “Write, execute, and validate a Jupyter notebook to test hypotheses aligned with the objective. Use appropriate statistical controls; document assumptions; export summary + figures; push a concise world‑model update with key findings and limitations.”
+    - Tools: Jupyter (Python/R), plotting, statistical packages; domain libraries (e.g., TwoSampleMR, coloc, susieR, LDlinkR, gseapy/Enrichr, palantir, powerlaw, SHAP)
+    - Memory: reads prior cycle summaries and related artifacts from world model; reuses prior code where relevant; caches dataset schemas/validations
+  - Literature Search Agent
+    - LLM model: not specified (reading/retrieval‑capable)
+    - Role: discover, read, and summarize primary literature; extract mechanistic evidence; map evidence to hypotheses; propose new directions
+    - Prompts: “Retrieve primary sources most relevant to current hypotheses; extract key claims, statistics, and limitations; ground each summary with precise citations; add evidence nodes and links into the world model.”
+    - Tools: web search, PDF parsing, bibliographic APIs, citation graphing
+    - Memory: maintains read‑paper library; de‑duplicates across cycles; aligns evidence to analysis findings in the world model
+- System‑Level Components
+  - Orchestrator/Planner
+    - Queries the world model to propose balanced bundles of up to ~10 tasks per cycle across literature and data analysis
+    - De‑duplicates tasks, enforces coverage of divergent avenues, and allocates compute budgets
+  - Parallel Rollout Executor
+    - Runs many agent instances in parallel (reported averages: ~166 analysis + ~36 literature rollouts per run)
+    - Resource limits; error handling; retry/backoff; log collection
+  - World Model Service
+    - Graph store with read/write/query endpoints
+    - Change summaries after each cycle; supports long‑horizon coherence across >200 rollouts
+  - Artifact Store and Provenance Layer
+    - Persists notebooks, figures, tables; immutable URIs are referenced in world‑model claims and final reports
+  - Report Synthesizer
+    - Generates 3–4 scientific reports per run
+    - Requirement: every statement cites either a notebook artifact or a primary publication
+    - Produces narrative, figures, and explicit citation trails to world‑model nodes
+  - Human‑in‑the‑Loop Interfaces
+    - Inputs: research objective, dataset provisioning/curation
+    - Outputs: expert evaluation of claims (accuracy, novelty, reasoning depth); validation/replication workflows
+  - Discovery Review/Evaluation System
+    - Sampling/KPIs: accuracy by statement type; expert‑equivalent time; scaling of valuable findings with cycles
+    - External validation hooks (links to Edison trajectories, replication notebooks, and third‑party datasets)
+- Interaction Flow
+  - Initialize: scientist provides research objective + dataset
+  - Cycle loop
+    - Planner proposes parallel tasks from current world‑model context
+    - Literature and analysis agents execute tasks; produce artifacts
+    - World model is updated with structured summaries, claims, and citations
+    - Planner queries updated world model to propose next tasks
+  - Termination
+    - When objective is satisfied or marginal utility declines, the system synthesizes 3–4 fully cited reports
+- Guardrails and Traceability
+  - Every report claim must link to either a code artifact (notebook cell/figure) or a primary source
+  - Provenance graph enables independent reproduction and auditing
+  - Cross‑agent context is mediated exclusively through the structured world model to reduce drift
+- Where to read code/resources
+  - Primary code/scripts for figures: Kosmos Artifacts for Technical Report: https://github.com/EdisonScientific/kosmos-figures
+  - Public reports and trajectories: Edison platform links (see Source References)
+  - Paper: https://arxiv.org/abs/2511.02824
+
+**Source Location**:
+- Kosmos Artifacts for Technical Report: https://github.com/EdisonScientific/kosmos-figures
+- Kosmos: An AI Scientist for Autonomous Discovery: https://arxiv.org/abs/2511.02824    0
+- Robin: A multi-agent system for automating scientific discovery: https://arxiv.org/abs/2505.13400    20
+- The AI Scientist: Towards Fully Automated Open-Ended Scientific Discovery: https://arxiv.org/abs/2408.06292    415
+- Towards an AI co-scientist: https://arxiv.org/abs/2502.18864    125
+- BixBench: a Comprehensive Benchmark for LLM-based Agents in Computational Biology: https://arxiv.org/abs/2503.00096    27
+- Language agents achieve superhuman synthesis of scientific knowledge: https://arxiv.org/abs/2409.13740    77
+- Disentangling the Effects of Simultaneous Environmental Variables on Perovskite Synthesis and Device Performance via Interpretable Machine Learning: https://arxiv.org/abs/2509.09022    1
+- https://www.biorxiv.org/content/10.1101/2025.02.27.640551v1
+- https://www.biorxiv.org/content/10.1101/2025.10.24.684192v1
+- https://platform.edisonscientific.com/kosmos/c4bdef64-5e9b-43b9-a365-592dd1ed7587
+- https://platform.edisonscientific.com/kosmos/1fdbf827-be65-4d97-9b66-bf0da600091a
+- https://platform.edisonscientific.com/kosmos/4fb3fbdb-c449-4064-9aa6-ff4ec53131d8
+- https://platform.edisonscientific.com/kosmos/c6849232-5858-4634-adf5-83780afbe3db
+- https://platform.edisonscientific.com/kosmos/abac07da-a6bb-458f-b0ba-ef08f1be617e
+- https://platform.edisonscientific.com/kosmos/a770052b-2334-4bbe-b086-5149e0f03d99
+- https://platform.edisonscientific.com/kosmos/28c427d2-be31-48b5-b272-28d5a1e3ea5c
+- https://platform.edisonscientific.com/trajectories/aa8f203a-a27c-454e-b4be-25c1ed67c965
+- https://platform.edisonscientific.com/trajectories/4d948f9c-7402-48c5-a0f3-41daff09f737
+- https://platform.edisonscientific.com/trajectories/d40c1133-2e28-452f-b92e-75d4ba87d2e4
+- https://platform.edisonscientific.com/trajectories/13fee7fd-b5ef-4a61-bebf-cb2dcec678f0
+- https://platform.edisonscientific.com/trajectories/627619c1-b726-4c4c-bbed-743e55f456b6
+- https://platform.edisonscientific.com/trajectories/d8ef5055-113d-4fb4-91a0-42a9e53e7c98
+- https://platform.edisonscientific.com/trajectories/5b0c9346-0070-45a4-b058-fffb77aef062
+- https://platform.edisonscientific.com/trajectories/6b22ad5a-06f1-4375-903a-0aff5179ce3b
+- https://platform.edisonscientific.com/trajectories/152952fb-71a5-4d49-a44d-222142116e0c
+- https://platform.edisonscientific.com/trajectories/024b969f-fc41-4c69-83ef-4f493c9b0a9d
+- https://platform.edisonscientific.com/trajectories/9b31fb26-beb0-46f3-a93f-f5613ecfa646
+- https://platform.edisonscientific.com/trajectories/205e0b9d-d3e7-40b6-9e8a-5bb190763fca
+- https://platform.edisonscientific.com/trajectories/7c53ea61-f52a-48b6-839d-0c935ea37d3e
+- https://platform.edisonscientific.com/trajectories/9a60b3fe-8ddb-455c-902b-3950c8cbe44c
+- https://platform.edisonscientific.com/trajectories/77804eec-6c99-4c76-a165-efa9bf30683f
+- https://platform.edisonscientific.com/trajectories/efd47388-34b6-4573-a9b7-f8e14e5175af
+- https://platform.edisonscientific.com/trajectories/674572eb-cef9-49c1-9279-fb6c4f7021c9
+- https://platform.edisonscientific.com/trajectories/72bcc9f2-4a53-468a-93ba-3e22065616ab
+- https://platform.edisonscientific.com/trajectories/48c87183-3056-4d63-924b-534983ee3ca
+- https://platform.edisonscientific.com/trajectories/1d007ced-cefb-42ff-8f80-6bfe2da5bb9b
+- https://platform.edisonscientific.com/trajectories/08197da6-5d82-4849-9b36-7b44221b7f23
+- https://platform.edisonscientific.com/trajectories/11d414a9-a95e-4596-af46-3f6aec0a4f7e
+- https://www.synapse.org/Synapse:syn51365303
+- https://cvd.hugeamp.org/dinspector.html?dataset=Nauffal2024_Fibrosis_EU&phenotype=MyocardialT1
+- https://diagram-consortium.org/downloads.html
+- https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE124742
+- https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE164875
+- https://assets.nemoarchive.org/dat-61kfys3
+- https://e2g.stanford.edu/variant/6_7231610_G_A
+- https://twas-hub.org
+- https://BioRender.com
+
+### 2511.04541v1_LLM_as_a_judge.pdf
+**Title**: 2511.04541v1_LLM_as_a_judge.pdf
+
+**Agentic System Description**:
+
+- Agent Node
+  - Name: LLM-Judge Ensemble
+  - LLM models used (representative M-model ensemble per query): Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct, Ministral-8B-Instruct-2410, gemma-2-9b-it, Qwen2.5-14B-Instruct, Mistral-Small-24B-Instruct-2501, gemma-2-27b-it, Qwen2.5-32B-Instruct
+  - Responsibilities/Roles:
+    - Act as evaluator-centric world model for user preferences over slates
+    - Given user context and two ordered slates (L1, L2), return the preferred slate index
+    - Maintain coherence with preference axioms (transitivity, asymmetry, irreflexivity) and rating-transitivity
+    - Remain catalog-grounded (no hallucinated items rewarded)
+  - Prompts:
+    - Structure (four blocks): Instruction (choose better slate for this user; select exactly one), User context (short interaction history and features), Candidate slates (ordered item lists preserving layout), Output schema (single-token verdict: 1 or 2; optional brief rationale)
+    - Dataset-agnostic placeholders: {PLATFORM NAME}, {DOMAIN NOUN}, {RATING MIN}, {RATING MAX}, {HISTORY}, {LIST 1}, {LIST 2}, {LIST 1 TAG}, {LIST 2 TAG}, {VERDICT TAG}, {EXPLAIN LIMIT}, {CRITERIA POPULARITY}, {CRITERIA DIVERSITY}
+    - Model-family templates included: Qwen/Gemma (standard chat), LLaMA (ChatML), Mistral (INST)
+    - Output constraint: first token must be <{VERDICT TAG}>1</...> or <{VERDICT TAG}>2</...>; explanation optional and short
+- Tools and Services
+  - Prompt Builder
+    - Assembles model-family-specific prompt templates using dataset-agnostic placeholders
+    - Enforces one-token verdict schema and optional rationale budget
+  - Candidate Slate Generator
+    - Produces candidate slates per user/task
+    - Generates slate pairs for pairwise duels
+  - Duel Generator with Order Flipping
+    - For each pair (L1, L2), queries in both orders (L1, L2) and (L2, L1) to mitigate position/format bias
+  - LLM Ensemble Executor
+    - Sends identical duel prompts to M diverse LLMs per order
+    - Collects per-model verdicts
+  - Majority Vote Aggregator
+    - Aggregates the M-model votes (across both orders) to yield final preferred slate
+  - Coherence & Consistency Checker
+    - Computes preference-axiom metrics: transitivity, asymmetry, irreflexivity
+    - Computes rating transitivity (consistency between scalar ratings and pairwise outcomes)
+  - Metric Calculator
+    - Empirical regret (dataset-dependent utility; Eq. 2) as external objective
+    - Supports task metrics: rating-sum proxies (T1) and nDCG vs reference order (T2); combined for T3
+  - Embedding Similarity Analyzer
+    - Computes slate similarity sim(L1, L2) = cos(mean(ϕ(L1)), mean(ϕ(L2))) for duel difficulty analysis
+  - Baseline Generator
+    - Random preference baseline for comparison
+- Memory Features
+  - In-context memory only: short user interaction history and features embedded in each prompt
+  - Stateless across queries; no persistent external memory or tool-augmented retrieval
+- Sub-agents
+  - LLM-Judge-Qwen (Qwen2.5-7B/14B/32B-Instruct)
+    - Role: pairwise judge using Qwen-family template
+    - Tools: prompt family, order flipping; no external browsing
+  - LLM-Judge-Llama (Llama-3.1-8B-Instruct)
+    - Role: pairwise judge using ChatML template
+  - LLM-Judge-Mistral (Ministral-8B-Instruct-2410; Mistral-Small-24B-Instruct-2501)
+    - Role: pairwise judge using INST template
+  - LLM-Judge-Gemma (gemma-2-9b-it; gemma-2-27b-it)
+    - Role: pairwise judge using standard chat template
+  - Vote Aggregation Service
+    - Role: majority voting across sub-agent outputs; resolves ties, aggregates both orderings
+  - Coherence Validator
+    - Role: global consistency evaluation and reporting per dataset/task
+- System-Level Components and Interactions
+  - Data Ingestion
+    - Inputs: user features/history, catalog items with features, task/dataset config, ground-truth utilities or reference orders where available
+  - Task Pipelines
+    - T1 Set Selection (what): select k items (unordered); utility = sum of rescaled ratings
+    - T2 Re-ranking (how): fixed item set; optimize permutation; utility via nDCG against reference order (MIND news clicks, Spotify playlist order)
+    - T3 Joint selection + ordering (what+how): output ordered list; utility per domain (rating-sum or nDCG)
+  - Pairwise Evaluation Loop
+    - For each user and generated candidate slate pair: build prompts -> query LLM ensemble for (L1, L2) and (L2, L1) -> aggregate votes -> record preference
+  - Evaluation and Reporting
+    - Compute empirical regret over evaluated pairs (weighted by utility gaps)
+    - Compute coherence metrics and rating transitivity
+    - Analyze performance vs slate similarity
+- Title: 2511.04541v1_LLM_as_a_judge.pdf
+- Source Location
+  - Code/Project page: null (no explicit implementation URL provided in the document)
+  - Where to read the paper: arXiv link listed in Source References
+
+**Source Location**:
+- LLM-as-a-Judge: Toward World Models for Slate Recommendation Systems: https://arxiv.org/abs/2511.04541    0
+- https://grouplens.org/datasets/movielens/1m/
+- https://msnews.github.io/mind/
+- https://www.aicrowd.com/challenges/spotify-million-playlist-dataset-challenge
+- https://amazon-reviews-2023.github.io/
+- https://arena.lmsys.org
+- Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena: https://arxiv.org/abs/2306.05685    5947
+- RecoGym: https://github.com/criteo-research/reco-gym
+- KuaiSim: https://github.com/KuaiRec/KuaiSim
+- https://www.ijcai.org/proceedings/2019/0609.pdf
+- BPR: Bayesian Personalized Ranking from Implicit Feedback: https://arxiv.org/abs/1205.2618    6183
+
+
+### 2511.04583v1_JrScientist.pdf
+**Title**: 2511.04583v1_JrScientist.pdf
+
+**Agentic System Description**:
+
+- Title: 2511.04583v1_JrScientist.pdf
+- Agent Node
+  - LLM Models
+    - GPT-o4-mini (OpenAI)
+    - claude-sonnet-4-20250514 via Claude Code (Anthropic)
+    - GPT-4o (OpenAI, LMM for figure feedback)
+    - GPT-5 (OpenAI, reviewer)
+    - Gemini 2.5 (Google, reviewer)
+    - Claude Sonnet 4 (Anthropic, reviewer)
+  - Responsibilities/Roles
+    - Limitation Analyzer: read baseline paper (PDF/LaTeX), extract limitations
+    - Idea Generator: propose improvement hypotheses grounded in limitations
+    - Novelty Checker: search and compare with literature, refine ideas
+    - Coding Agent: implement ideas on baseline multi-file codebase, debug, iterate
+    - Experiment Orchestrator: manage stages, run commands, track metrics, propagate best nodes
+    - Ablation Designer: generate ablation ideas; implement scripts for hyperparameter and component studies
+    - Writing Agent: compose paper in LaTeX, method-first, structure plan, full draft, citation validation
+    - Reflection/Reviewer Agent: generate critiques (logic, formatting, figures), apply revisions; incorporate AI reviews
+    - Page-Length Adjuster: iterative trimming to target page limit
+  - Key Prompts/Guidelines
+    - Idea LLM: “Given the baseline paper below, list concrete limitations; propose N novel, testable improvement hypotheses; justify with citations; plan experiments.”
+    - Novelty Check: “Use Semantic Scholar/OpenScholar to retrieve papers citing the baseline and with similar concepts; compare and differentiate; revise ideas if overlapped.”
+    - Coding Agent: “Working directory contains baseline implementations. Only use read/write, ls, grep. Do NOT execute programs. Create runnable proposed_method.py (Stage1) and improved_proposed_method.py (Stage2). Use baseline.py as entrypoint and plot.py for visualization. Max 30 turns per task. Use runtime logs we provide to debug.”
+    - Ablation Generation: “Summarize Stage2 method textually; propose hyperparameter and component ablations; implement hyperparam_ablation_study.py and component_ablation_study.py without altering Stage2 artifacts.”
+    - Writing Agent: “Use Agents4Science LaTeX template in working dir; follow CLAUDE.md instructions. Write Method section first using baseline LaTeX and Stage2 code. Then outline paper structure, then full draft. Rewrite Related Work leveraging baseline. Validate citations; add missing references; remove irrelevant ones. Use provided JSON result summaries and LaTeX tables; do not fabricate results. Perform 3 reflection rounds (logic, formatting with chktex, figures with LMM). Address AI reviewer feedback in NeurIPS format. Iteratively adjust to 8 pages.”
+    - Reviewers: “Review manuscript in official conference format; provide actionable comments on soundness, clarity, significance, and weaknesses.”
+- Tools
+  - Literature/Knowledge
+    - Semantic Scholar API (retrieval, BibTeX collection)
+    - OpenScholar (RAG for scientific literature)
+  - Code/Filesystem
+    - Local file read/write; directory exploration via ls, grep
+    - Experiment runner: executes python entrypoints (baseline.py, proposed_method.py, improved_proposed_method.py, ablation scripts)
+    - Plotting pipeline: plot.py to generate figures
+    - Bug diagnostics: capture stdout/stderr for agent-guided debugging
+    - Diff/versioning of experimental nodes’ codebases
+  - Authoring/Formatting
+    - LaTeX toolchain with Agents4Science template
+    - chktex for style/syntax feedback
+    - Table auto-generator from JSON (component_ablation_summary_table.tex, hyperparam_ablation_summary_table.tex)
+  - Review/Feedback
+    - LMM-based figure critique (using abstract, captions, figure images)
+    - AI reviewers (GPT-5, Gemini 2.5, Claude Sonnet 4; NeurIPS-style rubric)
+- Memory Features
+  - Persistent working directory with multi-file baseline and generated code
+  - Experiment state tracking per node: Buggy/Non-Buggy, Plot-Buggy/Non-Plot-Buggy, metrics history
+  - Best-so-far performance cache for probabilistic selection in Stage2
+  - Summarized experimental results in JSON:
+    - baseline_summary.json
+    - improved_research_summary.json
+    - component_ablation_summary.json
+    - hyperparam_ablation_summary.json
+  - Generated visualizations and their paths for manuscript inclusion
+  - Verified BibTeX repository; dynamic retrieval on citation edits; guardrail to use only verified .bib
+- System Components
+  - Preparation
+    - Inputs: baseline paper PDF + LaTeX sources; baseline codebase
+    - Engineering: standardized entrypoints baseline.py (run) and plot.py (visualize)
+  - Idea Generation Pipeline
+    - Step 1: Limitation analysis on baseline text (GPT-o4-mini)
+    - Step 2: Idea proposal conditioned on limitations
+    - Step 3: Novelty check via Semantic Scholar/OpenScholar; refine/differentiate ideas
+    - Output: preliminary research idea with experiment plan
+  - Experiment Phase Orchestrator
+    - Coding Agent Harness (Claude Code)
+      - Permissions: read/write files; ls, grep
+      - External execution: system executes scripts after generation
+      - Max 30 turns; uses runtime feedback for debugging
+    - Stage 1: Idea Implementation
+      - Four parallel experimental nodes
+      - Deliverable: proposed_method.py per node
+      - Execute + visualize; label codebases (Buggy/Non-Buggy, Plot-Buggy/Non-Plot-Buggy)
+      - Iterations: up to 12; carry forward any bug-free implementation
+      - Debug strategy: rerun failed nodes with detailed logs
+    - Stage 2: Iterative Improvement
+      - Improvement proposal + code modification per trial
+      - Implement in improved_proposed_method.py
+      - Selection policy: sample from Stage1 implementation or current best performer
+      - Stop when surpassing baseline metrics; up to 50 iterations
+      - Pass best code to Stage3
+    - Stage 3: Ablation Studies
+      - Generate method description text; LLM proposes ablations
+      - Implement hyperparam_ablation_study.py and component_ablation_study.py
+      - Run to collect sufficient ablation results
+  - Writing Phase
+    - Resources injected: Agents4Science LaTeX template; instruction markdown (CLAUDE.md); baseline LaTeX; baseline code; Stage2 code; JSON summaries; auto-generated LaTeX tables
+    - Draft Writing
+      - BibTeX collection: Semantic Scholar + baseline .bib bootstrap
+      - Method-first authoring: accurate baseline and proposed method descriptions grounded in code
+      - Structure summary; full-paper generation
+      - Related Work rewrite using baseline section as scaffold
+      - Citation validation against baseline and verified .bib
+    - Reflection (3 rounds)
+      - Logical consistency: alignment of text with results; sufficiency checks
+      - Formatting/presentation: LaTeX hygiene with chktex; style improvements
+      - Figure-focused reflection via LMM: prune/move low-value figures; improve captions/text alignment
+      - Reviewer-driven revisions: integrate AI reviewer feedback (NeurIPS rubric)
+    - Adjustment
+      - Iterative page-length control to target 8 pages; gentle reduction to avoid over-trimming
+- Sub-Agents/Services
+  - AI Reviewer Service: GPT-5, Gemini 2.5, Claude Sonnet 4; in-context with ICLR review exemplars
+  - Figure LMM Service: GPT-4o for multimodal figure assessment
+- Data/Artifacts Flow
+  - Baseline resources → Idea LLM → Preliminary idea → Coding Agent → Stage1/2/3 code + results → JSON summaries/figures → Writing Agent → Draft → Reflections/Reviews → Final PDF within page limit
+- Execution Constraints and Safety
+  - Coding agent cannot execute code; system controls execution and sandboxed feedback
+  - Verified citation pipeline to prevent non-existent references; dynamic API retrieval on edits
+  - Anti-fabrication instruction during revisions; reliance on structured JSON results for grounding
+- Source/Code Availability
+  - Primary repo: Jr. AI Scientist and Its Risk Report: Autonomous Scientific Exploration from a Baseline Paper [[arXiv](https://arxiv.org/abs/2511.04583)]: https://github.com/Agent4Science-UTokyo/Jr.AI-Scientist
+  - Baseline/related project references and venues listed below
+
+**Source Location**:
+- Jr. AI Scientist and Its Risk Report: Autonomous Scientific Exploration from a Baseline Paper [[arXiv](https://arxiv.org/abs/2511.04583)]: https://github.com/Agent4Science-UTokyo/Jr.AI-Scientist
+- https://agents4science.stanford.edu/
+- https://openreview.net/forum?id=x7qlIDcw0P
+- https://openreview.net/forum?id=AzOkqwsTXo
+- https://openreview.net/forum?id=L5gDfr4GdF
+- https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/#gemini-2-5-thinking
+- https://www-cdn.anthropic.com/6d8a8055020700718b0c49369f60816ba2a7c285.pdf
+- https://docs.anthropic.com/en/docs/claude-code/overview
+- https://cdn.openai.com/gpt-5-system-card.pdf
+- https://cdn.openai.com/pdf/2221c875-02dc-4789-800b-e7758f3722c1/o3-and-o4-mini-system-card.pdf
+- https://www.semanticscholar.org/product/api
+- OpenScholar: Synthesizing Scientific Literature with Retrieval-augmented LMs: https://arxiv.org/abs/2411.14199    43
+- https://www.intology.ai/blog/zochi-tech-report
+- https://openai.com/research/clip
+- https://www.image-net.org/
+- http://vision.princeton.edu/projects/2010/SUN/
+- http://places2.csail.mit.edu/
+- https://www.robots.ox.ac.uk/~vgg/data/dtd/
+- https://www.inaturalist.org/
+- OpenOOD: Benchmarking Generalized OOD Detection: https://github.com/Jingkang50/OpenOOD
+
+
+
+
+
+## Uncategorized
+### agent_6sdk.jpeg
+**Title**: agent_6sdk.jpeg
+
+**Agentic System Description**:
+
+- agent_6sdk.jpeg
+  - Agent Node
+    - LLM models: null
+    - Responsibilities/Roles: overview of six no‑code tools for building agents, RAG systems, and LLM training/tuning; poster does not define a single runnable agent
+    - System prompts: null
+    - Available tools/services: RAG engines, agent workflow builders, training/fine‑tuning toolkits, desktop/Docker app with agents and RAG, MCP compatibility (tool-specific; see sub‑agents)
+    - Memory features: RAG context layers mentioned for RAGFlow and Anything LLM; others unspecified
+  - Sub‑agents / Platforms (as described in the image)
+    - SimAI
+      - Role: open‑source platform to build and deploy AI agent workflows
+      - LLM model names: null
+      - Prompts: null
+      - Tools: workflow/agent builder (unspecified)
+      - Memory: unspecified
+      - Source: null
+    - Transformer Lab
+      - Role: open‑source toolkit for LLMs to train, tune, and chat on your own machine
+      - LLM model names: null
+      - Prompts: null
+      - Tools: local training, fine‑tuning, chat interface (unspecified details)
+      - Memory: unspecified
+      - Source: null
+    - RAGFlow
+      - Role: open‑source RAG engine merging retrieval with agent capabilities for an enhanced LLM context layer
+      - LLM model names: null
+      - Prompts: null
+      - Tools: retriever/indexer + agent orchestration (unspecified)
+      - Memory: RAG context layer
+      - Source: 💡 What is RAGFlow?: https://github.com/infiniflow/ragflow, https://ragflow.io
+    - AutoAgent
+      - Role: fully‑automated, zero‑code LLM agent framework
+      - LLM model names: null
+      - Prompts: null
+      - Tools: agent automation/runtime (unspecified)
+      - Memory: unspecified
+      - Source: null
+    - Llama Factory
+      - Role: train and fine‑tune open‑source LLMs and VLMs without writing code
+      - LLM model names: null
+      - Prompts: null
+      - Tools: training/fine‑tuning pipelines
+      - Memory: unspecified
+      - Source: Used by [Amazon](https://aws.amazon.com/cn/blogs/machine-learning/how-apoidea-group-enhances-visual-information-extraction-from-banking-documents-with-multimodal-models-using-llama-factory-on-amazon-sagemaker-hyperpod/), [NVIDIA](https://developer.nvidia.com/rtx/ai-toolkit), [Aliyun](https://help.aliyun.com/zh/pai/use-cases/fine-tune-a-llama-3-model-with-llama-factory), etc.: https://github.com/hiyouga/LLaMA-Factory
+    - Anything LLM
+      - Role: all‑in‑one desktop & Docker AI app with built‑in RAG, AI agents, and no‑code agent builder; MCP compatible
+      - LLM model names: null
+      - Prompts: null
+      - Tools: RAG engine, agent builder, MCP client
+      - Memory: RAG‑based context memory
+      - Source: https://anythingllm.com, Product Overview: https://github.com/Mintplex-Labs/anything-llm
+  - System‑level components and interactions
+    - Components: agent workflow builders (SimAI, Anything LLM, AutoAgent), RAG engine (RAGFlow, Anything LLM), training/fine‑tuning toolkits (Transformer Lab, Llama Factory), desktop/Docker runtime (Anything LLM)
+    - Interactions: not specified in the image; tools appear as standalone offerings; potential composition is implied but unspecified
+  - Source location
+    - mcp.dailydoseofds.com
+    - RAGFlow: 💡 What is RAGFlow?: https://github.com/infiniflow/ragflow, https://ragflow.io
+    - Llama Factory: Used by [Amazon](https://aws.amazon.com/cn/blogs/machine-learning/how-apoidea-group-enhances-visual-information-extraction-from-banking-documents-with-multimodal-models-using-llama-factory-on-amazon-sagemaker-hyperpod/), [NVIDIA](https://developer.nvidia.com/rtx/ai-toolkit), [Aliyun](https://help.aliyun.com/zh/pai/use-cases/fine-tune-a-llama-3-model-with-llama-factory), etc.: https://github.com/hiyouga/LLaMA-Factory
+    - Anything LLM: https://anythingllm.com, Product Overview: https://github.com/Mintplex-Labs/anything-llm
+
+**Source Location**:
+- https://mcp.dailydoseofds.com
+- 💡 What is RAGFlow?: https://github.com/infiniflow/ragflow
+- https://ragflow.io
+- Used by [Amazon](https://aws.amazon.com/cn/blogs/machine-learning/how-apoidea-group-enhances-visual-information-extraction-from-banking-documents-with-multimodal-models-using-llama-factory-on-amazon-sagemaker-hyperpod/), [NVIDIA](https://developer.nvidia.com/rtx/ai-toolkit), [Aliyun](https://help.aliyun.com/zh/pai/use-cases/fine-tune-a-llama-3-model-with-llama-factory), etc.: https://github.com/hiyouga/LLaMA-Factory
+- https://anythingllm.com
+- Product Overview: https://github.com/Mintplex-Labs/anything-llm
+
+### agent_build_9steps.jpeg
+**Title**: agent_build_9steps.jpeg
+
+**Agentic System Description**:
+
+- Title: agent_build_9steps.jpeg
+- Agent Node
+  - LLM model names
+    - OpenAI GPT-4 family (multimodal) — option for conversation, reasoning, tool use
+    - Anthropic Claude family — option for safe long-form reasoning
+    - Meta Llama family — option for self-hosted/open models
+  - Responsibilities/Roles
+    - Answer customer queries and FAQs
+    - Automate workflows and business processes
+    - Make recommendations and generate personalized content
+    - Schedule tasks, create tickets, update CRM/ERP records
+    - Generate SOPs, knowledge articles, email replies, and responses to product/return queries
+  - Prompts
+    - System prompt: role, objectives, domain constraints, tone, compliance and safety rules
+    - Tool-use instructions: when to call connectors/APIs, required parameters, error handling
+    - Retrieval instructions: cite sources from knowledge base; prefer latest org data
+    - Interaction rules: ask clarifying questions; escalate to human when confidence low
+    - Output format: structured JSON for automations; natural-language for users
+- Available Tools and Connectors
+  - No-code orchestration connectors (Make.com, Zapier, n8n)
+  - HTTP/API requester; Webhooks (ingest external events)
+  - File/Document loaders; OCR for PDFs/Images
+  - RAG stack: embedding generator + vector store search
+  - Data sources: spreadsheets, databases, CRM/ERP/Helpdesk apps
+  - Communication: email sender, chat widget, notifications
+  - Scheduler/cron and queue worker for background jobs
+  - Payment integration (Stripe) for monetization
+  - Authentication/SSO, secrets manager
+- Memory Features
+  - Short‑term conversational memory per session
+  - Long‑term knowledge memory via vector database (for docs, SOPs, FAQs)
+  - User profile and preferences store
+  - Tool‑result cache and action history for traceability
+  - Analytics logs for evaluations and optimization
+- Sub‑Agents and Services
+  - Orchestrator/Planner: decides next action, selects tools, routes sub‑tasks
+  - Retriever: builds search queries and fetches context for RAG
+  - Tool Executor: performs API calls, validates outputs, retries on failure
+  - Monitor & Guardrails: safety filters, PII redaction, policy checks
+  - Human‑in‑the‑loop Reviewer: approval gates for high‑risk actions
+  - Evaluator/Tester: offline and online evaluations, A/B testing
+  - Scheduler/Worker: time/event‑based triggers and multi‑step flows
+- System‑Level Components and Interactions
+  - Step 1 — Purpose & Goals
+    - Define tasks, success metrics, guardrails, target users, and channels
+  - Step 2 — Model Selection
+    - Pick LLM from GPT‑4/Claude/Llama families based on capability, cost, privacy
+  - Step 3 — No‑Code Platform Layer
+    - Orchestrate flows using Make.com, Zapier, or n8n; manage triggers/actions; map data
+  - Step 4 — API & Data Integration
+    - Connect CRM/ERP/Helpdesk/Databases; set OAuth/API keys; webhooks for events
+    - Data governance: PII handling, encryption in transit/at rest
+  - Step 5 — Logic & Memory
+    - Prompt templates, few‑shot exemplars; RAG pipeline over organizational knowledge
+    - Vector memory for long‑term context; versioned knowledge base
+  - Step 6 — Task Automation
+    - Event/time triggers; multi‑step workflows; conditional branching; human approvals
+  - Step 7 — Deployment & Hosting
+    - Cloud options: AWS, Google Cloud, Azure; serverless/functions or containers
+    - Channels: web/chat widget; API for internal tools
+  - Step 8 — Monitoring, Testing, Optimization
+    - Telemetry: latency, success rate, cost; feedback capture
+    - A/B test prompts/flows; evaluation datasets; rate‑limit and budget controls
+  - Step 9 — Productization & Scale
+    - Payments via Stripe; user auth and roles; usage metering; audit logs; compliance
+- Where system/code can be found
+  - null
+
+**Source Location**:
+- https://www.linkedin.com/in/digitalprocessarchitect/
+- https://www.make.com
+- https://zapier.com
+- https://n8n.io
+- https://aws.amazon.com
+- https://cloud.google.com
+- https://azure.microsoft.com
+- https://stripe.com
+- https://openai.com
+- https://www.anthropic.com
+- https://ai.meta.com/llama
+
+### agent_claude_context_pruning.jpeg
+**Title**: agent_claude_context_pruning.jpeg
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM model names: Unspecified MCP-compatible LLM
+  - Responsibilities/Roles: interpret user requests; plan when to use tools; request tool execution via MCP; integrate tool results; generate assistant messages
+  - Prompts
+    - System prompt: includes tool-use instructions and behavioral policy
+    - Tool definitions: serialized specs for each available tool injected into context
+    - Conversation context: prior user and assistant messages; tool call requests and results
+  - Available Tools
+    - Dynamic toolset discovered via MCP tools/list
+    - Tools are invoked via MCP tools/call; results appended to context window
+  - Memory Features: short-term memory is the MCP client's context window (system prompt, tool defs, conversation turns, tool call results); no persistent/long-term memory specified
+
+- Sub-agents and Services
+  - MCP Client
+    - Role: orchestrator between LLM and tool backends; manages context window and tool lifecycle
+    - Context Window Layout (example sequence): System prompt -> Tool 1 def -> Tool 2 def -> User msg 1 -> Assistant msg 1 -> Call tool 1 -> Call tool 1 result -> Assistant msg 2 -> User msg 2
+    - Interfaces: requests tools/list; issues tools/call(tool_name, args); appends tool results to context; forwards updated context to the Model
+  - MCP Server
+    - Role: tool provider and executor
+    - Endpoints: tools/list (returns available tools and schemas); tools/call (executes a tool and returns result payload)
+    - Artifacts: tool catalog; execution environment; returns structured results to client
+  - Model
+    - Role: consumes the context window; produces assistant messages; emits tool-call actions when needed
+    - I/O: receives condensed context from client; returns assistant messages and tool-call directives back to client
+
+- System-Level Components and Interactions
+  - Components: Model, MCP Client (with context window manager), MCP Server (tool runtime)
+  - Interaction Flow
+    - Step 1: MCP Client -> MCP Server: tools/list; receives tool definitions; injects into context
+    - Step 2: User message appended; MCP Client sends updated context to Model
+    - Step 3: Model replies; may output tool-call action
+    - Step 4: MCP Client executes tools/call on MCP Server; receives tool result; appends result into context
+    - Step 5: MCP Client resubmits context to Model; Model continues generating assistant messages; loop repeats
+  - Data Placement: all prompts, tool specs, conversation turns, and tool outputs are maintained in the MCP Client’s context window and streamed to the Model as needed
+
+- Document Title
+  - agent_claude_context_pruning.jpeg
+
+**Source Location**:
+- https://modelcontextprotocol.io
+- Model Context Protocol (MCP): https://github.com/modelcontextprotocol/specification
+- Model Context Protocol servers: https://github.com/modelcontextprotocol/servers
+
+### agent_claude_MCP_server.jpg
+**Title**: agent_claude_MCP_server.jpg
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM model names: Unspecified (any MCP-compatible LLM); examples: Claude 3.x family
+  - Responsibilities/roles:
+    - Read system prompt and tool definitions in the context window
+    - Hold conversation with the user (assistant messages)
+    - Decide when to invoke tools exposed via MCP
+    - Incorporate tool call results into subsequent reasoning and replies
+  - Prompts:
+    - System prompt (placed at the top of the context window)
+    - Tool definitions (serialized descriptions added to the context)
+    - User messages (e.g., User msg 1, User msg 2)
+    - Assistant messages (e.g., Assistant msg 1, Assistant msg 2)
+  - Available tools:
+    - Dynamic discovery from MCP server via tools/list
+    - Invocation via tools/call(tool_name, args)
+    - Example placeholders shown: Tool 1, Tool 2
+  - Memory features:
+    - Short‑term: rolling context window containing system prompt, tool definitions, user/assistant messages, tool call results
+    - Long‑term: not depicted; persistence not specified in the diagram
+  - Sub-agents/services:
+    - MCP client (agent runtime/orchestrator)
+    - MCP server (tool host exposing tools to the agent)
+- System Components
+  - Model
+    - Generic LLM that consumes the context window and produces assistant messages and tool call decisions
+  - MCP client
+    - Maintains the context window (system prompt, tool defs, history, tool results)
+    - Discovers tools from MCP server (tools/list) and injects definitions into the context
+    - Routes tool invocations (tools/call) and appends results back to the context
+    - Presents user messages to the model and forwards model outputs to user
+  - MCP server
+    - Tool registry and implementations
+    - Endpoints:
+      - tools/list: enumerate available tools with their schemas/definitions
+      - tools/call: execute a named tool with arguments and return result payload
+- Interactions and Data Flow
+  - Session init:
+    - MCP client -> MCP server: tools/list
+    - MCP server -> MCP client: tools/list result (tool definitions)
+    - MCP client: inserts system prompt and tool definitions into context window
+  - Turn 1:
+    - User sends User msg 1 -> MCP client -> Model
+    - Model outputs Assistant msg 1 and decides Call tool1
+    - MCP client -> MCP server: tools/call(tool1)
+    - MCP server -> MCP client: tools/call result
+    - MCP client appends call result into context
+  - Turn 2:
+    - Model reads updated context and produces Assistant msg 2
+    - User sends User msg 2; cycle repeats
+- Title: agent_claude_MCP_server.jpg
+- Where to read code/docs
+  - Model Context Protocol website describing spec and servers
+  - Model Context Protocol GitHub organization with reference servers/clients and examples
+  - Anthropic Claude documentation for MCP usage
+
+**Source Location**:
+- https://modelcontextprotocol.io
+- https://github.com/modelcontextprotocol
+- https://docs.anthropic.com/claude/docs/model-context-protocol
+
+### agent_context_engineering.jpeg
+**Title**: agent_context_engineering.jpeg
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM model names: not specified (pluggable LLM)
+  - Responsibilities/roles:
+    - Interpret user Input and decide actions
+    - Coordinate retrieval (RAG) and tool use
+    - Generate Answer and route outputs to User and memories
+    - Perform agentic coordination and decision making
+  - Prompts:
+    - System prompt constructed from current task, Short‑Term Memory context, and retrieved Long‑Term Memory snippets
+    - Updated with the agent’s latest Answer (self‑update loop)
+    - Contains instructions for using RAG and Action Tools
+- Available Tools
+  - RAG
+    - Retrieval augmented generation layer
+    - Consumes vector search results from Long‑Term Memory
+    - Feeds retrieved context back to Agent for coordination/decision making
+  - Action Tools
+    - Extensible toolset (icons indicate coding/execution, document/file operations, web/navigation, automation/scheduling)
+    - Invoked by Agent for external actions
+  - Memory Connectors (MCP inside Long‑Term Memory)
+    - Interface/services to connect the Agent with databases and memory stores
+- Memory Features
+  - Short‑Term Memory
+    - Chat history buffer
+    - Stores all context after each Answer
+  - Long‑Term Memory
+    - Databases plus MCP services
+    - Vector index for retrieval
+    - Updated via “Add to memory” events
+  - Memory operations
+    - Write: Answer -> Add to memory -> Long‑Term Memory
+    - Read: Long‑Term Memory -> vector search -> RAG -> Agent
+- System‑Level Components
+  - User
+  - Input (pre‑agent message stage)
+  - Agent (orchestrator)
+  - Prompt (dynamic context package)
+  - Answer (final response object)
+  - RAG (retrieval layer)
+  - Action Tools (external actuators)
+  - Long‑Term Memory (MCP + Databases)
+  - Short‑Term Memory (chat history)
+  - Add to memory (write pathway)
+- Interactions and Data Flow
+  - 1: User -> Input
+  - 2: Input -> Agent
+  - 3: Agent <-> RAG (agentic coordination and decision making)
+  - Long‑Term Memory -> RAG via vector search (retrieval)
+  - 4: Agent -> Action Tools (execute actions as needed)
+  - 5: Agent -> Prompt (update prompt with latest Answer)
+  - 6: Agent -> Answer
+  - 7: Answer -> Short‑Term Memory (store all context in chat history)
+  - 8: Answer -> Add to memory -> Long‑Term Memory
+  - Answer -> User (deliver final response)
+- Document
+  - Title: agent_context_engineering.jpeg
+  - Where to read the code/project: null
+
+**Source Location**: null
+
+### agent_deployment.jpeg
+**Title**: agent_deployment.jpeg
+
+**Agentic System Description**:
+
+- Title: agent_deployment.jpeg
+- Agent Node
+  - LLM model names: not specified (diagram labels as "LLM")
+  - Responsibilities/Roles:
+    - Run inference over provided context
+    - Orchestrate tasks per deployment type (batch, stream, real time, edge)
+    - Return results to backend services or on-device consumers
+  - Prompts: not specified
+  - Available tools:
+    - Workflow orchestrator (Apache Airflow icon shown) for batch scheduling
+    - gRPC for real-time RPC transport
+  - Memory features:
+    - External Context via low-latency storage (red layered storage)
+    - Inference Store for persisted outputs/results and downstream fan-out
+    - Optional batch and streaming storage as context sources
+  - Sub-agents/Services:
+    - Multiple agent instances behind a load balancer for real-time serving
+    - On-device agents on user devices for edge deployment
+- Deployment Topologies
+  - Batch
+    - Components: External Context (batch storage), Airflow-orchestrated Agent, Inference Store, Backend Services
+    - Dataflow:
+      - External Context (batch storage) -> Agent (scheduled by Airflow) -> Inference Store -> multiple Backend Services
+  - Stream
+    - Components: Streaming Storage input, Agent, External Context (low-latency storage), Inference Store, Backend Services
+    - Dataflow:
+      - Streaming input -> Agent (+ optional External Context) -> Inference Store -> Backend Services
+  - Real Time
+    - Components: External Context (low-latency), multiple Agent instances (gRPC), Load Balancer, Backend Services
+    - Dataflow:
+      - External Context -> Agent instances (via gRPC) -> Load Balancer -> Backend Services
+  - Edge
+    - Components: User Device(s) each hosting an on-device Agent
+    - Dataflow:
+      - Local interactions on device; no centralized store depicted
+- System Components
+  - External Context (Low-Latency Storage)
+    - Purpose: fast retrieval of knowledge/context for inference
+    - Examples: key-value cache, vector store, feature cache (not specified explicitly)
+  - Batch Storage
+    - Purpose: store large datasets for scheduled processing
+  - Streaming Storage
+    - Purpose: continuous event/log ingestion for near-real-time inference
+  - Inference Store
+    - Purpose: persist model outputs; enable fan-out to multiple downstream services
+    - Acts as: results cache, audit/log sink for responses
+  - Backend Services
+    - Purpose: consume agent outputs to power application features/APIs
+  - Workflow Orchestrator (Apache Airflow)
+    - Purpose: schedule and manage batch agent runs
+  - Transport: gRPC
+    - Purpose: low-latency RPC between agents and serving layer in real-time mode
+  - Load Balancer
+    - Purpose: distribute real-time requests across agent instances
+  - User Device Agents (Edge)
+    - Purpose: on-device inference for privacy/latency; multiple devices supported
+- Interactions
+  - Batch: scheduled pulls from batch storage; results persisted then fanned out to services
+  - Stream: continuous consumption from streaming storage; enriched with external context; results written to inference store
+  - Real Time: request-time fetch of external context; gRPC calls routed via load balancer to backend services
+  - Edge: autonomous on-device agents; no centralized stores shown
+- Where to read code: null
+
+**Source Location**:
+- https://swirlai.com
+- https://newsletter.swirlai.com
+- https://grpc.io
+- https://airflow.apache.org
+
+### agent_how_to_build.png
+**Title**: agent_how_to_build.png
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM models
+    - OpenAI (via OpenAI Agents API)
+    - Google Vertex AI
+    - Anthropic
+    - Local/remote LLMs via LangChain/LangGraph
+  - Responsibilities/roles
+    - Interpret system prompt (goals, role, instructions)
+    - Plan tasks and select tools/APIs
+    - Invoke tools through API calls, MCP server, or other agents
+    - Read/write memory (episodic, working, vector DB, SQL DB, file store)
+    - Coordinate via orchestration (routes/workflows, triggers, params, queues)
+    - Communicate agent-to-agent
+    - Produce outputs to the UI and support evaluation-driven refinement
+  - Prompts
+    - System: goals, role, instructions
+    - Tool-use specification and constraints
+    - Memory retrieval and writeback instructions
+    - Evaluation rubric and success criteria
+- Tools
+  - Simple local tools (file/code utilities)
+  - API tools (web, apps, data)
+  - MCP server (remote tool registry/execution)
+  - AI agent as a tool (delegate to other agents)
+- Memory
+  - Episodic memory
+  - Working memory
+  - Vector database
+  - SQL database memory
+  - File store
+- Orchestration
+  - Routes/workflows
+  - Triggers
+  - Parameters
+  - Message queues
+  - Agent-to-agent communication
+  - Process flow: System Prompt -> LLM -> Tools -> Memory -> Orchestration -> UI -> AI Evals -> iterate
+- UI
+  - Interface layer for user interaction
+- AI Evals
+  - Analyze
+  - Measure
+  - Improve
+- Framework Implementations (from image)
+  - OpenAI Agents API
+    - LLM: OpenAI
+    - MCP: Remote
+    - Tools: Predefined (web, file/code)
+    - Orchestration: Threads
+    - URLs: https://platform.openai.com/docs/agents
+  - Google Vertex AI
+    - LLM: Vertex AI
+    - MCP: Remote
+    - Tools: Predefined (search, vision, etc.)
+    - Orchestration: Flow-based, native agent-to-agent
+    - URLs: https://cloud.google.com/vertex-ai
+  - Anthropic Agents API
+    - LLM: Anthropic
+    - MCP: Remote
+    - Tools: Predefined (web/file)
+    - Orchestration: Tool-calling only
+    - URLs: https://docs.anthropic.com
+  - Microsoft AutoGen
+    - LLM: Any
+    - MCP: None
+    - Tools: Predefined (REPL, code)
+    - Orchestration: Programmatic chaining
+    - URLs: AutoGen: https://github.com/microsoft/autogen
+  - Autogen Studio
+    - LLM: Any
+    - MCP: None
+    - Tools: Predefined
+    - Orchestration: Visual agent chaining
+    - URLs: AutoGen: https://github.com/microsoft/autogen/tree/main/autogen-studio
+  - LangGraph
+    - LLM: Local, Remote
+    - MCP: LangChain Functions
+    - Tools: Graph (DAG)-based flow
+    - Orchestration: Graph-based flow
+    - URLs: Get started: https://github.com/langchain-ai/langgraph, https://langchain-ai.github.io/langgraph/
+  - LangChain
+    - LLM: Local, Remote
+    - MCP: Local, Remote
+    - Tools: Functions (custom-defined)
+    - Orchestration: Manual (chains/agents)
+    - URLs: https://langchain.com, Why use LangChain?: https://github.com/langchain-ai/langchain
+  - CrewAI
+    - LLM: Remote
+    - MCP: Predefined
+    - Tools: Predefined, 40+ integrations
+    - Orchestration: Crew/role-based agent flow
+    - URLs: https://www.crewai.com, Fast and Flexible Multi-Agent Automation Framework: https://github.com/crewAIInc/crewAI
+  - n8n
+    - LLM: Local, Remote
+    - MCP: Remote
+    - Tools: Predefined, 100+ integrations
+    - Orchestration: Workflows, sub-workflows
+    - URLs: https://n8n.io, n8n - Secure Workflow Automation for Technical Teams: https://github.com/n8n-io/n8n
+  - Make
+    - LLM: Limited
+    - MCP: Limited
+    - Tools: Predefined, 100+ integrations
+    - Orchestration: Scenarios, sub-scenarios
+    - URLs: https://www.make.com
+- Document Entry
+  - Title: agent_how_to_build.png
+  - Source location: see Source References
+
+**Source Location**:
+- https://productcompass.pm
+- https://platform.openai.com/docs/agents
+- https://cloud.google.com/vertex-ai
+- https://docs.anthropic.com
+- AutoGen: https://github.com/microsoft/autogen
+- AutoGen: https://github.com/microsoft/autogen/tree/main/autogen-studio
+- Get started: https://github.com/langchain-ai/langgraph
+- https://langchain-ai.github.io/langgraph/
+- https://langchain.com
+- Why use LangChain?: https://github.com/langchain-ai/langchain
+- https://www.crewai.com
+- Fast and Flexible Multi-Agent Automation Framework: https://github.com/crewAIInc/crewAI
+- https://n8n.io
+- n8n - Secure Workflow Automation for Technical Teams: https://github.com/n8n-io/n8n
+- https://www.make.com
+- https://modelcontextprotocol.io
+
+### agent_Jr.Scientist.jpg
+**Title**: agent_Jr.Scientist.jpg
+
+**Agentic System Description**:
+
+- Agent Node: Jr. AI Scientist
+  - LLM models: unspecified in the provided page (multimodal LLM assumed for reading papers and code)
+  - Responsibilities/Roles:
+    - Read a baseline scientific paper and understand goals, methods, and limitations
+    - Formulate novel hypotheses and improvement directions
+    - Plan experiments to validate hypotheses
+    - Write and modify multi-file code to implement methods and run experiments
+    - Analyze experimental results and compose scientific reports/papers
+    - Interact with automated AI reviewers and prepare submissions to evaluation venues
+    - Produce a risk report covering limitations and potential risks of autonomous science workflows
+  - Prompts (representative, inferred from abstract):
+    - "Summarize the baseline paper’s contributions and identify limitations."
+    - "Propose testable hypotheses that improve on the baseline."
+    - "Create an experimental plan with datasets, metrics, and ablation studies."
+    - "Implement the plan with modular, multi-file code; generate tests and run scripts."
+    - "Execute experiments, track results, and diagnose failures."
+    - "Analyze results and write a paper (Introduction, Methods, Results, Discussion)."
+    - "Self-review with AI Reviewers and prepare a submission package for Agents4Science."
+  - Available Tools:
+    - Code synthesis/editing tool for complex, multi-file projects
+    - Execution sandbox for running experiments (script runner, package manager)
+    - PDF/figure/table reader for baseline paper intake
+    - Data I/O and plotting utilities for result analysis
+    - Paper drafting tool (LaTeX/Markdown) and reference manager
+    - AI Reviewer interface for automated assessments
+    - Benchmark/venue connector for Agents4Science submissions
+    - Risk logging/assessment reporter
+  - Memory Features:
+    - Project workspace with persistent files for code, configs, logs, and paper drafts (implied by multi-file implementations)
+    - Experiment logs and result artifacts (metrics, tables, plots)
+    - Review history and revision notes
+  - Sub-agents/Services:
+    - Baseline Paper Analyst
+    - Hypothesis & Research Plan Generator
+    - Coding/Implementation Agent (multi-file)
+    - Experiment Orchestrator/Runner
+    - Result Analyzer
+    - Paper Writing Agent
+    - AI Reviewer Interaction Agent
+    - Submission & Benchmarking Agent (Agents4Science)
+- System-Level Components
+  - Baseline Paper Intake
+    - Parses PDF; extracts tasks, datasets, methods, and limitations
+  - Research Planning
+    - Generates hypotheses, experimental design, and evaluation criteria
+  - Implementation Unit
+    - Produces modular code, configs, and tests; handles dependencies
+  - Experiment Execution
+    - Runs training/evaluation; tracks metrics and artifacts
+  - Analysis & Visualization
+    - Aggregates results, performs statistics/ablations, and renders plots/tables
+  - Paper Generation
+    - Drafts full paper with figures/tables; composes risk report
+  - Review & Iteration
+    - Receives automated AI Reviewer feedback; revises plan/code/paper
+  - Benchmarking/Submission
+    - Packages artifacts and submits to Agents4Science; records scores
+  - Orchestration/Controller
+    - Manages task flow across sub-agents; monitors state and failures
+  - Storage/Artifacts
+    - Stores datasets, checkpoints, logs, and paper drafts
+- Interactions and Control Flow
+  - Intake baseline paper -> analyze limitations
+  - Plan hypotheses -> design experiments
+  - Implement methods -> run experiments
+  - Collect results -> analyze -> draft paper and risk report
+  - Get AI Reviewer feedback -> iterate on plan/code/paper
+  - Submit to Agents4Science -> record evaluations and outcomes
+- Where to Find the System/Code
+  - GitHub repository: Jr. AI Scientist and Its Risk Report: Autonomous Scientific Exploration from a Baseline Paper [[arXiv](https://arxiv.org/abs/2511.04583)]: https://github.com/Agent4Science-UTokyo/Jr.AI-Scientist
+- File
+  - Title: agent_Jr.Scientist.jpg
+
+**Source Location**:
+- Jr. AI Scientist and Its Risk Report: Autonomous Scientific Exploration from a Baseline Paper [[arXiv](https://arxiv.org/abs/2511.04583)]: https://github.com/Agent4Science-UTokyo/Jr.AI-Scientist
+- Jr. AI Scientist and Its Risk Report: Autonomous Scientific Exploration from a Baseline Paper: https://arxiv.org/abs/2511.04583    0
+- https://agents4science.org
+
+### agent_memory.jpeg
+**Title**: agent_memory.jpeg
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM model names: Unspecified Core LLM (Orchestrator)
+  - Responsibilities/Roles: orchestrate tool use and retrieval; route queries to memory subsystems; compose prompts; reason over retrieved context; maintain/update working and episodic memories; generate final responses
+  - Prompts: system prompt with sections for goal, constraints, available tools, retrieved context, reasoning and action history; templates stored in Prompt Registry; augmented by grounding context and prior interactions
+  - Available Tools: Embedding Model (text/document/message to vector), Vector Database with ANN search and Vector Index, Tool Registry (APIs/scripts), Prompt Registry (prompt templates/patterns)
+  - Memory features: Episodic Memory (prior interactions), Semantic Memory (KB + embeddings + vector store), Procedural Memory (tool/prompt registries), Short‑term/Working Memory (active prompt context)
+  - Sub‑agents/Services: none specified beyond tools and memory services
+
+- System Components
+  - Core Orchestrator (LLM)
+    - Interfaces: calls Embedding Model and Vector Database for retrieval; queries Tool Registry; composes prompts from Prompt Registry; reads/writes Working and Episodic memories
+    - Interactions: 1) retrieves context from Semantic Memory; 2) selects tools; 3) executes/reasons; 4) updates memories; 5) emits response
+  - Episodic Memory
+    - Contents: previous interactions (user and assistant turns), conversation summaries
+    - Usage: retrieved/embedded to provide personal or session history to the LLM
+  - Semantic Memory
+    - Private Knowledge Base: Notion pages, Confluence/wiki spaces, PDFs, documentation
+    - Grounding Context: domain/business rules and environmental assumptions
+    - Embedding Model: encodes documents, chunks, and conversation artifacts into vectors
+    - Indexing Pipeline: ingestion, chunking, embedding creation, indexing into Vector Index
+    - Vector Database: stores vectors; supports Approximate Nearest Neighbor (ANN) search; returns top‑k vectors and metadata
+    - Vector Index: structure enabling efficient similarity search in latent space
+  - Procedural Memory
+    - Prompt Registry: catalog of prompt structures/templates and role instructions
+    - Tool Registry: catalog of callable tools/APIs/scripts (GitHub‑hosted or internal) with schemas
+  - Short‑term (Working) Memory
+    - Prompt Structure: assembled instruction block for the current turn
+    - AvailableTools: list of callable tools for the current task
+    - Additional context: retrieved knowledge, grounding facts, user/task parameters
+    - Reasoning and action history: chain‑of‑thought summaries, tool call traces, and outcomes
+  - Dataflow and Control
+    - Ingestion: documents and KB items -> Embedding Model -> Indexing -> Vector Database
+    - Retrieval: query + episodic snippets -> Embedding Model -> ANN search -> retrieved context
+    - Planning/Execution: Orchestrator selects tools from Tool Registry; uses Prompt Registry templates; executes and records results
+    - Memory Updates: outcomes summarized into Working Memory (current turn) and Episodic Memory (long‑term history)
+
+- Document
+  - Title: agent_memory.jpeg
+  - System‑level description: memory‑centric agent architecture with four memory types (episodic, semantic, procedural, working) coordinated by a core LLM orchestrator using embeddings, vector indexing/ANN retrieval, and registries for prompts and tools
+  - Where to read code/project info: general product and site links referenced in the diagram; no specific repository provided
+
+**Source Location**:
+- https://swirlai.com
+- https://newsletter.swirlai.com
+- https://www.notion.so
+- https://www.atlassian.com/software/confluence
+- https://github.com
+
+### agent_modules.jpg
+**Title**: agent_modules.jpg
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM model names: unspecified (multimodal-capable LLM)
+  - Responsibilities/roles:
+    - Orchestrate perception, cognition, and action
+    - Maintain user interaction loop (User Request <-> AI Agent)
+    - Fuse multimodal inputs (camera, text, audio, sensors)
+    - Consult memory and knowledge base to make decisions
+    - Execute tasks in the real world and monitor outcomes
+  - Prompts:
+    - System: "You are an AI agent that fuses camera, text, audio, and sensor inputs, consults memory and a knowledge base, makes decisions, executes and monitors actions, and communicates clearly with the user."
+    - Planning/Decision: "Given fused observations plus memory/KB, derive goals, propose a plan, select actions, and justify choices."
+    - Monitoring/Safety: "Verify outcomes, monitor environment and tool feedback, detect anomalies, and trigger replanning if needed."
+  - Available tools:
+    - Camera interface
+    - Text ingestion/parser
+    - Audio ASR/TTS
+    - Sensor I/O adapters
+    - Multimodal fusion module
+    - Memory store access (read/write)
+    - Knowledge base query
+    - Planner/decision engine
+    - Actuator APIs/robot control
+    - Monitoring/telemetry and logging
+  - Memory features:
+    - Short-term conversational/context memory
+    - Long-term episodic memory of interactions and observations
+    - Structured knowledge base of domain/world facts
+    - Feedback updates from monitors to memory/KB
+  - Sub-agents/services:
+    - Perception service (multimodal fusion of camera/text/audio/sensors)
+    - Cognition service (memory, knowledge base, decision making)
+    - Action/Execution service (task execution, actuators)
+    - Monitoring service (status, telemetry, anomaly detection)
+
+- System-Level Components and Interactions
+  - User Interface
+    - Bi-directional communication between User Request and AI Agent
+  - Perception
+    - Multi-modal fusion: Camera, Text, Audio, Sensors
+    - Output: fused observation delivered to Cognition
+  - Cognition
+    - Memory (episodic/context storage)
+    - Knowledge Base (structured facts)
+    - Decision making (consumes Memory and Knowledge Base; produces plans)
+  - Action
+    - Executing Tasks:
+      - Physical actions in real world
+      - Monitors (observe effects, collect telemetry)
+    - Feedback loops:
+      - Monitors -> Cognition (for evaluation/replanning)
+      - Monitors -> User Interface (status updates)
+  - Data flow
+    - User Request <-> AI Agent (dialog loop)
+    - Perception -> Decision making -> Action
+    - Memory -> Decision making
+    - Knowledge Base -> Decision making
+
+- File Entry
+  - Title: agent_modules.jpg
+  - Source location: null
+  - File reference: agent_modules.jpg
+
+**Source Location**: null
+
+### agent_multiagent_research.jpeg
+**Title**: agent_multiagent_research.jpeg
+
+**Agentic System Description**:
+
+- Agent Node
+  - Name: Lead agent (orchestrator)
+  - LLM model names: Claude (variant not specified)
+  - Responsibilities/Roles: orchestrate multi‑agent research; decompose user request; spawn and coordinate subagents; query/update memory; aggregate findings; manage citations; produce final report
+  - Prompts:
+    - System: "You are the lead research orchestrator. Use search tools and MCP tools, call run_subagent to spin up search subagents, consult shared memory, coordinate a citations subagent, and call complete_task when the report is ready."
+    - Behavior: task planning, tool selection, subagent management, memory read/write, result synthesis
+  - Available tools: search tools; MCP tools; run_subagent; complete_task; memory.read; memory.write
+  - Memory features: shared memory store accessible bidirectionally; persists intermediate findings, queries, citations, and report drafts
+
+- Sub‑agents and Services
+  - Search subagent (multiple instances)
+    - LLM model names: not specified
+    - Role: execute targeted searches; iterate/loop on queries; summarize and return findings to memory
+    - Prompts: "Search the web/doc sources for assigned topic; iterate until coverage; store summaries and links in memory."
+    - Tools: search tools; memory.write; memory.read (context)
+    - Memory features: writes result snippets, URLs, notes; reads assigned task context
+  - Citations subagent
+    - LLM model names: not specified
+    - Role: extract, verify, and format citations for the report
+    - Prompts: "Compile citations from memory into a clean, deduplicated references section."
+    - Tools: memory.read; citation formatting (implicit)
+    - Memory features: reads all subagent outputs; writes finalized citation objects
+  - Memory service
+    - Type: shared memory component
+    - Interfaces: read/write by lead agent and all subagents
+    - Contents: task decomposition, search results, notes, citation objects, draft report sections
+
+- System‑level Components and Interactions
+  - User interface: Claude.ai chat accepts user request and displays final report
+  - Orchestration flow:
+    - User request -> Lead agent
+    - Lead agent uses run_subagent to spawn multiple Search subagents
+    - Search subagents iterate searches and store results in Memory
+    - Lead agent consults Memory, assigns follow‑ups, and requests Citations subagent to assemble references
+    - Lead agent composes final report using Memory and calls complete_task
+    - Final report returned to Claude.ai chat
+  - Tools catalog:
+    - search tools (general search APIs; unspecified)
+    - MCP tools (Model Context Protocol compatible tool interfaces)
+    - run_subagent (spawn/manage subagents)
+    - complete_task (finalize workflow)
+    - memory.read / memory.write (shared state operations)
+
+- Output Artifacts
+  - Final research report
+  - Structured citation list
+
+- File Result
+  - Title: agent_multiagent_research.jpeg
+  - Source location: https://claude.ai, https://modelcontextprotocol.io
+
+**Source Location**:
+- https://claude.ai
+- https://modelcontextprotocol.io
+
+### agent_processing_diagram.jpeg
+**Title**: agent_processing_diagram.jpeg
+
+**Agentic System Description**:
+
+- Title: agent_processing_diagram.jpeg
+- Agent Node
+  - LLM models: gpt-5 (LeadResearcher), gpt-5 (ResearchSubagents), gpt-5 (CitationAgent)
+  - Responsibilities/Roles:
+    - LeadResearcher: plan research approach; save plan; retrieve context; decompose problem; create and coordinate subagents; evaluate results; synthesize results; decide whether more research is needed; return final research result
+    - ResearchSubagent (instantiated as Subagent1, Subagent2,...): perform focused web searches on assigned aspect; evaluate gathered information; complete assigned tasks and return summaries/evidence to LeadResearcher
+    - CitationAgent: process documents and research report; identify citation locations; insert citations; return report with citations
+  - Prompts:
+    - LeadResearcher system prompt: "You are the Lead Researcher. Plan an approach, save your plan, retrieve relevant context, create subagents for each aspect, coordinate their work, synthesize results, and decide whether to continue iterating. Produce a coherent research report as complete_task."
+    - ResearchSubagent system prompt: "You are a focused research subagent. For the assigned aspect, run targeted web_search queries, critically evaluate sources, summarize findings with evidence, and return a concise task result."
+    - CitationAgent system prompt: "Given documents and a research report, detect claims requiring citations, match supporting sources, and insert properly formatted citations before returning the revised report."
+- Available Tools
+  - web_search: internet search for documents and evidence (used by ResearchSubagents; optionally by LeadResearcher)
+  - memory.retrieve_context: fetch prior notes/plans/context relevant to the current query
+  - memory.save_plan: persist the LeadResearcher’s plan for the current task
+  - memory.persist_results: store final research results and supporting documents
+  - subagent.create: spawn ResearchSubagents for aspects A, B, ... with scoped prompts and goals
+  - task.complete: signal completion with outputs (partial or final)
+  - document_processor: parse/process research documents and the synthesized report
+  - citation_inserter: identify citation gaps and insert references
+- Memory Features
+  - Context store: retrieve context for current task
+  - Plan store: save and version the research plan
+  - Results store: persist final research results and supporting artifacts
+- System-Level Components and Interactions
+  - User Interface
+    - Input: send user query
+    - Output: return research results with citations
+  - System Orchestrator
+    - Creates LeadResearcher upon receiving the user query
+    - Manages lifecycle and routing among agents and tools
+  - Iterative Research Loop (within LeadResearcher)
+    - think (plan approach) -> save plan
+    - retrieve context from Memory
+    - create subagents for aspects (A, B, ...)
+    - Subagents perform web_search -> think (evaluate) -> complete_task (return aspect summaries/evidence)
+    - LeadResearcher think (synthesize results)
+    - Decision gate: "More research needed?" -> Continue loop or Exit loop
+  - Citation Pipeline
+    - After exit loop: LeadResearcher complete_task (research result) -> System
+    - Process documents + research report to identify locations for citations (CitationAgent)
+    - Return report with citations inserted
+  - Persistence
+    - System persists results to Memory
+- Sub‑agents or Services
+  - LeadResearcher (primary agent; gpt-5)
+  - ResearchSubagent (multiple instances; gpt-5)
+  - CitationAgent (specialized agent; gpt-5)
+  - Memory Service (context/plan/results)
+  - Web Search Service (external tool)
+- Where to find system/code
+  - File path reference: agent_processing_diagram.jpeg
+  - Public code/project URLs mentioned in source: null
+
+**Source Location**: null
+
+### agent_top16_ai_terms.jpeg
+**Title**: agent_top16_ai_terms.jpeg
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM model names: unspecified in source image
+  - Responsibilities/Roles: plan, reason, decide, act with tools; coordinate multi-agent tasks; retrieve knowledge; maintain short/long-term memory; follow guardrails; escalate to human-in-the-loop when needed
+  - Prompts
+    - System role prompt: unspecified
+    - Planning/reasoning prompt: unspecified
+    - Tool-use instruction prompt: unspecified
+    - Safety/guardrails prompt: unspecified
+- Available Tools
+  - Tool Calling: generic function/tool invocation to external APIs, services, data sources
+  - MCP-compatible tools: standardized tool interfaces via Model Context Protocol
+  - Retrieval/Search: web/doc search, knowledge base lookup for RAG
+  - Database query interface
+  - File system access
+  - Service integration bridge (third-party SaaS, internal microservices)
+- Memory Features
+  - Short-term working memory: conversation/context window
+  - Long-term memory: vector store + document index for RAG
+  - Episodic memory: interaction logs and task histories
+  - Semantic memory: summarized knowledge and learned preferences
+- Sub-Agents and Services
+  - Tool Use Agent: selects and sequences tools/APIs
+  - Reasoning & Planning Agent: task decomposition, multi-step plans
+  - Memory Augmented Agent: writes/reads long-term memory, summarizes context
+  - Autonomous Decision-Making Agent: evaluates options, applies decision policies with feedback loops
+  - Action Orchestrator: schedules and coordinates multi-step/multi-tool workflows
+  - Multi-Agent Coordinator: assigns roles and manages inter-agent communication
+  - Human-in-the-Loop Supervisor: review/approval, corrections, escalation handling
+  - Guardrails Service: safety, policy, privacy, and compliance enforcement
+- System-Level Components and Interactions
+  - LLM Core: foundation model layer used by all agents (specific models not named in source)
+  - Agent Framework: runtime for defining agents, roles, tools, and workflows; supports single- and multi-agent setups
+  - Protocols
+    - MCP (Model Context Protocol): open standard for connecting LLMs/agents to external tools, data sources, and services
+    - A2A Protocol: inter-agent communication for secure task/data exchange across vendors/platforms
+  - RAG Pipeline: combines retrieval with generation to ground responses in up-to-date, external information
+  - Tool Calling & Execution: structured function calls; schema-validated inputs/outputs; retries and error handling
+  - Action Orchestration: DAG/workflow runner coordinating multi-tool tasks and dependency management
+  - Multi-Agent System: collaboration/coordination among specialized agents to solve complex tasks
+  - Autonomous Decision Loop: perceive context -> analyze -> plan -> act -> evaluate results via feedback loops
+  - Human-in-the-Loop Checkpoints: gating steps for critical actions; manual overrides and approvals
+  - Guardrails & Safety: input/output filtering, content moderation, policy checks, data privacy enforcement
+- Document
+  - Title: agent_top16_ai_terms.jpeg
+  - Agentic system description: a consolidated architecture derived from the 16 terms shown (Agentic AI, LLMs, Autonomous Agents, Multi‑Agent Systems, MCP, RAG, A2A Protocol, Tool Use Agents, Action Orchestration, Memory Augmented Agents, Reasoning & Planning Agents, Autonomous Decision Making, Human in the Loop, Agent Framework, Guardrails, Tool Calling)
+  - Source location: https://modelcontextprotocol.io
+
+**Source Location**:
+- https://modelcontextprotocol.io
+
+### agent_types.jpeg
+**Title**: agent_types.jpeg
+
+**Agentic System Description**:
+
+- agent_types.jpeg
+  - Agent Node
+    - LLM model names: unspecified by source (multimodal LLM for vision+text; optional code-oriented LLMs)
+    - Responsibilities/roles: classify user query; route to appropriate sub‑agent; coordinate tools and APIs; maintain short‑term and long‑term memory; evaluate results and return outputs
+    - Prompts: task classification and routing; tool‑use instructions; memory read/write instructions; safety and execution guardrails
+  - Available Tools
+    - Tool registry: Browser automation, Desktop/Mobile UI control, Internal APIs, Triggers, Vector DB, Search, Code execution environment, Version control, Static analysis, Unit tests, Email API, DB query API, Telephony, ASR, TTS, Streaming I/O
+  - Memory Features
+    - Short‑term: per‑session context, UI state, intermediate workflow state
+    - Long‑term: project/codebase context, vector knowledge index, logs and audit history
+  - Sub‑Agents / Services
+    - UI Interaction Agent
+      - Role: interact with user interfaces to perform tasks by understanding visuals, text, and user inputs
+      - LLM model names: unspecified (vision‑language model)
+      - Prompts: “Perceive the current UI from screenshot/DOM; plan clicks/keystrokes; verify outcomes; minimize errors”
+      - Tools: Visual understanding module; UI Interpreter; Browser automation; Desktop automation; Mobile automation
+      - Memory: Long‑Term and Short‑Term UI/task memory
+      - Inputs/Outputs: Query and visual context -> actions (clicks, typing, navigation)
+    - Workflow Automation Agent
+      - Role: automate workflows by connecting apps/APIs and running AI‑driven process systems
+      - LLM model names: unspecified
+      - Prompts: “Compose workflows using triggers and internal APIs; manage retries; dispatch workers”
+      - System components: System(Main Process, Workers); Editor UI; Internal APIs; Triggers
+      - Memory: Workflow state store; job queue history
+      - Outputs: Orchestrated tasks across apps/services
+    - Knowledge Retrieval Agent
+      - Role: retrieve, organize, and generate answers from large databases or vector stores
+      - LLM model names: unspecified (generator)
+      - Prompts: “Formulate queries; retrieve from Vector DB/Search; synthesize grounded answers; cite sources”
+      - Tools: Retriever; Search; Vector DB; Reranker (implied); Generator
+      - Memory: Knowledge index cache
+      - Inputs/Outputs: User query -> grounded answer
+    - Coding & Development Agent
+      - Role: assist developers with reasoning, debugging, and code generation across environments and projects
+      - LLM model names: unspecified (Reason LLM, Action LLM)
+      - Prompts: “Analyze requirements; plan edits; execute tests; propose patches; explain outcomes”
+      - Tools: Code execution Environment; Version control; Unit/Integration tests; Static analysis
+      - Memory: Project files context; issue history; commit diffs
+      - Reasoning/Action loop: Reason -> Action -> Evaluate -> Iterate
+    - Tool‑Specific Agents
+      - Role: operate targeted APIs/tools for focused tasks (e.g., search, email, databases)
+      - LLM model names: unspecified
+      - Prompts: “Select correct tool server; format parameters; read results; handle errors”
+      - Tools: Tool Server 1 (e.g., Search API); Tool Server 2 (e.g., Email API); Database connectors
+      - Memory: Task logs; API usage history
+      - Inputs/Outputs: Query -> tool invocation -> structured result
+    - Voice Interaction Agent
+      - Role: communicate through voice, converting speech to text and text to speech; suitable for telephony/customer support
+      - LLM model names: unspecified
+      - Prompts: “Maintain conversational context; confirm intents; produce concise natural responses”
+      - Tools: ASR; Agent core; TTS; Telephony; Streaming I/O
+      - Memory: Conversation history; caller/session metadata
+      - Inputs/Outputs: Voice in -> transcript -> response -> synthesized speech
+  - System‑Level Components and Interactions
+    - Orchestrator/Router: routes tasks to sub‑agents based on query classification
+    - Tool Registry and Permissions: declares available tools and access scopes per agent
+    - Memory Layer: short‑term scratchpad; long‑term vector/index storage; logs/audit
+    - Evaluation and Testing: test cases for UI/coding; regression checks for workflows
+    - Monitoring/Telemetry: capture latency, success/failure, tool usage
+    - Security/Policy: secrets management; rate limits; PII handling
+    - Interaction flows:
+      - User query -> Orchestrator -> selected sub‑agent -> tools/APIs -> result -> Orchestrator -> user
+      - Sub‑agents can call each other via orchestrator (e.g., Retrieval feeding Coding Agent)
+  - Where system/code can be found: null
+
+**Source Location**: null
+
+### AI_Scientist_4papers.jpg
+**Title**: AI_Scientist_4papers.jpg
+
+**Agentic System Description**:
+
+- Agent Node
+  - LLM model names: unspecified (image does not name models); multimodal LLM used as core reasoner
+  - Responsibilities/Roles:
+    - Orchestrator of autonomous scientific workflow
+    - Hypothesis generation and experimental design
+    - Decomposition, planning, and dynamic task routing
+    - Closed-loop evaluation and iterative optimization
+    - Knowledge synthesis across domains
+    - Verification and trust assurance
+  - Prompts:
+    - System prompt: "You are an autonomous scientist that follows eight first principles (computational augmentation, closed-loop feedback, evolutionary/iterative optimization, decomposition/parallelism, verifiability, generalization beyond training data, integration of complementary systems, and scale). Generate hypotheses, plan experiments, evaluate objectively, verify results, and record reasoning traces."
+    - Decomposition prompt: "Break the goal into parallelizable subtasks; define interfaces and success metrics for each subtask."
+    - Candidate-generation prompt: "Propose diverse candidate solutions/hypotheses; ensure coverage of the search space."
+    - Evaluation prompt: "Design objective metrics and automated tests/simulations; return numeric scores and pass/fail judgments."
+    - Refinement prompt: "Analyze feedback; explain errors; produce improved candidates."
+    - Synthesis prompt: "Retrieve and integrate cross-domain knowledge; produce step-by-step reasoning traces with citations."
+    - Collaboration prompt: "Assign tasks to sub-agents; coordinate parallel execution; merge intermediate results into a coherent report."
+    - Verification prompt: "State claims precisely; create proofs/tests/replication plans; verify and log outcomes."
+- Available Tools
+  - Automated evaluator/test-harness (objective scoring; pass/fail checks)
+  - Program/simulation runner (code execution or domain simulators)
+  - Retrieval/knowledge access (encyclopedic or corpus search)
+  - Verifier tools (proof/checkers, constraint/consistency checks)
+  - Planner/scheduler for decomposition and parallel execution
+  - Logging/telemetry for experiment runs and results
+- Memory Features
+  - Reasoning trace store (step-by-step logs, prompts, intermediate states)
+  - Hypothesis and experiment ledger with outcomes and metrics
+  - Ever-expanding knowledge base for cross-domain synthesis
+  - Result cache and artifact registry (datasets, code snippets, proofs)
+- Sub-agents and Services
+  - Evolutionary Search Module
+    - Candidate Generator: proposes diverse hypotheses/solutions
+    - Objective Evaluator: runs automated evaluation; produces scores
+    - Refiner: uses feedback to iteratively improve candidates
+    - Explorer: expands/perturbs search regions to avoid local optima
+  - Knowledge Synthesis Module
+    - Retriever: searches prior knowledge and related work
+    - Trace Builder: constructs coherent reasoning chains with citations
+    - Cross-Domain Integrator: merges complementary concepts/solutions
+    - Memory Updater: adds validated findings to the knowledge base
+  - Collaborative Organization Module
+    - Decomposer: partitions problems into subtasks with interfaces
+    - Task Router: dynamic assignment to agents/executors
+    - Parallel Executors: run subtasks concurrently
+    - Merger/Reducer: integrates partial results; resolves conflicts
+- System-Level Components and Interactions
+  - Eight First Principles (governing constraints)
+    - Computational augmentation of scientific method
+    - Closed-loop feedback through automated evaluation
+    - Evolutionary and iterative optimization
+    - Decomposition and parallel execution
+    - Verifiability as foundation of trust
+    - Generalization beyond training distribution
+    - Integration of complementary systems
+    - Scale as enabler of discovery
+  - Orchestrated Workflow
+    - Plan: decompose task and define metrics
+    - Generate: produce diverse candidate solutions/hypotheses
+    - Evaluate: run automated tests/simulations; score results
+    - Select/Refine: keep best candidates; improve via feedback
+    - Verify: proofs/tests/replication; log trust evidence
+    - Synthesize: write reasoning traces and cross-domain insights
+    - Generalize: test on out-of-distribution or novel settings
+    - Scale: batch and parallelize across compute/agents
+  - Observability and Governance
+    - Run tracking, artifacts, and audit logs
+    - Safety/consistency checks before accepting findings
+- Title
+  - AI_Scientist_4papers.jpg
+- Where to Read Code/Project Pages
+  - Image does not provide URLs; source locations: null
+
+**Source Location**: null
+

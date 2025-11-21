@@ -1,0 +1,256 @@
+# MarkTechPost
+- MarkTechPost  [GitHub](https://github.com/Marktechpost/AI-Tutorial-Codes-Included)
+
+## dataset
+
+Synthetic_Data_Creation.ipynb
+Data Science/Active_Learning.ipynb
+
+## ML/DL training & optimization
+
+ML Project Codes/A Coding Implementation to End-to-End Transformer Model Optimization with Hugging Face Optimum, ONNX Runtime, and Quantization.ipynb
+ML Project Codes/Advanced_Ivy_Framework_Agnostic_ML_Tutorial_Marktechpost.ipynb
+ML Project Codes/Advanced_PySpark_End_to_End_Tutorial_Marktechpost.ipynb
+ML Project Codes/advanced_jax_flax_optax_training_pipeline_Marktechpost.ipynb
+ML Project Codes/gluonTS_advanced_multimodel_tutorial_Marktechpost.ipynb
+ML Project Codes/lightly_ai_self_supervised_active_learning_Marktechpost.ipynb
+ML Project Codes/meta_hydra_advanced_implementation_Marktechpost.ipynb
+ML Project Codes/tpot_advanced_pipeline_optimization_marktechpost.py
+ML Project Codes/huggingface_trackio_advanced_tutorial_Marktechpost.ipynb
+ML Project Codes/Code Implementation to Master DeepSpeed
+ML Project Codes/advanced_litserve_multi_endpoint_api_tutorial_marktechpost.py
+ML Project Codes/Build a Complete End-to-End NLP Pipeline with Gensim
+advanced_dspy_qa_Marktechpost.ipynb
+Mistral_Devstral_Compact_Loading_Marktechpost.ipynb
+mistral_devstral_compact_loading_marktechpost.py
+self_hosted_llm_ollama_Marktechpost.ipynb
+ollama_langchain_tutorial_marktechpost.py
+ML Project Codes/custom_gpt_local_colab_chat_marktechpost.py
+AI Agents Codes/Langchain_Deepagents.ipynb
+
+## utilities & infrastructure
+
+ML Project Codes/Getting Started with Asyncio.ipynb
+ML Project Codes/advanced_reflex_reactive_webapp_Marktechpost.ipynb
+ML Project Codes/zarr_implementation_tutorial.ipynb
+Data Science/Advanced_PyTest_Custom_Plugins_Fixtures_Tutorial_Marktechpost.ipynb
+Data Science/matlab_python_oct2py_colab_tutorial_Marktechpost.ipynb
+async_config_tutorial_Marktechpost.ipynb
+network.ipynb
+A_Coding_Guide_to_ACP_Systems_Marktechpost.ipynb
+Agent Communication Protocol/Getting Started/agent.py
+Agent Communication Protocol/Getting Started/client.py
+ML Project Codes/LLM_Parameters.ipynb
+Pyversity.ipynb
+
+## computer vision
+
+Computer Vision/How to Master Advanced TorchVision v2 Transforms, MixUp, CutMix, and Modern CNN Training for State-of-the-Art Computer Vision.ipynb
+SHAP-IQ/Intro_to_SHAP_IQ.ipynb
+SHAP-IQ/SHAP_IQ_Visuals.ipynb
+
+## Prompt Engineering
+
+JSON_Prompting.ipynb
+AI Agents Codes/agent_lightning_prompt_optimization_Marktechpost.ipynb
+Mirascope/Chain_of_Thought.ipynb
+Mirascope/Self_Refine.ipynb
+
+## openai api
+
+advanced_async_python_sdk_tutorial_Marktechpost.ipynb
+GPT-5/GPT_5.ipynb
+GPT-5/RouteLLM.ipynb
+
+## function call
+
+how to enable function calling in Mistral Agents.py
+Custom_Tool_For_AI_Agent_Marktechpost.ipynb
+Customizable_MultiTool_AI_Agent_with_Claude_Marktechpost (1).ipynb
+
+## RAG
+
+RAG/Semantic_Caching.ipynb
+RAG/agentic_rag_with_routing_and_self_check_marktechpost.py
+RAG/enterprise_ai_rag_guardrails_Marktechpost.ipynb
+RAG/rag_evaluation.py
+AI Agents Codes/agentic_rag_tutorial_marktechpost.py
+Cognee_Agent_Tutorial_with_HuggingFace_Integration_Marktechpost.ipynb
+
+## structural output
+
+Mirascope/Knowledge_Graph.ipynb
+Mirascope/Removing_Semantic_Duplicates.ipynb
+
+## evaluations
+
+LLM Evaluation/LLM_Arena_as_a_Judge.ipynb
+LLM Evaluation/llm_arena_as_a_judge.py
+MLFlow for LLM Evaluation/MLFlow_Intro.ipynb
+Advanced_AI_Evaluator_Enterprise_Grade_Framework_Marktechpost.ipynb
+AI Agents Codes/enterprise_agentic_benchmarking_framework_Marktechpost.ipynb
+
+## tracing & monitoring
+
+MLFlow for LLM Evaluation/OpenAI Tracing/guardrails.py
+MLFlow for LLM Evaluation/OpenAI Tracing/multi_agent_demo.py
+
+## RL
+
+AI Agents Codes/Model_Native_Agentic_AI_End_to_End_RL_Marktechpost.ipynb
+Agentic AI Memory/Model_Native_Agentic_AI_End_to_End_RL_Marktechpost.ipynb
+AI Agents Codes/parlant.py
+ML Project Codes/regression_language_model_transformer_rlm_tutorial_Marktechpost.ipynb
+
+## agent sdk
+
+advanced_google_adk_multi_agent_tutorial_Marktechpost.ipynb
+openai_agents_multiagent_research_Marktechpost.ipynb
+Getting_Started_with_Mistral_Agents_API.ipynb
+agent_orchestration_with_mistral_agents_api.py
+AI Agents Codes/semantic_kernel_gemini_agent_Marktechpost.ipynb
+AutoGen_SemanticKernel_Gemini_Flash_MultiAgent_Tutorial_Marktechpost.ipynb
+
+## AI agent frameworks & tools
+
+advanced_ai_agent_hugging_face_marktechpost.py
+production_ready_custom_ai_agents_workflows_Marktechpost.ipynb
+streamlit_ai_agent_multitool_interface_Marktechpost.ipynb
+nebius_llama3_multitool_agent_Marktechpost.ipynb
+sage_ai_agent_gemini_implementation_Marktechpost.ipynb
+gemini_agent_network_Marktechpost.ipynb
+graph_agent_framework_with_gemini_Marktechpost.ipynb
+GraphAIAgent_LangGraph_Gemini_Workflow_Marktechpost.ipynb
+prolog_gemini_langgraph_react_agent_Marktechpost.ipynb
+AI Agents Codes/graphagent_gemini_advanced_tutorial_Marktechpost.ipynb
+AI Agents Codes/advanced_neural_agent_Marktechpost.ipynb
+AI Agents Codes/Exploration_Agents_Problem_Solving_Marktechpost.ipynb
+AI Agents Codes/Value_Alignment_and_Ethics_in_Agentic_Systems_Marktechpost.ipynb
+Self_Improving_AI_Agent_with_Gemini_Marktechpost.ipynb
+UAgents_Gemini_Event_Driven_Tutorial_Marktechpost.ipynb
+
+## MCP (Model Context Protocol)
+
+MCP Codes/Model_Context_Protocol_Integration_Marktechpost.ipynb
+custom_mcp_tools_integration_with_fastmcp_marktechpost.py
+mcp_gemini_agent_tutorial_Marktechpost.ipynb
+OAuth 2.1 for MCP Servers/auth.py
+OAuth 2.1 for MCP Servers/config.py
+OAuth 2.1 for MCP Servers/finance.py
+OAuth 2.1 for MCP Servers/server.py
+
+## multi agent
+
+Advanced_PEER_MultiAgent_Tutorial_Marktechpost.ipynb
+AutoGen_TeamTool_RoundRobin_Marktechpost.ipynb
+LangGraph_Gemini_MultiAgent_Research_Team_Marktechpost.ipynb
+advanced_langgraph_multi_agent_pipeline_Marktechpost.ipynb
+agent2agent_collaboration_Marktechpost.ipynb
+beeai_multi_agent_workflow_Marktechpost.ipynb
+gemini_autogen_multiagent_framework_Marktechpost.ipynb
+primisai_nexus_multi_agent_workflow_Marktechpost.ipynb
+nomic_gemini_multi_agent_ai_Marktechpost.ipynb
+AI Agents Codes/uagents_multi_agent_marketplace_Marktechpost.ipynb
+AI Agents Codes/supervisor_framework_crewai_gemini_marktechpost.py
+AI Agents Codes/Agentic_AI_LangChain_AutoGen_HuggingFace_Marktechpost.ipynb
+AI Agents Codes/Building Advanced MCP Agents with Multi-Agent Coordination.ipynb
+CrewAI_Gemini_Workflow_Marktechpost.ipynb
+A2A_Simple_Agent/agent_executor.py
+A2A_Simple_Agent/client.py
+A2A_Simple_Agent/main.py
+
+## memory management, context engineering
+
+Agentic AI Memory/Persistent_Memory_Personalised_Agentic_AI_Marktechpost.ipynb
+Agentic AI Memory/neural_memory_agents_continual_learning_Marktechpost.ipynb
+Agentic AI Memory/spacy_agentic_ai_system_Marktechpost.ipynb
+cipher_memory_agent_Marktechpost.ipynb
+AI Agents Codes/context_folding_llm_agent_long_horizon_Marktechpost.ipynb
+Context_Aware_Assistant_MCP_Gemini_LangChain_LangGraph_Marktechpost.ipynb
+
+## coding agent
+
+daytona_secure_ai_code_execution_tutorial_Marktechpost.ipynb
+Live_Python_Execution_and_Validation_Agent_Marktechpost.ipynb
+tinydev_gemini_implementation_Marktechpost.ipynb
+AI Agents Codes/mle_agent_ollama_local_pipeline_Marktechpost.ipynb
+griffe_ai_code_analyzer_Marktechpost.ipynb
+AI Agents Codes/advanced_stable_baselines3_trading_agent_marktechpost.py
+
+## deep research
+
+advanced_pubmed_research_assistant_tutorial_Marktechpost.ipynb
+paperqa2_gemini_research_agent_Marktechpost.ipynb
+AI Agents Codes/deep_research_agent_Marktechpost.ipynb
+AI Agents Codes/langgraph_time_travel_research_agent_Marktechpost.ipynb
+Competitive_Analysis_with_ScrapeGraph_Gemini_Marktechpost.ipynb
+
+## data engineering & analytics agentic
+
+Data Science/Building an End-to-End Data Science Workflow with Machine Learning, Interpretability, and Gemini AI Assistance.ipynb
+Data Science/Unified_Tool_Orchestration_Framework_Marktechpost.ipynb
+Data Science/Advanced_Bokeh_Interactive_Dashboard_Marktechpost.ipynb
+Data Science/advanced_pygwalker_visual_analysis_marktechpost.py
+Data Science/dash_plotly_local_online_dashboard_Marktechpost.ipynb
+lilac_functional_data_pipeline_Marktechpost.ipynb
+polars_sql_analytics_pipeline_Marktechpost.ipynb
+Modin_Powered_DataFrames_Marktechpost.ipynb
+dagster_advanced_pipeline_Marktechpost.ipynb
+roboflow_supervision_advanced_tracking_analytics_pipeline_Marktechpost.ipynb
+
+## science & math agent
+
+BioCypher_Agent_Tutorial_Marktechpost.ipynb
+PyBEL_BioKG_Interactive_Tutorial_Marktechpost.ipynb
+AI Agents Codes/multi_agent_omics_integration_pipeline_Marktechpost.ipynb
+AI Agents Codes/wetlab_protocol_planner_codegen_Marktechpost.ipynb
+ML Project Codes/Quantum_State_Evolution_and_Entanglement_QuTiP_Tutorial_Marktechpost.ipynb
+ML Project Codes/Building an Advanced Convolutional Neural Network with Attention for DNA Sequence Classification and Interpretability.ipynb
+openbb_advanced_portfolio_market_intelligence_Marktechpost.ipynb
+
+## customer service agent
+
+Voice AI/agentic_voice_ai_autonomous_assistant_Marktechpost.ipynb
+Voice AI/voice_ai_whisperx_advanced_tutorial_Marktechpost.ipynb
+Voice AI/guide_to_building_an_end_to_end_speech_enhancement_and_recognition_pipeline_with_speechbrain.py
+Voice AI/how_to_build_an_advanced_end_to_end_voice_ai_agent_using_hugging_face_pipelines.py
+AI Agents Codes/how_to_build_an_advanced_end_to_end_voice_ai_agent_using_hugging_face_pipelines.py
+AI Agents Codes/Human Handoff - Parlant/agent.py
+AI Agents Codes/Human Handoff - Parlant/handoff.py
+Lyzr_Chatbot_Framework_Implementation_Marktechpost.ipynb
+
+## specialized agents
+
+AI Agents Codes/Computer_Use_Agent_Local_AI_Marktechpost.ipynb
+AI Agents Codes/ai_desktop_automation_agent_tutorial_Marktechpost.ipynb
+AI Agents Codes/agentic_ai_time_series_forecasting_darts_hf_Marktechpost.ipynb
+AI Agents Codes/agentic_data_infrastructure_strategy_qwen_marktechpost.py
+AI Agents Codes/advanced_ocr_ai_agent_Marktechpost.ipynb
+AI Agents Codes/LangChain_XGBoost_Agentic_Pipeline_Tutorial_Marktechpost.ipynb
+AI Agents Codes/secure_ai_agent_with_guardrails_marktechpost.py
+AI Agents Codes/self_verifying_dataops_agent_local_hf_marktechpost.py
+AI Agents Codes/hrm_braininspired_ai_agent_huggingface_marktechpost.py
+AI Agents Codes/AI_Crypto_Agent_Secure_Comms_Marktechpost.ipynb
+Gemini_Pandas_Agent_Marktechpost.ipynb
+smartwebagent_tavily_gemini_webintelligence_marktechpost2.py
+Enhanced_BrightData_Gemini_Scraper_Tutorial_Marktechpost.ipynb
+Jina_LangChain_Gemini_AI_Assistant_Marktechpost.ipynb
+Smart_Python_to_R_Converter_with_Gemini_Validation_Marktechpost (2).ipynb
+pipecat_huggingface_implementation_Marktechpost.ipynb
+Robotics/lerobot_pusht_bc_tutorial_marktechpost.py
+advanced_serpapi_tutorial_Marktechpost.ipynb
+emi_agent.py
+inflation_agent.py
+parsl_ai_agent_pipeline_marktechpost.py
+
+## security & safety
+
+Security/building_a_hybrid_rule_based_and_machine_learning_framework_to_detect_and_defend_against_jailbreak_prompts_in_llm_systems.py
+Adversarial Attacks/Single-Turn Attacks.ipynb
+Mistral_Guardrails.ipynb
+Presidio.ipynb
+Upstage_Groundedness_Check_Tutorial_Marktechpost.ipynb
+
+## Uncategorized
+
+guide_to_building_an_end_to_end_speech_enhancement_and_recognition_pipeline_with_speechbrain.py
