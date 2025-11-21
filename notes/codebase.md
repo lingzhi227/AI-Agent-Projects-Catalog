@@ -10,6 +10,10 @@
 - eval
 - reinforcement learning settings
 
+## useful applied math tools
+
+- mathwork file exchange
+
 ## Useful Reference projects
 - Tools
   - ToolUniverse: [Github](https://github.com/mims-harvard/ToolUniverse)
@@ -17,6 +21,9 @@
 - Agent-coder
   - codex
   - gemini cli
+- context engineering
+  - better grep makes claude easy to work: mgrep - [twitter](https://x.com/aaxsh18/status/1991626308611371387) - [GitHub](https://github.com/mixedbread-ai/mgrep)
+
 - Agent-datascience Karpathy [Github](https://github.com/K-Dense-AI/karpathy)
 
 ## Useful Reference Tutorials

@@ -513,15 +513,60 @@
       - github copilot
       - testing
  
-
-# TO DO
-
-## 2025-11-20   
+## 2025-11-20 download mathworks
 
 - task 有些yaml链接不在md当中，完善md确保完整
 
+- task25 Mathworks file exchange download
+  - goal: 下载https://www.mathworks.com/matlabcentral/fileexchange/所有的项目的code
+  - 我们需要做一个playwright ts来实现模拟网页点击，而不是用爬虫
+  - 我的账户是lingzhi.yang@stonybrook.edu
+  - 此项目是一个科研项目，而绝非商业目的。我们想让LLM可以调用mathworks积累的精彩纷呈的项目，想找到一种方式，终有一天，把任何微小的贡献，都得以发挥出来。这将是一项发挥出mathworks伟大使命的项目。
+  - 所以请你把ts写在/Users/lingzhi/Code/m，并执行，直到你的code至少可以把第一页的所有项目下载下来
+  - 把下载下来的zip都暂时存放在/Users/lingzhi/Code/m/fileexchange
+
+# TO DO
+
+## 2025-11-21
+
 - task propose一个系统的基本框架
   - focus
+  - context builder：
+    - 先从案例归纳总结
+    - example1: bioinformatics
+    - example2: mathworks
+      - llm with matlab: [Github](https://github.com/matlab-deep-learning/llms-with-matlab)
+    - example3: STM32、ARM Cortex-M
+    - example4: CUDA Jetson series
+    - context 基本结构：
+      - 现有workflow
+      - 现有example
+      - toolbox形式
+      - 高级定制：领域特定语言、领域特定编译、算法、UI、更大的集成开发环境（simulink）
+  - SDK as tool
+    - agentic-环境安装
+    - agentic-案例调试
+    - agentic workflow builder
+    - agentic-新功能开发
+
+- task STEM 通用开发工具
+  - 通用
+    - GCC / Clang + Make/CMake
+    - Eclipse / Eclipse-based IDE
+  - 数学物理类
+    - COMSOL Multiphysics
+  - 数学计算和统计类
+    - Mathematica / Maple / SAS JMP / R 等科学计算平台
+  - MCU / Firmware类
+    - Keil MDK（Arm Cortex-M 为主）
+    - IAR Embedded Workbench（多种 MCU 架构）
+    - MPLAB X IDE（Microchip，PIC / dsPIC / AVR / SAM 等）
+    - STM32CubeIDE（ST 的 STM32 系列）
+    - Code Composer Studio（TI）
+    - Atmel/Microchip Studio（AVR/ARM）
+    - Arduino IDE / PlatformIO（更偏开源 & Maker，但已经非常普及）
+  - HDL + EDA 工具链
+    - Xilinx/AMD Vivado Design Suite
 
 - task Test Programs
 
